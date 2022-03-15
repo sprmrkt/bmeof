@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `Great Start`,
-    description: `Will's great start for Gatsby builds`,
+    title: `Bear Meets Eagle On Fire`,
+    description: `We help good brands and people think and make things differently. `,
     author: `Will McLean`,
     siteUrl: `https://www.example.com`,
   },
@@ -49,8 +49,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `great-start`,
-        short_name: `great-start`,
+        name: `bear-meets-eagle-on-fire`,
+        short_name: `bear-meets-eagle-on-fire`,
         start_url: `/`,
         background_color: `#000000`,
         theme_color: `#000000`,

@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "bear-meets-eagle-on-fire",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Studio site",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Will McLean <willmcl@gmail.com>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "@contentful/rich-text-types": "^15.11.1",
