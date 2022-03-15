@@ -1,72 +1,82 @@
-import { createGlobalStyle } from "styled-components"
+import {createGlobalStyle} from "styled-components"
 
 const GlobalStyle = createGlobalStyle`
   html {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      ${(props) => props.theme.fluidType(0)};
-      * { box-sizing: border-box; }
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    ${(props) => props.theme.fluidType(0)};
+
+    * { box-sizing: border-box; }
   }
 
   body {
-      margin: 0;
-      // Use system fonts: https://css-tricks.com/snippets/css/system-font-stack/
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      color: ${(props) => props.theme.colours.black};
-      background-color: ${(props) => props.theme.colours.white};
+    margin: 0;
+    // Use system fonts: https://css-tricks.com/snippets/css/system-font-stack/
+    font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: ${(props) => props.theme.colors.black};
+    background-color: ${(props) => props.theme.colors.white};
   }
 
   h1, h2, h3, h4, h5, h6,
   .h1, .h2, .h3, .h4, .h5, .h6 {
-      line-height: 1.1;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
+    line-height: 0.72;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    padding-top: 0.1em;
+    margin: 0 0 -0.1em 0;
   }
-  
+
   p,
   ol, ul, li,
   code, kbd, pre, samp {
-      line-height: 1.5;
-      margin-top: 0.8rem;
-      margin-bottom: 0.8rem;
+    line-height: 0.8;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
   }
 
   h1, h2, h3, h4, h5, h6,
   .h1, .h2, .h3, .h4, .h5, .h6 {
-      font-weight: bold;
-      a { text-decoration: none; }
-      a:hover { text-decoration: none; }
+    font-weight: normal;
+
+    a { text-decoration: none; }
+
+    a:hover { text-decoration: none; }
   }
 
-  h1, .h1 { ${(props) => props.theme.fluidType(4)}; }
-  h2, .h2 { ${(props) => props.theme.fluidType(3)}; }
-  h3, .h3 { ${(props) => props.theme.fluidType(2)}; }
-  h4, .h4 { ${(props) => props.theme.fluidType(1)}; }
-  h5, .h5 { ${(props) => props.theme.fluidType(0)}; }
-  h6, .h6 { ${(props) => props.theme.fluidType(-1)}; }
+  h1, .h1 { ${(props) => props.theme.largeType()}; }
+
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  h5, .h5,
+  h6, .h6 { ${(props) => props.theme.fluidType(0)}; }
+
+  p, li {
+    ${(props) => props.theme.fluidType(0)};
+  }
 
   li {
-      margin-top: 0;
-      margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  small, p.small { ${(props) => props.theme.fluidType(-1)}; }
-  
+  small, p.small { ${(props) => props.theme.fluidType(0)}; }
+
   code, kbd, pre, samp {
-      font-family: monospace;
-      white-space: normal;
+    font-family: monospace;
+    white-space: normal;
   }
-  
+
   ul {
-      padding-left: 1rem;
-      list-style-type: disc;
+    padding-left: 1rem;
+    list-style-type: disc;
   }
-  
+
   ol {
-      padding-left: 1rem;
-      list-style-type: decimal;
+    padding-left: 1rem;
+    list-style-type: decimal;
   }
-  
+
   video {
     width: 100%;
     height: auto;
@@ -82,7 +92,7 @@ const GlobalStyle = createGlobalStyle`
       margin: 3rem 0;
     }
   }
-  
+
   // Specific to PrismicRichText component
   .embed {
     position: relative;
@@ -102,36 +112,36 @@ const GlobalStyle = createGlobalStyle`
       height: 100%;
     }
   }
-  
+
   em, i { font-style: italic; }
-  
-  strong, b { font-weight: bold; }
-  
+
+  strong, b { font-weight: normal; }
+
   blockquote {
-      font-weight: bold;
-      padding-left: 1rem;
+    font-weight: bold;
+    padding-left: 1rem;
   }
-  
+
   a { color: inherit; }
-  
+
   sup, sub {
-      vertical-align: baseline;
-      position: relative;
-      top: -0.4em;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
   }
-  
+
   sub { top: 0.4em; }
-  
+
   label {
-      ${(props) => props.theme.fluidType(-1)};
-      line-height: 1.2;
-      font-weight: normal;
+    ${(props) => props.theme.fluidType(-1)};
+    line-height: 1.2;
+    font-weight: normal;
   }
 
   .fieldset {
     margin: 0.5rem 0;
   }
-  
+
   .text-input,
   input[type="text"],
   input[type="password"],
@@ -147,27 +157,28 @@ const GlobalStyle = createGlobalStyle`
   input[type="url"],
   input[type="week"],
   textarea {
-      display: block;
-      font-family:inherit;
-      ${(props) => props.theme.fluidType(0)};
-      padding: 0.2rem 0.5rem;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid;
-      border-radius: 2px;
-      line-height: 1.6;
-      background-color: transparent;
-      -webkit-appearance: none;
-      &:focus {
-          border: 1px ${(props) => props.theme.colours.focus} solid;
-      }
+    display: block;
+    font-family: inherit;
+    ${(props) => props.theme.fluidType(0)};
+    padding: 0.2rem 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid;
+    border-radius: 2px;
+    line-height: 1.6;
+    background-color: transparent;
+    -webkit-appearance: none;
+
+    &:focus {
+      border: 1px ${(props) => props.theme.colors.focus} solid;
+    }
   }
 
   ::placeholder {
-        color: ${props => props.theme.colours.black};
-        opacity: 0.6;
+    color: ${props => props.theme.colors.black};
+    opacity: 0.6;
   }
-  
+
   .file-input,
   input[type="file"],
   .radio-input,
@@ -175,9 +186,9 @@ const GlobalStyle = createGlobalStyle`
   .checkbox-input,
   input[type="checkbox"],
   select {
-      font-family:inherit;
+    font-family: inherit;
   }
-  
+
   // Select
 
   select {
@@ -195,7 +206,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: inherit;
     line-height: inherit;
     outline: none;
-    color: ${props => props.theme.colours.black};
+    color: ${props => props.theme.colors.black};
   }
 
   select::-ms-expand {
@@ -208,7 +219,7 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 0;
     padding: 0;
     margin: 0.5rem 0 1.5rem 0;
-    ${props => props.theme.fluidType( 0 )};
+    ${props => props.theme.fluidType(0)};
     cursor: pointer;
     line-height: 1.1;
     background-color: transparent;
@@ -216,62 +227,68 @@ const GlobalStyle = createGlobalStyle`
     display: grid;
     align-items: center;
     max-width: 15rem;
+
     &:after {
       content: "";
       width: 0.8rem;
       height: 0.5rem;
-      background-color: ${props => props.theme.colours.black};
+      background-color: ${props => props.theme.colors.black};
       clip-path: polygon(100% 0%, 0 0%, 50% 100%);
       justify-self: end;
     }
+
     select,
     &:after {
       grid-area: select;
     }
   }
-  
+
   .button,
   button,
   input[type="submit"],
   input[type="button"],
   input[type="reset"] {
-      display: inline-block;
-  
-      padding: 0 1rem;
-  
-      font-family:inherit;
-      ${(props) => props.theme.fluidType(0)};
-      line-height: 2;
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 1rem;
+
+    font-family: inherit;
+    ${(props) => props.theme.fluidType(0)};
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid;
+    border-radius: 2px;
+
+    color: inherit;
+    background-color: transparent;
+
+    &:hover {
       text-decoration: none;
-      white-space: nowrap;
-      border: 1px solid;
-      border-radius: 2px;
-  
-      color: inherit;
+    }
+
+    &.link {
+      margin: 0;
+      border: none;
+      padding: 0;
       background-color: transparent;
-      
-      &:hover {
-          text-decoration: none;
+      line-height: inherit;
+    }
+
+    &.icon {
+      border: none;
+      padding: 0;
+      background-color: transparent;
+
+      svg {
+        height: 3rem;
+        width: auto;
+        display: block;
       }
-      &.link {
-        border: none;
-        padding: 0;
-        background-color: transparent;
-      }
-      &.icon {
-        border: none;
-        padding: 0;
-        background-color: transparent;
-        svg {
-          height: 3rem;
-          width: auto;
-          display: block;
-        }
-      }
+    }
   }
-  
+
   .errorMsg {
-      color: ${(props) => props.theme.colours.error};
+    color: ${(props) => props.theme.colors.error};
   }
 `
 

@@ -1,16 +1,20 @@
 import { Link } from "gatsby";
 import React, { Component } from "react";
 import Container from "../atoms/Container";
+import styled from "styled-components";
+
+const Holder = styled.header`
+`;
 
 class Header extends Component {
   render() {
     return (
       <Container>
-        <header className="Header">
-          <h1>
-            <Link to="/">Great Start</Link>
-          </h1>
-        </header>
+        <Holder>
+          <p>
+            <Link to="/">Logo</Link>
+          </p>
+        </Holder>
       </Container>
     );
   }

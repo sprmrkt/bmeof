@@ -1,20 +1,24 @@
 export const theme = {
-  colours: {
-    black: "#373737",
-    white: "white",
+  colors: {
+    black: "#000000",
+    white: "#c6c6c6",
     // Accessibility and forms
     focus: "#4fcd90",
     error: "#d0021b",
   },
   typography: {
-    min: 16,
-    max: 24,
+    min: 15,
+    max: 20,
     minScreen: 400,
     maxScreen: 1200,
     scale: {
-      min: 1.067,
-      max: 1.125,
+      min: 1,
+      max: 1,
     },
+    largeType: {
+      min: 200,
+      max: 400,
+    }
   },
   // https://www.smashingmagazine.com/2016/05/fluid-typography/
   fluidType: (exp) => {
@@ -37,6 +41,17 @@ export const theme = {
         font-size: ${
           theme.typography.max * Math.pow(theme.typography.scale.max, exp)
         }px;
+      }
+      `
+  },
+  largeType: () => {
+    return `
+      font-size: ${theme.typography.largeType.min}px;
+      @media screen and (min-width: ${theme.typography.minScreen}px ) {
+        font-size: calc( ${theme.typography.largeType.min}px + (${theme.typography.largeType.max} - ${theme.typography.largeType.min})*(100vw - ${theme.typography.minScreen}px)/(${theme.typography.maxScreen} - ${theme.typography.minScreen}) );
+      }
+      @media screen and (min-width: ${theme.typography.maxScreen}px ) {
+        font-size: ${theme.typography.largeType.max}px;
       }
       `
   },
