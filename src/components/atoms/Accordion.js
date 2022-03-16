@@ -5,6 +5,7 @@ import {Element, scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import useWindowSize from "../../hooks/useWindowSize";
+import LockScroll from "./LockScroll";
 
 const scrollTime = 500;
 const timeout = 3000;
@@ -28,6 +29,7 @@ const Content = styled.div`
     background-color: ${props => props.theme.colors.black};
     transform-origin: top left;
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
 
@@ -86,10 +88,10 @@ const Content = styled.div`
   }
 `;
 
-function Accordion({title, children}) {
+function Accordion({button, children, id, scrollAfterOpen}) {
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
-  const id = uuidv4();
+  const uid = uuidv4();
   const buttonRef = useRef(null);
   const size = useWindowSize();
 
@@ -101,23 +103,21 @@ function Accordion({title, children}) {
 
   useEffect(() => {
     if (open) {
-      scroller.scrollTo(id, {
+
+      let options = {
         duration: scrollTime,
         smooth: true,
         offset: offset * 0.8,
-      })
-    } else {
-      scroller.scrollTo(id, {
-        duration: scrollTime,
-        delay: timeout,
-        smooth: true,
-      })
+      }
+      if( scrollAfterOpen ) options.delay = timeout + scrollTime;
+
+      scroller.scrollTo(uid, options);
     }
-  }, [open]);
+  }, [open, uid, offset, scrollAfterOpen]);
 
   return (
-    <Element name={id}>
-      <button ref={buttonRef} className="link accordion-title" onClick={() => setOpen(!open)}>{title}</button>
+    <Element name={uid}>
+      <button ref={buttonRef} className="link accordion-title" onClick={() => setOpen(!open)}>{button}</button>
       <CSSTransition
         mountOnEnter
         unmountOnExit
@@ -126,7 +126,8 @@ function Accordion({title, children}) {
         timeout={timeout + scrollTime}
         classNames="accordion-content"
       >
-        <Content offset={offset * 0.2}>
+        <Content offset={offset * 0.2} id={`${id}-accordion-content`}>
+          <LockScroll/>
           <div className="border" />
           <div className="accordion-inner">
             {children}
@@ -139,7 +140,13 @@ function Accordion({title, children}) {
 }
 
 Accordion.propTypes = {
-  title: PropTypes.element.isRequired,
+  button: PropTypes.element.isRequired,
+  id: PropTypes.string.isRequired,
+  scrollAfterOpen: PropTypes.bool,
+};
+
+Accordion.defaultProps = {
+  scrollAfterOpen: false,
 };
 
 export default Accordion;

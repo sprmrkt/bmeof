@@ -4,7 +4,7 @@ import Container from "../components/atoms/Container";
 import styled from "styled-components";
 import AccordionGroup from "../components/atoms/AccordionGroup";
 import Accordion from "../components/atoms/Accordion";
-import Work from "../components/organisms/Work";
+import WorkContent from "../components/organisms/WorkContent";
 
 const Holder = styled.div`
   svg {
@@ -26,19 +26,26 @@ function IndexPage() {
         Fire<br />
       </h1>
       <Accordion
-        title={<p className="h1">Work</p>}>
-        <Work/>
+        id="work"
+        button={<p className="h1">Work</p>}>
+        <WorkContent/>
       </Accordion>
       <Accordion
-        title={<p className="h1">Belief</p>}>
+        id="belief"
+        scrollAfterOpen
+        button={<p className="h1">Belief</p>}>
         <p>Content</p>
       </Accordion>
       <Accordion
-        title={<p className="h1">Studio</p>}>
+        id="studio"
+        scrollAfterOpen
+        button={<p className="h1">Studio</p>}>
         <p>Content</p>
       </Accordion>
       <Accordion
-        title={<p className="h1">Shop</p>}>
+        id="shop"
+        scrollAfterOpen
+        button={<p className="h1">Shop</p>}>
         <p>Content</p>
       </Accordion>
     </Holder>
