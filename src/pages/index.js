@@ -1,8 +1,6 @@
 import React from "react";
 import Seo from "../components/molecules/Seo";
-import Container from "../components/atoms/Container";
 import styled from "styled-components";
-import AccordionGroup from "../components/atoms/AccordionGroup";
 import Accordion from "../components/atoms/Accordion";
 import WorkContent from "../components/organisms/WorkContent";
 

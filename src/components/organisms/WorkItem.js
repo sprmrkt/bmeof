@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Image from "../atoms/Image";
-import Accordion from "../atoms/Accordion";
 
 const Holder = styled.div`
   height: calc(100vh - 6rem);
@@ -10,6 +9,7 @@ const Holder = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: mediumspringgreen;
 `;
 
 const ImageHolder = styled.div`
@@ -22,22 +22,21 @@ const ImageHolder = styled.div`
   }
 `;
 
-const Content = styled.div`
-`;
-
-function WorkItem({work}) {
+const WorkItem = forwardRef(({work}, ref) => {
   return (
     <Holder>
       <ImageHolder>
         <Image imgName="entrance-pool.jpg" />
       </ImageHolder>
-      <p>Title</p>
+      <p ref={ref}>Title</p>
     </Holder>
   )
-}
+});
 
 WorkItem.propTypes = {
   work: PropTypes.object,
 };
+
+WorkItem.displayName = 'WorkItem'
 
 export default WorkItem;
