@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import useWindowSize from "../../hooks/useWindowSize";
 import WorkItem from "../organisms/WorkItem";
 import WorkItemContent from "../molecules/WorkItemContent";
+import WorkContent from "../organisms/WorkContent";
 
 const timeout = 3000;
 
@@ -48,7 +49,7 @@ const Content = styled.div`
   }
 `;
 
-function Accordion() {
+function Accordion({parentUid, parentButtonHeight}) {
   const [open, setOpen] = useState(false);
   const [titleHeight, setTitleHeight] = useState(0);
   const [buttonHeight, setButtonHeight] = useState(0);
@@ -66,20 +67,17 @@ function Accordion() {
     }
   }, [size.width]);
 
-  // useEffect(() => {
-  //   if (open) {
-  //
-  //     let options = {
-  //       duration: scrollTime,
-  //       smooth: true,
-  //       offset: offset * 0.8,
-  //       delay: timeout,
-  //       containerId: 'work-content'
-  //     }
-  //
-  //     scroller.scrollTo(uid, options);
-  //   }
-  // }, [open, uid, offset]);
+  useEffect(() => {
+    if (open) {
+      // Scroll the body up to hide the parent button
+      scroller.scrollTo(parentUid, {
+        duration: 500,
+        smooth: true,
+        offset: parentButtonHeight,
+      });
+
+    }
+  }, [open, parentUid, parentButtonHeight]);
 
   return (
     <>
@@ -106,7 +104,9 @@ function Accordion() {
 }
 
 Accordion.propTypes = {
-  parent: PropTypes.object,
+  parentUid: PropTypes.string.isRequired,
+  parentButtonHeight: PropTypes.number.isRequired,
 };
+
 
 export default Accordion;

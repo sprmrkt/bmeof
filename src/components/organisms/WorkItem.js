@@ -10,6 +10,10 @@ const Holder = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: mediumspringgreen;
+  p {
+    margin: 0;
+    padding: 1rem 0;
+  }
 `;
 
 const ImageHolder = styled.div`

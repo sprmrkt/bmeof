@@ -55,7 +55,7 @@ const Content = styled.div`
   &.accordion-content-enter-active,
   &.accordion-content-enter-done {
     .accordion-inner {
-      height: calc(100vh - ${props => props.offset}px);
+      height: 100vh;
       transition: height ${timeout * 0.75}ms ${timeout * 0.25 + scrollTime}ms;
     }
 
@@ -67,7 +67,7 @@ const Content = styled.div`
 
   &.accordion-content-exit {
     .accordion-inner {
-      height: calc(100vh - ${props => props.offset}px);
+      height: 100vh;
     }
 
     .border {
@@ -115,6 +115,15 @@ function Accordion({button, children, id, scrollAfterOpen}) {
     }
   }, [open, uid, offset, scrollAfterOpen]);
 
+  const childrenWithProps = React.Children.map(children, child => {
+    // Checking isValidElement is the safe way and avoids a typescript
+    // error too.
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { parentUid: uid, parentButtonHeight: offset });
+    }
+    return child;
+  });
+
   return (
     <Element name={uid}>
       <button ref={buttonRef} className="link accordion-title" onClick={() => setOpen(!open)}>{button}</button>
@@ -126,11 +135,11 @@ function Accordion({button, children, id, scrollAfterOpen}) {
         timeout={timeout + scrollTime}
         classNames="accordion-content"
       >
-        <Content offset={offset * 0.2} id={`${id}-accordion-content`}>
+        <Content id={`${id}-accordion-content`}>
           <LockScroll/>
           <div className="border" />
           <div className="accordion-inner">
-            {children}
+            {childrenWithProps}
           </div>
           <div className="border" />
         </Content>

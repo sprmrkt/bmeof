@@ -1,6 +1,7 @@
 import React, {useRef} from 'react';
 import styled from 'styled-components';
 import WorkAccordion from "../atoms/WorkAccordion";
+import PropTypes from 'prop-types';
 
 const Holder = styled.div`
   height: 100%;
@@ -16,16 +17,21 @@ const Holder = styled.div`
   }
 `;
 
-function WorkContent() {
+function WorkContent(props) {
   const holderRef = useRef(null);
   return (
     <Holder ref={holderRef} id="work-content">
-      <WorkAccordion parent={holderRef}/>
-      <WorkAccordion parent={holderRef}/>
-      <WorkAccordion parent={holderRef}/>
-      <WorkAccordion parent={holderRef}/>
+      <WorkAccordion {...props} parent={holderRef}/>
+      <WorkAccordion {...props} parent={holderRef}/>
+      <WorkAccordion {...props} parent={holderRef}/>
+      <WorkAccordion {...props} parent={holderRef}/>
     </Holder>
   )
 }
+
+WorkContent.propTypes = {
+  parentUid: PropTypes.string,
+  parentButtonHeight: PropTypes.number,
+};
 
 export default WorkContent;
