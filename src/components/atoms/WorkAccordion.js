@@ -1,13 +1,12 @@
 import React, {useEffect, useState, useRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {Element, scroller} from 'react-scroll/modules';
+import {scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import useWindowSize from "../../hooks/useWindowSize";
 import WorkItem from "../organisms/WorkItem";
 import WorkItemContent from "../molecules/WorkItemContent";
-import WorkContent from "../organisms/WorkContent";
 
 const timeout = 3000;
 
@@ -23,7 +22,7 @@ const Content = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: hotpink;
+    padding: 1rem 0;
   }
 
   &.work-content-appear,
@@ -49,11 +48,11 @@ const Content = styled.div`
   }
 `;
 
-function Accordion({parentUid, parentButtonHeight}) {
+function Accordion({parentUid, parentButtonHeight, parent}) {
   const [open, setOpen] = useState(false);
   const [titleHeight, setTitleHeight] = useState(0);
   const [buttonHeight, setButtonHeight] = useState(0);
-  const uid = uuidv4();
+  const itemUid = uuidv4();
   const buttonRef = useRef(null);
   const titleRef = useRef(null);
   const size = useWindowSize();
@@ -75,13 +74,32 @@ function Accordion({parentUid, parentButtonHeight}) {
         smooth: true,
         offset: parentButtonHeight,
       });
+      // Stop work content holder from scrolling
+      parent.current.style.overflow = "hidden";
+      // Scroll the work content holder to show only the title of the open item
+      scroller.scrollTo(itemUid, {
+        duration: 500,
+        smooth: true,
+        offset: buttonHeight - titleHeight,
+        containerId: 'work-content'
+      });
 
+    } else {
+      // Scroll the body back to see the edge of the large work text
+      scroller.scrollTo(parentUid, {
+        duration: 500,
+        smooth: true,
+        offset: parentButtonHeight * 0.8,
+        delay: timeout
+      });
+      // Resume scrolling work content holder
+      parent.current.style.overflow = "scroll";
     }
-  }, [open, parentUid, parentButtonHeight]);
+  }, [open, parentUid, parentButtonHeight, buttonHeight, titleHeight, itemUid, parent]);
 
   return (
     <>
-      <button ref={buttonRef} className="link" onClick={() => setOpen(!open)}>
+      <button id={itemUid} ref={buttonRef} className="link" onClick={() => setOpen(!open)}>
         <WorkItem ref={titleRef} />
       </button>
       <CSSTransition
@@ -104,6 +122,7 @@ function Accordion({parentUid, parentButtonHeight}) {
 }
 
 Accordion.propTypes = {
+  parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
   parentButtonHeight: PropTypes.number.isRequired,
 };
