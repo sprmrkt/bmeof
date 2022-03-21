@@ -2,7 +2,7 @@ import React from "react";
 import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
-import WorkContent from "../components/organisms/WorkContent";
+import WorkList from "../components/organisms/WorkList";
 
 const Holder = styled.div`
   svg {
@@ -26,7 +26,7 @@ function IndexPage() {
       <Accordion
         id="work"
         button={<p className="h1">Work</p>}>
-        <WorkContent/>
+        <WorkList/>
       </Accordion>
       <Accordion
         id="belief"

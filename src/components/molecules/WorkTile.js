@@ -94,11 +94,7 @@ WorkTile.propTypes = {
   work: PropTypes.object,
   toggleProjectHandler: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  even: PropTypes.bool,
-};
-
-WorkTile.defaultProps = {
-  even: false,
+  even: PropTypes.bool.isRequired,
 };
 
 export default WorkTile;

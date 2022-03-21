@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import styled from 'styled-components';
-import WorkAccordion from "../atoms/WorkAccordion";
+import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from 'prop-types';
 
 const Holder = styled.div`
@@ -17,21 +17,21 @@ const Holder = styled.div`
   }
 `;
 
-function WorkContent(props) {
+function WorkList(props) {
   const holderRef = useRef(null);
   return (
     <Holder ref={holderRef} id="work-content">
-      <WorkAccordion {...props} parent={holderRef}/>
-      <WorkAccordion {...props} parent={holderRef} even/>
-      <WorkAccordion {...props} parent={holderRef}/>
-      <WorkAccordion {...props} parent={holderRef} even/>
+      <WorkHolder {...props} parent={holderRef}/>
+      <WorkHolder {...props} parent={holderRef} even={true}/>
+      <WorkHolder {...props} parent={holderRef}/>
+      <WorkHolder {...props} parent={holderRef} even={true}/>
     </Holder>
   )
 }
 
-WorkContent.propTypes = {
+WorkList.propTypes = {
   parentUid: PropTypes.string,
   parentButtonHeight: PropTypes.number,
 };
 
-export default WorkContent;
+export default WorkList;

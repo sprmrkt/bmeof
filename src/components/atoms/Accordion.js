@@ -8,7 +8,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import LockScroll from "./LockScroll";
 
 const scrollTime = 500;
-const timeout = 3000;
+const timeout = 2000;
 
 
 const Content = styled.div`

@@ -5,10 +5,10 @@ import {scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import useWindowSize from "../../hooks/useWindowSize";
-import WorkTile from "../organisms/WorkTile";
+import WorkTile from "../molecules/WorkTile";
 import WorkItemContent from "../molecules/WorkItemContent";
 
-const timeout = 3000;
+const timeout = 2000;
 
 const Content = styled.div`
   overflow: hidden;
@@ -48,9 +48,7 @@ const Content = styled.div`
   }
 `;
 
-function WorkAccordion({parentUid, parentButtonHeight, parent, even}) {
-  const [open, setOpen] = useState(false);
-  const itemUid = uuidv4();
+function WorkContentAnimation({open, children, parent, parentUid, parentButtonHeight, itemUid}) {
   const size = useWindowSize();
   const tileHeight = size.height - 60;
 
@@ -83,16 +81,9 @@ function WorkAccordion({parentUid, parentButtonHeight, parent, even}) {
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
     }
-  }, [open, parentUid, parentButtonHeight, tileHeight, itemUid, parent]);
+  }, [open, parent, parentUid, parentButtonHeight, tileHeight, itemUid ]);
 
   return (
-    <>
-      <div id={itemUid}>
-        <WorkTile
-          open={open}
-          even={even}
-          toggleProjectHandler={(toggle) => setOpen(toggle)} />
-      </div>
       <CSSTransition
         mountOnEnter
         unmountOnExit
@@ -101,27 +92,23 @@ function WorkAccordion({parentUid, parentButtonHeight, parent, even}) {
         timeout={timeout}
         classNames="work-content"
       >
-        <Content className="work-content" tileHeight={tileHeight}>
+        <Content className="work-content">
           <div className="spacer" />
           <div className="content-inner">
-            <WorkItemContent />
+            {children}
           </div>
         </Content>
       </CSSTransition>
-    </>
   )
 }
 
-WorkAccordion.propTypes = {
+WorkContentAnimation.propTypes = {
+  itemUid: PropTypes.string.isRequired,
   parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
   parentButtonHeight: PropTypes.number.isRequired,
-  even: PropTypes.bool,
-};
-
-WorkAccordion.defaultProps = {
-  even: false,
+  open: PropTypes.bool,
 };
 
 
-export default WorkAccordion;
+export default WorkContentAnimation;
