@@ -106,7 +106,7 @@ function Accordion({button, children, id}) {
       scroller.scrollTo(uid, {
         duration: scrollTime,
         smooth: true,
-        offset: offset * 0.8,
+        offset: offset - 60,
         delay: timeout
       });
     }

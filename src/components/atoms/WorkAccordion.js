@@ -34,12 +34,12 @@ const Content = styled.div`
   &.work-content-appear-done,
   &.work-content-enter-active,
   &.work-content-enter-done {
-    height: calc(100vh - ${props => props.titleHeight}px);
+    height: calc(100vh - 60px);
     transition: height ${timeout}ms;
   }
 
   &.work-content-exit {
-    height: calc(100vh - ${props => props.titleHeight}px);
+    height: calc(100vh - 60px);
   }
 
   &.work-content-exit-active {
@@ -50,21 +50,9 @@ const Content = styled.div`
 
 function Accordion({parentUid, parentButtonHeight, parent}) {
   const [open, setOpen] = useState(false);
-  const [titleHeight, setTitleHeight] = useState(0);
-  const [buttonHeight, setButtonHeight] = useState(0);
   const itemUid = uuidv4();
-  const buttonRef = useRef(null);
-  const titleRef = useRef(null);
   const size = useWindowSize();
-
-  useEffect(() => {
-    if (titleRef.current) {
-      setTitleHeight(titleRef.current.offsetHeight);
-    }
-    if (buttonRef.current) {
-      setButtonHeight(buttonRef.current.offsetHeight);
-    }
-  }, [size.width]);
+  const tileHeight = size.height - 60;
 
   useEffect(() => {
     if (open) {
@@ -80,7 +68,7 @@ function Accordion({parentUid, parentButtonHeight, parent}) {
       scroller.scrollTo(itemUid, {
         duration: 500,
         smooth: true,
-        offset: buttonHeight - titleHeight,
+        offset: tileHeight - 60,
         containerId: 'work-content'
       });
 
@@ -89,18 +77,18 @@ function Accordion({parentUid, parentButtonHeight, parent}) {
       scroller.scrollTo(parentUid, {
         duration: 500,
         smooth: true,
-        offset: parentButtonHeight * 0.8,
+        offset: parentButtonHeight - 60,
         delay: timeout
       });
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
     }
-  }, [open, parentUid, parentButtonHeight, buttonHeight, titleHeight, itemUid, parent]);
+  }, [open, parentUid, parentButtonHeight, tileHeight, itemUid, parent]);
 
   return (
     <>
-      <button id={itemUid} ref={buttonRef} className="link" onClick={() => setOpen(!open)}>
-        <WorkItem ref={titleRef} />
+      <button id={itemUid} className="link" onClick={() => setOpen(!open)}>
+        <WorkItem />
       </button>
       <CSSTransition
         mountOnEnter
@@ -110,7 +98,7 @@ function Accordion({parentUid, parentButtonHeight, parent}) {
         timeout={timeout}
         classNames="work-content"
       >
-        <Content className="work-content" titleHeight={titleHeight} buttonHeight={buttonHeight}>
+        <Content className="work-content" tileHeight={tileHeight}>
           <div className="spacer" />
           <div className="content-inner">
             <WorkItemContent />

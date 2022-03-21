@@ -4,21 +4,27 @@ import PropTypes from "prop-types";
 import Image from "../atoms/Image";
 
 const Holder = styled.div`
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 60px);
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: mediumspringgreen;
   p {
     margin: 0;
     padding: 1rem 0;
   }
 `;
 
-const ImageHolder = styled.div`
-  background-color: white;
+const TitleHolder = styled.div`
+  height: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-gap: 1rem;
+  > :last-child {
+    justify-self: end;
+  }
+`;
 
+const ImageHolder = styled.div`
+  background-color: mediumspringgreen;
+  
   .gatsby-image-wrapper {
     width: 100%;
     height: 0;
@@ -26,21 +32,23 @@ const ImageHolder = styled.div`
   }
 `;
 
-const WorkItem = forwardRef(({work}, ref) => {
+const WorkItem = () => {
   return (
     <Holder>
       <ImageHolder>
         <Image imgName="entrance-pool.jpg" />
       </ImageHolder>
-      <p ref={ref}>Title</p>
+      <TitleHolder>
+        <p>Project title</p>
+        <p>Info</p>
+        <p>Back</p>
+      </TitleHolder>
     </Holder>
   )
-});
+};
 
 WorkItem.propTypes = {
   work: PropTypes.object,
 };
-
-WorkItem.displayName = 'WorkItem'
 
 export default WorkItem;
