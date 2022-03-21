@@ -22,9 +22,9 @@ function WorkContent(props) {
   return (
     <Holder ref={holderRef} id="work-content">
       <WorkAccordion {...props} parent={holderRef}/>
+      <WorkAccordion {...props} parent={holderRef} even/>
       <WorkAccordion {...props} parent={holderRef}/>
-      <WorkAccordion {...props} parent={holderRef}/>
-      <WorkAccordion {...props} parent={holderRef}/>
+      <WorkAccordion {...props} parent={holderRef} even/>
     </Holder>
   )
 }

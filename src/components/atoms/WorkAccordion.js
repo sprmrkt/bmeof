@@ -1,11 +1,11 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import useWindowSize from "../../hooks/useWindowSize";
-import WorkItem from "../organisms/WorkItem";
+import WorkTile from "../organisms/WorkTile";
 import WorkItemContent from "../molecules/WorkItemContent";
 
 const timeout = 3000;
@@ -22,7 +22,7 @@ const Content = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 1rem 0;
+    padding: 0 0 1rem 0;
   }
 
   &.work-content-appear,
@@ -48,7 +48,7 @@ const Content = styled.div`
   }
 `;
 
-function Accordion({parentUid, parentButtonHeight, parent}) {
+function WorkAccordion({parentUid, parentButtonHeight, parent, even}) {
   const [open, setOpen] = useState(false);
   const itemUid = uuidv4();
   const size = useWindowSize();
@@ -87,9 +87,12 @@ function Accordion({parentUid, parentButtonHeight, parent}) {
 
   return (
     <>
-      <button id={itemUid} className="link" onClick={() => setOpen(!open)}>
-        <WorkItem />
-      </button>
+      <div id={itemUid}>
+        <WorkTile
+          open={open}
+          even={even}
+          toggleProjectHandler={(toggle) => setOpen(toggle)} />
+      </div>
       <CSSTransition
         mountOnEnter
         unmountOnExit
@@ -109,11 +112,16 @@ function Accordion({parentUid, parentButtonHeight, parent}) {
   )
 }
 
-Accordion.propTypes = {
+WorkAccordion.propTypes = {
   parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
   parentButtonHeight: PropTypes.number.isRequired,
+  even: PropTypes.bool,
+};
+
+WorkAccordion.defaultProps = {
+  even: false,
 };
 
 
-export default Accordion;
+export default WorkAccordion;
