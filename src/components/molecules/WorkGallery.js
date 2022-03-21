@@ -37,7 +37,7 @@ const Inner = styled.div`
   }
 `;
 
-function WorkItemContent() {
+function WorkGallery() {
   return (
     <Holder>
       <Inner>
@@ -54,4 +54,4 @@ function WorkItemContent() {
   )
 }
 
-export default WorkItemContent;
+export default WorkGallery;

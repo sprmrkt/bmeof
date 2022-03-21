@@ -66,7 +66,7 @@ const TextHolder = styled.div`
   }
 `;
 
-const WorkTile = ({toggleProjectHandler, open, even}) => {
+const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, even}) => {
 
   const textClasses = classNames({open: open, even: even})
 
@@ -81,7 +81,9 @@ const WorkTile = ({toggleProjectHandler, open, even}) => {
         <p>
           <button onClick={() => toggleProjectHandler(true)}>Project title</button>
         </p>
-        <p className="info">Info</p>
+        <p className="info">
+          <button onClick={() => toggleInfoHandler(false)}>Info</button>
+        </p>
         <p className="close">
           <button onClick={() => toggleProjectHandler(false)}>Close</button>
         </p>
@@ -93,6 +95,7 @@ const WorkTile = ({toggleProjectHandler, open, even}) => {
 WorkTile.propTypes = {
   work: PropTypes.object,
   toggleProjectHandler: PropTypes.func.isRequired,
+  toggleInfoHandler: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   even: PropTypes.bool.isRequired,
 };

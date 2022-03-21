@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
-import {v4 as uuidv4} from 'uuid';
 import useWindowSize from "../../hooks/useWindowSize";
-import WorkTile from "../molecules/WorkTile";
-import WorkItemContent from "../molecules/WorkItemContent";
 
 const timeout = 2000;
 
