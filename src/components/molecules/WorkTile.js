@@ -16,6 +16,7 @@ const Holder = styled.div`
 const ImageHolder = styled.div`
   background-color: mediumspringgreen;
   height: calc(100% - 60px);
+  overflow: hidden;
   button {
     width: 100%;
     height: 100%;
@@ -42,9 +43,9 @@ const TextHolder = styled.div`
     z-index: 20;
     position: relative;
     @media ( ${props => props.theme.breakpoints.md} ) {
-      width: calc(200% + 1rem);
+      width: 200%;
       &.even {
-        margin-left: calc(-100% - 1rem);
+        margin-left: -100%;
       }
     }
   }

@@ -19,7 +19,7 @@ const Content = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    padding: 0 0 1rem 0;
+    padding: 0;
   }
 
   &.work-content-appear,
@@ -45,7 +45,7 @@ const Content = styled.div`
   }
 `;
 
-function WorkContentAnimation({open, children, parent, parentUid, parentButtonHeight, itemUid}) {
+function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
   const size = useWindowSize();
   const tileHeight = size.height - 60;
 
@@ -55,7 +55,6 @@ function WorkContentAnimation({open, children, parent, parentUid, parentButtonHe
       scroller.scrollTo(parentUid, {
         duration: 500,
         smooth: true,
-        offset: parentButtonHeight,
       });
       // Stop work content holder from scrolling
       parent.current.style.overflow = "hidden";
@@ -72,13 +71,13 @@ function WorkContentAnimation({open, children, parent, parentUid, parentButtonHe
       scroller.scrollTo(parentUid, {
         duration: 500,
         smooth: true,
-        offset: parentButtonHeight - 60,
+        offset: -60,
         delay: timeout
       });
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
     }
-  }, [open, parent, parentUid, parentButtonHeight, tileHeight, itemUid ]);
+  }, [open, parent, parentUid, tileHeight, itemUid ]);
 
   return (
       <CSSTransition
@@ -103,7 +102,6 @@ WorkContentAnimation.propTypes = {
   itemUid: PropTypes.string.isRequired,
   parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
-  parentButtonHeight: PropTypes.number.isRequired,
   open: PropTypes.bool,
 };
 

@@ -32,7 +32,6 @@ function WorkHolder(props) {
 WorkHolder.propTypes = {
   parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
-  parentButtonHeight: PropTypes.number.isRequired,
   even: PropTypes.bool,
 };
 

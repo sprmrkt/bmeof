@@ -7,7 +7,8 @@ const timeout = 2000
 
 const Holder = styled.div`
   background-color: khaki;
-
+  > :first-child { margin-top: 0; }
+  > :last-child { margin-bottom: 0; }
   &.work-info-appear,
   &.work-info-enter {
     height: 0;

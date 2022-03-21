@@ -25,25 +25,25 @@ function IndexPage() {
       </h1>
       <Accordion
         id="work"
-        button={<p className="h1">Work</p>}>
+        button="Work">
         <WorkList/>
       </Accordion>
       <Accordion
         id="belief"
         scrollAfterOpen
-        button={<p className="h1">Belief</p>}>
+        button="Belief">
         <p>Content</p>
       </Accordion>
       <Accordion
         id="studio"
         scrollAfterOpen
-        button={<p className="h1">Studio</p>}>
+        button="Studio">
         <p>Content</p>
       </Accordion>
       <Accordion
         id="shop"
         scrollAfterOpen
-        button={<p className="h1">Shop</p>}>
+        button="Shop">
         <p>Content</p>
       </Accordion>
     </Holder>

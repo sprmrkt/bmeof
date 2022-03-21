@@ -19,11 +19,12 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6,
   .h1, .h2, .h3, .h4, .h5, .h6 {
-    line-height: 0.72;
+    line-height: 0.8;
     text-transform: uppercase;
     letter-spacing: -0.025em;
-    padding-top: 0.1em;
-    margin: 0 0 -0.1em 0;
+    margin: 0;
+    vertical-align: bottom;
+    display: inline;
   }
 
   p,
@@ -250,40 +251,19 @@ const GlobalStyle = createGlobalStyle`
   input[type="reset"] {
     display: inline-block;
     cursor: pointer;
-    padding: 0 1rem;
+    padding: 0;
 
     font-family: inherit;
     ${(props) => props.theme.fluidType(0)};
     text-decoration: none;
     white-space: nowrap;
-    border: 1px solid;
-    border-radius: 2px;
+    border: none;
 
     color: inherit;
     background-color: transparent;
 
     &:hover {
       text-decoration: none;
-    }
-
-    &.link {
-      margin: 0;
-      border: none;
-      padding: 0;
-      background-color: transparent;
-      line-height: inherit;
-    }
-
-    &.icon {
-      border: none;
-      padding: 0;
-      background-color: transparent;
-
-      svg {
-        height: 3rem;
-        width: auto;
-        display: block;
-      }
     }
   }
 

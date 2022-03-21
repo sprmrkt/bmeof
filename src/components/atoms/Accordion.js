@@ -11,6 +11,13 @@ const scrollTime = 500;
 const timeout = 2000;
 
 
+const Button = styled.button`
+  ${(props) => props.theme.largeType()};
+  line-height: 0.8;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  display: block;
+`;
 const Content = styled.div`
   width: 100%;
   position: relative;
@@ -90,40 +97,32 @@ const Content = styled.div`
 
 function Accordion({button, children, id}) {
   const [open, setOpen] = useState(false);
-  const [offset, setOffset] = useState(0);
   const uid = uuidv4();
-  const buttonRef = useRef(null);
-  const size = useWindowSize();
-
-  useEffect(() => {
-    if (buttonRef.current) {
-      setOffset(buttonRef.current.offsetHeight);
-    }
-  }, [size.width]);
 
   useEffect(() => {
     if (open) {
       scroller.scrollTo(uid, {
         duration: scrollTime,
         smooth: true,
-        offset: offset - 60,
+        offset: -60,
         delay: timeout
       });
     }
-  }, [open, uid, offset]);
+  }, [open, uid]);
 
   const childrenWithProps = React.Children.map(children, child => {
     // Checking isValidElement is the safe way and avoids a typescript
     // error too.
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { parentUid: uid, parentButtonHeight: offset });
+      return React.cloneElement(child, { parentUid: uid });
     }
     return child;
   });
 
   return (
-    <Element name={uid}>
-      <button ref={buttonRef} className="link accordion-title" onClick={() => setOpen(!open)}>{button}</button>
+    <>
+      <Button className="accordion-title" onClick={() => setOpen(!open)}>{button}</Button>
+      <Element name={uid}/>
       <CSSTransition
         mountOnEnter
         unmountOnExit
@@ -141,12 +140,12 @@ function Accordion({button, children, id}) {
           <div className="border" />
         </Content>
       </CSSTransition>
-    </Element>
+    </>
   )
 }
 
 Accordion.propTypes = {
-  button: PropTypes.element.isRequired,
+  button: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 

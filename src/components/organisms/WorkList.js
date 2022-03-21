@@ -9,8 +9,6 @@ const Holder = styled.div`
   -webkit-overflow-scrolling: touch;
   display: grid;
   grid-template-columns: 1fr;
-  grid-column-gap: 1rem;
-  padding: 1rem;
   @media ( ${props => props.theme.breakpoints.md} ) {
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
@@ -31,7 +29,6 @@ function WorkList(props) {
 
 WorkList.propTypes = {
   parentUid: PropTypes.string,
-  parentButtonHeight: PropTypes.number,
 };
 
 export default WorkList;
