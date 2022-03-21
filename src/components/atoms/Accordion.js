@@ -56,12 +56,12 @@ const Content = styled.div`
   &.accordion-content-enter-done {
     .accordion-inner {
       height: 100vh;
-      transition: height ${timeout * 0.75}ms ${timeout * 0.25 + scrollTime}ms;
+      transition: height ${timeout * 0.75}ms ${timeout * 0.25}ms;
     }
 
     .border {
       transform: scaleX(1);
-      transition: transform ${timeout * 0.25}ms ${scrollTime}ms;
+      transition: transform ${timeout * 0.25}ms;
     }
   }
 
@@ -88,7 +88,7 @@ const Content = styled.div`
   }
 `;
 
-function Accordion({button, children, id, scrollAfterOpen}) {
+function Accordion({button, children, id}) {
   const [open, setOpen] = useState(false);
   const [offset, setOffset] = useState(0);
   const uid = uuidv4();
@@ -103,17 +103,14 @@ function Accordion({button, children, id, scrollAfterOpen}) {
 
   useEffect(() => {
     if (open) {
-
-      let options = {
+      scroller.scrollTo(uid, {
         duration: scrollTime,
         smooth: true,
         offset: offset * 0.8,
-      }
-      if( scrollAfterOpen ) options.delay = timeout + scrollTime;
-
-      scroller.scrollTo(uid, options);
+        delay: timeout
+      });
     }
-  }, [open, uid, offset, scrollAfterOpen]);
+  }, [open, uid, offset]);
 
   const childrenWithProps = React.Children.map(children, child => {
     // Checking isValidElement is the safe way and avoids a typescript
@@ -132,7 +129,7 @@ function Accordion({button, children, id, scrollAfterOpen}) {
         unmountOnExit
         appear
         in={open}
-        timeout={timeout + scrollTime}
+        timeout={timeout}
         classNames="accordion-content"
       >
         <Content id={`${id}-accordion-content`}>
@@ -151,11 +148,6 @@ function Accordion({button, children, id, scrollAfterOpen}) {
 Accordion.propTypes = {
   button: PropTypes.element.isRequired,
   id: PropTypes.string.isRequired,
-  scrollAfterOpen: PropTypes.bool,
-};
-
-Accordion.defaultProps = {
-  scrollAfterOpen: false,
 };
 
 export default Accordion;
