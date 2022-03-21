@@ -17,6 +17,9 @@ const Button = styled.button`
   text-transform: uppercase;
   letter-spacing: -0.025em;
   display: block;
+  @supports (-moz-appearance:none) {
+    color: red;
+  }
 `;
 const Content = styled.div`
   width: 100%;
