@@ -48,7 +48,7 @@ function RandomWords() {
 
   return (
     <Holder>
-      {count > 0 && words.map((word, i) => i < count && <p key={i} className="h1">{word}</p>)}
+      {count > 0 && words.map((word, i) => i < count && <p key={i} className="h1"><span>{word}</span></p>)}
       <div ref={elementRef} className="trigger" />
     </Holder>
   )

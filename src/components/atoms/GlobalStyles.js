@@ -23,6 +23,12 @@ const GlobalStyle = createGlobalStyle`
     text-transform: uppercase;
     letter-spacing: -0.025em;
     margin: 0;
+    @supports (-moz-appearance:none) {
+      span {
+        display: block;
+        transform: translateY(0.1em);
+      }
+    }
   }
 
   p,

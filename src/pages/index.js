@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
 import WorkList from "../components/organisms/WorkList";
 import RandomWords from "../components/organisms/RandomWords";
+import ProductList from "../components/organisms/ProductList";
 
 const Holder = styled.div`
   width: 100%;
@@ -15,16 +16,18 @@ function IndexPage() {
     <Holder>
       <Seo title="Home" />
       <h1>
+        <span>
         Bear<br />
         Meets<br />
         Eagle<br />
         On<br />
         Fire<br />
+        </span>
       </h1>
       <Accordion
         id="work"
         button="Work">
-        <WorkList/>
+        <WorkList />
       </Accordion>
       <Accordion
         id="belief"
@@ -42,9 +45,9 @@ function IndexPage() {
         id="shop"
         scrollAfterOpen
         button="Shop">
-        <p>Content</p>
+        <ProductList/>
       </Accordion>
-      <RandomWords/>
+      <RandomWords />
     </Holder>
   )
 }

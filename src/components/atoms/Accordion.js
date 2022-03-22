@@ -19,7 +19,7 @@ const Button = styled.button`
   @supports (-moz-appearance:none) {
     span {
       display: block;
-      transform: translateY(10%);
+      transform: translateY(0.1em);
     }
   }
 `;
