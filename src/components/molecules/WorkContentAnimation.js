@@ -60,7 +60,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       parent.current.style.overflow = "hidden";
       // Scroll the work content holder to show only the title of the open item
       scroller.scrollTo(itemUid, {
-        duration: 500,
+        duration: timeout,
         smooth: true,
         offset: tileHeight - 60,
         containerId: 'work-content'

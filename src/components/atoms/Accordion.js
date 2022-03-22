@@ -1,10 +1,9 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
-import useWindowSize from "../../hooks/useWindowSize";
 import LockScroll from "./LockScroll";
 
 const scrollTime = 500;
@@ -18,7 +17,10 @@ const Button = styled.button`
   letter-spacing: -0.025em;
   display: block;
   @supports (-moz-appearance:none) {
-    color: red;
+    span {
+      display: block;
+      transform: translateY(10%);
+    }
   }
 `;
 const Content = styled.div`
@@ -46,6 +48,20 @@ const Content = styled.div`
     &:last-child {
       top: auto;
       bottom: -1px;
+    }
+  }
+  
+  .close-button {
+    ${(props) => props.theme.largeType()};
+    line-height: 0.8;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    display: block;
+    @supports (-moz-appearance:none) {
+      span {
+        display: block;
+        transform: translateY(10%);
+      }
     }
   }
 
@@ -117,14 +133,17 @@ function Accordion({button, children, id}) {
     // Checking isValidElement is the safe way and avoids a typescript
     // error too.
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, { parentUid: uid });
+      return React.cloneElement(child, {
+        parentUid: uid,
+        closeHandler: () => setOpen(false),
+      });
     }
     return child;
   });
 
   return (
     <>
-      <Button className="accordion-title" onClick={() => setOpen(!open)}>{button}</Button>
+      <Button className="accordion-title" onClick={() => setOpen(!open)}><span>{button}</span></Button>
       <Element name={uid}/>
       <CSSTransition
         mountOnEnter

@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
 import WorkTile from "../molecules/WorkTile";
