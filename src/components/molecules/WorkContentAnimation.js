@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import useWindowSize from "../../hooks/useWindowSize";
 
-const timeout = 2000;
+const timeout = 1000;
 
 const Content = styled.div`
   overflow: hidden;
@@ -48,6 +48,7 @@ const Content = styled.div`
 function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
   const size = useWindowSize();
   const tileHeight = size.height - 60;
+  const [hasOpened, setHasOpened] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -66,7 +67,10 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
         containerId: 'work-content'
       });
 
-    } else {
+      // Update hasOpened
+      setHasOpened(true);
+
+    } else if (hasOpened) {
       // Scroll the body back to see the edge of the large work text
       scroller.scrollTo(parentUid, {
         duration: 500,
@@ -77,24 +81,24 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
     }
-  }, [open, parent, parentUid, tileHeight, itemUid ]);
+  }, [open, parent, parentUid, tileHeight, itemUid, setHasOpened]);
 
   return (
-      <CSSTransition
-        mountOnEnter
-        unmountOnExit
-        appear
-        in={open}
-        timeout={timeout}
-        classNames="work-content"
-      >
-        <Content className="work-content">
-          <div className="spacer" />
-          <div className="content-inner">
-            {children}
-          </div>
-        </Content>
-      </CSSTransition>
+    <CSSTransition
+      mountOnEnter
+      unmountOnExit
+      appear
+      in={open}
+      timeout={timeout}
+      classNames="work-content"
+    >
+      <Content className="work-content">
+        <div className="spacer" />
+        <div className="content-inner">
+          {children}
+        </div>
+      </Content>
+    </CSSTransition>
   )
 }
 

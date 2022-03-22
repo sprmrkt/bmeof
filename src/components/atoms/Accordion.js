@@ -7,7 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import LockScroll from "./LockScroll";
 
 const scrollTime = 500;
-const timeout = 2000;
+const timeout = 1000;
 
 
 const Button = styled.button`
