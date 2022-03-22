@@ -8,6 +8,7 @@ import Transition from "../components/atoms/Transition";
 import GlobalStyles from "../components/atoms/GlobalStyles";
 import {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
+import EasterEgg from "../components/organisms/EasterEgg";
 
 function Index({location, children}) {
   return (
@@ -15,6 +16,7 @@ function Index({location, children}) {
       <>
         <GlobalStyles />
         <Header />
+        <EasterEgg/>
         <Transition location={location}>
           <main>{children}</main>
         </Transition>
