@@ -22,7 +22,7 @@ function WorkHolder(props) {
       </div>
       <WorkContentAnimation {...props} open={openContent} itemUid={itemUid}>
         <WorkInfo open={openInfo}/>
-        <WorkGallery />
+        <WorkGallery closeHandler={() => setOpenContent(false)}/>
       </WorkContentAnimation>
     </>
   )

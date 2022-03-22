@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from "prop-types";
+import WorkList from "../organisms/WorkList";
 
 const Holder = styled.div`
   height: 100%;
   position: relative;
-  background-color: hotpink;
-  padding: 1rem;
+  overflow-y: scroll;
 
   > :first-child { margin-top: 0; }
 
@@ -13,15 +14,13 @@ const Holder = styled.div`
 `;
 
 const Inner = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: calc(100vh - 60px);
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   display: flex;
   padding: 1rem;
+  background-color: hotpink;
 
   div {
     position: relative;
@@ -37,7 +36,12 @@ const Inner = styled.div`
   }
 `;
 
-function WorkGallery() {
+const CloseHolder = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+
+function WorkGallery({closeHandler}) {
   return (
     <Holder>
       <Inner>
@@ -50,8 +54,15 @@ function WorkGallery() {
         <div />
         <div />
       </Inner>
+      <CloseHolder>
+        <button className="close-button" onClick={() => closeHandler()}><span>Close</span></button>
+      </CloseHolder>
     </Holder>
   )
 }
+
+WorkGallery.propTypes = {
+  closeHandler: PropTypes.func.isRequired,
+};
 
 export default WorkGallery;

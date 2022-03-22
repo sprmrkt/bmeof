@@ -43,6 +43,7 @@ function WorkList(props) {
 
 WorkList.propTypes = {
   parentUid: PropTypes.string,
+  closeHandler: PropTypes.func,
 };
 
 export default WorkList;
