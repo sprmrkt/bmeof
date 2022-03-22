@@ -3,13 +3,11 @@ import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
 import WorkList from "../components/organisms/WorkList";
+import RandomWords from "../components/organisms/RandomWords";
 
 const Holder = styled.div`
-  svg {
-    width: 4rem;
-    height: auto;
-    margin-right: 2rem;
-  }
+  width: 100%;
+  overflow: hidden;
 `;
 
 function IndexPage() {
@@ -46,6 +44,7 @@ function IndexPage() {
         button="Shop">
         <p>Content</p>
       </Accordion>
+      <RandomWords/>
     </Holder>
   )
 }

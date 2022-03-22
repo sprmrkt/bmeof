@@ -23,8 +23,6 @@ const GlobalStyle = createGlobalStyle`
     text-transform: uppercase;
     letter-spacing: -0.025em;
     margin: 0;
-    vertical-align: bottom;
-    display: inline;
   }
 
   p,
