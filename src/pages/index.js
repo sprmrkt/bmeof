@@ -3,7 +3,7 @@ import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
 import WorkList from "../components/organisms/WorkList";
-import RandomWords from "../components/organisms/RandomWords";
+import LoopingScroll from "../components/organisms/LoopingScroll";
 import ProductList from "../components/organisms/ProductList";
 
 const Holder = styled.div`
@@ -47,7 +47,7 @@ function IndexPage() {
         button="Shop">
         <ProductList/>
       </Accordion>
-      <RandomWords />
+      <LoopingScroll />
     </Holder>
   )
 }
