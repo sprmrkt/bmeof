@@ -82,12 +82,12 @@ const Content = styled.div`
   &.accordion-content-enter-done {
     .accordion-inner {
       height: 100vh;
-      transition: height ${timeout * 0.75}ms ${timeout * 0.25}ms;
+      transition: height ${timeout * 0.75}ms ${timeout * 0.25 + scrollTime}ms;
     }
 
     .border {
       transform: scaleX(1);
-      transition: transform ${timeout * 0.25}ms;
+      transition: transform ${timeout * 0.25}ms ${scrollTime}ms;
     }
   }
 
@@ -124,7 +124,6 @@ function Accordion({button, children, id}) {
         duration: scrollTime,
         smooth: true,
         offset: -60,
-        delay: timeout
       });
     }
   }, [open, uid]);
@@ -150,7 +149,7 @@ function Accordion({button, children, id}) {
         unmountOnExit
         appear
         in={open}
-        timeout={timeout}
+        timeout={scrollTime + timeout}
         classNames="accordion-content"
       >
         <Content id={`${id}-accordion-content`}>
