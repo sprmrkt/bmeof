@@ -18,10 +18,9 @@ const Grid = styled.div`
   }
 `;
 
-const CloseHolder = styled.div`
+const Spacer = styled.div`
   width: 100%;
-  overflow: hidden;
-  padding-bottom: 60px;
+  height: 60px;
 `;
 
 function WorkList(props) {
@@ -34,9 +33,7 @@ function WorkList(props) {
         <WorkHolder {...props} parent={holderRef} />
         <WorkHolder {...props} parent={holderRef} even={true} />
       </Grid>
-      <CloseHolder>
-        <button className="close-button" onClick={() => props.closeHandler()}><span>Close</span></button>
-      </CloseHolder>
+      <Spacer/>
     </Holder>
   )
 }

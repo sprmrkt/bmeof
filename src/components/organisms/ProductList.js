@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from "prop-types";
 import ProductTile from "../molecules/ProductTile";
 
 const Holder = styled.div`
@@ -9,28 +8,21 @@ const Holder = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 
-const CloseHolder = styled.div`
+const Spacer = styled.div`
   width: 100%;
-  overflow: hidden;
-  padding-bottom: 60px;
+  height: 60px;
 `;
 
-function ProductList({closeHandler}) {
+function ProductList() {
   return (
     <Holder>
       <ProductTile/>
       <ProductTile/>
       <ProductTile/>
       <ProductTile/>
-      <CloseHolder>
-        <button className="close-button" onClick={() => closeHandler()}><span>Close</span></button>
-      </CloseHolder>
+      <Spacer/>
     </Holder>
   )
 }
-
-ProductList.propTypes = {
-  closeHandler: PropTypes.func,
-};
 
 export default ProductList;

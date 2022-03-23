@@ -41,7 +41,15 @@ const CloseHolder = styled.div`
   overflow: hidden;
 `;
 
-function WorkGallery({closeHandler}) {
+function WorkGallery({closeHandler, closeParentHandler}) {
+
+  const handleClose = () => {
+    closeHandler();
+    setTimeout(() => {
+      closeParentHandler()
+    }, 1500);
+  }
+
   return (
     <Holder>
       <Inner>
@@ -55,7 +63,7 @@ function WorkGallery({closeHandler}) {
         <div />
       </Inner>
       <CloseHolder>
-        <button className="close-button" onClick={() => closeHandler()}><span>Close</span></button>
+        <button className="close-button" onClick={() => handleClose()}><span>Close</span></button>
       </CloseHolder>
     </Holder>
   )
@@ -63,6 +71,7 @@ function WorkGallery({closeHandler}) {
 
 WorkGallery.propTypes = {
   closeHandler: PropTypes.func.isRequired,
+  closeParentHandler: PropTypes.func.isRequired,
 };
 
 export default WorkGallery;

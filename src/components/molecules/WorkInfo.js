@@ -18,12 +18,12 @@ const Holder = styled.div`
   &.work-info-appear-done,
   &.work-info-enter-active,
   &.work-info-enter-done {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 120px);
     transition: height ${timeout}ms;
   }
 
   &.work-info-exit {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 120px);
   }
 
   &.work-info-exit-active {
@@ -34,16 +34,12 @@ const Holder = styled.div`
 
 const Images = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  height: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
   > div {
     background-color: black;
     width: 150px;
     height: 100px;
     margin: 0 1rem 1rem 0;
+    display: inline-block;
   }
 `;
 
