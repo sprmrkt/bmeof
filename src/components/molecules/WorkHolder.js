@@ -32,7 +32,7 @@ function WorkHolder(props) {
       containerId: `${itemUid}-gallery-${size.width>= 576 ? 'inner' : 'holder'}`,
       horizontal: size.width>= 576,
     });
-  }, [currentSlide, size.width]);
+  }, [currentSlide, size.width, itemUid]);
 
   return (
     <>

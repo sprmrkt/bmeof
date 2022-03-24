@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react';
+import React, {forwardRef, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Image from "../atoms/Image";
@@ -14,25 +14,45 @@ const Holder = styled.div`
       padding: 1rem 1rem 0 0.5rem;
     }
   }
+
   button {
     padding: 0;
     border: none;
+  }
+
+  &:hover {
+    .gatsby-image-wrapper {
+      transform: translateY(${props => props.hoverDist}px);
+    }
+
+    .landscape .gatsby-image-wrapper {
+      transform: translateX(${props => props.hoverDist}px);
+    }
   }
 `;
 
 const ImageHolder = styled.div`
   height: calc(100% - 60px);
   overflow: hidden;
+  position: relative;
+
   button {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
-    flex-direction: column;
+
     .gatsby-image-wrapper {
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%;
+      width: ${props => props.imageSize}px;
+      height: ${props => props.imageSize}px;
+      transition: transform 0.5s 0.25s;
     }
+  }
+
+  &.landscape {
+
   }
 `;
 
@@ -44,6 +64,7 @@ const TextHolder = styled.div`
   align-items: center;
   width: 100%;
   transition: all 0.25s;
+
   &.open {
     background-color: ${props => props.theme.colors.white};
     z-index: 20;
@@ -55,14 +76,18 @@ const TextHolder = styled.div`
       }
     }
   }
+
   .title {
     grid-column: span 3;
   }
+
   .close {
     justify-self: end;
   }
+
   p {
     margin: 0;
+
     button {
       line-height: 60px;
       width: 100%;
@@ -70,14 +95,17 @@ const TextHolder = styled.div`
       display: inline-block;
     }
   }
+
   .info, .close {
     opacity: 0;
     transition: opacity 0.25s;
   }
+
   &.open {
     .title {
       grid-column: span 1;
     }
+
     .info, .close {
       opacity: 1;
     }
@@ -85,12 +113,35 @@ const TextHolder = styled.div`
 `;
 
 const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, even}) => {
+  const imageHolderRef = useRef(null);
+  const [landscapeTile, setLandscapeTile] = useState(null);
+  const [imageSize, setImageSize] = useState(null);
+  const [hoverDist, setHoverDist] = useState(0);
+
+  useEffect(() => {
+    if (imageHolderRef.current) {
+      const width = imageHolderRef.current.offsetWidth;
+      const height = imageHolderRef.current.offsetHeight;
+      setImageSize(Math.min(width, height));
+      setHoverDist(Math.abs(width - height));
+      if (width > height) {
+        setLandscapeTile(true);
+      } else {
+        setLandscapeTile(false);
+      }
+    }
+  }, []);
 
   const tileClasses = classNames({open: open, even: even})
 
   return (
-    <Holder className={tileClasses}>
-      <ImageHolder>
+    <Holder
+      className={tileClasses}
+      hoverDist={hoverDist}>
+      <ImageHolder
+        ref={imageHolderRef}
+        imageSize={imageSize}
+        className={landscapeTile ? 'landscape' : 'portrait'}>
         <button onClick={() => toggleProjectHandler(true)}>
           <Image imgName="dummy-3.jpg" />
         </button>
