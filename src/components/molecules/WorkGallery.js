@@ -53,11 +53,12 @@ const ButtonHolder = styled.div`
 
 const Inner = styled.div`
   width: 100%;
-  padding: 1rem;
-  background-color: hotpink;
+  padding: 0 1rem 1rem 1rem;
   position: relative;
   scroll-snap-align: start;
+  border-bottom: 1px solid;
   @media( ${props => props.theme.breakpoints.md} ) {
+    padding: 1rem 1rem 1rem 0;
     height: calc(100vh - 60px);
     overflow: hidden;
     display: flex;
@@ -65,9 +66,9 @@ const Inner = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  margin: 0 0 1rem 0;
+  padding-top: 1rem;
   @media( ${props => props.theme.breakpoints.md} ) {
-    margin: 0 1rem 0 0;
+    padding: 0 0 0 1rem;
   }
 `;
 

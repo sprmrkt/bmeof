@@ -24,9 +24,23 @@ const Content = styled.div`
     padding: 0;
   }
 
+  .border {
+    width: 100%;
+    height: 1px;
+    background-color: ${props => props.theme.colors.black};
+    transform-origin: top left;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+  }
+
   &.work-content-appear,
   &.work-content-enter {
     height: 0;
+    .border {
+      transform: scaleX(0);
+    }
   }
 
   &.work-content-appear-active,
@@ -35,15 +49,26 @@ const Content = styled.div`
   &.work-content-enter-done {
     height: calc(100vh - 60px);
     transition: height ${timeout}ms;
+    .border {
+      transform: scaleX(1);
+      transition: transform ${timeout}ms;
+    }
   }
 
   &.work-content-exit {
     height: calc(100vh - 60px);
+    .border {
+      transform: scaleX(1);
+    }
   }
 
   &.work-content-exit-active {
     height: 0;
     transition: height ${timeout}ms;
+    .border {
+      transform: scaleX(0);
+      transition: transform ${timeout}ms;
+    }
   }
 `;
 
@@ -95,7 +120,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       classNames="work-content"
     >
       <Content className="work-content">
-        <div className="spacer" />
+        <div className="border" />
         <div className="content-inner">
           {children}
         </div>

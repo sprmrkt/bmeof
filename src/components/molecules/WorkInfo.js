@@ -7,13 +7,20 @@ import Image from "../atoms/Image";
 const timeout = 1000
 
 const Holder = styled.div`
-  background-color: khaki;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  padding: 0 1rem;
+  border-bottom: 1px solid;
 
-  > :first-child { margin-top: 0; }
+  > :first-child { 
+    margin-top: 0; 
+    padding-top: 1rem;
+  }
 
-  > :last-child { margin-bottom: 0; }
+  > :last-child { 
+    margin-bottom: 0; 
+    padding-bottom: 1rem; 
+  }
 
   &.work-info-appear,
   &.work-info-enter {
@@ -52,8 +59,10 @@ const ImageHolder = styled.div`
 function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
 
   const handleClick = (i) => {
+    setTimeout(() => {
+      setCurrentSlide(i);
+    }, timeout);
     closeHandler();
-    setCurrentSlide(i);
   }
 
   return (

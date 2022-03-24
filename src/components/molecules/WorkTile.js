@@ -7,6 +7,13 @@ import classNames from "classnames";
 const Holder = styled.div`
   height: calc(100vh - 60px);
   width: 100%;
+  padding: 1rem 1rem 0 1rem;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    padding: 1rem 0.5rem 0 1rem;
+    &.even {
+      padding: 1rem 1rem 0 0.5rem;
+    }
+  }
   button {
     padding: 0;
     border: none;
@@ -14,7 +21,6 @@ const Holder = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  background-color: mediumspringgreen;
   height: calc(100% - 60px);
   overflow: hidden;
   button {
@@ -39,28 +45,39 @@ const TextHolder = styled.div`
   width: 100%;
   transition: all 0.25s;
   &.open {
-    background-color: darkturquoise;
+    background-color: ${props => props.theme.colors.white};
     z-index: 20;
     position: relative;
     @media ( ${props => props.theme.breakpoints.md} ) {
-      width: 200%;
+      width: calc(200% + 1rem);
       &.even {
-        margin-left: -100%;
+        margin-left: calc(-100% - 1rem);
       }
     }
   }
-  
-  > :last-child {
+  .title {
+    grid-column: span 3;
+  }
+  .close {
     justify-self: end;
   }
   p {
     margin: 0;
+    button {
+      line-height: 60px;
+      width: 100%;
+      text-align: left;
+      display: inline-block;
+    }
   }
   .info, .close {
     opacity: 0;
     transition: opacity 0.25s;
   }
   &.open {
+    .title {
+      grid-column: span 1;
+    }
     .info, .close {
       opacity: 1;
     }
@@ -69,25 +86,25 @@ const TextHolder = styled.div`
 
 const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, even}) => {
 
-  const textClasses = classNames({open: open, even: even})
+  const tileClasses = classNames({open: open, even: even})
 
   return (
-    <Holder>
+    <Holder className={tileClasses}>
       <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
           <Image imgName="dummy-3.jpg" />
         </button>
       </ImageHolder>
-      <TextHolder className={textClasses}>
-        <p>
+      <TextHolder className={tileClasses}>
+        <p className="title">
           <button onClick={() => toggleProjectHandler(true)}>Project title</button>
         </p>
-        <p className="info">
+        {open && <p className="info">
           <button onClick={() => toggleInfoHandler(false)}>Info</button>
-        </p>
-        <p className="close">
+        </p>}
+        {open && <p className="close">
           <button onClick={() => toggleProjectHandler(false)}>Close</button>
-        </p>
+        </p>}
       </TextHolder>
     </Holder>
   )
