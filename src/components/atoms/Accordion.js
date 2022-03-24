@@ -17,6 +17,9 @@ const Button = styled.button`
   text-transform: uppercase;
   letter-spacing: -0.025em;
   display: block;
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
   @supports (-moz-appearance:none) {
     span {
       display: block;
