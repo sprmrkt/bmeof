@@ -16,7 +16,7 @@ export const theme = {
       max: 1,
     },
     largeType: {
-      min: 200,
+      min: 130,
       max: 400,
     }
   },

@@ -6,6 +6,7 @@ import WorkGallery from "../molecules/WorkGallery";
 import WorkContentAnimation from "./WorkContentAnimation";
 import WorkInfo from "./WorkInfo";
 import {scroller} from "react-scroll";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const images = [
   'dummy-1.jpg',
@@ -22,15 +23,16 @@ function WorkHolder(props) {
   const [openInfo, setOpenInfo] = useState(false);
   const itemUid = uuidv4();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const size = useWindowSize();
 
   useEffect(() => {
     scroller.scrollTo(`${itemUid}-gallery-image-${currentSlide}`, {
       duration: 500,
       smooth: true,
-      containerId: `${itemUid}-gallery-holder`,
-      horizontal: true
+      containerId: `${itemUid}-gallery-${size.width>= 576 ? 'inner' : 'holder'}`,
+      horizontal: size.width>= 576,
     });
-  }, [currentSlide]);
+  }, [currentSlide, size.width]);
 
   return (
     <>

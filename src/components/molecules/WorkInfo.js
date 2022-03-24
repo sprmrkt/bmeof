@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import Image from "../atoms/Image";
-import {scroller} from "react-scroll";
 
 const timeout = 1000
 
 const Holder = styled.div`
   background-color: khaki;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   > :first-child { margin-top: 0; }
 

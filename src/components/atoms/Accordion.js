@@ -5,6 +5,7 @@ import {Element, scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import LockScroll from "./LockScroll";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const scrollTime = 500;
 const timeout = 1000;
@@ -117,6 +118,12 @@ const Content = styled.div`
 function Accordion({button, children, id}) {
   const [open, setOpen] = useState(false);
   const uid = uuidv4();
+  const size = useWindowSize();
+
+  // ABORT ABORT if the window resizes :)
+  useEffect(() => {
+    setOpen(false);
+  }, [size]);
 
   useEffect(() => {
     if (open) {

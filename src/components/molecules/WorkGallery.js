@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Image from "../atoms/Image";
 import {scroller} from "react-scroll";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Holder = styled.div`
   height: 100%;
@@ -50,16 +51,21 @@ const ButtonHolder = styled.div`
 
 const Inner = styled.div`
   width: 100%;
-  height: calc(100vh - 60px);
-  overflow: hidden;
-  display: flex;
   padding: 1rem;
   background-color: hotpink;
   position: relative;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    display: flex;
+  }
 `;
 
 const ImageHolder = styled.div`
-  margin: 0 1rem 0 0;
+  margin: 0 0 1rem 0;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    margin: 0 1rem 0 0;
+  }
 `;
 
 const CloseHolder = styled.div`
@@ -68,6 +74,7 @@ const CloseHolder = styled.div`
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, images, itemUid, currentSlide, setCurrentSlide}) {
+  const size = useWindowSize();
 
   const handleClose = () => {
     closeHandler();
@@ -77,11 +84,12 @@ function WorkGallery({closeHandler, closeParentHandler, images, itemUid, current
   }
 
   return (
-    <Holder>
-      <Inner id={`${itemUid}-gallery-holder`}>
+    <Holder id={`${itemUid}-gallery-holder`}>
+      <Inner id={`${itemUid}-gallery-inner`}>
         {images.map((image, i) =>
           <ImageHolder key={i} id={`${itemUid}-gallery-image-${i}`}>
-            <Image imgName={image} height="100vh - 60px - 2rem" />
+            {size.width < 576 && <Image imgName={image} />}
+            {size.width >= 576 && <Image imgName={image} height='100vh - 60px - 2rem' />}
           </ImageHolder>
         )}
       </Inner>

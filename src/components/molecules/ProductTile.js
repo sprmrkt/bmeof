@@ -19,12 +19,12 @@ const TextHolder = styled.div`
   position: absolute;
   top: 1rem;
   left: 1rem;
-  width: 100%;
+  width: calc(75% - 1.5rem);
   z-index: 2;
   padding: 1rem;
   background-color: ${props => props.theme.colors.white};
   @media( ${props => props.theme.breakpoints.md} ) {
-    width: 50%;
+    width: calc(50% - 1rem);
   }
 `;
 

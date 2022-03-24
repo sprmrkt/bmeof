@@ -9,9 +9,11 @@ const timeout = 1000;
 
 const Content = styled.div`
   overflow: hidden;
-  grid-column: span 2;
   height: 0;
   position: relative;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    grid-column: span 2;
+  }
 
   .content-inner {
     position: absolute;
