@@ -16,7 +16,7 @@ function Image({imgName, height, contain}) {
                   gatsbyImageData(
                       width: 1200
                       placeholder: BLURRED
-                      formats: [AUTO, WEBP]
+                      formats: [AUTO]
                   )
                   original {
                       width
