@@ -9,6 +9,8 @@ const Holder = styled.div`
   height: 100%;
   position: relative;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
 
   > :first-child { margin-top: 0; }
 
@@ -54,6 +56,7 @@ const Inner = styled.div`
   padding: 1rem;
   background-color: hotpink;
   position: relative;
+  scroll-snap-align: start;
   @media( ${props => props.theme.breakpoints.md} ) {
     height: calc(100vh - 60px);
     overflow: hidden;
@@ -69,6 +72,7 @@ const ImageHolder = styled.div`
 `;
 
 const CloseHolder = styled.div`
+  scroll-snap-align: start;
   width: 100%;
   overflow: hidden;
 `;
