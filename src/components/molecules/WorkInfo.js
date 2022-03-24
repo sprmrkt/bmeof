@@ -2,13 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
+import Image from "../atoms/Image";
+import {scroller} from "react-scroll";
 
-const timeout = 2000
+const timeout = 1000
 
 const Holder = styled.div`
   background-color: khaki;
+
   > :first-child { margin-top: 0; }
+
   > :last-child { margin-bottom: 0; }
+
   &.work-info-appear,
   &.work-info-enter {
     height: 0;
@@ -33,17 +38,23 @@ const Holder = styled.div`
 `;
 
 const Images = styled.div`
-  width: 100%;
-  > div {
-    background-color: black;
-    width: 150px;
-    height: 100px;
-    margin: 0 1rem 1rem 0;
-    display: inline-block;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
 `;
 
-function WorkInfo({open}) {
+const ImageHolder = styled.div`
+  margin: 0 1rem 1rem 0;
+`;
+
+function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
+
+  const handleClick = (i) => {
+    closeHandler();
+    setCurrentSlide(i);
+  }
+
   return (
     <CSSTransition
       mountOnEnter
@@ -59,14 +70,13 @@ function WorkInfo({open}) {
           scelerisque magna vestibulum quis. Quisque enim dui, gravida faucibus ligula sit amet, lacinia tempus
           purus. </p>
         <Images>
-          <div/>
-          <div/>
-          <div/>
-          <div/>
-          <div/>
-          <div/>
-          <div/>
-          <div/>
+          {images.map((image, i) =>
+            <ImageHolder key={i}>
+              <button onClick={() => handleClick(i)}>
+                <Image imgName={image} height="20vh" />
+              </button>
+            </ImageHolder>
+          )}
         </Images>
       </Holder>
     </CSSTransition>
@@ -75,6 +85,9 @@ function WorkInfo({open}) {
 
 WorkInfo.propTypes = {
   open: PropTypes.bool.isRequired,
+  images: PropTypes.array.isRequired,
+  closeHandler: PropTypes.func.isRequired,
+  setCurrentSlide: PropTypes.func.isRequired,
 };
 
 export default WorkInfo;

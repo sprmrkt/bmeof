@@ -37,7 +37,7 @@ function ProductTile({product}) {
         <p>$1111</p>
         <p><a href="https://buy.stripe.com/test_14k7uD4q83iZ5zifYY" target="_blank" rel="noopener noreferrer">Buy now</a></p>
       </TextHolder>
-      <Image imgName="entrance-pool.jpg" />
+      <Image imgName="dummy-3.jpg" />
     </Holder>
   )
 }

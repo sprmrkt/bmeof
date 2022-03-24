@@ -75,7 +75,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, even}) => {
     <Holder>
       <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
-          <Image imgName="entrance-pool.jpg" />
+          <Image imgName="dummy-3.jpg" />
         </button>
       </ImageHolder>
       <TextHolder className={textClasses}>
