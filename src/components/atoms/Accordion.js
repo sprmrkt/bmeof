@@ -20,10 +20,25 @@ const Button = styled.button`
   overflow: hidden;
   width: 100%;
   text-align: left;
+  span {
+    display: inline-block;
+    transform-origin: bottom left;
+    transition: transform 0.25s;
+  }
+  &:hover {
+    span {
+      transform: skewX(-8deg);
+    }
+  }
   @supports (-moz-appearance:none) {
     span {
       display: block;
       transform: translateY(0.1em);
+    }
+    &:hover {
+      span {
+        transform: skewX(-8deg) translateY(12.5%);
+      }
     }
   }
 `;
