@@ -47,7 +47,7 @@ const ImageHolder = styled.div`
     .gatsby-image-wrapper {
       width: ${props => props.imageSize}px;
       height: ${props => props.imageSize}px;
-      transition: transform 0.5s 0.25s;
+      transition: transform 0.5s;
     }
   }
 
