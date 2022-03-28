@@ -110,6 +110,13 @@ const TextHolder = styled.div`
       opacity: 1;
     }
   }
+  
+  .close {
+    span {
+      transform: rotate(45deg);
+      display: inline-block;
+    }
+  }
 `;
 
 const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even}) => {
@@ -151,13 +158,13 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
           <button onClick={() => toggleProjectHandler(true)}>Project title</button>
         </p>
         {open && <p className="info">
-          <button onClick={() => toggleInfoHandler(false)}>Info</button>
+          <button onClick={() => toggleInfoHandler(false)}>Info {!infoOpen && <span>+</span>}</button>
         </p>}
         {open && !infoOpen && <p className="close">
-          <button onClick={() => toggleProjectHandler(false)}>Close</button>
+          <button onClick={() => toggleProjectHandler(false)}>Back</button>
         </p>}
         {open && infoOpen && <p className="close">
-          <button onClick={() => toggleInfoHandler(false)}>Back</button>
+          <button onClick={() => toggleInfoHandler(false)}>Close <span>+</span></button>
         </p>}
       </TextHolder>
     </Holder>
