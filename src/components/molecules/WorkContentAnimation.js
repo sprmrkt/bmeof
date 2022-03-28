@@ -107,6 +107,13 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       });
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
+      // Scroll the work content holder to show only the work tile that was just closed
+      scroller.scrollTo(itemUid, {
+        duration: 500,
+        smooth: true,
+        containerId: 'work-content',
+        delay: timeout
+      });
     }
   }, [open, parent, parentUid, tileHeight, itemUid, setHasOpened]);
 
