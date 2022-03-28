@@ -20,7 +20,7 @@ const Holder = styled.div`
     border: none;
   }
 
-  &:hover {
+  &.hovered {
     .gatsby-image-wrapper {
       transform: translateY(${props => props.hoverDist}px);
     }
@@ -124,6 +124,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
   const [landscapeTile, setLandscapeTile] = useState(null);
   const [imageSize, setImageSize] = useState(null);
   const [hoverDist, setHoverDist] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
     if (imageHolderRef.current) {
@@ -139,7 +140,11 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
     }
   }, []);
 
-  const tileClasses = classNames({open: open, even: even})
+  const tileClasses = classNames({
+    open: open,
+    even: even,
+    hovered: hovered,
+  })
 
   return (
     <Holder
@@ -153,9 +158,12 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
           <Image imgName="dummy-3.jpg" />
         </button>
       </ImageHolder>
-      <TextHolder className={tileClasses}>
+      <TextHolder className={tileClasses} >
         <p className="title">
-          <button onClick={() => toggleProjectHandler(true)}>Project title</button>
+          <button
+            onClick={() => toggleProjectHandler(true)}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}>Project title</button>
         </p>
         {open && <p className="info">
           <button onClick={() => toggleInfoHandler(false)}>Info {!infoOpen && <span>+</span>}</button>
