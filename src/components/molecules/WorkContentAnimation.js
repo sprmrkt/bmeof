@@ -115,7 +115,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
         delay: timeout
       });
     }
-  }, [open, parent, parentUid, tileHeight, itemUid, setHasOpened]);
+  }, [open, parent, parentUid, tileHeight, itemUid, hasOpened, setHasOpened]);
 
   return (
     <CSSTransition

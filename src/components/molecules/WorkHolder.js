@@ -15,7 +15,7 @@ const images = [
   'dummy-4.jpg',
   'dummy-5.jpg',
   'dummy-6.png',
-  'dummy-7.jpg',
+  'dummy-7.png',
 ]
 
 function WorkHolder(props) {

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
-import Image from "../atoms/Image";
+import WorkInfoImage from "./WorkInfoImage";
 
 const timeout = 1000
 
@@ -12,14 +12,14 @@ const Holder = styled.div`
   padding: 0 1rem;
   border-bottom: 1px solid;
 
-  > :first-child { 
-    margin-top: 0; 
+  > :first-child {
+    margin-top: 0;
     padding-top: 1rem;
   }
 
-  > :last-child { 
-    margin-bottom: 0; 
-    padding-bottom: 1rem; 
+  > :last-child {
+    margin-bottom: 0;
+    padding-bottom: 1rem;
   }
 
   &.work-info-appear,
@@ -52,10 +52,6 @@ const Images = styled.div`
   align-content: flex-start;
 `;
 
-const ImageHolder = styled.div`
-  margin: 0 1rem 1rem 0;
-`;
-
 function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
 
   const handleClick = (i) => {
@@ -81,11 +77,12 @@ function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
           purus. </p>
         <Images>
           {images.map((image, i) =>
-            <ImageHolder key={i}>
-              <button onClick={() => handleClick(i)}>
-                <Image imgName={image} height="20vh" />
-              </button>
-            </ImageHolder>
+            <WorkInfoImage
+              key={i}
+              handleClick={() => handleClick(i)}
+              image={image}
+              totalImages={images.length}
+              i={i} />
           )}
         </Images>
       </Holder>

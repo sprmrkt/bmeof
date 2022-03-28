@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Image from "../atoms/Image";
