@@ -39,6 +39,7 @@ function WorkHolder(props) {
       <div id={itemUid}>
         <WorkTile
           open={openContent}
+          infoOpen={openInfo}
           even={props.even}
           toggleProjectHandler={(toggle) => setOpenContent(toggle)}
           toggleInfoHandler={() => setOpenInfo(!openInfo)} />

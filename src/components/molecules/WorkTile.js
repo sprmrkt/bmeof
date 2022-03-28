@@ -112,7 +112,7 @@ const TextHolder = styled.div`
   }
 `;
 
-const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, even}) => {
+const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even}) => {
   const imageHolderRef = useRef(null);
   const [landscapeTile, setLandscapeTile] = useState(null);
   const [imageSize, setImageSize] = useState(null);
@@ -153,8 +153,11 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, even}) => {
         {open && <p className="info">
           <button onClick={() => toggleInfoHandler(false)}>Info</button>
         </p>}
-        {open && <p className="close">
+        {open && !infoOpen && <p className="close">
           <button onClick={() => toggleProjectHandler(false)}>Close</button>
+        </p>}
+        {open && infoOpen && <p className="close">
+          <button onClick={() => toggleInfoHandler(false)}>Back</button>
         </p>}
       </TextHolder>
     </Holder>
@@ -166,6 +169,7 @@ WorkTile.propTypes = {
   toggleProjectHandler: PropTypes.func.isRequired,
   toggleInfoHandler: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
+  infoOpen: PropTypes.bool.isRequired,
   even: PropTypes.bool.isRequired,
 };
 
