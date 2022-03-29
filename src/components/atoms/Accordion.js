@@ -21,6 +21,7 @@ const Button = styled.button`
   overflow: hidden;
   width: 100%;
   text-align: left;
+  padding-left: 24px;
   &:hover {
     font-style: italic;
   }

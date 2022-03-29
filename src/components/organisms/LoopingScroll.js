@@ -35,15 +35,6 @@ function LoopingScroll() {
 
   return (
     <Holder>
-      <p className="h1">
-        <span>
-          Some <br/>
-          other <br/>
-          links <br/>
-          go <br/>
-          here <br/>
-        </span>
-      </p>
       <div className="inner">
         <Header/>
         <h1>
