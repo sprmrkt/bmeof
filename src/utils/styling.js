@@ -10,7 +10,7 @@ export const theme = {
     min: 15,
     max: 18,
     minScreen: 400,
-    maxScreen: 1200,
+    maxScreen: 3000,
     scale: {
       min: 1,
       max: 1,

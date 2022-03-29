@@ -35,8 +35,8 @@ const GlobalStyle = createGlobalStyle`
   ol, ul, li,
   code, kbd, pre, samp {
     line-height: 1.2;
-    margin-top: 0.8rem;
-    margin-bottom: 0.8rem;
+    margin-top: 12px;
+    margin-bottom: 12px;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -48,16 +48,16 @@ const GlobalStyle = createGlobalStyle`
     a:hover { text-decoration: none; }
   }
 
-  h1, .h1 { ${(props) => props.theme.largeType()}; }
+  h1, .h1 { font-size: 33.5vw; }
 
   h2, .h2,
   h3, .h3,
   h4, .h4,
   h5, .h5,
-  h6, .h6 { ${(props) => props.theme.fluidType(0)}; }
+  h6, .h6 { font-size: 12px; }
 
   p, li {
-    ${(props) => props.theme.fluidType(0)};
+    font-size: 12px;
   }
 
   li {
@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 0;
   }
 
-  small, p.small { ${(props) => props.theme.fluidType(0)}; }
+  small, p.small { font-size: 12px; }
 
   code, kbd, pre, samp {
     font-family: monospace;
@@ -258,7 +258,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
 
     font-family: inherit;
-    ${(props) => props.theme.fluidType(0)};
+    font-size: 12px;
     text-decoration: none;
     white-space: nowrap;
     border: none;

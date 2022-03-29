@@ -6,13 +6,13 @@ import classNames from "classnames";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const Holder = styled.div`
-  height: calc(100vh - 60px);
+  height: calc(100vh - 48px);
   width: 100%;
-  padding: 1rem 1rem 0 1rem;
+  padding: 24px 24px 0 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
-    padding: 1rem 0.5rem 0 1rem;
+    padding: 24px 12px 0 24px;
     &.even {
-      padding: 1rem 1rem 0 0.5rem;
+      padding: 24px 24px 0 12px;
     }
   }
 
@@ -33,7 +33,7 @@ const Holder = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  height: calc(100% - 60px);
+  height: calc(100% - 48px);
   overflow: hidden;
   position: relative;
 
@@ -58,10 +58,10 @@ const ImageHolder = styled.div`
 `;
 
 const TextHolder = styled.div`
-  height: 60px;
+  height: 48px;
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
-  grid-gap: 1rem;
+  grid-gap: 24px;
   align-items: center;
   width: 100%;
   transition: all 0.25s;
@@ -71,11 +71,11 @@ const TextHolder = styled.div`
     z-index: 20;
     position: relative;
     @media ( ${props => props.theme.breakpoints.md} ) {
-      width: calc(200% + 3rem);
-      margin-left: -1rem;
-      padding: 0 1rem;
+      width: calc(200% + 72px);
+      margin-left: -24px;
+      padding: 0 24px;
       &.even {
-        margin-left: calc(-100% - 2rem);
+        margin-left: calc(-100% - 48px);
       }
     }
   }
@@ -93,7 +93,7 @@ const TextHolder = styled.div`
     text-transform: uppercase;
 
     button {
-      line-height: 60px;
+      line-height: 48px;
       width: 100%;
       text-align: left;
       display: inline-block;

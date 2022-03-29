@@ -9,7 +9,7 @@ const timeout = 1000
 const Holder = styled.div`
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 0 1rem;
+  padding: 0 24px;
   border-bottom: 1px solid;
   
   p {
@@ -20,12 +20,12 @@ const Holder = styled.div`
 
   > :first-child {
     margin-top: 0;
-    padding-top: 1rem;
+    padding-top: 24px;
   }
 
   > :last-child {
     margin-bottom: 0;
-    padding-bottom: 1rem;
+    padding-bottom: 24px;
   }
 
   &.work-info-appear,
@@ -37,12 +37,12 @@ const Holder = styled.div`
   &.work-info-appear-done,
   &.work-info-enter-active,
   &.work-info-enter-done {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 96px);
     transition: height ${timeout}ms;
   }
 
   &.work-info-exit {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 96px);
   }
 
   &.work-info-exit-active {

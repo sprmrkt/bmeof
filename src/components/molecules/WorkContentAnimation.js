@@ -47,7 +47,7 @@ const Content = styled.div`
   &.work-content-appear-done,
   &.work-content-enter-active,
   &.work-content-enter-done {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 48px);
     transition: height ${timeout}ms;
     .border {
       transform: scaleX(1);
@@ -56,7 +56,7 @@ const Content = styled.div`
   }
 
   &.work-content-exit {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 48px);
     .border {
       transform: scaleX(1);
     }
@@ -74,7 +74,7 @@ const Content = styled.div`
 
 function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
   const size = useWindowSize();
-  const tileHeight = size.height - 60;
+  const tileHeight = size.height - 48;
   const [hasOpened, setHasOpened] = useState(false);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       scroller.scrollTo(itemUid, {
         duration: timeout,
         smooth: true,
-        offset: tileHeight - 60,
+        offset: tileHeight - 48,
         containerId: 'work-content'
       });
 

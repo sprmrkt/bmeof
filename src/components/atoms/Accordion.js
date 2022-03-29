@@ -13,7 +13,7 @@ const timeout = 1000;
 
 
 const Button = styled.button`
-  ${(props) => props.theme.largeType()};
+  font-size: 33.5vw;
   line-height: 0.8;
   text-transform: uppercase;
   letter-spacing: -0.025em;
@@ -139,7 +139,7 @@ function Accordion({button, children, id}) {
       scroller.scrollTo(uid, {
         duration: projectIsOpen ? 100 : scrollTime,
         smooth: true,
-        offset: projectIsOpen ? 0 : -60,
+        offset: projectIsOpen ? 0 : -48,
       });
     }
   }, [open, uid, size, projectIsOpen]);

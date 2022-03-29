@@ -20,7 +20,7 @@ const Grid = styled.div`
 
 const Spacer = styled.div`
   width: 100%;
-  height: 60px;
+  height: 48px;
 `;
 
 function WorkList(props) {

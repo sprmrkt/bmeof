@@ -75,22 +75,22 @@ const MouseText = styled.div.attrs(props => ({
 
 const Inner = styled.div`
   width: 100%;
-  padding: 0 1rem 1rem 1rem;
+  padding: 0 24px 24px 24px;
   position: relative;
   scroll-snap-align: start;
   border-bottom: 1px solid;
   @media ( ${props => props.theme.breakpoints.md} ) {
-    padding: 1rem 1rem 1rem 0;
-    height: calc(100vh - 60px);
+    padding: 24px 24px 24px 0;
+    height: calc(100vh - 48px);
     overflow: hidden;
     display: flex;
   }
 `;
 
 const ImageHolder = styled.div`
-  padding-top: 1rem;
+  padding-top: 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
-    padding: 0 0 0 1rem;
+    padding: 0 0 0 24px;
   }
 `;
 
