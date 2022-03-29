@@ -79,11 +79,6 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
 
   useEffect(() => {
     if (open) {
-      // Scroll the body up to hide the parent button
-      scroller.scrollTo(parentUid, {
-        duration: 500,
-        smooth: true,
-      });
       // Stop work content holder from scrolling
       parent.current.style.overflow = "hidden";
       // Scroll the work content holder to show only the title of the open item
@@ -98,13 +93,13 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       setHasOpened(true);
 
     } else if (hasOpened) {
-      // Scroll the body back to see the edge of the large work text
-      scroller.scrollTo(parentUid, {
-        duration: 500,
-        smooth: true,
-        offset: -60,
-        delay: timeout
-      });
+      // // Scroll the body back to see the edge of the large work text
+      // scroller.scrollTo(parentUid, {
+      //   duration: 500,
+      //   smooth: true,
+      //   offset: -60,
+      //   delay: timeout
+      // });
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
       // Scroll the work content holder to show only the work tile that was just closed

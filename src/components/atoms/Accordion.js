@@ -6,6 +6,7 @@ import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import LockScroll from "./LockScroll";
 import useWindowSize from "../../hooks/useWindowSize";
+import {useStore} from "../../utils/store";
 
 const scrollTime = 500;
 const timeout = 1000;
@@ -127,28 +128,23 @@ const Content = styled.div`
 `;
 
 function Accordion({button, children, id}) {
+  const size = useWindowSize();
   const [open, setOpen] = useState(false);
   const uid = uuidv4();
-  const size = useWindowSize();
+  const projectIsOpen = useStore(state => state.projectIsOpen);
 
-  // ABORT ABORT if the window resizes :)
-  useEffect(() => {
-    setOpen(false);
-  }, [size]);
-
+  // Set scroll on open
   useEffect(() => {
     if (open) {
       scroller.scrollTo(uid, {
-        duration: scrollTime,
+        duration: projectIsOpen ? 100 : scrollTime,
         smooth: true,
-        offset: -60,
+        offset: projectIsOpen ? 0 : -60,
       });
     }
-  }, [open, uid]);
+  }, [open, uid, size, projectIsOpen]);
 
   const childrenWithProps = React.Children.map(children, child => {
-    // Checking isValidElement is the safe way and avoids a typescript
-    // error too.
     if (React.isValidElement(child)) {
       return React.cloneElement(child, {
         parentUid: uid,

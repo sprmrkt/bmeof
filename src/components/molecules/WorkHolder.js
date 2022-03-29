@@ -7,6 +7,7 @@ import WorkContentAnimation from "./WorkContentAnimation";
 import WorkInfo from "./WorkInfo";
 import {scroller} from "react-scroll";
 import useWindowSize from "../../hooks/useWindowSize";
+import {useStore} from '../../utils/store'
 
 const images = [
   'dummy-1.jpg',
@@ -24,15 +25,23 @@ function WorkHolder(props) {
   const itemUid = uuidv4();
   const [currentSlide, setCurrentSlide] = useState(0);
   const size = useWindowSize();
+  const setProjectIsOpen = useStore(state => state.setProjectIsOpen)
 
   useEffect(() => {
-    scroller.scrollTo(`${itemUid}-gallery-image-${currentSlide}`, {
-      duration: 500,
-      smooth: true,
-      containerId: `${itemUid}-gallery-${size.width>= 576 ? 'inner' : 'holder'}`,
-      horizontal: size.width>= 576,
-    });
-  }, [currentSlide, size.width, itemUid]);
+    if(openContent) {
+      scroller.scrollTo(`${itemUid}-gallery-image-${currentSlide}`, {
+        duration: 500,
+        smooth: true,
+        containerId: `${itemUid}-gallery-${size.width >= 576 ? 'inner' : 'holder'}`,
+        horizontal: size.width >= 576,
+      });
+    }
+  }, [currentSlide, size.width, itemUid, openContent]);
+
+  const toggleHandler = (toggle) => {
+    setOpenContent(toggle);
+    setProjectIsOpen(toggle);
+  }
 
   return (
     <>
@@ -41,7 +50,7 @@ function WorkHolder(props) {
           open={openContent}
           infoOpen={openInfo}
           even={props.even}
-          toggleProjectHandler={(toggle) => setOpenContent(toggle)}
+          toggleProjectHandler={(toggle) => toggleHandler(toggle)}
           toggleInfoHandler={() => setOpenInfo(!openInfo)} />
       </div>
       <WorkContentAnimation {...props} open={openContent} itemUid={itemUid}>
@@ -55,7 +64,7 @@ function WorkHolder(props) {
           images={images}
           currentSlide={currentSlide}
           setCurrentSlide={(i) => setCurrentSlide(i)}
-          closeHandler={() => setOpenContent(false)}
+          closeHandler={() => toggleHandler(false)}
           closeParentHandler={() => props.closeHandler()}/>
       </WorkContentAnimation>
     </>

@@ -45,7 +45,8 @@
     "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^5.3.3",
     "uuid": "^8.3.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zustand": "^3.7.1"
   },
   "devDependencies": {
     "prettier": "2.5.1"
