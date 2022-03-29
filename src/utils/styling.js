@@ -8,7 +8,7 @@ export const theme = {
   },
   typography: {
     min: 15,
-    max: 20,
+    max: 18,
     minScreen: 400,
     maxScreen: 1200,
     scale: {

@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
   p,
   ol, ul, li,
   code, kbd, pre, samp {
-    line-height: 0.8;
+    line-height: 1.2;
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
   }

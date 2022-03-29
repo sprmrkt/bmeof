@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Image from "../atoms/Image";
 import classNames from "classnames";
+import useWindowSize from "../../hooks/useWindowSize";
 
 const Holder = styled.div`
   height: calc(100vh - 60px);
@@ -70,9 +71,11 @@ const TextHolder = styled.div`
     z-index: 20;
     position: relative;
     @media ( ${props => props.theme.breakpoints.md} ) {
-      width: calc(200% + 1rem);
+      width: calc(200% + 3rem);
+      margin-left: -1rem;
+      padding: 0 1rem;
       &.even {
-        margin-left: calc(-100% - 1rem);
+        margin-left: calc(-100% - 2rem);
       }
     }
   }
@@ -87,12 +90,14 @@ const TextHolder = styled.div`
 
   p {
     margin: 0;
+    text-transform: uppercase;
 
     button {
       line-height: 60px;
       width: 100%;
       text-align: left;
       display: inline-block;
+      text-transform: uppercase;
     }
   }
 
@@ -125,6 +130,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
   const [imageSize, setImageSize] = useState(null);
   const [hoverDist, setHoverDist] = useState(0);
   const [hovered, setHovered] = useState(false);
+  const size = useWindowSize();
 
   useEffect(() => {
     if (imageHolderRef.current) {
@@ -138,7 +144,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
         setLandscapeTile(false);
       }
     }
-  }, []);
+  }, [size]);
 
   const tileClasses = classNames({
     open: open,

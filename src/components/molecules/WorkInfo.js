@@ -11,6 +11,12 @@ const Holder = styled.div`
   -webkit-overflow-scrolling: touch;
   padding: 0 1rem;
   border-bottom: 1px solid;
+  
+  p {
+    @media( ${props => props.theme.breakpoints.sm} ) {
+      width: 50%;
+    }
+  }
 
   > :first-child {
     margin-top: 0;
