@@ -16,9 +16,7 @@ const Holder = styled.div`
       Disable in FF due to https://bugzilla.mozilla.org/show_bug.cgi?id=1744289
       using @supports https://stackoverflow.com/a/32455002
     */
-    .snap-no-ff {
-      scroll-snap-type: none;
-    }
+    scroll-snap-type: none;
   }
 
   > :first-child { margin-top: 0; }
@@ -100,6 +98,21 @@ const CloseHolder = styled.div`
   scroll-snap-align: start;
   width: 100%;
   overflow: hidden;
+
+  button {
+    font-size: 33.5vw;
+    line-height: 0.75;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    display: block;
+    padding-top: 24px;
+    @supports (-moz-appearance:none) {
+      span {
+        display: block;
+        transform: translateY(10%);
+      }
+    }
+  }
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, images, itemUid, currentSlide, setCurrentSlide}) {

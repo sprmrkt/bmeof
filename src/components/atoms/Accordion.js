@@ -64,20 +64,6 @@ const Content = styled.div`
       bottom: -1px;
     }
   }
-  
-  .close-button {
-    ${(props) => props.theme.largeType()};
-    line-height: 0.8;
-    text-transform: uppercase;
-    letter-spacing: -0.025em;
-    display: block;
-    @supports (-moz-appearance:none) {
-      span {
-        display: block;
-        transform: translateY(10%);
-      }
-    }
-  }
 
   &.accordion-content-appear,
   &.accordion-content-enter {
