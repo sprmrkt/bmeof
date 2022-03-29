@@ -30,7 +30,10 @@ const FixedOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  color: white;
+  display: none;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    display: block;
+  }
   .mouse-text {
     opacity: 0;
   }

@@ -30,6 +30,10 @@ const MouseText = styled.div.attrs(props => ({
   text-transform: uppercase;
   font-size: 40px;
   z-index: 10;
+  opacity: 0;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    opacity: 1;
+  }
 `;
 
 function WorkInfoImage({image, handleClick, totalImages, i}) {

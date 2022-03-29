@@ -11,21 +11,23 @@ const Holder = styled.div`
   -webkit-overflow-scrolling: touch;
   padding: 0 24px;
   border-bottom: 1px solid;
+  position: relative;
   
   p {
+    margin-top: 0;
+    padding-top: 24px;
     @media( ${props => props.theme.breakpoints.sm} ) {
       width: 50%;
     }
   }
-
-  > :first-child {
-    margin-top: 0;
-    padding-top: 24px;
-  }
-
-  > :last-child {
-    margin-bottom: 0;
-    padding-bottom: 24px;
+  .close-info {
+    width: 100%;
+    height: 48px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 200;
   }
 
   &.work-info-appear,
@@ -91,6 +93,7 @@ function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
               i={i} />
           )}
         </Images>
+        <button className="close-info" onClick={() => closeHandler()} title="Close info"/>
       </Holder>
     </CSSTransition>
   )

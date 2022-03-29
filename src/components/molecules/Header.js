@@ -18,6 +18,12 @@ const Holder = styled.header`
   }
   p {
     text-transform: uppercase;
+    br {
+      display: none;
+      @media( ${props => props.theme.breakpoints.sm} ) {
+        display: inline;
+      }
+    }
   }
 `;
 
