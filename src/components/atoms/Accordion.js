@@ -23,7 +23,9 @@ const Button = styled.button`
   text-align: left;
   padding-left: 12px;
   &:hover {
-    font-style: italic;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      font-style: italic;
+    }
   }
   @supports (-moz-appearance:none) {
     span {
