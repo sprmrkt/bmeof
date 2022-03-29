@@ -25,8 +25,11 @@ const MouseText = styled.div.attrs(props => ({
   position: absolute;
   top: 0;
   left: 0;
-  color: yellow;
+  color: #ffff00;
   pointer-events: none;
+  text-transform: uppercase;
+  font-size: 40px;
+  z-index: 10;
 `;
 
 function WorkInfoImage({image, handleClick, totalImages, i}) {

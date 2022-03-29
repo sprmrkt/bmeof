@@ -85,7 +85,9 @@ const TextHolder = styled.div`
   }
 
   .close {
-    justify-self: end;
+    button {
+      text-align: right;
+    }
   }
 
   p {
@@ -172,13 +174,16 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
             onMouseLeave={() => setHovered(false)}>Project title</button>
         </p>
         {open && <p className="info">
-          <button onClick={() => toggleInfoHandler(false)}>Info {!infoOpen && <span>+</span>}</button>
+          <button onClick={() => toggleInfoHandler()}>
+            {!infoOpen && <>Info <span>+</span></>}
+            {infoOpen && <>Close</>}
+          </button>
         </p>}
         {open && !infoOpen && <p className="close">
           <button onClick={() => toggleProjectHandler(false)}>Back</button>
         </p>}
         {open && infoOpen && <p className="close">
-          <button onClick={() => toggleInfoHandler(false)}>Close <span>+</span></button>
+          <button onClick={() => toggleInfoHandler()} title="Close info"><span>+</span></button>
         </p>}
       </TextHolder>
     </Holder>
