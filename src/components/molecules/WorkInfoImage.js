@@ -5,7 +5,7 @@ import Image from "../atoms/Image";
 import {useMouseHovered} from "react-use";
 
 const ImageHolder = styled.div`
-  margin: 0 1rem 1rem 0;
+  margin: 0 24px 24px 0;
   position: relative;
   .mouse-text {
     display: none;

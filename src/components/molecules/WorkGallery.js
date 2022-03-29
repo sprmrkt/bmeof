@@ -101,7 +101,7 @@ const CloseHolder = styled.div`
   scroll-snap-align: start;
   width: 100%;
   overflow: hidden;
-
+  padding-left: 12px;
   button {
     font-size: 33.5vw;
     line-height: 0.75;
@@ -113,6 +113,26 @@ const CloseHolder = styled.div`
       span {
         display: block;
         transform: translateY(10%);
+      }
+    }
+  }
+`;
+
+const Copyright = styled.div`
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: 1fr 3fr;
+  align-items: end;
+  padding: 0 24px;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    grid-template-columns: 1fr 1fr;
+  }
+  p {
+    text-transform: uppercase;
+    br {
+      display: none;
+      @media( ${props => props.theme.breakpoints.sm} ) {
+        display: inline;
       }
     }
   }
@@ -167,6 +187,10 @@ function WorkGallery({closeHandler, closeParentHandler, images, itemUid, current
       <CloseHolder>
         <button className="close-button" onClick={() => handleClose()}><span>Close</span></button>
       </CloseHolder>
+      <Copyright>
+        <p>&copy;</p>
+        <p>We help good brands and people think<br/> and make things differently.</p>
+      </Copyright>
     </Holder>
   )
 }
