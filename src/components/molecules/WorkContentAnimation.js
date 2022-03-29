@@ -74,7 +74,7 @@ const Content = styled.div`
 
 function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
   const size = useWindowSize();
-  const tileHeight = size.height - 48;
+  const offsetHeight = size.width < 768 ? size.width - 24 : size.height - 96;
   const [hasOpened, setHasOpened] = useState(false);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
       scroller.scrollTo(itemUid, {
         duration: timeout,
         smooth: true,
-        offset: tileHeight - 48,
+        offset: offsetHeight,
         containerId: 'work-content'
       });
 
@@ -110,7 +110,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
         delay: timeout
       });
     }
-  }, [open, parent, parentUid, tileHeight, itemUid, hasOpened, setHasOpened]);
+  }, [open, parent, parentUid, offsetHeight, itemUid, hasOpened, setHasOpened]);
 
   return (
     <CSSTransition

@@ -109,10 +109,10 @@ function WorkGallery({closeHandler, closeParentHandler, images, itemUid, current
   const {elX, elY, elW} = useMouseHovered(ref, {bound: false, whenHovered: true});
 
   const handleClose = () => {
-    closeHandler();
     setTimeout(() => {
       closeParentHandler()
     }, 1500);
+    closeHandler(false);
   }
 
   useEffect(() => {

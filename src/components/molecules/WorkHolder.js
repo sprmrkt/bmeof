@@ -64,7 +64,7 @@ function WorkHolder(props) {
           images={images}
           currentSlide={currentSlide}
           setCurrentSlide={(i) => setCurrentSlide(i)}
-          closeHandler={() => toggleHandler(false)}
+          closeHandler={(toggle) => toggleHandler(toggle)}
           closeParentHandler={() => props.closeHandler()}/>
       </WorkContentAnimation>
     </>

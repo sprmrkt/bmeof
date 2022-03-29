@@ -6,11 +6,11 @@ import classNames from "classnames";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const Holder = styled.div`
-  height: calc(100vh - 48px);
   width: 100%;
   padding: 24px 24px 0 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 12px 0 24px;
+    height: calc(100vh - 48px);
     &.even {
       padding: 24px 24px 0 12px;
     }
@@ -22,20 +22,29 @@ const Holder = styled.div`
   }
 
   &.hovered {
-    .gatsby-image-wrapper {
-      transform: translateY(${props => props.hoverDist}px);
-    }
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      .gatsby-image-wrapper {
+        transform: translateY(${props => props.hoverDist}px);
+      }
 
-    .landscape .gatsby-image-wrapper {
-      transform: translateX(${props => props.hoverDist}px);
+      .landscape .gatsby-image-wrapper {
+        transform: translateX(${props => props.hoverDist}px);
+      }
     }
   }
 `;
 
 const ImageHolder = styled.div`
-  height: calc(100% - 48px);
-  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
   position: relative;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    height: calc(100% - 48px);
+    padding-bottom: 0;
+    overflow: hidden;
+    position: relative;
+  }
 
   button {
     position: absolute;
@@ -46,9 +55,13 @@ const ImageHolder = styled.div`
     display: flex;
 
     .gatsby-image-wrapper {
-      width: ${props => props.imageSize}px;
-      height: ${props => props.imageSize}px;
-      transition: transform 0.5s;
+      width: 100%;
+      height: 100%;
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        width: ${props => props.imageSize}px;
+        height: ${props => props.imageSize}px;
+        transition: transform 0.5s;
+      }
     }
   }
 
