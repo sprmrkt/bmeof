@@ -10,7 +10,7 @@ const Holder = styled.div`
   width: 100%;
   overflow: hidden;
   h1, .h1 {
-    margin-left: 24px;
+    margin-left: 12px;
   }
 `;
 

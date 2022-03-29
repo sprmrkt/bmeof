@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6,
   .h1, .h2, .h3, .h4, .h5, .h6 {
-    line-height: 0.8;
+    line-height: 0.75;
     text-transform: uppercase;
     letter-spacing: -0.025em;
     margin: 0;

@@ -14,14 +14,14 @@ const timeout = 1000;
 
 const Button = styled.button`
   font-size: 33.5vw;
-  line-height: 0.8;
+  line-height: 0.75;
   text-transform: uppercase;
   letter-spacing: -0.025em;
   display: block;
   overflow: hidden;
   width: 100%;
   text-align: left;
-  padding-left: 24px;
+  padding-left: 12px;
   &:hover {
     font-style: italic;
   }
