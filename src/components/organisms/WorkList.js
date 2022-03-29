@@ -2,6 +2,7 @@ import React, {useRef} from 'react';
 import styled from 'styled-components';
 import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from 'prop-types';
+import Spacer from "../atoms/Spacer";
 
 const Holder = styled.div`
   height: 100%;
@@ -16,11 +17,6 @@ const Grid = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
   }
-`;
-
-const Spacer = styled.div`
-  width: 100%;
-  height: 48px;
 `;
 
 function WorkList(props) {

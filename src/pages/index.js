@@ -5,6 +5,8 @@ import Accordion from "../components/atoms/Accordion";
 import WorkList from "../components/organisms/WorkList";
 import LoopingScroll from "../components/organisms/LoopingScroll";
 import ProductList from "../components/organisms/ProductList";
+import Belief from "../components/organisms/Belief";
+import Studio from "../components/organisms/Studio";
 
 const Holder = styled.div`
   width: 100%;
@@ -34,15 +36,14 @@ function IndexPage() {
       </Accordion>
       <Accordion
         id="belief"
-        scrollAfterOpen
         button="Belief">
-        <p>Content</p>
+        <Belief/>
       </Accordion>
       <Accordion
         id="studio"
         scrollAfterOpen
         button="Studio">
-        <p>Content</p>
+        <Studio/>
       </Accordion>
       <Accordion
         id="shop"
