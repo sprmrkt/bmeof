@@ -7,6 +7,7 @@
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "@contentful/rich-text-types": "^15.11.1",
+    "@prismicio/react": "^2.1.2",
     "@svgr/webpack": "^6.2.1",
     "babel-plugin-styled-components": "^2.0.5",
     "classnames": "^2.3.1",
@@ -14,7 +15,7 @@
     "formik": "^2.2.9",
     "gatsby": "^4.8.0",
     "gatsby-image": "^3.11.0",
-    "gatsby-plugin-image": "^2.8.0",
+    "gatsby-plugin-image": "^2.11.0",
     "gatsby-plugin-layout": "^3.8.0",
     "gatsby-plugin-manifest": "^4.8.0",
     "gatsby-plugin-offline": "^5.8.0",

@@ -1,3 +1,8 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+const linkResolver = require('./src/utils/linkResolver');
+
 module.exports = {
   siteMetadata: {
     title: `Bear Meets Eagle On Fire`,
@@ -39,6 +44,16 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: 'gatsby-source-prismic',
+      options: {
+        repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
+        accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+        customTypesApiToken: process.env.PRISMIC_CUSTOM_TYPES_API_TOKEN,
+        linkResolver: (doc) => linkResolver(doc),
+        shouldDownloadFiles: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

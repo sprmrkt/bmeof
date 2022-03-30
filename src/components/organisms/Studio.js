@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from "prop-types";
 import Spacer from "../atoms/Spacer";
-import Image from "../atoms/Image";
+import {graphql, useStaticQuery} from "gatsby";
+import PrismicRichText from "../atoms/PrismicRichText";
+import {GatsbyImage} from "gatsby-plugin-image";
 
 const Holder = styled.div`
   height: 100%;
   overflow: hidden;
   padding: 24px;
-
 `;
 
 const Grid = styled.div`
@@ -31,15 +31,17 @@ const Grid = styled.div`
     }
   }
 
-  .email {
-    font-size: 15px;
-    line-height: 1.2;
-    text-transform: uppercase;
-    margin-top: 24px;
+  .contact {
     @media ( ${props => props.theme.breakpoints.md} ) {
       align-self: end;
       grid-row: 2/3;
       grid-column: 1/2;
+    }
+    p {
+      font-size: 15px;
+      line-height: 1.2;
+      text-transform: uppercase;
+      margin-top: 24px;
     }
   }
   
@@ -55,26 +57,36 @@ const Grid = styled.div`
   }
 `;
 
-function Belief() {
+function Studio() {
+  const data = useStaticQuery(graphql`
+      query StudioQuery {
+          prismicStudio {
+              data {
+                  address {
+                      richText
+                  }
+                  contact {
+                      richText
+                  }
+                  image {
+                      alt
+                      gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                  }
+              }
+          }
+      }
+  `)
+  const {address, image, contact} = data.prismicStudio.data;
   return (
     <Holder>
       <Grid>
-        <p className="address">Suite 203<br />
-          19A Boundary St<br />
-          Darlinghurst<br />
-          2010 NSW</p>
-        <Image imgName="dummy-1.jpg" />
-        <p className="email">Get in touch<br />
-          <a href="mailto:info@beareaglefire.com" target="_blank" rel="noopener noreferrer">info@beareaglefire.com</a>
-        </p>
+        <div className="address"><PrismicRichText render={address.richText}/></div>
+        <GatsbyImage alt={image.alt || 'Studio shot'} image={image.gatsbyImageData}/>
+        <div className="contact"><PrismicRichText render={contact.richText}/></div>
       </Grid>
       <Spacer />
     </Holder>
   )
 }
 
-Belief.propTypes = {
-  propName: PropTypes.string.isRequired,
-};
-
-export default Belief;
+export default Studio;
