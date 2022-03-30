@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Image from "../atoms/Image";
 import {useMouseHovered} from "react-use";
+import {GatsbyImage} from "gatsby-plugin-image";
 
 const ImageHolder = styled.div`
   margin: 0 24px 24px 0;
@@ -36,24 +37,31 @@ const MouseText = styled.div.attrs(props => ({
   }
 `;
 
-function WorkInfoImage({image, handleClick, totalImages, i}) {
+function WorkInfoMedia({media, handleClick, totalImages, i}) {
   const ref = useRef(null);
   const {elX, elY} = useMouseHovered(ref, {bound: false, whenHovered: true});
   return (
     <ImageHolder ref={ref}>
       <button onClick={() => handleClick()}>
-        <Image imgName={image} height="20vh" />
+        <GatsbyImage
+          alt="gatsby"
+          layout="constrained"
+          style={{
+            width: `calc(${media.original.width / media.original.height} * (20vh))`,
+            height: `20vh`,
+          }}
+          image={media.gatsbyImageData} />
       </button>
       <MouseText x={elX} y={elY} className="mouse-text">{i+1}/{totalImages}</MouseText>
     </ImageHolder>
   )
 }
 
-WorkInfoImage.propTypes = {
+WorkInfoMedia.propTypes = {
   i: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
+  media: PropTypes.object.isRequired,
   totalImages: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 
-export default WorkInfoImage;
+export default WorkInfoMedia;

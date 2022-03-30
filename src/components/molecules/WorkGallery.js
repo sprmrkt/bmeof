@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import Image from "../atoms/Image";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useMouseHovered} from "react-use";
+import WorkSlideStandard from "./WorkSlideStandard";
+import WorkSlideGrid from "./WorkSlideGrid";
 
 const Holder = styled.div`
   height: 100%;
@@ -90,7 +92,7 @@ const Inner = styled.div`
   }
 `;
 
-const ImageHolder = styled.div`
+const SlideHolder = styled.div`
   padding-top: 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 0 0 0 24px;
@@ -138,8 +140,7 @@ const Copyright = styled.div`
   }
 `;
 
-function WorkGallery({closeHandler, closeParentHandler, images, itemUid, currentSlide, setCurrentSlide}) {
-  const size = useWindowSize();
+function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
   const [mouseText, setMouseText] = useState('');
   const ref = useRef(null);
   const {elX, elY, elW} = useMouseHovered(ref, {bound: false, whenHovered: true});
@@ -157,18 +158,18 @@ function WorkGallery({closeHandler, closeParentHandler, images, itemUid, current
     } else if (elX > elW * 0.75) {
       setMouseText('Next');
     } else {
-      setMouseText(`${currentSlide + 1}/${images.length}`);
+      setMouseText(`${currentSlide + 1}/${slides.length}`);
     }
-  }, [elX, elY, elW, images.length, currentSlide]);
+  }, [elX, elY, elW, slides.length, currentSlide]);
 
   return (
     <Holder id={`${itemUid}-gallery-holder`}>
       <Inner id={`${itemUid}-gallery-inner`}>
-        {images.map((image, i) =>
-          <ImageHolder key={i} id={`${itemUid}-gallery-image-${i}`}>
-            {size.width < 576 && <Image imgName={image} />}
-            {size.width >= 576 && <Image imgName={image} height="100vh - 60px - 2rem" />}
-          </ImageHolder>
+        {slides.map((slide, i) =>
+          <SlideHolder key={i} id={`${itemUid}-gallery-image-${i}`}>
+            {slide.slice_type === 'standard_slide' && <WorkSlideStandard slide={slide}/>}
+            {slide.slice_type === 'grid_slide' && <WorkSlideGrid slide={slide}/>}
+          </SlideHolder>
         )}
       </Inner>
       <FixedOverlay ref={ref}>
@@ -176,7 +177,7 @@ function WorkGallery({closeHandler, closeParentHandler, images, itemUid, current
         <button
           className="next"
           onClick={() => setCurrentSlide(currentSlide + 1)}
-          disabled={currentSlide === images.length - 1}>Next
+          disabled={currentSlide === slides.length - 1}>Next
         </button>
         <button
           className="prev"
@@ -200,7 +201,7 @@ WorkGallery.propTypes = {
   closeParentHandler: PropTypes.func.isRequired,
   currentSlide: PropTypes.number.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
-  images: PropTypes.array.isRequired,
+  slides: PropTypes.array.isRequired,
   itemUid: PropTypes.string.isRequired,
 };
 

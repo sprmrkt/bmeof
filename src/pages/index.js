@@ -7,16 +7,21 @@ import LoopingScroll from "../components/organisms/LoopingScroll";
 import ProductList from "../components/organisms/ProductList";
 import Belief from "../components/organisms/Belief";
 import Studio from "../components/organisms/Studio";
+import {graphql} from "gatsby";
 
 const Holder = styled.div`
   width: 100%;
   overflow: hidden;
+
   h1, .h1 {
     margin-left: 12px;
   }
 `;
 
-function IndexPage() {
+function IndexPage({data}) {
+
+  const work = data.allPrismicWork.nodes;
+
   return (
     <Holder>
       <Seo title="Home" />
@@ -32,32 +37,32 @@ function IndexPage() {
       <Accordion
         id="work"
         button="Work">
-        <WorkList />
+        <WorkList work={work} />
       </Accordion>
       <Accordion
         id="belief"
         button="Belief">
-        <Belief/>
+        <Belief />
       </Accordion>
       <Accordion
         id="studio"
         scrollAfterOpen
         button="Studio">
-        <Studio/>
+        <Studio />
       </Accordion>
       <Accordion
         id="shop"
         scrollAfterOpen
         button="Shop">
-        <ProductList/>
+        <ProductList />
       </Accordion>
       <p className="h1">
         <span>
-          Some <br/>
-          other <br/>
-          links <br/>
-          go <br/>
-          here <br/>
+          Some <br />
+          other <br />
+          links <br />
+          go <br />
+          here <br />
         </span>
       </p>
       <LoopingScroll />
@@ -66,3 +71,94 @@ function IndexPage() {
 }
 
 export default IndexPage;
+
+export const homePageQuery = graphql`
+    query {
+        allPrismicWork {
+            nodes {
+                data {
+                    info {
+                        richText
+                    }
+                    tile_image {
+                        alt
+                        gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                    }
+                    title {
+                        text
+                    }
+                    body {
+                        ... on PrismicWorkDataBodyStandardSlide {
+                            id
+                            slice_type
+                            primary {
+                                media {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                            original {
+                                                height
+                                                width
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        ... on PrismicWorkDataBodyGridSlide {
+                            id 
+                            slice_type
+                            primary {
+                                media_top_left {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                            original {
+                                                height
+                                                width
+                                            }
+                                        }
+                                    }
+
+                                }
+                                media_bottom_right {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                            original {
+                                                height
+                                                width
+                                            }
+                                        }
+                                    }
+                                }
+                                media_bottom_left {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                            original {
+                                                height
+                                                width
+                                            }
+                                        }
+                                    }
+                                }
+                                media_top_right {
+                                    localFile {
+                                        childImageSharp {
+                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                            original {
+                                                height
+                                                width
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+`

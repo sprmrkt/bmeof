@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
-import WorkInfoImage from "./WorkInfoImage";
+import WorkInfoMedia from "./WorkInfoMedia";
+import PrismicRichText from "../atoms/PrismicRichText";
 
 const timeout = 1000
 
@@ -60,7 +61,7 @@ const Images = styled.div`
   align-content: flex-start;
 `;
 
-function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
+function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
 
   const handleClick = (i) => {
     setTimeout(() => {
@@ -68,6 +69,23 @@ function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
     }, timeout);
     closeHandler();
   }
+
+  const pullMediaFromSlides = (slides) => {
+    let media = [];
+    slides.forEach(slide => {
+      if( slide.slice_type === 'standard_slide' ) {
+        if(slide.primary.media.localFile) media.push(slide.primary.media.localFile.childImageSharp);
+      } else {
+        if(slide.primary.media_top_left.localFile) media.push(slide.primary.media_top_left.localFile.childImageSharp);
+        if(slide.primary.media_top_right.localFile) media.push(slide.primary.media_top_right.localFile.childImageSharp);
+        if(slide.primary.media_bottom_left.localFile) media.push(slide.primary.media_bottom_left.localFile.childImageSharp);
+        if(slide.primary.media_bottom_right.localFile) media.push(slide.primary.media_bottom_right.localFile.childImageSharp);
+      }
+    })
+    return media;
+  }
+
+  const mediaFromSlides = pullMediaFromSlides(slides);
 
   return (
     <CSSTransition
@@ -79,17 +97,14 @@ function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
       classNames="work-info"
     >
       <Holder>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas elit erat, vehicula in luctus dictum,
-          euismod vitae risus. Cras at odio nec orci egestas pharetra ac et purus. Sed ultricies nunc magna, sed
-          scelerisque magna vestibulum quis. Quisque enim dui, gravida faucibus ligula sit amet, lacinia tempus
-          purus. </p>
+        <PrismicRichText render={infoText.richText}/>
         <Images>
-          {images.map((image, i) =>
-            <WorkInfoImage
+          {mediaFromSlides.map((media, i) =>
+            <WorkInfoMedia
               key={i}
               handleClick={() => handleClick(i)}
-              image={image}
-              totalImages={images.length}
+              media={media}
+              totalImages={mediaFromSlides.length}
               i={i} />
           )}
         </Images>
@@ -101,7 +116,8 @@ function WorkInfo({open, images, closeHandler, setCurrentSlide}) {
 
 WorkInfo.propTypes = {
   open: PropTypes.bool.isRequired,
-  images: PropTypes.array.isRequired,
+  infoText: PropTypes.object.isRequired,
+  slides: PropTypes.array.isRequired,
   closeHandler: PropTypes.func.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
 };

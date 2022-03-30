@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Image from "../atoms/Image";
 import classNames from "classnames";
 import useWindowSize from "../../hooks/useWindowSize";
+import {GatsbyImage} from "gatsby-plugin-image";
 
 const Holder = styled.div`
   width: 100%;
@@ -139,7 +140,7 @@ const TextHolder = styled.div`
   }
 `;
 
-const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even}) => {
+const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image}) => {
   const imageHolderRef = useRef(null);
   const [landscapeTile, setLandscapeTile] = useState(null);
   const [imageSize, setImageSize] = useState(null);
@@ -176,7 +177,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
         imageSize={imageSize}
         className={landscapeTile ? 'landscape' : 'portrait'}>
         <button onClick={() => toggleProjectHandler(true)}>
-          <Image imgName="dummy-3.jpg" />
+          <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData}/>
         </button>
       </ImageHolder>
       <TextHolder className={tileClasses} >
@@ -184,7 +185,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
           <button
             onClick={() => toggleProjectHandler(true)}
             onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}>Project title</button>
+            onMouseLeave={() => setHovered(false)}>{title}</button>
         </p>
         {open && <p className="info">
           <button onClick={() => toggleInfoHandler()}>
@@ -210,6 +211,8 @@ WorkTile.propTypes = {
   open: PropTypes.bool.isRequired,
   infoOpen: PropTypes.bool.isRequired,
   even: PropTypes.bool.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.object.isRequired,
 };
 
 export default WorkTile;

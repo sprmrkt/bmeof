@@ -26,6 +26,7 @@ function WorkHolder(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const size = useWindowSize();
   const setProjectIsOpen = useStore(state => state.setProjectIsOpen)
+  const {title, tile_image, info, body} = props.node.data;
 
   useEffect(() => {
     if(openContent) {
@@ -47,6 +48,8 @@ function WorkHolder(props) {
     <>
       <div id={itemUid}>
         <WorkTile
+          title={title.text}
+          image={tile_image}
           open={openContent}
           infoOpen={openInfo}
           even={props.even}
@@ -55,13 +58,14 @@ function WorkHolder(props) {
       </div>
       <WorkContentAnimation {...props} open={openContent} itemUid={itemUid}>
         <WorkInfo
+          infoText={info}
           setCurrentSlide={(i) => setCurrentSlide(i)}
           open={openInfo}
           closeHandler={() => setOpenInfo(false)}
-          images={images}/>
+          slides={body}/>
         <WorkGallery
           itemUid={itemUid}
-          images={images}
+          slides={body}
           currentSlide={currentSlide}
           setCurrentSlide={(i) => setCurrentSlide(i)}
           closeHandler={(toggle) => toggleHandler(toggle)}
@@ -75,6 +79,7 @@ WorkHolder.propTypes = {
   parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
   even: PropTypes.bool,
+  node: PropTypes.object.isRequired,
 };
 
 WorkHolder.defaultProps = {

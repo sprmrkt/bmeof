@@ -24,10 +24,13 @@ function WorkList(props) {
   return (
     <Holder ref={holderRef} id="work-content">
       <Grid>
-        <WorkHolder {...props} parent={holderRef} />
-        <WorkHolder {...props} parent={holderRef} even={true} />
-        <WorkHolder {...props} parent={holderRef} />
-        <WorkHolder {...props} parent={holderRef} even={true} />
+        {props.work.map((node, i) =>
+          <WorkHolder
+            key={i}
+            {...props}
+            parent={holderRef}
+            node={node}
+            even={i%2 === 1}/>)}
       </Grid>
       <Spacer/>
     </Holder>
@@ -37,6 +40,7 @@ function WorkList(props) {
 WorkList.propTypes = {
   parentUid: PropTypes.string,
   closeHandler: PropTypes.func,
+  work: PropTypes.array.isRequired,
 };
 
 export default WorkList;
