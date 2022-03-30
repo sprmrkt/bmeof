@@ -92,67 +92,43 @@ export const homePageQuery = graphql`
                             id
                             slice_type
                             primary {
-                                media {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                            original {
-                                                height
-                                                width
-                                            }
-                                        }
+                                image {
+                                    dimensions {
+                                        width
+                                        height
                                     }
+                                    alt
+                                    gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                }
+                                video {
+                                    url
+                                }
+                                embed {
+                                    html
+                                    height
+                                    width
                                 }
                             }
                         }
                         ... on PrismicWorkDataBodyGridSlide {
-                            id 
+                            id
                             slice_type
-                            primary {
-                                media_top_left {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                            original {
-                                                height
-                                                width
-                                            }
-                                        }
+                            items {
+                                image {
+                                    dimensions {
+                                        width
+                                        height
                                     }
-
+                                    alt
+                                    gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
                                 }
-                                media_bottom_right {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                            original {
-                                                height
-                                                width
-                                            }
-                                        }
-                                    }
+                                video {
+                                    url
                                 }
-                                media_bottom_left {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                            original {
-                                                height
-                                                width
-                                            }
-                                        }
-                                    }
-                                }
-                                media_top_right {
-                                    localFile {
-                                        childImageSharp {
-                                            gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                            original {
-                                                height
-                                                width
-                                            }
-                                        }
-                                    }
+                                embed {
+                                    html
+                                    height
+                                    width
                                 }
                             }
                         }

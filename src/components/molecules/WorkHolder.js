@@ -9,16 +9,6 @@ import {scroller} from "react-scroll";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from '../../utils/store'
 
-const images = [
-  'dummy-1.jpg',
-  'dummy-2.jpg',
-  'dummy-3.jpg',
-  'dummy-4.jpg',
-  'dummy-5.jpg',
-  'dummy-6.png',
-  'dummy-7.png',
-]
-
 function WorkHolder(props) {
   const [openContent, setOpenContent] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);

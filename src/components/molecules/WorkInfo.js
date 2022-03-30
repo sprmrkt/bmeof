@@ -72,14 +72,13 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
 
   const pullMediaFromSlides = (slides) => {
     let media = [];
-    slides.forEach(slide => {
+    slides.forEach((slide, i) => {
       if( slide.slice_type === 'standard_slide' ) {
-        if(slide.primary.media.localFile) media.push(slide.primary.media.localFile.childImageSharp);
+        media.push([slide.primary, i]);
       } else {
-        if(slide.primary.media_top_left.localFile) media.push(slide.primary.media_top_left.localFile.childImageSharp);
-        if(slide.primary.media_top_right.localFile) media.push(slide.primary.media_top_right.localFile.childImageSharp);
-        if(slide.primary.media_bottom_left.localFile) media.push(slide.primary.media_bottom_left.localFile.childImageSharp);
-        if(slide.primary.media_bottom_right.localFile) media.push(slide.primary.media_bottom_right.localFile.childImageSharp);
+        slide.items.forEach(item => {
+          media.push([item, i]);
+        })
       }
     })
     return media;
@@ -102,10 +101,10 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
           {mediaFromSlides.map((media, i) =>
             <WorkInfoMedia
               key={i}
-              handleClick={() => handleClick(i)}
-              media={media}
+              handleClick={() => handleClick(media[1])}
+              media={media[0]}
               totalImages={mediaFromSlides.length}
-              i={i} />
+              i={media[1]} />
           )}
         </Images>
         <button className="close-info" onClick={() => closeHandler()} title="Close info"/>
