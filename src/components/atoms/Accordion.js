@@ -129,6 +129,7 @@ function Accordion({button, children, id}) {
         duration: projectIsOpen ? 100 : scrollTime,
         smooth: true,
         offset: projectIsOpen ? 0 : -48,
+        ignoreCancelEvents: true
       });
     }
   }, [open, uid, size, projectIsOpen]);

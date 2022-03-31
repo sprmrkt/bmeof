@@ -25,6 +25,7 @@ function WorkHolder(props) {
         smooth: true,
         containerId: `${itemUid}-gallery-${size.width >= 576 ? 'inner' : 'holder'}`,
         horizontal: size.width >= 576,
+        ignoreCancelEvents: true
       });
     }
   }, [currentSlide, size.width, itemUid, openContent]);

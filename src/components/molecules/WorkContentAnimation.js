@@ -86,7 +86,8 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
         duration: timeout,
         smooth: true,
         offset: offsetHeight,
-        containerId: 'work-content'
+        containerId: 'work-content',
+        ignoreCancelEvents: true
       });
 
       // Update hasOpened
@@ -107,7 +108,8 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
         duration: 500,
         smooth: true,
         containerId: 'work-content',
-        delay: timeout
+        delay: timeout,
+        ignoreCancelEvents: true
       });
     }
   }, [open, parent, parentUid, offsetHeight, itemUid, hasOpened, setHasOpened]);
