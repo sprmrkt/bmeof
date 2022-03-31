@@ -56,10 +56,13 @@ const Holder = styled.div`
 `;
 
 const Images = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
+  display: none;
+  @media( ${props => props.theme.breakpoints.sm} ) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+  }
 `;
 
 function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {

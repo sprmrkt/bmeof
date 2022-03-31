@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {useMouseHovered} from "react-use";

@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {GatsbyImage} from "gatsby-plugin-image";
 import EmbedItem from "./EmbedItem";
