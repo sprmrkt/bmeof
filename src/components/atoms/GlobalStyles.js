@@ -35,8 +35,8 @@ const GlobalStyle = createGlobalStyle`
   ol, ul, li,
   code, kbd, pre, samp {
     line-height: 1.2;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -54,10 +54,10 @@ const GlobalStyle = createGlobalStyle`
   h3, .h3,
   h4, .h4,
   h5, .h5,
-  h6, .h6 { font-size: 12px; }
+  h6, .h6 { font-size: 15px; }
 
   p, li {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   li {
@@ -65,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 0;
   }
 
-  small, p.small { font-size: 12px; }
+  small, p.small { font-size: 15px; }
 
   code, kbd, pre, samp {
     font-family: monospace;
@@ -73,12 +73,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ul {
-    padding-left: 1rem;
+    padding-left: 24px;
     list-style-type: disc;
   }
 
   ol {
-    padding-left: 1rem;
+    padding-left: 24px;
     list-style-type: decimal;
   }
 
@@ -123,7 +123,7 @@ const GlobalStyle = createGlobalStyle`
 
   blockquote {
     font-weight: bold;
-    padding-left: 1rem;
+    padding-left: 24px;
   }
 
   a { color: inherit; }
@@ -165,8 +165,8 @@ const GlobalStyle = createGlobalStyle`
     font-family: inherit;
     ${(props) => props.theme.fluidType(0)};
     padding: 0.2rem 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 24px;
+    margin-bottom: 24px;
     border: 1px solid;
     border-radius: 2px;
     line-height: 1.6;
@@ -257,7 +257,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
 
     font-family: inherit;
-    font-size: 12px;
+    font-size: 15px;
     text-decoration: none;
     white-space: nowrap;
     border: none;
