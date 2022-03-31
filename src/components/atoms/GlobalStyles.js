@@ -85,7 +85,6 @@ const GlobalStyle = createGlobalStyle`
   video {
     width: 100%;
     height: auto;
-    margin-bottom: 1rem;
   }
 
   // Specific to PrismicRichText component

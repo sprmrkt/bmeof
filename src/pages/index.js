@@ -107,28 +107,8 @@ export const homePageQuery = graphql`
                                     html
                                     height
                                     width
-                                }
-                            }
-                        }
-                        ... on PrismicWorkDataBodyGridSlide {
-                            id
-                            slice_type
-                            items {
-                                image {
-                                    dimensions {
-                                        width
-                                        height
-                                    }
-                                    alt
-                                    gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                }
-                                video {
-                                    url
-                                }
-                                embed {
-                                    html
-                                    height
-                                    width
+                                    thumbnail_url
+                                    title
                                 }
                             }
                         }

@@ -1,11 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
-import Image from "../atoms/Image";
-import useWindowSize from "../../hooks/useWindowSize";
 import {useMouseHovered} from "react-use";
 import WorkSlideStandard from "./WorkSlideStandard";
-import WorkSlideGrid from "./WorkSlideGrid";
 
 const Holder = styled.div`
   height: 100%;
@@ -26,11 +23,14 @@ const Holder = styled.div`
   > :last-child { margin-bottom: 0; }
 `;
 
-const FixedOverlay = styled.div`
+const Button = styled.button.attrs(props => ({
+  disabled: props.disabled,
+}))`
   position: absolute;
+  z-index: 20;
+  width: 25%;
   top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
   display: none;
   @media( ${props => props.theme.breakpoints.md} ) {
@@ -44,22 +44,11 @@ const FixedOverlay = styled.div`
       opacity: 1;
     }
   }
-  
-  button {
-    width: 25%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    opacity: 0;
-
-    &.next {
-      left: 75%;
-    }
-
-    &:disabled {
-      cursor: auto;
-    }
+  &.next {
+    left: 75%;
+  }
+  &:disabled {
+    display: none;
   }
 `;
 
@@ -141,9 +130,10 @@ const Copyright = styled.div`
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
-  const [mouseText, setMouseText] = useState('');
-  const ref = useRef(null);
-  const {elX, elY, elW} = useMouseHovered(ref, {bound: false, whenHovered: true});
+  const prevRef = useRef(null);
+  const prevMouseHovered = useMouseHovered(prevRef, {bound: false, whenHovered: true});
+  const nextRef = useRef(null);
+  const nextMouseHovered = useMouseHovered(nextRef, {bound: false, whenHovered: true});
 
   const handleClose = () => {
     setTimeout(() => {
@@ -152,39 +142,29 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
     closeHandler(false);
   }
 
-  useEffect(() => {
-    if (elX < elW * 0.25 && currentSlide > 0) {
-      setMouseText('Prev');
-    } else if (elX > elW * 0.75) {
-      setMouseText('Next');
-    } else {
-      setMouseText(`${currentSlide + 1}/${slides.length}`);
-    }
-  }, [elX, elY, elW, slides.length, currentSlide]);
-
   return (
     <Holder id={`${itemUid}-gallery-holder`}>
       <Inner id={`${itemUid}-gallery-inner`}>
         {slides.map((slide, i) =>
           <SlideHolder key={i} id={`${itemUid}-gallery-image-${i}`}>
             {slide.slice_type === 'standard_slide' && <WorkSlideStandard slide={slide}/>}
-            {slide.slice_type === 'grid_slide' && <WorkSlideGrid slide={slide}/>}
           </SlideHolder>
         )}
       </Inner>
-      <FixedOverlay ref={ref}>
-        <MouseText x={elX} y={elY} className="mouse-text">{mouseText}</MouseText>
-        <button
-          className="next"
-          onClick={() => setCurrentSlide(currentSlide + 1)}
-          disabled={currentSlide === slides.length - 1}>Next
-        </button>
-        <button
-          className="prev"
-          onClick={() => setCurrentSlide(currentSlide - 1)}
-          disabled={currentSlide === 0}>Prev
-        </button>
-      </FixedOverlay>
+      <Button
+        ref={prevRef}
+        className="prev"
+        onClick={() => setCurrentSlide(currentSlide - 1)}
+        disabled={currentSlide === 0}>
+        <MouseText x={prevMouseHovered.elX} y={prevMouseHovered.elY} className="mouse-text">Prev</MouseText>
+      </Button>
+      <Button
+        ref={nextRef}
+        className="next"
+        onClick={() => setCurrentSlide(currentSlide + 1)}
+        disabled={currentSlide === slides.length - 1}>
+        <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
+      </Button>
       <CloseHolder>
         <button className="close-button" onClick={() => handleClose()}><span>Close</span></button>
       </CloseHolder>

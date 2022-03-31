@@ -13,14 +13,15 @@ const Holder = styled.div`
   padding: 0 24px;
   border-bottom: 1px solid;
   position: relative;
-  
+
   p {
     margin-top: 0;
     padding-top: 24px;
-    @media( ${props => props.theme.breakpoints.sm} ) {
+    @media ( ${props => props.theme.breakpoints.sm} ) {
       width: 50%;
     }
   }
+
   .close-info {
     width: 100%;
     height: 48px;
@@ -70,21 +71,22 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
     closeHandler();
   }
 
-  const pullMediaFromSlides = (slides) => {
-    let media = [];
-    slides.forEach((slide, i) => {
-      if( slide.slice_type === 'standard_slide' ) {
-        media.push([slide.primary, i]);
-      } else {
-        slide.items.forEach(item => {
-          media.push([item, i]);
-        })
-      }
-    })
-    return media;
-  }
+  // // Function for pulling individual media from standard and grid slides.
+  // const pullMediaFromSlides = (slides) => {
+  //   let media = [];
+  //   slides.forEach((slide, i) => {
+  //     if( slide.slice_type === 'standard_slide' ) {
+  //       media.push([slide.primary, i]);
+  //     } else {
+  //       slide.items.forEach(item => {
+  //         media.push([item, i]);
+  //       })
+  //     }
+  //   })
+  //   return media;
+  // }
 
-  const mediaFromSlides = pullMediaFromSlides(slides);
+  // const mediaFromSlides = pullMediaFromSlides(slides);
 
   return (
     <CSSTransition
@@ -96,18 +98,18 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
       classNames="work-info"
     >
       <Holder>
-        <PrismicRichText render={infoText.richText}/>
+        <PrismicRichText render={infoText.richText} />
         <Images>
-          {mediaFromSlides.map((media, i) =>
+          {slides.map((slide, i) =>
             <WorkInfoMedia
               key={i}
-              handleClick={() => handleClick(media[1])}
-              media={media[0]}
-              totalImages={mediaFromSlides.length}
-              i={media[1]} />
+              handleClick={() => handleClick(i)}
+              media={slide.primary}
+              totalImages={slides.length}
+              i={i} />
           )}
         </Images>
-        <button className="close-info" onClick={() => closeHandler()} title="Close info"/>
+        <button className="close-info" onClick={() => closeHandler()} title="Close info" />
       </Holder>
     </CSSTransition>
   )
