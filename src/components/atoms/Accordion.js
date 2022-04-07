@@ -22,20 +22,16 @@ const Button = styled.button`
   width: 100%;
   text-align: left;
   padding-left: 12px;
+  transition: color 0.5s linear;
   &:hover {
     @media( ${props => props.theme.breakpoints.md} ) {
-      font-style: italic;
+      color: rgb(70,70,70);
     }
   }
   @supports (-moz-appearance:none) {
     span {
       display: block;
       transform: translateY(0.1em);
-    }
-    &:hover {
-      span {
-        transform: skewX(-8deg) translateY(12.5%);
-      }
     }
   }
 `;
