@@ -5,18 +5,19 @@ import WorkTile from "../molecules/WorkTile";
 import WorkGallery from "../molecules/WorkGallery";
 import WorkContentAnimation from "./WorkContentAnimation";
 import WorkInfo from "./WorkInfo";
-import {scroller} from "react-scroll";
+import {scroller, Element} from "react-scroll";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from '../../utils/store'
+import {convertToSlug} from "../../utils/helpers";
 
 function WorkHolder(props) {
   const [openContent, setOpenContent] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
-  const itemUid = uuidv4();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const {title, tile_image, info, body} = props.node.data;
+  const itemUid = convertToSlug(title.text) + '-' + uuidv4();
   const size = useWindowSize();
   const setProjectIsOpen = useStore(state => state.setProjectIsOpen)
-  const {title, tile_image, info, body} = props.node.data;
 
   useEffect(() => {
     if(openContent) {
@@ -37,7 +38,7 @@ function WorkHolder(props) {
 
   return (
     <>
-      <div id={itemUid}>
+      <Element name={itemUid}>
         <WorkTile
           title={title.text}
           image={tile_image}
@@ -46,7 +47,7 @@ function WorkHolder(props) {
           even={props.even}
           toggleProjectHandler={(toggle) => toggleHandler(toggle)}
           toggleInfoHandler={() => setOpenInfo(!openInfo)} />
-      </div>
+      </Element>
       <WorkContentAnimation {...props} open={openContent} itemUid={itemUid}>
         <WorkInfo
           infoText={info}

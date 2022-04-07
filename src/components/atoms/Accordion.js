@@ -119,7 +119,7 @@ const Content = styled.div`
 function Accordion({button, children, id}) {
   const size = useWindowSize();
   const [open, setOpen] = useState(false);
-  const uid = uuidv4();
+  const uid = id + '-' + uuidv4();
   const projectIsOpen = useStore(state => state.projectIsOpen);
 
   // Set scroll on open
