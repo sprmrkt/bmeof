@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
@@ -8,7 +8,7 @@ import ProductList from "../components/organisms/ProductList";
 import Belief from "../components/organisms/Belief";
 import Studio from "../components/organisms/Studio";
 import {graphql} from "gatsby";
-import {Events} from "react-scroll";
+// import {Events} from "react-scroll";
 
 const Holder = styled.div`
   width: 100%;
@@ -23,20 +23,20 @@ function IndexPage({data}) {
 
   const work = data.allPrismicWork.nodes;
 
-  useEffect(() => {
-    Events.scrollEvent.register('begin', function(to, element) {
-      console.log('begin', arguments);
-    });
-
-    Events.scrollEvent.register('end', function(to, element) {
-      console.log('end', arguments);
-    });
-
-    return function cleanup() {
-      Events.scrollEvent.remove('begin');
-      Events.scrollEvent.remove('end');
-    };
-  }, []);
+  // useEffect(() => {
+  //   Events.scrollEvent.register('begin', function(to, element) {
+  //     console.log('begin', arguments);
+  //   });
+  //
+  //   Events.scrollEvent.register('end', function(to, element) {
+  //     console.log('end', arguments);
+  //   });
+  //
+  //   return function cleanup() {
+  //     Events.scrollEvent.remove('begin');
+  //     Events.scrollEvent.remove('end');
+  //   };
+  // }, []);
 
   return (
     <Holder>
