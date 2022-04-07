@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {scroller} from 'react-scroll/modules';
-import {CSSTransition} from "react-transition-group";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const timeout = 1000;
@@ -84,6 +83,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
     if (open) {
       // Stop work content holder from scrolling
       parent.current.style.overflow = "hidden";
+      parent.current.style.scrollSnapType = "none";
       // Scroll the work content holder to show only the title of the open item
       scroller.scrollTo(itemUid, {
         duration: timeout,
@@ -96,14 +96,16 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
     } else {
       // Resume scrolling work content holder
       parent.current.style.overflow = "scroll";
+
       // Scroll the work content holder to show only the work tile that was just closed
       scroller.scrollTo(itemUid, {
         duration: 500,
         smooth: true,
         containerId: 'work-content',
         delay: timeout,
-        ignoreCancelEvents: true
+        ignoreCancelEvents: true,
       });
+
     }
   }, [open, parent, parentUid, offsetHeight, itemUid]);
 

@@ -7,6 +7,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import {GatsbyImage} from "gatsby-plugin-image";
 
 const Holder = styled.div`
+  scroll-snap-align: start;
   width: 100%;
   padding: 24px 24px 0 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
@@ -15,6 +16,10 @@ const Holder = styled.div`
     &.even {
       padding: 24px 24px 0 12px;
     }
+  }
+  
+  &.open {
+    scroll-snap-align: none;
   }
 
   button {

@@ -15,6 +15,11 @@ function WorkContentAnimation(props) {
       in={props.open}
       timeout={timeout}
       classNames="work-content"
+      onExited={ () => {
+        setTimeout(() => {
+          props.parent.current.style.scrollSnapType = "y mandatory";
+        }, 500);
+      }}
     >
       <WorkContentAnimationInner {...props}/>
     </CSSTransition>
