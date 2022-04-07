@@ -8,6 +8,7 @@ import ProductList from "../components/organisms/ProductList";
 import Belief from "../components/organisms/Belief";
 import Studio from "../components/organisms/Studio";
 import {graphql} from "gatsby";
+import Extras from "../components/organisms/Extras";
 // import {Events} from "react-scroll";
 
 const Holder = styled.div`
@@ -62,25 +63,15 @@ function IndexPage({data}) {
       </Accordion>
       <Accordion
         id="studio"
-        scrollAfterOpen
         button="Studio">
         <Studio />
       </Accordion>
       <Accordion
         id="shop"
-        scrollAfterOpen
         button="Shop">
         <ProductList />
       </Accordion>
-      <p className="h1">
-        <span>
-          Some <br />
-          other <br />
-          links <br />
-          go <br />
-          here <br />
-        </span>
-      </p>
+      <Extras/>
       <LoopingScroll />
     </Holder>
   )

@@ -95,6 +95,8 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
 
     } else {
       // Resume scrolling work content holder
+      // scrollSnapType (see above where we set it to none) gets reset out in the
+      // WorkContentAnimation component in the onExited callback in the css transition component.
       parent.current.style.overflow = "scroll";
 
       // Scroll the work content holder to show only the work tile that was just closed
