@@ -25,15 +25,23 @@ function Extras() {
                                           richText
                                       }
                                       gallery {
-                                          embed {
-                                              html
-                                          }
                                           image {
+                                              dimensions {
+                                                  width
+                                                  height
+                                              }
                                               alt
                                               gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
                                           }
                                           video {
                                               url
+                                          }
+                                          embed {
+                                              html
+                                              height
+                                              width
+                                              thumbnail_url
+                                              title
                                           }
                                       }
                                   }
