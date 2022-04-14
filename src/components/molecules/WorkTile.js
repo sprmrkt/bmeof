@@ -10,6 +10,7 @@ const Holder = styled.div`
   scroll-snap-align: start;
   width: 100%;
   padding: 24px 24px 0 24px;
+  border-bottom: 1px solid;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 12px 0 24px;
     height: calc(100vh - 48px);
