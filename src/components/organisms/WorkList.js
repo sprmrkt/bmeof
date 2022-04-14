@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import styled from 'styled-components';
 import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from 'prop-types';
-import Spacer from "../atoms/Spacer";
+import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
   height: 100%;
@@ -25,6 +25,16 @@ const Grid = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
   }
+  
+`;
+
+const SpareTileBorder = styled.div`
+  align-self: end;
+  border-bottom: 1px solid;
+  display: none;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    display: block;
+  }
 `;
 
 function WorkList(props) {
@@ -39,8 +49,9 @@ function WorkList(props) {
             parent={holderRef}
             node={node}
             even={i%2 === 1}/>)}
+        {props.work.length % 2 === 1 && <SpareTileBorder/>}
       </Grid>
-      <Spacer/>
+      <CloseButton closeHandler={props.closeHandler} border={false}/>
     </Holder>
   )
 }

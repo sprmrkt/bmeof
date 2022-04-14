@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
-import Image from "../atoms/Image";
 import classNames from "classnames";
 import useWindowSize from "../../hooks/useWindowSize";
 import {GatsbyImage} from "gatsby-plugin-image";

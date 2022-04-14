@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {useMouseHovered} from "react-use";
 import WorkSlideStandard from "./WorkSlideStandard";
+import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
   height: 100%;
@@ -17,6 +18,7 @@ const Holder = styled.div`
     */
     scroll-snap-type: none;
   }
+  .close-copyright{ padding-bottom: 0; }
 
   > :first-child { margin-top: 0; }
 
@@ -88,47 +90,6 @@ const SlideHolder = styled.div`
   }
 `;
 
-const CloseHolder = styled.div`
-  scroll-snap-align: start;
-  width: 100%;
-  overflow: hidden;
-  padding-left: 12px;
-  button {
-    font-size: 33.5vw;
-    line-height: 0.75;
-    text-transform: uppercase;
-    letter-spacing: -0.025em;
-    display: block;
-    padding-top: 24px;
-    @supports (-moz-appearance:none) {
-      span {
-        display: block;
-        transform: translateY(10%);
-      }
-    }
-  }
-`;
-
-const Copyright = styled.div`
-  display: grid;
-  grid-gap: 24px;
-  grid-template-columns: 1fr 3fr;
-  align-items: end;
-  padding: 0 24px;
-  @media( ${props => props.theme.breakpoints.md} ) {
-    grid-template-columns: 1fr 1fr;
-  }
-  p {
-    text-transform: uppercase;
-    br {
-      display: none;
-      @media( ${props => props.theme.breakpoints.sm} ) {
-        display: inline;
-      }
-    }
-  }
-`;
-
 function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
   const prevRef = useRef(null);
   const prevMouseHovered = useMouseHovered(prevRef, {bound: false, whenHovered: true});
@@ -165,13 +126,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
         disabled={currentSlide === slides.length - 1}>
         <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
       </Button>
-      <CloseHolder>
-        <button className="close-button" onClick={() => handleClose()}><span>Close</span></button>
-      </CloseHolder>
-      <Copyright>
-        <p>&copy;</p>
-        <p>We help good brands and people think<br/> and make things differently.</p>
-      </Copyright>
+      <CloseButton closeHandler={handleClose} border={false}/>
     </Holder>
   )
 }

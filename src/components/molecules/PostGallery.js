@@ -9,7 +9,7 @@ import {scroller} from "react-scroll";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const Holder = styled.div`
-  height: 100%;
+  height: calc(100% - 48px);
   position: relative;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -71,7 +71,6 @@ const Inner = styled.div`
   width: 100%;
   padding: 0 24px 24px 24px;
   position: relative;
-  border-bottom: 1px solid;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 24px 24px 0;
     height: calc(100vh - 48px);

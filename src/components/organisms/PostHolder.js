@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {graphql, useStaticQuery} from "gatsby";
+import PropTypes from "prop-types";
 import PrismicRichText from "../atoms/PrismicRichText";
+import PostGallery from "../molecules/PostGallery";
 import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
@@ -10,8 +11,9 @@ const Holder = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 
-const Inner = styled.div`
+const TextHolder = styled.div`
   padding: 24px;
+  
   p {
     font-size: 40px;
     line-height: 36px;
@@ -20,31 +22,26 @@ const Inner = styled.div`
       font-size: 84px;
       line-height: 72px;
     }
+
+    &:nth-last-child(2) { margin-bottom: 0; }
   }
   > :first-child { margin-top: 0; }
   > :last-child { margin-bottom: 0; }
 `;
 
-function Belief(props) {
-  const data = useStaticQuery(graphql`
-      query BeliefQuery {
-          prismicBelief {
-              data {
-                  text {
-                      richText
-                  }
-              }
-          }
-      }
-  `)
+function PostHolder(props) {
+  const {title, text, gallery} = props.post.data;
   return (
     <Holder>
-      <Inner>
-        <PrismicRichText render={data.prismicBelief.data.text.richText} />
-      </Inner>
-      <CloseButton closeHandler={props.closeHandler} />
+      {text.richText.length > 0 && <TextHolder><PrismicRichText render={text.richText} /></TextHolder>}
+      {!text.richText.length > 0 && gallery.length > 0 && <PostGallery slides={gallery} title={title} />}
+      <CloseButton closeHandler={props.closeHandler}/>
     </Holder>
   )
 }
 
-export default Belief;
+PostHolder.propTypes = {
+  post: PropTypes.object.isRequired,
+};
+
+export default PostHolder;
