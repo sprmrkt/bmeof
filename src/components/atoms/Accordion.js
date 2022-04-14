@@ -7,6 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import LockScroll from "./LockScroll";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from "../../utils/store";
+import classNames from "classnames";
 
 const scrollTime = 500;
 const timeout = 1000;
@@ -23,15 +24,29 @@ const Button = styled.button`
   text-align: left;
   padding-left: 12px;
   transition: color 0.5s linear;
+  span {
+    display: inline-block;
+    transition: transform 0.25s linear;
+  }
   &:hover {
     @media( ${props => props.theme.breakpoints.md} ) {
       color: rgb(70,70,70);
+    }
+  }
+  &.is-open {
+    span {
+      transform: translateY(-0.04em);
     }
   }
   @supports (-moz-appearance:none) {
     span {
       display: block;
       transform: translateY(0.1em);
+    }
+    &.is-open {
+      span {
+        transform: translateY(0.06em);
+      }
     }
   }
 `;
@@ -140,9 +155,11 @@ function Accordion({button, children, id}) {
     return child;
   });
 
+  const buttonClasses = classNames('accordion-title', { 'is-open': open });
+
   return (
     <>
-      <Button className="accordion-title" onClick={() => setOpen(!open)}><span>{button}</span></Button>
+      <Button className={buttonClasses} onClick={() => setOpen(!open)}><span>{button}</span></Button>
       <Element name={uid}/>
       <CSSTransition
         mountOnEnter
