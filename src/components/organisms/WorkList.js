@@ -47,7 +47,7 @@ function WorkList(props) {
             key={i}
             {...props}
             parent={holderRef}
-            node={node}
+            node={node.work_item.document}
             even={i%2 === 1}/>)}
         {props.work.length % 2 === 1 && <SpareTileBorder/>}
       </Grid>

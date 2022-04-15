@@ -22,22 +22,7 @@ const Holder = styled.div`
 
 function IndexPage({data}) {
 
-  const work = data.allPrismicWork.nodes;
-
-  // useEffect(() => {
-  //   Events.scrollEvent.register('begin', function(to, element) {
-  //     console.log('begin', arguments);
-  //   });
-  //
-  //   Events.scrollEvent.register('end', function(to, element) {
-  //     console.log('end', arguments);
-  //   });
-  //
-  //   return function cleanup() {
-  //     Events.scrollEvent.remove('begin');
-  //     Events.scrollEvent.remove('end');
-  //   };
-  // }, []);
+  const work = data.prismicHomepage.data.work;
 
   return (
     <Holder>
@@ -71,7 +56,7 @@ function IndexPage({data}) {
         button="Shop">
         <ProductList />
       </Accordion>
-      <Extras/>
+      <Extras />
       <LoopingScroll />
     </Holder>
   )
@@ -81,41 +66,50 @@ export default IndexPage;
 
 export const homePageQuery = graphql`
     query {
-        allPrismicWork {
-            nodes {
-                data {
-                    info {
-                        richText
-                    }
-                    tile_image {
-                        alt
-                        gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                    }
-                    title {
-                        text
-                    }
-                    body {
-                        ... on PrismicWorkDataBodyStandardSlide {
-                            id
-                            slice_type
-                            primary {
-                                image {
-                                    dimensions {
-                                        width
-                                        height
+        prismicHomepage {
+            data {
+                work {
+                    work_item {
+                        document {
+                            ... on PrismicWork {
+                                id
+                                data {
+                                    info {
+                                        richText
                                     }
-                                    alt
-                                    gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
-                                }
-                                video {
-                                    url
-                                }
-                                embed {
-                                    html
-                                    height
-                                    width
-                                    thumbnail_url
-                                    title
+                                    tile_image {
+                                        alt
+                                        gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                    }
+                                    title {
+                                        text
+                                    }
+                                    body {
+                                        ... on PrismicWorkDataBodyStandardSlide {
+                                            id
+                                            slice_type
+                                            primary {
+                                                image {
+                                                    dimensions {
+                                                        width
+                                                        height
+                                                    }
+                                                    alt
+                                                    gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                                }
+                                                video {
+                                                    url
+                                                }
+                                                embed {
+                                                    html
+                                                    height
+                                                    width
+                                                    thumbnail_url
+                                                    title
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

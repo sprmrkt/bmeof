@@ -6,9 +6,9 @@ function Extras() {
 
   const data = useStaticQuery(graphql`
       query ExtrasQuery {
-          prismicExtras {
+          prismicHomepage {
               data {
-                  posts {
+                  extras {
                       post {
                           document {
                               ... on PrismicPost {
@@ -54,9 +54,9 @@ function Extras() {
       }
   `)
 
-  if (data.prismicExtras.data.posts.length < 1) return null;
+  if (data.prismicHomepage.data.extras.length < 1) return null;
 
-  return data.prismicExtras.data.posts.map((node, i) => <Post key={i} post={node.post.document}/>);
+  return data.prismicHomepage.data.extras.map((node, i) => <Post key={i} post={node.post.document}/>);
 }
 
 export default Extras;
