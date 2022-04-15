@@ -36,6 +36,9 @@ function Extras() {
                                           video {
                                               url
                                           }
+                                          embed_poster {
+                                              url
+                                          }
                                           embed {
                                               html
                                               height

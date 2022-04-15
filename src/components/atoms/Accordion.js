@@ -68,7 +68,7 @@ const Content = styled.div`
     background-color: ${props => props.theme.colors.black};
     transform-origin: top left;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     top: 0;
     left: 0;
 

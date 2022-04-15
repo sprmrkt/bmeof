@@ -18,7 +18,7 @@ function MediaItem({media, height, embedCanPlay}) {
       image={media.image.gatsbyImageData} />
   )
 
-  if (media.embed) return <EmbedItem embed={media.embed} canPlay={embedCanPlay}/>
+  if (media.embed) return <EmbedItem embed={media.embed} poster={media.embed_poster} canPlay={embedCanPlay}/>
 
   if (media.video.url) return (
     <video autoPlay muted playsInline loop>

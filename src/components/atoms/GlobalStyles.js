@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  p,
+  p, .p,
   ol, ul, li,
   code, kbd, pre, samp {
     line-height: 1;
@@ -56,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
   h5, .h5,
   h6, .h6 { font-size: 15px; }
 
-  p, li {
+  .p, p, li {
     font-size: 15px;
   }
   

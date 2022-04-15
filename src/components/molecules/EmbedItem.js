@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import { ReactComponent as PlayButton } from '../../assets/svg/play.inline.svg';
+import {GatsbyImage} from "gatsby-plugin-image";
 
 const timeout = 500;
 
@@ -104,13 +105,13 @@ const OverlayHolder = styled.div`
   }
 `;
 
-function EmbedItem({embed, canPlay}) {
+function EmbedItem({embed, canPlay, poster}) {
   const [overlayOpen, setOverlayOpen] = useState(false);
 
   if (canPlay) return (
     <Holder>
       <button onClick={() => setOverlayOpen(true)}>
-        <img alt={embed.title} src={embed.thumbnail_url} />
+        <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
         <PlayButton/>
       </button>
 
@@ -142,6 +143,7 @@ function EmbedItem({embed, canPlay}) {
 EmbedItem.propTypes = {
   embed: PropTypes.object.isRequired,
   canPlay: PropTypes.bool,
+  poster: PropTypes.object,
 };
 
 EmbedItem.defaultProps = {

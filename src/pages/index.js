@@ -97,6 +97,9 @@ export const homePageQuery = graphql`
                                                     alt
                                                     gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
                                                 }
+                                                embed_poster {
+                                                    url
+                                                }
                                                 video {
                                                     url
                                                 }

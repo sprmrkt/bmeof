@@ -125,7 +125,7 @@ function PostGallery({slides, title}) {
   }, [currentSlide, size.width, itemUid,]);
 
   return (
-    <Holder id={`${itemUid}-post-gallery-holder`}>
+    <Holder id={`${itemUid}-post-gallery-holder`} className="post-gallery-holder">
       <Inner id={`${itemUid}-post-gallery-inner`}>
         {slides.map((slide, i) =>
           <SlideHolder key={i} id={`${itemUid}-post-gallery-image-${i}`}>

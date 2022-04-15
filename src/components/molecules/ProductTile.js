@@ -1,43 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
-import Image from "../atoms/Image";
+import PrismicRichText from "../atoms/PrismicRichText";
+import PostGallery from "./PostGallery";
 
 const Holder = styled.div`
-  height: calc(100vh - 60px);
+  height: calc(100vh - 48px);
   position: relative;
-  .gatsby-image-wrapper {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 1;
+  overflow: hidden;
+
+  .post-gallery-holder {
+    height: 100%;
   }
 `;
 const TextHolder = styled.div`
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  width: calc(75% - 1.5rem);
+  top: 0;
+  left: 0;
+  width: 75%;
   z-index: 2;
-  padding: 1rem;
+  padding: 24px 24px 12px 24px;
   background-color: ${props => props.theme.colors.white};
-  @media( ${props => props.theme.breakpoints.md} ) {
-    width: calc(50% - 1rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+  > div:last-child {
+    justify-self: end;
+    text-align: right;
+  }
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    width: 50%;
+  }
+
+  p, .p {
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
   }
 `;
 
 function ProductTile({product}) {
+  const {title, price, description, link, gallery} = product.data;
   return (
     <Holder>
       <TextHolder>
-        <h3>Product title</h3>
-        <p>Product description</p>
-        <p>$1111</p>
-        <p><a href="https://buy.stripe.com/test_14k7uD4q83iZ5zifYY" target="_blank" rel="noopener noreferrer">Buy now</a></p>
+        <div>
+          <h3 className="p">{title.text}</h3>
+          <PrismicRichText render={description.richText} />
+        </div>
+        <div>
+          <p>${price}</p>
+          <p><a href={link.url} target="_blank" rel="noopener noreferrer">Buy now</a></p>
+        </div>
       </TextHolder>
-      <Image imgName="dummy-3.jpg" />
+      <PostGallery slides={gallery} title={title} />
     </Holder>
   )
 }
