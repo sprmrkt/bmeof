@@ -22,16 +22,6 @@ const Grid = styled.div`
     grid-gap: 24px;
   }
 
-  p {
-    font-size: 40px;
-    line-height: 36px;
-    margin: 0;
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      font-size: 84px;
-      line-height: 72px;
-    }
-  }
-
   .contact {
     @media ( ${props => props.theme.breakpoints.md} ) {
       align-self: end;
@@ -81,7 +71,7 @@ function Studio(props) {
   return (
     <Holder>
       <Grid>
-        <div className="address"><PrismicRichText render={address.richText}/></div>
+        <div className="address p-large"><PrismicRichText render={address.richText}/></div>
         <GatsbyImage alt={image.alt || 'Studio shot'} image={image.gatsbyImageData}/>
         <div className="contact"><PrismicRichText render={contact.richText}/></div>
       </Grid>

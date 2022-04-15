@@ -12,15 +12,6 @@ const Holder = styled.div`
 
 const Inner = styled.div`
   padding: 24px;
-  p {
-    font-size: 40px;
-    line-height: 36px;
-    margin-bottom: 0.75em;
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      font-size: 84px;
-      line-height: 72px;
-    }
-  }
   > :first-child { margin-top: 0; }
   > :last-child { margin-bottom: 0; }
 `;
@@ -39,7 +30,7 @@ function Belief(props) {
   `)
   return (
     <Holder>
-      <Inner>
+      <Inner className="p-large">
         <PrismicRichText render={data.prismicBelief.data.text.richText} />
       </Inner>
       <CloseButton closeHandler={props.closeHandler} />

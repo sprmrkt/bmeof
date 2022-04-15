@@ -59,6 +59,16 @@ const GlobalStyle = createGlobalStyle`
   p, li {
     font-size: 15px;
   }
+  
+  .p-large p, p.large {
+      font-size: 40px;
+      line-height: 36px;
+      margin-bottom: 0.75em;
+      @media ( ${props => props.theme.breakpoints.md} ) {
+          font-size: 72px;
+          line-height: 66px;
+      }
+  }
 
   li {
     margin-top: 0;
