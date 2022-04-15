@@ -103,6 +103,21 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
     closeHandler(false);
   }
 
+  const handlePrev = (current) => {
+    if( current === 0 ) {
+      setCurrentSlide(slides.length - 1)
+    } else {
+      setCurrentSlide(current - 1)
+    }
+  }
+  const handleNext = (current) => {
+    if( current === slides.length - 1 ) {
+      setCurrentSlide(0)
+    } else {
+      setCurrentSlide(current + 1)
+    }
+  }
+
   return (
     <Holder id={`${itemUid}-gallery-holder`}>
       <Inner id={`${itemUid}-gallery-inner`}>
@@ -115,15 +130,13 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
       <Button
         ref={prevRef}
         className="prev"
-        onClick={() => setCurrentSlide(currentSlide - 1)}
-        disabled={currentSlide === 0}>
+        onClick={() => handlePrev(currentSlide)}>
         <MouseText x={prevMouseHovered.elX} y={prevMouseHovered.elY} className="mouse-text">Prev</MouseText>
       </Button>
       <Button
         ref={nextRef}
         className="next"
-        onClick={() => setCurrentSlide(currentSlide + 1)}
-        disabled={currentSlide === slides.length - 1}>
+        onClick={() => handleNext(currentSlide)}>
         <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
       </Button>
       <CloseButton closeHandler={handleClose} border={false}/>
