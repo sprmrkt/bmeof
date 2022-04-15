@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
+import { ReactComponent as PlayButton } from '../../assets/svg/play.inline.svg';
 
 const timeout = 500;
 
@@ -11,12 +12,9 @@ const Holder = styled.div`
     position: relative;
     z-index: 1;
   }
-  .play {
-    width: 0;
-    height: 0;
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;
-    border-left: 20px solid ${props => props.theme.colors.white};
+  svg {
+    width: 10rem;
+    height: auto;
     position: absolute;
     z-index: 2;
     top: 50%;
@@ -33,27 +31,26 @@ const OverlayHolder = styled.div`
   right: 0;
   bottom: 0;
   overflow: hidden;
-  background-color: ${props => props.theme.colors.black};
+  color: #333;
+  background-color: #000;
   transform-origin: bottom left;
   
   .close {
     position: absolute;
-    top: 12px;
-    right: 24px;
-    font-size: 36px;
-    color: ${props => props.theme.colors.white};
-    transform: rotate(45deg);
-    transform-origin: center;
+    top: ${(48 - 15) / 2}px;
+    left: 24px;
+    margin: 0;
+    text-transform: uppercase;
   }
 
   iframe,
   object,
   embed {
     position: absolute;
-    top: 24px;
-    left: 24px;
-    width: calc(100% - 48px);
-    height: calc(100% - 48px);
+    top: 48px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 96px);
     object-fit: contain;
     object-position: center;
   }
@@ -114,7 +111,7 @@ function EmbedItem({embed, canPlay}) {
     <Holder>
       <button onClick={() => setOverlayOpen(true)}>
         <img alt={embed.title} src={embed.thumbnail_url} />
-        <div className="play" />
+        <PlayButton/>
       </button>
 
       <CSSTransition
@@ -127,7 +124,7 @@ function EmbedItem({embed, canPlay}) {
       >
         <OverlayHolder>
           <div dangerouslySetInnerHTML={{__html: embed.html}} />
-          <button className="close" onClick={() => setOverlayOpen(false)}>+</button>
+          <button className="close" onClick={() => setOverlayOpen(false)}>Exit full screen</button>
         </OverlayHolder>
       </CSSTransition>
 
@@ -137,7 +134,7 @@ function EmbedItem({embed, canPlay}) {
   return (
     <Holder>
       <img alt={embed.title} src={embed.thumbnail_url} />
-      <div className="play" />
+      <PlayButton/>
     </Holder>
   )
 }
