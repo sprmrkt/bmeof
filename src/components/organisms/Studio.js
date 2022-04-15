@@ -29,10 +29,11 @@ const Grid = styled.div`
       grid-column: 1/2;
     }
     p {
-      font-size: 15px;
-      line-height: 1.2;
       text-transform: uppercase;
       margin-top: 24px;
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        margin-bottom: 0;
+      }
     }
   }
   

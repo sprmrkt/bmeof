@@ -136,7 +136,16 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 24px;
   }
 
-  a { color: inherit; }
+  a { 
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.5s linear;
+      &:hover {
+          @media ( ${props => props.theme.breakpoints.md} ) {
+              color: rgb(70, 70, 70);
+          }
+      }
+  }
 
   sup, sub {
     vertical-align: baseline;
