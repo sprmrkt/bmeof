@@ -58,13 +58,17 @@ const OverlayHolder = styled.div`
   iframe,
   object,
   embed {
+    //position: absolute;
+    //top: 48px;
+    //left: 0;
+    //width: 100%;
+    //height: calc(100% - 96px);
     position: absolute;
-    top: 48px;
-    left: 0;
-    width: 100%;
-    height: calc(100% - 96px);
-    object-fit: contain;
-    object-position: center;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: calc(100vh - 96px);
+    transform: translate(-50%, -50%);
   }
 
   &.overlay-holder-appear,

@@ -9,7 +9,7 @@ import {scroller} from "react-scroll";
 import useWindowSize from "../../hooks/useWindowSize";
 
 const Holder = styled.div`
-  height: calc(100% - 48px);
+  height: calc(100vh - 48px);
   position: relative;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;

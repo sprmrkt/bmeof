@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 const Holder = styled.div`
-  scroll-snap-align: start;
   width: 100%;
   overflow: hidden;
   padding: 0 0 0 12px;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    scroll-snap-align: start;
+  }
   
   &.has-border {
     border-top: 1px solid;
