@@ -76,6 +76,15 @@ const ImageHolder = styled.div`
   }
 `;
 
+const Hover = styled.div`
+  position: absolute;
+  width: ${props => props.landscapeTile ? `${props.hoverDist}px` : '100%'};
+  height: ${props => props.landscapeTile ? `100%` : `${props.hoverDist}px`};
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+`;
+
 const TextHolder = styled.div`
   height: 48px;
   display: grid;
@@ -183,6 +192,11 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
         className={landscapeTile ? 'landscape' : 'portrait'}>
         <button onClick={() => toggleProjectHandler(true)}>
           <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData}/>
+          <Hover
+            landscapeTile={landscapeTile}
+            hoverDist={hoverDist}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}/>
         </button>
       </ImageHolder>
       <TextHolder className={tileClasses} >

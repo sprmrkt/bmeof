@@ -134,7 +134,7 @@ function EmbedItem({embed, canPlay, poster}) {
 
   return (
     <Holder>
-      <img alt={embed.title} src={embed.thumbnail_url} />
+      <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
       <PlayButton/>
     </Holder>
   )
