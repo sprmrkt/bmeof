@@ -69,7 +69,7 @@ const MouseText = styled.div.attrs(props => ({
 
 const Inner = styled.div`
   width: 100%;
-  padding: 0 24px 24px 24px;
+  padding: 0 15px 15px 15px;
   position: relative;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 24px 24px 0;
@@ -80,7 +80,7 @@ const Inner = styled.div`
 `;
 
 const SlideHolder = styled.div`
-  padding-top: 24px;
+  padding-top: 15px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 0 0 0 24px;
   }

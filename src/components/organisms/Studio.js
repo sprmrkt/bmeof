@@ -12,14 +12,15 @@ const Holder = styled.div`
 `;
 
 const Grid = styled.div`
-  height: calc(100% - 48px);
+  height: calc(100vh - 48px);
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 15px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     display: grid;
     grid-template-columns: 5fr 3fr;
     grid-gap: 24px;
+    padding: 24px;
   }
 
   .contact {
@@ -31,14 +32,13 @@ const Grid = styled.div`
     p {
       text-transform: uppercase;
       margin-top: 24px;
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        margin-bottom: 0;
-      }
+      margin-bottom: 0;
     }
   }
   
   .address {
     margin-bottom: auto;
+    p { margin-top: 0; }
   }
   
   .gatsby-image-wrapper {

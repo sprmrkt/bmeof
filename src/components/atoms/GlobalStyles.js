@@ -61,8 +61,8 @@ const GlobalStyle = createGlobalStyle`
   }
   
   .p-large p, p.large {
-      font-size: 40px;
-      line-height: 36px;
+      font-size: 24px;
+      line-height: 22px;
       margin-bottom: 0.75em;
       @media ( ${props => props.theme.breakpoints.md} ) {
           font-size: 72px;

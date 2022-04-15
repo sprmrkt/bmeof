@@ -10,14 +10,18 @@ const timeout = 1000
 const Holder = styled.div`
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 0 24px;
+  padding: 0 15px;
   border-bottom: 1px solid;
   position: relative;
+  @media ( ${props => props.theme.breakpoints.sm} ) {
+    padding: 0 24px;
+  }
 
   p {
     margin-top: 0;
-    padding-top: 24px;
+    padding-top: 15px;
     @media ( ${props => props.theme.breakpoints.sm} ) {
+      padding-top: 24px;
       width: 50%;
     }
   }

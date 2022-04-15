@@ -8,8 +8,9 @@ import {GatsbyImage} from "gatsby-plugin-image";
 const Holder = styled.div`
   scroll-snap-align: start;
   width: 100%;
-  padding: 24px 24px 0 24px;
+  padding: 15px 15px 0 15px;
   border-bottom: 1px solid;
+  background-color: ${props => props.theme.colors.white};
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 12px 0 24px;
     height: calc(100vh - 48px);
@@ -49,15 +50,14 @@ const ImageHolder = styled.div`
     height: calc(100% - 48px);
     padding-bottom: 0;
     overflow: hidden;
-    position: relative;
   }
 
   button {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     display: flex;
 
     .gatsby-image-wrapper {
@@ -77,12 +77,16 @@ const ImageHolder = styled.div`
 `;
 
 const Hover = styled.div`
-  position: absolute;
-  width: ${props => props.landscapeTile ? `${props.hoverDist}px` : '100%'};
-  height: ${props => props.landscapeTile ? `100%` : `${props.hoverDist}px`};
-  right: 0;
-  bottom: 0;
-  background-color: transparent;
+  display: none;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    display: block;
+    position: absolute;
+    width: ${props => props.landscapeTile ? `${props.hoverDist}px` : '100%'};
+    height: ${props => props.landscapeTile ? `100%` : `${props.hoverDist}px`};
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+  }
 `;
 
 const TextHolder = styled.div`

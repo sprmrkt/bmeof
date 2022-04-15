@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import { ReactComponent as PlayButton } from '../../assets/svg/play.inline.svg';
-import {GatsbyImage} from "gatsby-plugin-image";
 
 const timeout = 500;
 
@@ -14,13 +13,22 @@ const Holder = styled.div`
     z-index: 1;
   }
   svg {
-    width: 10rem;
+    width: 50px;
     height: auto;
     position: absolute;
     z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media( ${props => props.theme.breakpoints.md} ) {
+      width: 190px;
+    }
+  }
+  .open-overlay {
+    width: 100%;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      width: auto;
+    }
   }
 `;
 
@@ -39,9 +47,12 @@ const OverlayHolder = styled.div`
   .close {
     position: absolute;
     top: ${(48 - 15) / 2}px;
-    left: 24px;
+    left: 15px;
     margin: 0;
     text-transform: uppercase;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      left: 24px;
+    }
   }
 
   iframe,
@@ -110,7 +121,7 @@ function EmbedItem({embed, canPlay, poster}) {
 
   if (canPlay) return (
     <Holder>
-      <button onClick={() => setOverlayOpen(true)}>
+      <button className="open-overlay" onClick={() => setOverlayOpen(true)}>
         <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
         <PlayButton/>
       </button>

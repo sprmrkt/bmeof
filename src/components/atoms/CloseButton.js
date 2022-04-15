@@ -19,8 +19,11 @@ const Holder = styled.div`
     text-transform: uppercase;
     letter-spacing: -0.025em;
     display: block;
-    padding-top: 24px;
+    padding-top: 15px;
     transition: color 0.5s linear;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      padding-top: 24px;
+    }
     @supports (-moz-appearance:none) {
       span {
         display: block;
@@ -41,14 +44,19 @@ const Copyright = styled.div`
   grid-gap: 24px;
   grid-template-columns: 1fr 3fr;
   align-items: end;
-  padding: 0 24px 60px;
+  padding: 0 15px 48px;
   @media( ${props => props.theme.breakpoints.md} ) {
     grid-template-columns: 1fr 1fr;
+    padding: 0 24px 48px;
   }
   p {
     text-transform: uppercase;
-    font-size: initial !important;
-    line-height: initial !important;
+    font-size: 12px;
+    line-height: 12px;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      font-size: initial !important;
+      line-height: initial !important;
+    }
     br {
       display: none;
       @media( ${props => props.theme.breakpoints.sm} ) {

@@ -19,23 +19,29 @@ const TextHolder = styled.div`
   left: 0;
   width: 75%;
   z-index: 2;
-  padding: 24px 24px 12px 24px;
+  padding: 15px 15px 12px 15px;
   background-color: ${props => props.theme.colors.white};
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 24px;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    width: 50%;
+    padding: 24px 24px 12px 24px;
+  }
   > div:last-child {
     justify-self: end;
     text-align: right;
-  }
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    width: 50%;
   }
 
   p, .p {
     text-transform: uppercase;
     margin: 0;
-    line-height: 1;
+    font-size: 12px;
+    line-height: 12px;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      font-size: initial !important;
+      line-height: initial !important;
+    }
   }
 `;
 

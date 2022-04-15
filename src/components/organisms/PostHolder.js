@@ -12,7 +12,10 @@ const Holder = styled.div`
 `;
 
 const TextHolder = styled.div`
-  padding: 24px;
+  padding: 15px;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    padding: 24px;
+  }
   > :first-child { margin-top: 0; }
   > :last-child { margin-bottom: 0; }
 `;

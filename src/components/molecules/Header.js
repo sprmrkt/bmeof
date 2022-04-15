@@ -12,12 +12,21 @@ const Holder = styled.header`
     grid-template-columns: 1fr 1fr;
   }
   img {
-    width: 75px;
+    width: 50px;
     height: auto;
     display: block;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      width: 75px;
+    }
   }
   p {
     text-transform: uppercase;
+    font-size: 12px;
+    line-height: 12px;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      font-size: initial !important;
+      line-height: initial !important;
+    }
     br {
       display: none;
       @media( ${props => props.theme.breakpoints.sm} ) {

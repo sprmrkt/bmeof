@@ -48,7 +48,7 @@ const Content = styled.div`
 
 function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
   const size = useWindowSize();
-  const offsetHeight = size.width < 768 ? size.width - 24 : size.height - 96;
+  const offsetHeight = size.width < 768 ? size.width - 15 : size.height - 96;
 
   useEffect(() => {
     if (open) {

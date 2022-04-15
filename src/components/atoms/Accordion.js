@@ -34,8 +34,10 @@ const Button = styled.button`
     }
   }
   &.is-open {
-    span {
-      transform: translateY(-0.04em);
+    @media( ${props => props.theme.breakpoints.md} ) {
+      span {
+        transform: translateY(-0.04em);
+      }
     }
   }
   @supports (-moz-appearance:none) {
@@ -44,8 +46,10 @@ const Button = styled.button`
       transform: translateY(0.1em);
     }
     &.is-open {
-      span {
-        transform: translateY(0.06em);
+      @media( ${props => props.theme.breakpoints.md} ) {
+        span {
+          transform: translateY(0.06em);
+        }
       }
     }
   }
@@ -71,6 +75,10 @@ const Content = styled.div`
     z-index: 3;
     top: 0;
     left: 0;
+    transition: opacity 0.25s;
+    &.project-is-open {
+      opacity: 0;
+    }
 
     &:last-child {
       top: auto;
@@ -156,6 +164,7 @@ function Accordion({button, children, id}) {
   });
 
   const buttonClasses = classNames('accordion-title', { 'is-open': open });
+  const borderClasses = classNames('top-border', 'border', { 'project-is-open': projectIsOpen });
 
   return (
     <>
@@ -171,7 +180,7 @@ function Accordion({button, children, id}) {
       >
         <Content id={`${id}-accordion-content`}>
           <LockScroll/>
-          <div className="border" />
+          <div className={borderClasses} />
           <div className="accordion-inner">
             {childrenWithProps}
           </div>
