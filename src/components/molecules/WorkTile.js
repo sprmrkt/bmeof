@@ -28,19 +28,86 @@ const Holder = styled.div`
     border: none;
   }
 `;
+const Excerpt = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  text-align: left;
+  p {
+    white-space: normal;
+    margin: 0 0 12px 12px;
+  }
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: ${props => props.theme.colors.black};
+    transition: transform 0.75s ease-out;
+  }
+  &:before {
+    width: 1px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    transform: scaleY(0);
+    transform-origin: bottom right;
+    transition-delay: 0.75s;
+    transition-duration: 1s;
+  }
+  &:after {
+    height: 1px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom left;
+  }
+  .inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+  }
+`;
 
 const ImageHolder = styled.div`
-
+  &:hover {
+    ${Excerpt} {
+      &:before {
+        transform: scaleY(1);
+      }
+      &:after {
+        transform: scaleX(1);
+      }
+      .inner {
+        opacity: 1;
+      }
+    }
+    .gatsby-image-wrapper {
+      opacity: 0;
+    }
+  }
   button {
     width: 100%;
     height: 100%;
     display: block;
+    position: relative;
 
     .gatsby-image-wrapper {
       position: relative;
+      z-index: 2;
       width: 100%;
       height: 0;
       padding-bottom: 100%;
+      transition: opacity 0.1s ease-in-out;
     }
   }
 `;
@@ -127,6 +194,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
       <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
           <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData} />
+          <Excerpt><div className="inner p-large"><p>Some intro text blah blah blah.</p></div></Excerpt>
         </button>
       </ImageHolder>
       <TextHolder className={tileClasses}>
