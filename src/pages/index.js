@@ -37,14 +37,14 @@ function IndexPage({data}) {
         </span>
       </h1>
       <Accordion
-        id="work"
-        button="Work">
-        <WorkList work={work} />
+        id="belief"
+        button="Think">
+        <Belief />
       </Accordion>
       <Accordion
-        id="belief"
-        button="Belief">
-        <Belief />
+        id="work"
+        button="Make">
+        <WorkList work={work} />
       </Accordion>
       <Accordion
         id="studio"
