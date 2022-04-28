@@ -51,11 +51,11 @@ function IndexPage({data}) {
         button="Studio">
         <Studio />
       </Accordion>
-      <Accordion
-        id="shop"
-        button="Shop">
-        <ProductList />
-      </Accordion>
+      {/*<Accordion*/}
+      {/*  id="shop"*/}
+      {/*  button="Shop">*/}
+      {/*  <ProductList />*/}
+      {/*</Accordion>*/}
       <Extras />
       <LoopingScroll />
     </Holder>
