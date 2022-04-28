@@ -1,8 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import useWindowSize from "../../hooks/useWindowSize";
 import {GatsbyImage} from "gatsby-plugin-image";
 
 const Holder = styled.div`
@@ -12,75 +11,37 @@ const Holder = styled.div`
   background-color: ${props => props.theme.colors.white};
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 12px 0 24px;
-    height: calc(100vh - 48px);
+    min-height: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &.even {
       padding: 24px 24px 0 12px;
     }
+  }
+  @media ( ${props => props.theme.breakpoints.lg} ) {
+    min-height: calc(100vh - 48px);
   }
 
   button {
     padding: 0;
     border: none;
   }
-
-  &.hovered {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      .gatsby-image-wrapper {
-        transform: translateY(${props => props.hoverDist}px);
-      }
-
-      .landscape .gatsby-image-wrapper {
-        transform: translateX(${props => props.hoverDist}px);
-      }
-    }
-  }
 `;
 
 const ImageHolder = styled.div`
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%;
-  position: relative;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    height: calc(100% - 48px);
-    padding-bottom: 0;
-    overflow: hidden;
-  }
 
   button {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
+    display: block;
 
     .gatsby-image-wrapper {
+      position: relative;
       width: 100%;
-      height: 100%;
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        width: ${props => props.imageSize}px;
-        height: ${props => props.imageSize}px;
-        transition: transform 0.5s;
-      }
+      height: 0;
+      padding-bottom: 100%;
     }
-  }
-
-  &.landscape {
-
-  }
-`;
-
-const Hover = styled.div`
-  display: none;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    display: block;
-    position: absolute;
-    width: ${props => props.landscapeTile ? `${props.hoverDist}px` : '100%'};
-    height: ${props => props.landscapeTile ? `100%` : `${props.hoverDist}px`};
-    right: 0;
-    bottom: 0;
-    background-color: transparent;
   }
 `;
 
@@ -144,7 +105,7 @@ const TextHolder = styled.div`
       opacity: 1;
     }
   }
-  
+
   .close {
     span {
       transform: rotate(45deg);
@@ -154,56 +115,23 @@ const TextHolder = styled.div`
 `;
 
 const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image}) => {
-  const imageHolderRef = useRef(null);
-  const [landscapeTile, setLandscapeTile] = useState(null);
-  const [imageSize, setImageSize] = useState(null);
-  const [hoverDist, setHoverDist] = useState(0);
-  const [hovered, setHovered] = useState(false);
-  const size = useWindowSize();
-
-  useEffect(() => {
-    if (imageHolderRef.current) {
-      const width = imageHolderRef.current.offsetWidth;
-      const height = imageHolderRef.current.offsetHeight;
-      setImageSize(Math.min(width, height));
-      setHoverDist(Math.abs(width - height));
-      if (width > height) {
-        setLandscapeTile(true);
-      } else {
-        setLandscapeTile(false);
-      }
-    }
-  }, [size]);
 
   const tileClasses = classNames({
     open: open,
     even: even,
-    hovered: hovered,
   })
 
   return (
     <Holder
-      className={tileClasses}
-      hoverDist={hoverDist}>
-      <ImageHolder
-        ref={imageHolderRef}
-        imageSize={imageSize}
-        className={landscapeTile ? 'landscape' : 'portrait'}>
+      className={tileClasses}>
+      <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
-          <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData}/>
-          <Hover
-            landscapeTile={landscapeTile}
-            hoverDist={hoverDist}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}/>
+          <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData} />
         </button>
       </ImageHolder>
-      <TextHolder className={tileClasses} >
+      <TextHolder className={tileClasses}>
         <p className="title">
-          <button
-            onClick={() => toggleProjectHandler(true)}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}>{title}</button>
+          <button onClick={() => toggleProjectHandler(true)}>{title}</button>
         </p>
         {open && <p className="info">
           <button onClick={() => toggleInfoHandler()}>
