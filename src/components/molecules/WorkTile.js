@@ -6,7 +6,6 @@ import useWindowSize from "../../hooks/useWindowSize";
 import {GatsbyImage} from "gatsby-plugin-image";
 
 const Holder = styled.div`
-  scroll-snap-align: start;
   width: 100%;
   padding: 15px 15px 0 15px;
   border-bottom: 1px solid;
@@ -17,10 +16,6 @@ const Holder = styled.div`
     &.even {
       padding: 24px 24px 0 12px;
     }
-  }
-  
-  &.open {
-    scroll-snap-align: none;
   }
 
   button {
