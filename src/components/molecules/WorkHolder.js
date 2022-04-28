@@ -14,7 +14,7 @@ function WorkHolder(props) {
   const [openContent, setOpenContent] = useState(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const {title, tile_image, info, body} = props.node.data;
+  const {title, tile_image, info, body, excerpt} = props.node.data;
   const itemUid = convertToSlug(title.text) + '-' + uuidv4();
   const size = useWindowSize();
   const setProjectIsOpen = useStore(state => state.setProjectIsOpen)
@@ -41,6 +41,7 @@ function WorkHolder(props) {
       <Element name={itemUid}>
         <WorkTile
           title={title.text}
+          excerpt={excerpt}
           image={tile_image}
           open={openContent}
           infoOpen={openInfo}

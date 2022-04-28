@@ -84,6 +84,9 @@ export const homePageQuery = graphql`
                                     title {
                                         text
                                     }
+                                    excerpt {
+                                        text
+                                    }
                                     body {
                                         ... on PrismicWorkDataBodyStandardSlide {
                                             id

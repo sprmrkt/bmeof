@@ -181,7 +181,7 @@ const TextHolder = styled.div`
   }
 `;
 
-const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image}) => {
+const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image, excerpt}) => {
 
   const tileClasses = classNames({
     open: open,
@@ -194,7 +194,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
       <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
           <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData} />
-          <Excerpt><div className="inner p-large"><p>Some intro text blah blah blah.</p></div></Excerpt>
+          <Excerpt><div className="inner p-large"><p>{excerpt.text || 'Add an excerpt in the CMS'}</p></div></Excerpt>
         </button>
       </ImageHolder>
       <TextHolder className={tileClasses}>
@@ -219,13 +219,13 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
 };
 
 WorkTile.propTypes = {
-  work: PropTypes.object,
   toggleProjectHandler: PropTypes.func.isRequired,
   toggleInfoHandler: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
   infoOpen: PropTypes.bool.isRequired,
   even: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
+  excerpt: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
 };
 
