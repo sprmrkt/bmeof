@@ -17,10 +17,11 @@ const Holder = styled.div`
     */
     scroll-snap-type: none;
   }
-  @media( ${props => props.theme.breakpoints.md} ) {
+  @media ( ${props => props.theme.breakpoints.md} ) {
     scroll-snap-type: y mandatory;
   }
-  .close-copyright{ padding-bottom: 0; }
+
+  .close-copyright { padding-bottom: 0; }
 
   > :first-child { margin-top: 0; }
 
@@ -37,20 +38,24 @@ const Button = styled.button.attrs(props => ({
   left: 0;
   bottom: 0;
   display: none;
-  @media( ${props => props.theme.breakpoints.md} ) {
+  @media ( ${props => props.theme.breakpoints.md} ) {
     display: block;
   }
+
   .mouse-text {
     opacity: 0;
   }
+
   &:hover {
     .mouse-text {
       opacity: 1;
     }
   }
+
   &.next {
     left: 75%;
   }
+
   &:disabled {
     display: none;
   }
@@ -66,7 +71,7 @@ const MouseText = styled.div.attrs(props => ({
   left: 0;
   color: #ffff00;
   pointer-events: none;
-  transition: transform 100ms ease-out;
+  transition: transform 100ms ease-out, opacity 10ms 100ms linear;
   text-transform: uppercase;
   font-size: 40px;
 `;
@@ -106,14 +111,14 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
   }
 
   const handlePrev = (current) => {
-    if( current === 0 ) {
+    if (current === 0) {
       setCurrentSlide(slides.length - 1)
     } else {
       setCurrentSlide(current - 1)
     }
   }
   const handleNext = (current) => {
-    if( current === slides.length - 1 ) {
+    if (current === slides.length - 1) {
       setCurrentSlide(0)
     } else {
       setCurrentSlide(current + 1)
@@ -125,23 +130,25 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
       <Inner id={`${itemUid}-gallery-inner`}>
         {slides.map((slide, i) =>
           <SlideHolder key={i} id={`${itemUid}-gallery-image-${i}`}>
-            {slide.slice_type === 'standard_slide' && <WorkSlideStandard slide={slide}/>}
+            {slide.slice_type === 'standard_slide' && <WorkSlideStandard slide={slide} />}
           </SlideHolder>
         )}
       </Inner>
       <Button
         ref={prevRef}
         className="prev"
-        onClick={() => handlePrev(currentSlide)}>
+        onClick={() => handlePrev(currentSlide)}
+        disabled={slides.length <= 1}>
         <MouseText x={prevMouseHovered.elX} y={prevMouseHovered.elY} className="mouse-text">Prev</MouseText>
       </Button>
       <Button
         ref={nextRef}
         className="next"
-        onClick={() => handleNext(currentSlide)}>
+        onClick={() => handleNext(currentSlide)}
+        disabled={slides.length <= 1}>
         <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
       </Button>
-      <CloseButton closeHandler={handleClose} border={false}/>
+      <CloseButton closeHandler={handleClose} border={false} />
     </Holder>
   )
 }

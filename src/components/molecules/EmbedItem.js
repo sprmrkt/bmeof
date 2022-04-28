@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import { ReactComponent as PlayButton } from '../../assets/svg/play.inline.svg';
+import {useMouseHovered} from "react-use";
 
 const timeout = 500;
 
@@ -26,8 +27,18 @@ const Holder = styled.div`
   }
   .open-overlay {
     width: 100%;
+    position: relative;
     @media( ${props => props.theme.breakpoints.md} ) {
       width: auto;
+    }
+    .mouse-text {
+      opacity: 0;
+    }
+
+    &:hover {
+      .mouse-text {
+        opacity: 1;
+      }
     }
   }
 `;
@@ -120,12 +131,31 @@ const OverlayHolder = styled.div`
   }
 `;
 
+const MouseText = styled.div.attrs(props => ({
+  style: {
+    transform: `translate( ${props.x}px, ${props.y - 20}px)`,
+  },
+}))`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  color: #ffff00;
+  pointer-events: none;
+  transition: transform 100ms ease-out, opacity 10ms 100ms linear;
+  text-transform: uppercase;
+  font-size: 40px;
+`;
+
 function EmbedItem({embed, canPlay, poster}) {
   const [overlayOpen, setOverlayOpen] = useState(false);
+  const ref = useRef(null);
+  const mouseHovered = useMouseHovered(ref, {bound: false, whenHovered: true});
 
   if (canPlay) return (
     <Holder>
-      <button className="open-overlay" onClick={() => setOverlayOpen(true)}>
+      <button ref={ref} className="open-overlay" onClick={() => setOverlayOpen(true)}>
+        <MouseText x={mouseHovered.elX} y={mouseHovered.elY} className="mouse-text">Play</MouseText>
         <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
         <PlayButton/>
       </button>
