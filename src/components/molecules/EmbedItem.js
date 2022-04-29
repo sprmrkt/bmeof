@@ -155,7 +155,6 @@ function EmbedItem({embed, canPlay, poster}) {
   const html = embed.html
   const reg = /src\s*=\s*"(.+?)"/
   const newHtml = html.replace(reg, 'src="$1&autoplay=1"');
-  console.log(newHtml);
 
   if (canPlay) return (
     <Holder>
