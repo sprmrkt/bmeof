@@ -28,7 +28,7 @@ function IndexPage({data}) {
     <Holder>
       <Seo title="Home" />
       <h1>
-        <span>
+        <span className="large-text-wrapper">
         Bear<br />
         Meets<br />
         Eagle<br />

@@ -38,7 +38,7 @@ function LoopingScroll() {
       <div className="inner">
         <Header/>
         <h1>
-        <span>
+        <span className="large-text-wrapper">
         Bear<br />
         Meets<br />
         Eagle<br />

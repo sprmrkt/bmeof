@@ -20,7 +20,7 @@ function Post({post}) {
   const {title, external_link} = post.data;
   if (external_link.url) return (
     <ExternalLink className="h1"><a href={external_link.url} target="_blank"
-                                    rel="noopener noreferrer"><span>{title.text}</span></a></ExternalLink>
+                                    rel="noopener noreferrer"><span className="large-text-wrapper">{title.text}</span></a></ExternalLink>
   )
   return (
     <Accordion

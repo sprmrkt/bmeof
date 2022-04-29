@@ -8,6 +8,7 @@ import LockScroll from "./LockScroll";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
+import {largeTypeKerning} from "../../utils/helpers";
 
 const scrollTime = 500;
 const timeout = 1000;
@@ -24,7 +25,7 @@ const Button = styled.button`
   text-align: left;
   padding-left: 12px;
   transition: color 0.5s linear;
-  span {
+  .large-text-wrapper {
     display: inline-block;
     transition: transform 0.25s linear;
   }
@@ -34,23 +35,23 @@ const Button = styled.button`
     }
   }
   &.is-open {
-    span {
+    .large-text-wrapper {
       transform: translateY(-8px);
     }
     @media( ${props => props.theme.breakpoints.md} ) {
-      span {
+      .large-text-wrapper {
         transform: translateY(-0.04em);
       }
     }
   }
   @supports (-moz-appearance:none) {
-    span {
+    .large-text-wrapper {
       display: block;
       transform: translateY(0.1em);
     }
     &.is-open {
       @media( ${props => props.theme.breakpoints.md} ) {
-        span {
+        .large-text-wrapper {
           transform: translateY(0.06em);
         }
       }
@@ -171,7 +172,7 @@ function Accordion({button, children, id}) {
 
   return (
     <>
-      <Button className={buttonClasses} onClick={() => setOpen(!open)}><span>{button}</span></Button>
+      <Button className={buttonClasses} onClick={() => setOpen(!open)}><span className="large-text-wrapper">{button}</span></Button>
       <Element name={uid}/>
       <CSSTransition
         mountOnEnter

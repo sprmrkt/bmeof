@@ -23,12 +23,6 @@ const GlobalStyle = createGlobalStyle`
     text-transform: uppercase;
     letter-spacing: -0.025em;
     margin: 0;
-    @supports (-moz-appearance:none) {
-      span {
-        display: block;
-        transform: translateY(0.1em);
-      }
-    }
   }
 
   p, .p,
@@ -49,7 +43,44 @@ const GlobalStyle = createGlobalStyle`
     a:hover { text-decoration: none; }
   }
 
-  h1, .h1 { font-size: 33.5vw; }
+  h1, .h1 {
+    font-size: 33.5vw;
+    font-kerning: normal;
+    @supports (-moz-appearance:none) {
+      .large-text-wrapper {
+        display: block;
+        transform: translateY(0.1em);
+      }
+    }
+  }
+
+  .large-kerning {
+    .letter-g,
+    .letter-o {
+      transition: all 0.25s linear;
+      display: inline;
+
+      &:hover {
+        color: red;
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    .letter-g {
+      margin-left: -0.5%;
+      margin-right: -0.5%;
+    }
+
+    .letter-o {
+      margin-left: -0.5%;
+      margin-right: -0.5%;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
 
   h2, .h2,
   h3, .h3,
