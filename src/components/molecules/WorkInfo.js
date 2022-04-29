@@ -20,6 +20,7 @@ const Holder = styled.div`
   p {
     margin-top: 0;
     padding-top: 15px;
+    font-weight: 100;
     @media ( ${props => props.theme.breakpoints.sm} ) {
       padding-top: 24px;
       width: 50%;

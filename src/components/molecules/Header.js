@@ -20,7 +20,6 @@ const Holder = styled.header`
     }
   }
   p {
-    text-transform: uppercase;
     font-size: 12px;
     line-height: 12px;
     @media( ${props => props.theme.breakpoints.md} ) {

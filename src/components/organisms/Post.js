@@ -7,6 +7,7 @@ import PostHolder from "./PostHolder";
 const ExternalLink = styled.p`
   text-decoration: 0;
   transition: color 0.5s linear;
+  font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   &:hover {
     @media ( ${props => props.theme.breakpoints.md} ) {

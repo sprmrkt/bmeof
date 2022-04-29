@@ -52,7 +52,6 @@ const Copyright = styled.div`
     padding: 0 24px 48px;
   }
   p {
-    text-transform: uppercase;
     font-size: 12px;
     line-height: 12px;
     @media( ${props => props.theme.breakpoints.md} ) {

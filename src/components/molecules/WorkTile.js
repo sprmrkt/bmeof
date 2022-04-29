@@ -147,14 +147,12 @@ const TextHolder = styled.div`
 
   p {
     margin: 0;
-    text-transform: uppercase;
 
     button {
       line-height: 48px;
       width: 100%;
       text-align: left;
       display: inline-block;
-      text-transform: uppercase;
     }
   }
 
@@ -203,7 +201,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
         </p>
         {open && <p className="info">
           <button onClick={() => toggleInfoHandler()}>
-            {!infoOpen && <>Info <span>+</span></>}
+            {!infoOpen && <>Project Overview <span>+</span></>}
             {infoOpen && <>Close</>}
           </button>
         </p>}

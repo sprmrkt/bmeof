@@ -34,7 +34,8 @@ const GlobalStyle = createGlobalStyle`
   p, .p,
   ol, ul, li,
   code, kbd, pre, samp {
-    line-height: 1;
+    font-family: 'Gotham', "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 16px;
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -59,15 +60,16 @@ const GlobalStyle = createGlobalStyle`
   .p, p, li {
     font-size: 15px;
   }
-  
+
   .p-large p, p.large {
-      font-size: 24px;
-      line-height: 22px;
-      margin-bottom: 0.75em;
-      @media ( ${props => props.theme.breakpoints.md} ) {
-          font-size: 72px;
-          line-height: 66px;
-      }
+    font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 24px;
+    line-height: 22px;
+    margin-bottom: 0.75em;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      font-size: 72px;
+      line-height: 66px;
+    }
   }
 
   li {
@@ -136,15 +138,16 @@ const GlobalStyle = createGlobalStyle`
     padding-left: 24px;
   }
 
-  a { 
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.5s linear;
-      &:hover {
-          @media ( ${props => props.theme.breakpoints.md} ) {
-              color: rgb(70, 70, 70);
-          }
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.5s linear;
+
+    &:hover {
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        color: rgb(70, 70, 70);
       }
+    }
   }
 
   sup, sub {

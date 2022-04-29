@@ -30,7 +30,6 @@ const Grid = styled.div`
       grid-column: 1/2;
     }
     p {
-      text-transform: uppercase;
       margin-top: 24px;
       margin-bottom: 0;
     }
