@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import PrismicRichText from "../atoms/PrismicRichText";
 import PostGallery from "./PostGallery";
+import MediaItem from "./MediaItem";
 
 const Holder = styled.div`
   height: calc(100vh - 48px);
@@ -11,6 +12,10 @@ const Holder = styled.div`
 
   .post-gallery-holder {
     height: 100%;
+    visibility: hidden;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      visibility: visible;
+    }
   }
 `;
 const TextHolder = styled.div`
@@ -28,6 +33,7 @@ const TextHolder = styled.div`
     width: 50%;
     padding: 24px 24px 12px 24px;
   }
+
   > div:last-child {
     justify-self: end;
     text-align: right;
@@ -38,10 +44,27 @@ const TextHolder = styled.div`
     margin: 0;
     font-size: 12px;
     line-height: 12px;
-    @media( ${props => props.theme.breakpoints.md} ) {
+    @media ( ${props => props.theme.breakpoints.md} ) {
       font-size: initial !important;
       line-height: initial !important;
     }
+  }
+`;
+
+const MobileImage = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  position: relative;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    display: none;
+  }
+  .gatsby-image-wrapper {
+    max-width: calc(100vw - 30px);
+  }
+  video {
+    width: 100%;
+    height: auto;
   }
 `;
 
@@ -59,6 +82,9 @@ function ProductTile({product}) {
           <p><a href={link.url} target="_blank" rel="noopener noreferrer">Buy now</a></p>
         </div>
       </TextHolder>
+      <MobileImage>
+        <MediaItem media={gallery[0]} height="100vh - 48px - 30px" />
+      </MobileImage>
       <PostGallery slides={gallery} title={title} />
     </Holder>
   )
