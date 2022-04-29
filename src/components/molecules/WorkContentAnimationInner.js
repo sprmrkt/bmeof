@@ -46,9 +46,9 @@ const Content = styled.div`
   }
 `;
 
-function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
+function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileHeight}) {
   const size = useWindowSize();
-  const offsetHeight = size.width < 768 ? size.width - 15 : size.height - 96;
+  const offsetHeight = size.width < 768 ? tileHeight - 15 : tileHeight - 48;
 
   useEffect(() => {
     if (open) {
@@ -93,6 +93,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid}) {
 
 WorkContentAnimation.propTypes = {
   itemUid: PropTypes.string.isRequired,
+  tileHeight: PropTypes.number,
   parent: PropTypes.object.isRequired,
   parentUid: PropTypes.string.isRequired,
   open: PropTypes.bool,

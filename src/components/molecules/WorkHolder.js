@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import PropTypes from 'prop-types';
 import {v4 as uuidv4} from 'uuid';
 import WorkTile from "../molecules/WorkTile";
@@ -18,9 +18,11 @@ function WorkHolder(props) {
   const itemUid = convertToSlug(title.text) + '-' + uuidv4();
   const size = useWindowSize();
   const setProjectIsOpen = useStore(state => state.setProjectIsOpen)
+  const tileHolder = useRef(null)
+  const [tileHeight, setTileHeight] = useState(0)
 
   useEffect(() => {
-    if(openContent) {
+    if (openContent) {
       scroller.scrollTo(`${itemUid}-gallery-image-${currentSlide}`, {
         duration: 500,
         smooth: true,
@@ -31,6 +33,12 @@ function WorkHolder(props) {
     }
   }, [currentSlide, size.width, itemUid, openContent]);
 
+  useEffect(() => {
+    if (tileHolder.current) {
+      setTileHeight(tileHolder.current.clientHeight)
+    }
+  }, [size, setTileHeight, tileHolder]);
+
   const toggleHandler = (toggle) => {
     setOpenContent(toggle);
     setProjectIsOpen(toggle);
@@ -39,30 +47,32 @@ function WorkHolder(props) {
   return (
     <>
       <Element name={itemUid}>
-        <WorkTile
-          title={title.text}
-          excerpt={excerpt}
-          image={tile_image}
-          open={openContent}
-          infoOpen={openInfo}
-          even={props.even}
-          toggleProjectHandler={(toggle) => toggleHandler(toggle)}
-          toggleInfoHandler={() => setOpenInfo(!openInfo)} />
+        <div ref={tileHolder}>
+          <WorkTile
+            title={title.text}
+            excerpt={excerpt}
+            image={tile_image}
+            open={openContent}
+            infoOpen={openInfo}
+            even={props.even}
+            toggleProjectHandler={(toggle) => toggleHandler(toggle)}
+            toggleInfoHandler={() => setOpenInfo(!openInfo)} />
+        </div>
       </Element>
-      <WorkContentAnimation {...props} open={openContent} itemUid={itemUid}>
+      <WorkContentAnimation {...props} open={openContent} itemUid={itemUid} tileHeight={tileHeight}>
         <WorkInfo
           infoText={info}
           setCurrentSlide={(i) => setCurrentSlide(i)}
           open={openInfo}
           closeHandler={() => setOpenInfo(false)}
-          slides={body}/>
+          slides={body} />
         <WorkGallery
           itemUid={itemUid}
           slides={body}
           currentSlide={currentSlide}
           setCurrentSlide={(i) => setCurrentSlide(i)}
           closeHandler={(toggle) => toggleHandler(toggle)}
-          closeParentHandler={() => props.closeHandler()}/>
+          closeParentHandler={() => props.closeHandler()} />
       </WorkContentAnimation>
     </>
   )
