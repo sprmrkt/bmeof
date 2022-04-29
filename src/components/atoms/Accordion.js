@@ -34,6 +34,9 @@ const Button = styled.button`
     }
   }
   &.is-open {
+    span {
+      transform: translateY(-8px);
+    }
     @media( ${props => props.theme.breakpoints.md} ) {
       span {
         transform: translateY(-0.04em);
