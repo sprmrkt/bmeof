@@ -10,15 +10,16 @@ const Holder = styled.div`
   position: relative;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  @supports (-moz-appearance: none) {
-    /*
-      Disable in FF due to https://bugzilla.mozilla.org/show_bug.cgi?id=1744289
-      using @supports https://stackoverflow.com/a/32455002
-    */
-    scroll-snap-type: none;
-  }
+
   @media ( ${props => props.theme.breakpoints.md} ) {
     scroll-snap-type: y mandatory;
+    @supports (-moz-appearance: none) {
+      /*
+        Disable in FF due to https://bugzilla.mozilla.org/show_bug.cgi?id=1744289
+        using @supports https://stackoverflow.com/a/32455002
+      */
+      scroll-snap-type: none;
+    }
   }
 
   .close-copyright { padding-bottom: 0; }

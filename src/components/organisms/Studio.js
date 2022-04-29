@@ -49,6 +49,7 @@ const Grid = styled.div`
   }
   
   .gatsby-image-wrapper {
+    mix-blend-mode: multiply;
     @media ( ${props => props.theme.breakpoints.md} ) {
       grid-row: 2/3;
       grid-column: 2/3;

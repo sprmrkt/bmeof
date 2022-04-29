@@ -18,7 +18,7 @@ const Holder = styled.div`
   }
 
   p {
-    margin-top: 0;
+    margin: 0;
     padding-top: 15px;
     font-weight: 100;
     @media ( ${props => props.theme.breakpoints.sm} ) {
@@ -67,6 +67,9 @@ const Images = styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
+  }
+  svg {
+    width: 50px;
   }
 `;
 

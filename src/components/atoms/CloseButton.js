@@ -55,8 +55,8 @@ const Copyright = styled.div`
     font-size: 12px;
     line-height: 12px;
     @media( ${props => props.theme.breakpoints.md} ) {
-      font-size: initial !important;
-      line-height: initial !important;
+      font-size: 15px;
+      line-height: 16px;
     }
     br {
       display: none;
