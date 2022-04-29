@@ -152,6 +152,11 @@ function EmbedItem({embed, canPlay, poster}) {
   const ref = useRef(null);
   const mouseHovered = useMouseHovered(ref, {bound: false, whenHovered: true});
 
+  const html = embed.html
+  const reg = /src\s*=\s*"(.+?)"/
+  const newHtml = html.replace(reg, 'src="$1&autoplay=1"');
+  console.log(newHtml);
+
   if (canPlay) return (
     <Holder>
       <button ref={ref} className="open-overlay" onClick={() => setOverlayOpen(true)}>
@@ -169,7 +174,7 @@ function EmbedItem({embed, canPlay, poster}) {
         classNames="overlay-holder"
       >
         <OverlayHolder>
-          <div dangerouslySetInnerHTML={{__html: embed.html}} />
+          <div dangerouslySetInnerHTML={{__html: newHtml}} />
           <button className="close" onClick={() => setOverlayOpen(false)}>Exit full screen</button>
         </OverlayHolder>
       </CSSTransition>
