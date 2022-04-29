@@ -3,12 +3,13 @@ import styled from "styled-components";
 import logo from "../../assets/img/bear.png";
 
 const Holder = styled.header`
-  padding: 24px 24px 0 24px;
+  padding: 6px 12px 0 12px;
   display: grid;
   grid-gap: 24px;
   grid-template-columns: 1fr 3fr;
   align-items: center;
   @media( ${props => props.theme.breakpoints.md} ) {
+    padding: 24px 24px 0 24px;
     grid-template-columns: 1fr 1fr;
   }
   img {
