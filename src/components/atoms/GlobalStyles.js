@@ -63,8 +63,8 @@ const GlobalStyle = createGlobalStyle`
 
   .p-large p, p.large {
     font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 24px;
-    line-height: 22px;
+    font-size: 30px;
+    line-height: 27px;
     margin-bottom: 0.75em;
     @media ( ${props => props.theme.breakpoints.md} ) {
       font-size: 72px;
