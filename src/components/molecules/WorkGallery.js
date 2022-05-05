@@ -2,24 +2,18 @@ import React, {useRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {useMouseHovered} from "react-use";
-import WorkSlideStandard from "./WorkSlideStandard";
+import WorkSlide from "./WorkSlide";
 import CloseButton from "../atoms/CloseButton";
+import {useSwipeable} from "react-swipeable";
 
 const Holder = styled.div`
   height: 100%;
   position: relative;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    scroll-snap-type: y mandatory;
-    @supports (-moz-appearance: none) {
-      /*
-        Disable in FF due to https://bugzilla.mozilla.org/show_bug.cgi?id=1744289
-        using @supports https://stackoverflow.com/a/32455002
-      */
-      scroll-snap-type: none;
-    }
+  scroll-snap-type: y mandatory;
+  @supports (-moz-appearance: none) {
+    scroll-snap-type: none; // Disable in Firefox
   }
 
   .close-copyright { padding-bottom: 0; }
@@ -77,25 +71,27 @@ const MouseText = styled.div.attrs(props => ({
   font-size: 40px;
 `;
 
-const Inner = styled.div`
+const Gallery = styled.div`
   width: 100%;
-  padding: 0 15px 15px 15px;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+  padding: 15px;
   position: relative;
   border-bottom: 1px solid;
+  scroll-snap-align: start;
   @media ( ${props => props.theme.breakpoints.md} ) {
-    scroll-snap-align: start;
-    padding: 24px 24px 24px 0;
-    height: calc(100vh - 48px);
-    overflow: hidden;
-    display: flex;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 24px;
   }
 `;
 
-const SlideHolder = styled.div`
-  padding-top: 15px;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    padding: 0 0 0 24px;
-  }
+const GalleryInner = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: 66.6667%;
+  position: relative;
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
@@ -126,29 +122,35 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
     }
   }
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => handleNext(currentSlide),
+    onSwipedRight: () => handlePrev(currentSlide),
+  });
+
   return (
     <Holder id={`${itemUid}-gallery-holder`}>
-      <Inner id={`${itemUid}-gallery-inner`}>
-        {slides.map((slide, i) =>
-          <SlideHolder key={i} id={`${itemUid}-gallery-image-${i}`}>
-            {slide.slice_type === 'standard_slide' && <WorkSlideStandard slide={slide} />}
-          </SlideHolder>
-        )}
-      </Inner>
-      <Button
-        ref={prevRef}
-        className="prev"
-        onClick={() => handlePrev(currentSlide)}
-        disabled={slides.length <= 1}>
-        <MouseText x={prevMouseHovered.elX} y={prevMouseHovered.elY} className="mouse-text">Prev</MouseText>
-      </Button>
-      <Button
-        ref={nextRef}
-        className="next"
-        onClick={() => handleNext(currentSlide)}
-        disabled={slides.length <= 1}>
-        <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
-      </Button>
+      <Gallery id={`${itemUid}-gallery-inner`} {...swipeHandlers}>
+        <GalleryInner>
+          {slides.map((slide, i) =>
+            slide.slice_type === 'standard_slide' &&
+            <WorkSlide key={i} slide={slide} active={i === currentSlide} />
+          )}
+          <Button
+            ref={prevRef}
+            className="prev"
+            onClick={() => handlePrev(currentSlide)}
+            disabled={slides.length <= 1}>
+            <MouseText x={prevMouseHovered.elX} y={prevMouseHovered.elY} className="mouse-text">Prev</MouseText>
+          </Button>
+          <Button
+            ref={nextRef}
+            className="next"
+            onClick={() => handleNext(currentSlide)}
+            disabled={slides.length <= 1}>
+            <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
+          </Button>
+        </GalleryInner>
+      </Gallery>
       <CloseButton closeHandler={handleClose} border={false} />
     </Holder>
   )

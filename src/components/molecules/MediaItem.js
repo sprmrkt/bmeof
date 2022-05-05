@@ -2,29 +2,50 @@ import React from 'react';
 import PropTypes from "prop-types";
 import {GatsbyImage} from "gatsby-plugin-image";
 import EmbedItem from "./EmbedItem";
+import styled from "styled-components";
 
-function MediaItem({media, height, embedCanPlay}) {
+const Holder = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  .gatsby-image-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+
+  video, img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+`
+
+function MediaItem({media, embedCanPlay}) {
 
   // This component tests if the media prop has image, video or embed and shows the correct content based on that
 
   if (media.image.gatsbyImageData) return (
-    <GatsbyImage
-      alt="gatsby"
-      layout="constrained"
-      style={{
-        width: `calc(${media.image.dimensions.width / media.image.dimensions.height} * (${height}))`,
-        height: `calc(${height})`,
-      }}
-      image={media.image.gatsbyImageData} />
+    <Holder>
+      <GatsbyImage
+        alt={media.image.alt || ""}
+        image={media.image.gatsbyImageData} />
+    </Holder>
   )
 
-  if (media.embed) return <EmbedItem embed={media.embed} poster={media.embed_poster} canPlay={embedCanPlay}/>
+  if (media.embed) return <Holder><EmbedItem embed={media.embed} poster={media.embed_poster}
+                                             canPlay={embedCanPlay} /></Holder>
 
   if (media.video.url) return (
-    <video autoPlay muted playsInline loop>
-      <source src={media.video.url} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <Holder>
+      <video autoPlay muted playsInline loop>
+        <source src={media.video.url} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </Holder>
   );
 
   return null;
@@ -32,7 +53,6 @@ function MediaItem({media, height, embedCanPlay}) {
 
 MediaItem.propTypes = {
   media: PropTypes.object.isRequired,
-  height: PropTypes.string,
   embedCanPlay: PropTypes.bool,
 };
 

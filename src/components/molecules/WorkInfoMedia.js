@@ -5,8 +5,10 @@ import {useMouseHovered} from "react-use";
 import MediaItem from "./MediaItem";
 
 const Holder = styled.div`
-  margin: 24px 24px 0 0;
   position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 66.6667%;
 
   .mouse-text {
     display: none;
@@ -16,10 +18,6 @@ const Holder = styled.div`
     .mouse-text {
       display: block;
     }
-  }
-  video, img {
-    height: 20vh;
-    width: auto;
   }
 `;
 
@@ -50,7 +48,7 @@ function WorkInfoMedia({media, handleClick, totalImages, i}) {
   return (
     <Holder ref={ref}>
       <button onClick={() => handleClick()}>
-        <MediaItem media={media} height={'20vh'} embedCanPlay={false}/>
+        <MediaItem media={media} embedCanPlay={false}/>
       </button>
       <MouseText x={elX} y={elY} className="mouse-text">{i + 1}/{totalImages}</MouseText>
     </Holder>

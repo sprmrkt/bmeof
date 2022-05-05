@@ -22,18 +22,6 @@ function WorkHolder(props) {
   const [tileHeight, setTileHeight] = useState(0)
 
   useEffect(() => {
-    if (openContent) {
-      scroller.scrollTo(`${itemUid}-gallery-image-${currentSlide}`, {
-        duration: 500,
-        smooth: true,
-        containerId: `${itemUid}-gallery-${size.width >= 576 ? 'inner' : 'holder'}`,
-        horizontal: size.width >= 576,
-        ignoreCancelEvents: true
-      });
-    }
-  }, [currentSlide, size.width, itemUid, openContent]);
-
-  useEffect(() => {
     if (tileHolder.current) {
       setTileHeight(tileHolder.current.clientHeight)
     }

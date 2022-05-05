@@ -9,6 +9,8 @@ const timeout = 500;
 
 const Holder = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
   img {
     position: relative;
     z-index: 1;
@@ -27,10 +29,8 @@ const Holder = styled.div`
   }
   .open-overlay {
     width: 100%;
+    height: 100%;
     position: relative;
-    @media( ${props => props.theme.breakpoints.md} ) {
-      width: auto;
-    }
     .mouse-text {
       opacity: 0;
     }

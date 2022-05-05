@@ -47,8 +47,7 @@ const Content = styled.div`
 `;
 
 function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileHeight}) {
-  const size = useWindowSize();
-  const offsetHeight = size.width < 768 ? tileHeight - 15 : tileHeight - 48;
+  const offsetHeight = tileHeight - 48;
 
   useEffect(() => {
     if (open) {

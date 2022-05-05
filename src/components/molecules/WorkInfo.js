@@ -62,12 +62,13 @@ const Holder = styled.div`
 
 const Images = styled.div`
   display: none;
-  @media( ${props => props.theme.breakpoints.sm} ) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-content: flex-start;
+  @media ( ${props => props.theme.breakpoints.sm} ) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 24px;
+    padding: 24px 0;
   }
+
   svg {
     width: 50px;
   }
@@ -81,23 +82,6 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
     }, timeout);
     closeHandler();
   }
-
-  // // Function for pulling individual media from standard and grid slides.
-  // const pullMediaFromSlides = (slides) => {
-  //   let media = [];
-  //   slides.forEach((slide, i) => {
-  //     if( slide.slice_type === 'standard_slide' ) {
-  //       media.push([slide.primary, i]);
-  //     } else {
-  //       slide.items.forEach(item => {
-  //         media.push([item, i]);
-  //       })
-  //     }
-  //   })
-  //   return media;
-  // }
-
-  // const mediaFromSlides = pullMediaFromSlides(slides);
 
   return (
     <CSSTransition
