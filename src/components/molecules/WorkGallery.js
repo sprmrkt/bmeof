@@ -92,6 +92,14 @@ const GalleryInner = styled.div`
   height: 0;
   padding-bottom: 66.6667%;
   position: relative;
+  .inner-for-hiding-overflow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+  }
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
@@ -131,10 +139,12 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
     <Holder id={`${itemUid}-gallery-holder`}>
       <Gallery id={`${itemUid}-gallery-inner`} {...swipeHandlers}>
         <GalleryInner>
-          {slides.map((slide, i) =>
-            slide.slice_type === 'standard_slide' &&
-            <WorkSlide key={i} slide={slide} active={i === currentSlide} />
-          )}
+          <div className="inner-for-hiding-overflow">
+            {slides.map((slide, i) =>
+              slide.slice_type === 'standard_slide' &&
+              <WorkSlide key={i} slide={slide} active={i === currentSlide} />
+            )}
+          </div>
           <Button
             ref={prevRef}
             className="prev"
