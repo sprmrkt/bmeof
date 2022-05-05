@@ -1,10 +1,11 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {useMouseHovered} from "react-use";
-import WorkSlide from "./WorkSlide";
+import WorkSlides from "./WorkSlides";
 import CloseButton from "../atoms/CloseButton";
 import {useSwipeable} from "react-swipeable";
+import {TransitionGroup} from "react-transition-group";
 
 const Holder = styled.div`
   height: 100%;
@@ -92,6 +93,7 @@ const GalleryInner = styled.div`
   height: 0;
   padding-bottom: 66.6667%;
   position: relative;
+
   .inner-for-hiding-overflow {
     position: absolute;
     top: 0;
@@ -107,6 +109,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
   const prevMouseHovered = useMouseHovered(prevRef, {bound: false, whenHovered: true});
   const nextRef = useRef(null);
   const nextMouseHovered = useMouseHovered(nextRef, {bound: false, whenHovered: true});
+  const [isNext, setIsNext] = useState(true);
 
   const handleClose = () => {
     setTimeout(() => {
@@ -116,6 +119,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
   }
 
   const handlePrev = (current) => {
+    setIsNext(false)
     if (current === 0) {
       setCurrentSlide(slides.length - 1)
     } else {
@@ -123,6 +127,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
     }
   }
   const handleNext = (current) => {
+    setIsNext(true)
     if (current === slides.length - 1) {
       setCurrentSlide(0)
     } else {
@@ -140,10 +145,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
       <Gallery id={`${itemUid}-gallery-inner`} {...swipeHandlers}>
         <GalleryInner>
           <div className="inner-for-hiding-overflow">
-            {slides.map((slide, i) =>
-              slide.slice_type === 'standard_slide' &&
-              <WorkSlide key={i} slide={slide} active={i === currentSlide} />
-            )}
+            <WorkSlides slides={slides} currentSlide={currentSlide} isNext={isNext}/>
           </div>
           <Button
             ref={prevRef}
