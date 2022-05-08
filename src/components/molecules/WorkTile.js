@@ -37,35 +37,11 @@ const Excerpt = styled.div`
   height: 0;
   padding-bottom: 100%;
   text-align: left;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
   p {
     white-space: normal;
     margin: 0 0 12px 12px;
-  }
-  &:before,
-  &:after {
-    content: '';
-    display: block;
-    position: absolute;
-    background-color: ${props => props.theme.colors.black};
-    transition: transform 0.75s ease-out;
-  }
-  &:before {
-    width: 1px;
-    height: 100%;
-    top: 0;
-    right: 0;
-    transform: scaleY(0);
-    transform-origin: bottom right;
-    transition-delay: 0.75s;
-    transition-duration: 1s;
-  }
-  &:after {
-    height: 1px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: bottom left;
   }
   .inner {
     position: absolute;
@@ -81,12 +57,6 @@ const Excerpt = styled.div`
 const ImageHolder = styled.div`
   &:hover {
     ${Excerpt} {
-      &:before {
-        transform: scaleY(1);
-      }
-      &:after {
-        transform: scaleX(1);
-      }
       .inner {
         opacity: 1;
       }

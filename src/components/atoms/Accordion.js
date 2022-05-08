@@ -8,7 +8,6 @@ import LockScroll from "./LockScroll";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
-import {largeTypeKerning} from "../../utils/helpers";
 
 const scrollTime = 500;
 const timeout = 1000;
@@ -97,7 +96,7 @@ const Content = styled.div`
     }
 
     .border {
-      transform: scaleX(0);
+      opacity: 0;
     }
   }
 
@@ -111,8 +110,8 @@ const Content = styled.div`
     }
 
     .border {
-      transform: scaleX(1);
-      transition: transform ${timeout * 0.25}ms ${scrollTime}ms;
+      opacity: 1;
+      transition: opacity ${timeout * 0.25}ms ${scrollTime}ms;
     }
   }
 
@@ -122,7 +121,7 @@ const Content = styled.div`
     }
 
     .border {
-      transform: scaleX(1);
+      opacity: 1;
     }
   }
 
@@ -133,8 +132,8 @@ const Content = styled.div`
     }
 
     .border {
-      transform: scaleX(0);
-      transition: transform ${timeout * 0.25}ms ${timeout * 0.75}ms;
+      opacity: 0;
+      transition: opacity ${timeout * 0.25}ms ${timeout * 0.75}ms;
     }
   }
 `;
