@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import {GatsbyImage} from "gatsby-plugin-image";
+import MediaItem from "./MediaItem";
 
 const Holder = styled.div`
   width: 100%;
@@ -37,8 +38,6 @@ const Excerpt = styled.div`
   height: 0;
   padding-bottom: 100%;
   text-align: left;
-  border-right: 1px solid;
-  border-bottom: 1px solid;
   p {
     white-space: normal;
     margin: 0 24px 24px 0;
@@ -51,6 +50,8 @@ const Excerpt = styled.div`
     height: 100%;
     opacity: 0;
     transition: opacity 0.25s ease-in-out;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
   }
 `;
 
@@ -61,22 +62,24 @@ const ImageHolder = styled.div`
         opacity: 1;
       }
     }
-    .gatsby-image-wrapper {
+    .media-holder {
       opacity: 0;
     }
   }
   button {
     width: 100%;
-    height: 100%;
+    height: 0;
+    padding-bottom: 100%;
     display: block;
     position: relative;
 
-    .gatsby-image-wrapper {
-      position: relative;
+    .media-holder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       z-index: 2;
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%;
       transition: opacity 0.1s ease-in-out;
     }
   }
@@ -149,19 +152,22 @@ const TextHolder = styled.div`
   }
 `;
 
-const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image, excerpt}) => {
+const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image, video, excerpt}) => {
 
   const tileClasses = classNames({
     open: open,
     even: even,
   })
 
+
+
   return (
     <Holder
       className={tileClasses}>
       <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
-          <GatsbyImage alt={image.alt || title} image={image.gatsbyImageData} />
+          <div className="media-holder"><MediaItem media={{image: image, video: video}}/></div>
+          {/*<GatsbyImage alt={image.alt || title} image={image.gatsbyImageData} />*/}
           <Excerpt><div className="inner p-large"><p>{excerpt.text || 'Add an excerpt in the CMS'}</p></div></Excerpt>
         </button>
       </ImageHolder>
@@ -195,6 +201,7 @@ WorkTile.propTypes = {
   title: PropTypes.string.isRequired,
   excerpt: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
+  video: PropTypes.object.isRequired,
 };
 
 export default WorkTile;
