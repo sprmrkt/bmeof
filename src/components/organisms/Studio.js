@@ -30,29 +30,38 @@ const Grid = styled.div`
     grid-gap: 24px;
     padding: 24px;
   }
+  p {
+    margin: 0;
+  }
+`;
 
+const Address = styled.div`
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
   .contact {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      align-self: end;
-      grid-row: 2/3;
-      grid-column: 1/2;
-    }
-    p {
-      margin-top: 24px;
-      margin-bottom: 0;
+    display: none;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      display: block;
+      margin-top: auto;
     }
   }
-  
-  .address {
-    margin-bottom: auto;
-    p { margin-top: 0; }
-  }
-  
+`;
+
+const ImageHolder = styled.div`
+  margin-top: auto;
   .gatsby-image-wrapper {
     mix-blend-mode: multiply;
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      grid-row: 2/3;
-      grid-column: 2/3;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+  }
+  .contact {
+    margin-top: 15px;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      display: none;
     }
   }
 `;
@@ -80,11 +89,18 @@ function Studio(props) {
   return (
     <Holder>
       <Grid>
-        <div className="address p-large"><PrismicRichText render={address.richText}/></div>
-        <GatsbyImage alt={image.alt || 'Studio shot'} image={image.gatsbyImageData}/>
-        <div className="contact"><PrismicRichText render={contact.richText}/></div>
+        <Address>
+          <div className="p-large"><PrismicRichText render={address.richText} /></div>
+          <div className="contact"><PrismicRichText render={contact.richText} /></div>
+        </Address>
+
+        <ImageHolder>
+          <GatsbyImage alt={image.alt || 'Studio shot'} image={image.gatsbyImageData} />
+          <div className="contact"><PrismicRichText render={contact.richText} /></div>
+        </ImageHolder>
+
       </Grid>
-      <CloseButton closeHandler={props.closeHandler}/>
+      <CloseButton closeHandler={props.closeHandler} />
     </Holder>
   )
 }
