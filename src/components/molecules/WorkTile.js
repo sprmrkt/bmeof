@@ -41,7 +41,7 @@ const Excerpt = styled.div`
   border-bottom: 1px solid;
   p {
     white-space: normal;
-    margin: 0 0 12px 12px;
+    margin: 0 24px 24px 0;
   }
   .inner {
     position: absolute;
