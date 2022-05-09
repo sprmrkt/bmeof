@@ -98,6 +98,15 @@ const GalleryInner = styled.div`
     right: 0;
     overflow: hidden;
   }
+  .swipe-text {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    text-transform: uppercase;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      display: none;
+    }
+  }
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
@@ -143,6 +152,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
           <div className="inner-for-hiding-overflow">
             <WorkSlides slides={slides} currentSlide={currentSlide} isNext={isNext}/>
           </div>
+          {slides.length > 1 && <p className="swipe-text">&larr; &rarr;</p>}
           <Button
             ref={prevRef}
             className="prev"

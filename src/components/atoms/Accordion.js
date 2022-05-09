@@ -80,7 +80,7 @@ const Content = styled.div`
     left: 0;
     transition: opacity 0.25s;
     &.project-is-open {
-      opacity: 0;
+      background-color: ${props => props.theme.colors.white};
     }
 
     &:last-child {
