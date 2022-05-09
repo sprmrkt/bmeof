@@ -37,7 +37,7 @@ function LoopingScroll() {
     <Holder>
       <div className="inner">
         <Header/>
-        <h1>
+        <p className="h1">
         <span className="large-text-wrapper">
         Bear<br />
         Meets<br />
@@ -45,8 +45,15 @@ function LoopingScroll() {
         On<br />
         Fire<br />
         </span>
-        </h1>
+        </p>
         <div ref={elementRef} className="trigger" />
+        <p className="h1">
+        <span className="large-text-wrapper">
+        Think<br />
+        Make<br />
+        Studio<br />
+        </span>
+        </p>
       </div>
     </Holder>
   )
