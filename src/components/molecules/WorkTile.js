@@ -56,14 +56,16 @@ const Excerpt = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  &:hover {
-    ${Excerpt} {
-      .inner {
-        opacity: 1;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    &:hover {
+      ${Excerpt} {
+        .inner {
+          opacity: 1;
+        }
       }
-    }
-    .media-holder {
-      opacity: 0;
+      .media-holder {
+        opacity: 0;
+      }
     }
   }
   button {
