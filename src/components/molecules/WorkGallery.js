@@ -12,10 +12,6 @@ const Holder = styled.div`
   position: relative;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  scroll-snap-type: y mandatory;
-  @supports (-moz-appearance: none) {
-    scroll-snap-type: none; // Disable in Firefox
-  }
 
   .close-copyright { padding-bottom: 0; }
 

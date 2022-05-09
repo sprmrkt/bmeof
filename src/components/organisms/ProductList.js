@@ -8,14 +8,6 @@ const Holder = styled.div`
   height: 100%;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y proximity;
-    @supports (-moz-appearance: none) {
-        /*
-          Disable in FF due to https://bugzilla.mozilla.org/show_bug.cgi?id=1744289
-          using @supports https://stackoverflow.com/a/32455002
-        */
-        scroll-snap-type: none !important;
-    }
 `;
 
 function ProductList(props) {
