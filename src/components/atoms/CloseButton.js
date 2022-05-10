@@ -14,7 +14,7 @@ const Holder = styled.div`
   
   button {
     display: block;
-    padding: 15px 0;
+    padding: 12px 0;
     transition: color 0.5s linear;
     @media( ${props => props.theme.breakpoints.md} ) {
       padding: 12px 0 24px 0;
@@ -41,6 +41,8 @@ const Copyright = styled.div`
   p {
     font-size: 12px;
     line-height: 12px;
+    margin-bottom: 12px;
+    margin-top: 0;
     @media( ${props => props.theme.breakpoints.md} ) {
       font-size: 15px;
       line-height: 16px;
