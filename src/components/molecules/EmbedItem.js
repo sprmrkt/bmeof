@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import { ReactComponent as PlayButton } from '../../assets/svg/play.inline.svg';
 import {useMouseHovered} from "react-use";
+import {useStore} from "../../utils/store";
 
 const timeout = 500;
 
@@ -160,6 +161,7 @@ const MouseText = styled.div.attrs(props => ({
 `;
 
 function EmbedItem({embed, canPlay, poster}) {
+  const setEmbedIsOpen = useStore(state => state.setEmbedIsOpen)
   const [overlayOpen, setOverlayOpen] = useState(false);
   const ref = useRef(null);
   const mouseHovered = useMouseHovered(ref, {bound: false, whenHovered: true});
@@ -170,7 +172,10 @@ function EmbedItem({embed, canPlay, poster}) {
 
   if (canPlay) return (
     <Holder>
-      <button ref={ref} className="open-overlay" onClick={() => setOverlayOpen(true)}>
+      <button ref={ref} className="open-overlay" onClick={() => {
+        setOverlayOpen(true);
+        setEmbedIsOpen(true);
+      }}>
         <MouseText x={mouseHovered.elX} y={mouseHovered.elY} className="mouse-text">Play</MouseText>
         <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
         <PlayButton/>
@@ -185,7 +190,10 @@ function EmbedItem({embed, canPlay, poster}) {
         classNames="overlay-holder"
       >
         <OverlayHolder>
-          <button className="close" onClick={() => setOverlayOpen(false)}>
+          <button className="close" onClick={() => {
+            setOverlayOpen(false);
+            setEmbedIsOpen(false);
+          }}>
             <p className="exit-text">Exit full screen</p>
             <p className="cross">X</p>
           </button>

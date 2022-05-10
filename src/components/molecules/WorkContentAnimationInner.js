@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {scroller} from 'react-scroll/modules';
 import useWindowSize from "../../hooks/useWindowSize";
+import {useStore} from "../../utils/store";
 
 const timeout = 1000;
 
@@ -47,6 +48,7 @@ const Content = styled.div`
 `;
 
 function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileHeight}) {
+  const embedIsOpen = useStore(state => state.embedIsOpen)
   const offsetHeight = tileHeight - 48;
 
   useEffect(() => {
@@ -58,7 +60,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
       scroller.scrollTo(itemUid, {
         duration: timeout,
         smooth: true,
-        offset: offsetHeight,
+        offset: embedIsOpen ? offsetHeight + 48 : offsetHeight,
         containerId: 'work-content',
         ignoreCancelEvents: true
       });
@@ -77,9 +79,8 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
         delay: timeout,
         ignoreCancelEvents: true,
       });
-
     }
-  }, [open, parent, parentUid, offsetHeight, itemUid]);
+  }, [open, parent, parentUid, offsetHeight, itemUid, embedIsOpen]);
 
   return (
     <Content className="work-content">
