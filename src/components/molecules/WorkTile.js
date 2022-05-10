@@ -38,10 +38,12 @@ const Excerpt = styled.div`
   height: 0;
   padding-bottom: 100%;
   text-align: left;
+
   p {
     white-space: normal;
     margin: 0 24px 24px 0;
   }
+
   .inner {
     position: absolute;
     top: 0;
@@ -56,18 +58,20 @@ const Excerpt = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  @media( ${props => props.theme.breakpoints.md} ) {
+  @media ( ${props => props.theme.breakpoints.md} ) {
     &:hover {
       ${Excerpt} {
         .inner {
           opacity: 1;
         }
       }
+
       .media-holder {
         opacity: 0;
       }
     }
   }
+
   button {
     width: 100%;
     height: 0;
@@ -115,6 +119,13 @@ const TextHolder = styled.div`
   }
 
   .close {
+    &.close-info-secondary {
+      display: none;
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        display: block;
+      }
+    }
+
     button {
       text-align: right;
     }
@@ -136,6 +147,27 @@ const TextHolder = styled.div`
     transition: opacity 0.25s;
   }
 
+  .info {
+    .info-text {
+      display: none;
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        display: inline;
+      }
+    }
+
+    .close-info-text {
+      display: none;
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        display: inline;
+      }
+    }
+    .close-info-cross {
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        display: none;
+      }
+    }
+  }
+
   &.open {
     .title {
       grid-column: span 1;
@@ -146,11 +178,9 @@ const TextHolder = styled.div`
     }
   }
 
-  .close {
-    span {
-      transform: rotate(45deg);
-      display: inline-block;
-    }
+  .close-info-cross {
+    transform: rotate(45deg);
+    display: inline-block;
   }
 `;
 
@@ -162,15 +192,15 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
   })
 
 
-
   return (
     <Holder
       className={tileClasses}>
       <ImageHolder>
         <button onClick={() => toggleProjectHandler(true)}>
-          <div className="media-holder"><MediaItem media={{image: image, video: video}}/></div>
-          {/*<GatsbyImage alt={image.alt || title} image={image.gatsbyImageData} />*/}
-          <Excerpt><div className="inner p-large"><p>{excerpt.text || 'Add an excerpt in the CMS'}</p></div></Excerpt>
+          <div className="media-holder"><MediaItem media={{image: image, video: video}} /></div>
+          <Excerpt>
+            <div className="inner p-large"><p>{excerpt.text || 'Add an excerpt in the CMS'}</p></div>
+          </Excerpt>
         </button>
       </ImageHolder>
       <TextHolder className={tileClasses}>
@@ -179,15 +209,16 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
         </p>
         {open && <p className="info">
           <button onClick={() => toggleInfoHandler()}>
-            {!infoOpen && <>Project Overview <span>+</span></>}
-            {infoOpen && <>Close</>}
+            {!infoOpen && <><span className="info-text">Project Overview </span><span className="info-plus">+</span></>}
+            {infoOpen && <><span className="close-info-text">Close</span><span className="close-info-cross">+</span></>}
           </button>
         </p>}
         {open && !infoOpen && <p className="close">
           <button onClick={() => toggleProjectHandler(false)}>Back</button>
         </p>}
-        {open && infoOpen && <p className="close">
-          <button onClick={() => toggleInfoHandler()} title="Close info"><span>+</span></button>
+        {open && infoOpen && <p className="close close-info-secondary">
+          <button onClick={() => toggleInfoHandler()} title="Close info"><span className="close-info-cross">+</span>
+          </button>
         </p>}
       </TextHolder>
     </Holder>
