@@ -5,7 +5,6 @@ import {useMouseHovered} from "react-use";
 import WorkSlides from "./WorkSlides";
 import CloseButton from "../atoms/CloseButton";
 import {useSwipeable} from "react-swipeable";
-import {TransitionGroup} from "react-transition-group";
 
 const Holder = styled.div`
   height: 100%;
