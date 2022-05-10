@@ -21,7 +21,7 @@ const Holder = styled.div`
     }
   }
   @media ( ${props => props.theme.breakpoints.lg} ) {
-    min-height: calc(100vh - 48px);
+    min-height: calc(100vh - 48px + 1px);
   }
 
   button {

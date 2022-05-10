@@ -77,6 +77,7 @@ const Gallery = styled.div`
   border-bottom: 1px solid;
   scroll-snap-align: start;
   @media ( ${props => props.theme.breakpoints.md} ) {
+    height: calc(100vh - 48px + 1px);
     padding: 24px;
     display: grid;
     grid-template-columns: 3fr 1fr;
