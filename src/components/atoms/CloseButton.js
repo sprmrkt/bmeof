@@ -13,21 +13,11 @@ const Holder = styled.div`
   }
   
   button {
-    font-size: 33.5vw;
-    line-height: 0.75;
-    text-transform: uppercase;
-    letter-spacing: -0.025em;
     display: block;
-    padding-top: 15px;
+    padding: 15px 0;
     transition: color 0.5s linear;
     @media( ${props => props.theme.breakpoints.md} ) {
-      padding-top: 24px;
-    }
-    @supports (-moz-appearance:none) {
-      span {
-        display: block;
-        transform: translateY(10%);
-      }
+      padding: 12px 0 24px 0;
     }
 
     &:hover {
@@ -54,6 +44,8 @@ const Copyright = styled.div`
     @media( ${props => props.theme.breakpoints.md} ) {
       font-size: 15px;
       line-height: 16px;
+      margin-bottom: 24px;
+      margin-top: 0;
     }
     br {
       display: none;
@@ -69,7 +61,7 @@ function CloseButton({closeHandler, border}) {
   return (
     <>
       <Holder className={holderClasses}>
-        <button onClick={() => closeHandler()}><span>Close</span></button>
+        <button onClick={() => closeHandler()} className="h1"><span className="large-text-wrapper">Close</span></button>
       </Holder>
       <Copyright className="close-copyright">
         <p>&copy;</p>
