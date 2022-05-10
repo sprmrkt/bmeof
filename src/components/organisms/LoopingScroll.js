@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {useOnScreen} from "../../hooks/useOnScreen";
 import Header from "../molecules/Header";
+import useScrollTrigger from "../../hooks/useScrollTrigger";
 
 const Holder = styled.div`
   .inner {
@@ -10,6 +11,7 @@ const Holder = styled.div`
     height: 150vh;
     overflow: hidden;
   }
+
   .trigger {
     position: absolute;
     left: 0;
@@ -20,23 +22,24 @@ const Holder = styled.div`
 `;
 
 function LoopingScroll() {
-  const elementRef = useRef(null);
-  const isOnScreen = useOnScreen(elementRef);
+  const {tl, holderRef, gsap, st, q} = useScrollTrigger();
 
   useEffect(() => {
-    if (isOnScreen) {
-      window.scrollTo(0, 0);
+    if (!tl.current) {
+      tl.current = st.create({
+        trigger: holderRef.current,
+        start: "top top",
+        onEnter: () => {
+          window.scrollTo(0, 0);
+        }
+      });
     }
-  }, [isOnScreen]);
-
-  useEffect(() => {
-
-  }, []);
+  })
 
   return (
-    <Holder>
+    <Holder ref={holderRef}>
       <div className="inner">
-        <Header/>
+        <Header />
         <p className="h1">
         <span className="large-text-wrapper">
         Bear<br />
@@ -44,11 +47,6 @@ function LoopingScroll() {
         Eagle<br />
         On<br />
         Fire<br />
-        </span>
-        </p>
-        <div ref={elementRef} className="trigger" />
-        <p className="h1">
-        <span className="large-text-wrapper">
         Think<br />
         Make<br />
         Studio<br />
