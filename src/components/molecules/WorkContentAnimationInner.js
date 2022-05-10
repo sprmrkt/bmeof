@@ -58,7 +58,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
       parent.current.style.scrollSnapType = "none";
       // Scroll the work content holder to show only the title of the open item
       scroller.scrollTo(itemUid, {
-        duration: timeout,
+        duration: embedIsOpen ? 100 : timeout,
         smooth: true,
         offset: embedIsOpen ? offsetHeight + 48 : offsetHeight,
         containerId: 'work-content',
