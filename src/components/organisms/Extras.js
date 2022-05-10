@@ -31,7 +31,8 @@ function Extras() {
                                                   height
                                               }
                                               alt
-                                              gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                              gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                                              url(imgixParams: {width: 1000})
                                           }
                                           video {
                                               url

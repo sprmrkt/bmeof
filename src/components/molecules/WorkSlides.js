@@ -75,7 +75,7 @@ function WorkSlides({slides, currentSlide, isNext}) {
         classNames="right-to-left"
       >
         <Holder>
-          <MediaItem media={slides[currentSlide].primary} />
+          <MediaItem media={slides[currentSlide].primary || slides[currentSlide]} />
         </Holder>
       </CSSTransition>
     </TransitionGroup>

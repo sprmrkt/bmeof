@@ -110,7 +110,7 @@ const GalleryInner = styled.div`
   }
 `;
 
-function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, currentSlide, setCurrentSlide}) {
+function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, setCurrentSlide}) {
   const prevRef = useRef(null);
   const prevMouseHovered = useMouseHovered(prevRef, {bound: false, whenHovered: true});
   const nextRef = useRef(null);
@@ -118,9 +118,11 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
   const [isNext, setIsNext] = useState(true);
 
   const handleClose = () => {
-    setTimeout(() => {
-      closeParentHandler()
-    }, 1500);
+    if(closeParentHandler) {
+      setTimeout(() => {
+        closeParentHandler()
+      }, 1500);
+    }
     closeHandler(false);
   }
 
@@ -147,8 +149,8 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
   });
 
   return (
-    <Holder id={`${itemUid}-gallery-holder`}>
-      <Gallery id={`${itemUid}-gallery-inner`} {...swipeHandlers}>
+    <Holder>
+      <Gallery {...swipeHandlers}>
         <GalleryInner>
           <div className="inner-for-hiding-overflow">
             <WorkSlides slides={slides} currentSlide={currentSlide} isNext={isNext}/>
@@ -177,11 +179,10 @@ function WorkGallery({closeHandler, closeParentHandler, slides, itemUid, current
 
 WorkGallery.propTypes = {
   closeHandler: PropTypes.func.isRequired,
-  closeParentHandler: PropTypes.func.isRequired,
+  closeParentHandler: PropTypes.func,
   currentSlide: PropTypes.number.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
   slides: PropTypes.array.isRequired,
-  itemUid: PropTypes.string.isRequired,
 };
 
 export default WorkGallery;
