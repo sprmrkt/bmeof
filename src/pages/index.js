@@ -74,7 +74,7 @@ export const homePageQuery = graphql`
                                     }
                                     tile_image {
                                         alt
-                                        gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
+                                        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
                                     }
                                     tile_video {
                                         url
