@@ -8,6 +8,9 @@ const Holder = styled.div`
   height: 100%;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  .close-button {
+    border-top: 1px solid;
+  }
 `;
 
 const Grid = styled.div`
@@ -21,8 +24,7 @@ const Grid = styled.div`
 `;
 
 const SpareTileBorder = styled.div`
-  align-self: end;
-  border-bottom: 1px solid;
+  border-top: 1px solid;
   display: none;
   @media ( ${props => props.theme.breakpoints.md} ) {
     display: block;

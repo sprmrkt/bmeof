@@ -20,12 +20,14 @@ function WorkHolder(props) {
   const setProjectIsOpen = useStore(state => state.setProjectIsOpen)
   const tileHolder = useRef(null)
   const [tileHeight, setTileHeight] = useState(0)
+  const [tileWidth, setTileWidth] = useState(0)
 
   useEffect(() => {
     if (tileHolder.current) {
       setTileHeight(tileHolder.current.clientHeight)
+      setTileWidth(tileHolder.current.clientWidth)
     }
-  }, [size, setTileHeight, tileHolder]);
+  }, [size, setTileHeight, setTileWidth, tileHolder]);
 
   const toggleHandler = (toggle) => {
     setOpenContent(toggle);
@@ -38,6 +40,8 @@ function WorkHolder(props) {
         <div ref={tileHolder}>
           <WorkTile
             title={title.text}
+            tileHeight={tileHeight}
+            tileWidth={tileWidth}
             excerpt={excerpt}
             image={tile_image}
             video={tile_video}

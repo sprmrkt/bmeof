@@ -2,26 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import {GatsbyImage} from "gatsby-plugin-image";
 import MediaItem from "./MediaItem";
 
 const Holder = styled.div`
   width: 100%;
   padding: 15px 15px 0 15px;
-  border-bottom: 1px solid;
+  border-top: 1px solid;
   background-color: ${props => props.theme.colors.white};
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 12px 0 24px;
     min-height: 70vw;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     &.even {
       padding: 24px 24px 0 12px;
     }
   }
   @media ( ${props => props.theme.breakpoints.lg} ) {
-    min-height: calc(100vh - 48px + 1px);
+    min-height: calc(100vh - 96px + 1px);
   }
 
   button {
@@ -99,15 +97,18 @@ const TextHolder = styled.div`
   align-items: center;
   width: 100%;
   transition: all 0.25s;
+  margin-top: 0;
 
   &.open {
     background-color: ${props => props.theme.colors.white};
     z-index: 20;
     position: relative;
+    border-bottom: 1px solid;
     @media ( ${props => props.theme.breakpoints.md} ) {
       width: calc(200% + 72px);
       margin-left: -24px;
       padding: 0 24px;
+      margin-top: ${props => props.textMarginWhenOpen}px;
       &.even {
         margin-left: calc(-100% - 48px);
       }
@@ -161,6 +162,7 @@ const TextHolder = styled.div`
         display: inline;
       }
     }
+
     .close-info-cross {
       @media ( ${props => props.theme.breakpoints.md} ) {
         display: none;
@@ -184,13 +186,26 @@ const TextHolder = styled.div`
   }
 `;
 
-const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even, title, image, video, excerpt}) => {
+const WorkTile = ({
+                    toggleProjectHandler,
+                    toggleInfoHandler,
+                    open,
+                    infoOpen,
+                    even,
+                    title,
+                    image,
+                    video,
+                    excerpt,
+                    tileHeight,
+                    tileWidth
+                  }) => {
 
   const tileClasses = classNames({
     open: open,
     even: even,
   })
 
+  const textMarginWhenOpen = Math.max(tileHeight - tileWidth - 48 + 12, 0);
 
   return (
     <Holder
@@ -203,7 +218,7 @@ const WorkTile = ({toggleProjectHandler, toggleInfoHandler, open, infoOpen, even
           </Excerpt>
         </button>
       </ImageHolder>
-      <TextHolder className={tileClasses}>
+      <TextHolder className={tileClasses} textMarginWhenOpen={textMarginWhenOpen}>
         <p className="title">
           <button onClick={() => toggleProjectHandler(true)}>{title}</button>
         </p>
@@ -235,6 +250,8 @@ WorkTile.propTypes = {
   excerpt: PropTypes.object.isRequired,
   image: PropTypes.object.isRequired,
   video: PropTypes.object.isRequired,
+  tileHeight: PropTypes.number,
+  tileWidth: PropTypes.number,
 };
 
 export default WorkTile;

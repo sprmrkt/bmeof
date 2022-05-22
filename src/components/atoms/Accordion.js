@@ -23,7 +23,7 @@ const Button = styled.button`
   width: 100%;
   text-align: left;
   padding-left: 12px;
-  transition: color 0.5s linear;
+  transition: color 0.25s linear;
   white-space: normal;
   
   .large-text-wrapper {
