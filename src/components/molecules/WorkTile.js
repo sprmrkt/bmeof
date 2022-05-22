@@ -104,6 +104,9 @@ const TextHolder = styled.div`
     z-index: 20;
     position: relative;
     border-bottom: 1px solid;
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    padding: 0 15px;
     @media ( ${props => props.theme.breakpoints.md} ) {
       width: calc(200% + 72px);
       margin-left: -24px;

@@ -92,6 +92,7 @@ export const homePageQuery = graphql`
                         document {
                             ... on PrismicWork {
                                 id
+                                tags
                                 data {
                                     info {
                                         richText

@@ -55,6 +55,7 @@ function WorkHolder(props) {
       <WorkContentAnimation {...props} open={openContent} itemUid={itemUid} tileHeight={tileHeight}>
         <WorkInfo
           infoText={info}
+          tags={props.node.tags}
           setCurrentSlide={(i) => setCurrentSlide(i)}
           open={openInfo}
           closeHandler={() => setOpenInfo(false)}

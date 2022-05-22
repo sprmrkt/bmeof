@@ -17,16 +17,6 @@ const Holder = styled.div`
     padding: 0 24px;
   }
 
-  p {
-    margin: 0;
-    padding-top: 15px;
-    font-weight: 100;
-    @media ( ${props => props.theme.breakpoints.sm} ) {
-      padding-top: 24px;
-      width: 50%;
-    }
-  }
-
   .close-info {
     width: 100%;
     height: 48px;
@@ -74,7 +64,43 @@ const Images = styled.div`
   }
 `;
 
-function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
+const TextHolder = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 24px;
+  padding-top: 15px;
+  @media ( ${props => props.theme.breakpoints.sm} ) {
+    padding-top: 24px;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+  
+  p, li {
+    font-weight: 100;
+  }
+
+  .tags {
+    @media ( ${props => props.theme.breakpoints.sm} ) {
+      grid-column: 3/4;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 0;
+      > :first-child { margin-top: 0; }
+      > :last-child { margin-bottom: 0; }
+      li {
+        color: #808080;
+      }
+    }
+  }
+  
+  > div {
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+  }
+`;
+
+function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText, tags}) {
 
   const handleClick = (i) => {
     setTimeout(() => {
@@ -93,7 +119,16 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText}) {
       classNames="work-info"
     >
       <Holder>
-        <PrismicRichText render={infoText.richText} />
+        <TextHolder>
+          <div className="text">
+            <PrismicRichText render={infoText.richText} />
+          </div>
+          {tags.length > 0 && <div className="tags">
+            <ul>
+              {tags.map((tag, i) => <li key={i}>{tag}</li>)}
+            </ul>
+          </div>}
+        </TextHolder>
         <Images>
           {slides.map((slide, i) =>
             <WorkInfoMedia
@@ -116,6 +151,7 @@ WorkInfo.propTypes = {
   slides: PropTypes.array.isRequired,
   closeHandler: PropTypes.func.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
+  tags: PropTypes.array,
 };
 
 export default WorkInfo;
