@@ -33,11 +33,12 @@ function MediaItem({media, embedCanPlay}) {
       <GatsbyImage
         alt={media.image.alt || ""}
         image={media.image.gatsbyImageData} />
+      {media.caption && <p>{media.caption.text}</p>}
     </Holder>
   )
 
   if (media.embed) return <Holder><EmbedItem embed={media.embed} poster={media.embed_poster}
-                                             canPlay={embedCanPlay} /></Holder>
+                                             canPlay={embedCanPlay} caption={media.caption}/></Holder>
 
   if (media.video.url) return (
     <Holder>
@@ -45,6 +46,7 @@ function MediaItem({media, embedCanPlay}) {
         <source src={media.video.url} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      {media.caption && <p>{media.caption.text}</p>}
     </Holder>
   );
 

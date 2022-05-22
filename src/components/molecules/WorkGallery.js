@@ -25,9 +25,10 @@ const Button = styled.button.attrs(props => ({
   position: absolute;
   z-index: 20;
   width: 25%;
+  height: 0;
+  padding-bottom: calc(25% / 3 * 2 * 4);
   top: 0;
   left: 0;
-  bottom: 0;
   display: none;
   @media ( ${props => props.theme.breakpoints.md} ) {
     display: block;
@@ -86,8 +87,7 @@ const Gallery = styled.div`
 
 const GalleryInner = styled.div`
   width: 100%;
-  height: 0;
-  padding-bottom: 66.6667%;
+  height: 100%;
   position: relative;
 
   .inner-for-hiding-overflow {
@@ -98,6 +98,7 @@ const GalleryInner = styled.div`
     right: 0;
     overflow: hidden;
   }
+  
   .swipe-text {
     position: absolute;
     top: 100%;

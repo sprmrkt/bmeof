@@ -24,6 +24,8 @@ const Button = styled.button`
   text-align: left;
   padding-left: 12px;
   transition: color 0.5s linear;
+  white-space: normal;
+  
   .large-text-wrapper {
     display: inline-block;
     transition: transform 0.25s linear;

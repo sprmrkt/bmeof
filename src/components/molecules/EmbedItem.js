@@ -160,7 +160,7 @@ const MouseText = styled.div.attrs(props => ({
   font-size: 40px;
 `;
 
-function EmbedItem({embed, canPlay, poster}) {
+function EmbedItem({embed, canPlay, poster, caption}) {
   const setEmbedIsOpen = useStore(state => state.setEmbedIsOpen)
   const [overlayOpen, setOverlayOpen] = useState(false);
   const ref = useRef(null);
@@ -179,6 +179,7 @@ function EmbedItem({embed, canPlay, poster}) {
         <MouseText x={mouseHovered.elX} y={mouseHovered.elY} className="mouse-text">Play</MouseText>
         <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
         <PlayButton/>
+        {caption && <p>{caption.text}</p>}
       </button>
 
       <CSSTransition
@@ -216,6 +217,7 @@ EmbedItem.propTypes = {
   embed: PropTypes.object.isRequired,
   canPlay: PropTypes.bool,
   poster: PropTypes.object,
+  caption: PropTypes.object,
 };
 
 EmbedItem.defaultProps = {

@@ -9,6 +9,7 @@ import Belief from "../components/organisms/Belief";
 import Studio from "../components/organisms/Studio";
 import {graphql} from "gatsby";
 import Extras from "../components/organisms/Extras";
+import GalleryHolder from "../components/molecules/GalleryHolder";
 // import {Events} from "react-scroll";
 
 const Holder = styled.div`
@@ -22,20 +23,16 @@ const Holder = styled.div`
 
 function IndexPage({data}) {
 
-  const work = data.prismicHomepage.data.work;
+  const {work, primary_gallery} = data.prismicHomepage.data;
 
   return (
     <Holder>
       <Seo title="Home" />
-      <h1>
-        <span className="large-text-wrapper">
-        Bear<br />
-        Meets<br />
-        Eagle<br />
-        On<br />
-        Fire<br />
-        </span>
-      </h1>
+      <Accordion
+        id="title"
+        button="Bear meets eagle on fire">
+        <GalleryHolder slides={primary_gallery}/>
+      </Accordion>
       <Accordion
         id="belief"
         button="Think">
@@ -63,6 +60,33 @@ export const homePageQuery = graphql`
     query {
         prismicHomepage {
             data {
+                primary_gallery {
+                    image {
+                        dimensions {
+                            width
+                            height
+                        }
+                        alt
+                        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                        url(imgixParams: {width: 1000})
+                    }
+                    embed_poster {
+                        url
+                    }
+                    video {
+                        url
+                    }
+                    embed {
+                        html
+                        height
+                        width
+                        thumbnail_url
+                        title
+                    }
+                    caption {
+                        text
+                    }
+                }
                 work {
                     work_item {
                         document {
@@ -111,6 +135,9 @@ export const homePageQuery = graphql`
                                                     width
                                                     thumbnail_url
                                                     title
+                                                }
+                                                caption {
+                                                    text
                                                 }
                                             }
                                         }

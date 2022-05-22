@@ -6,12 +6,18 @@ import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const timeout = 500;
 
+const MediaHolder = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: 66.6667%;
+  position: relative;
+`;
+
 const Holder = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.1);
 
   &.right-to-left-appear,
@@ -75,7 +81,9 @@ function WorkSlides({slides, currentSlide, isNext}) {
         classNames="right-to-left"
       >
         <Holder>
+          <MediaHolder>
           <MediaItem media={slides[currentSlide].primary || slides[currentSlide]} />
+          </MediaHolder>
         </Holder>
       </CSSTransition>
     </TransitionGroup>

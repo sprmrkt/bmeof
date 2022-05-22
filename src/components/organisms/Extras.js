@@ -47,6 +47,9 @@ function Extras() {
                                               thumbnail_url
                                               title
                                           }
+                                          caption {
+                                              text
+                                          }
                                       }
                                   }
                               }
