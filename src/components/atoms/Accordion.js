@@ -8,57 +8,11 @@ import LockScroll from "./LockScroll";
 import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
+import AccordionButton from "./AccordionButton";
 
 const scrollTime = 500;
 const timeout = 1000;
 
-
-const Button = styled.button`
-  font-size: 33.5vw;
-  line-height: 0.75;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  display: block;
-  overflow: hidden;
-  width: 100%;
-  text-align: left;
-  padding-left: 12px;
-  transition: color 0.25s linear;
-  white-space: normal;
-  
-  .large-text-wrapper {
-    display: inline-block;
-    transition: transform 0.25s linear;
-  }
-  &:hover {
-    @media( ${props => props.theme.breakpoints.md} ) {
-      color: rgb(70,70,70);
-    }
-  }
-  &.is-open {
-    .large-text-wrapper {
-      transform: translateY(-8px);
-    }
-    @media( ${props => props.theme.breakpoints.md} ) {
-      .large-text-wrapper {
-        transform: translateY(-0.04em);
-      }
-    }
-  }
-  @supports (-moz-appearance:none) {
-    .large-text-wrapper {
-      display: block;
-      transform: translateY(0.1em);
-    }
-    &.is-open {
-      @media( ${props => props.theme.breakpoints.md} ) {
-        .large-text-wrapper {
-          transform: translateY(0.06em);
-        }
-      }
-    }
-  }
-`;
 const Content = styled.div`
   width: 100%;
   position: relative;
@@ -168,12 +122,11 @@ function Accordion({button, children, id}) {
     return child;
   });
 
-  const buttonClasses = classNames('accordion-title', { 'is-open': open });
   const borderClasses = classNames('top-border', 'border', { 'project-is-open': projectIsOpen });
 
   return (
     <>
-      <Button className={buttonClasses} onClick={() => setOpen(!open)}><span className="large-text-wrapper">{button}</span></Button>
+      <AccordionButton toggleOpen={() => setOpen(!open)} text={button} open={open}/>
       <Element name={uid}/>
       <CSSTransition
         mountOnEnter

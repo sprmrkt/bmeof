@@ -60,7 +60,7 @@ const Images = styled.div`
   }
 
   svg {
-    width: 50px;
+    width: 50px !important;
   }
 `;
 

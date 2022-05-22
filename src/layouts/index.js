@@ -8,6 +8,7 @@ import Transition from "../components/atoms/Transition";
 import GlobalStyles from "../components/atoms/GlobalStyles";
 import {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
+import CustomCursor from "../components/atoms/CustomCursor";
 
 function Index({location, children}) {
   return (
@@ -18,6 +19,7 @@ function Index({location, children}) {
         <Transition location={location}>
           <main>{children}</main>
         </Transition>
+        <CustomCursor/>
       </>
     </ThemeProvider>
   );

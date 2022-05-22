@@ -1,56 +1,40 @@
 import React, {useRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
-import {useMouseHovered} from "react-use";
 import MediaItem from "./MediaItem";
+import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 66.6667%;
-
-  .mouse-text {
-    display: none;
-  }
-
-  &:hover {
-    .mouse-text {
-      display: block;
+  button {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 66.6667%;
+    .gatsby-image-wrapper {
+      pointer-events: none;
     }
   }
 `;
 
-const MouseText = styled.div.attrs(props => ({
-  style: {
-    transform: `translate( ${props.x}px, ${props.y - 20}px)`,
-  },
-}))`
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #ffff00;
-  pointer-events: none;
-  text-transform: uppercase;
-  font-size: 40px;
-  z-index: 10;
-  opacity: 0;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    opacity: 1;
-  }
-`;
-
-
 
 function WorkInfoMedia({media, handleClick, totalImages, i}) {
-  const ref = useRef(null);
-  const {elX, elY} = useMouseHovered(ref, {bound: false, whenHovered: true});
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+  const setCustomCursorContent = useStore(state => state.setCustomCursorContent);
   return (
-    <Holder ref={ref}>
-      <button onClick={() => handleClick()}>
-        <MediaItem media={media} embedCanPlay={false}/>
+    <Holder>
+      <button
+        onClick={() => handleClick()}
+        onMouseEnter={() => {
+          setCustomCursorIsVisible(true);
+          setCustomCursorContent(`${i + 1}/${totalImages}`);
+        }}
+        onMouseLeave={() => {
+          setCustomCursorIsVisible(false);
+          setCustomCursorContent(false);
+        }}
+      >
+        <MediaItem media={media} embedCanPlay={false} />
       </button>
-      <MouseText x={elX} y={elY} className="mouse-text">{i + 1}/{totalImages}</MouseText>
     </Holder>
   )
 }

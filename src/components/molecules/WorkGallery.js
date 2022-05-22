@@ -1,10 +1,10 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
-import {useMouseHovered} from "react-use";
 import WorkSlides from "./WorkSlides";
 import CloseButton from "../atoms/CloseButton";
 import {useSwipeable} from "react-swipeable";
+import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
   height: 100%;
@@ -53,21 +53,6 @@ const Button = styled.button.attrs(props => ({
   }
 `;
 
-const MouseText = styled.div.attrs(props => ({
-  style: {
-    transform: `translate( ${props.x}px, ${props.y - 20}px)`,
-  },
-}))`
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #ffff00;
-  pointer-events: none;
-  transition: transform 100ms ease-out, opacity 10ms 100ms linear;
-  text-transform: uppercase;
-  font-size: 40px;
-`;
-
 const Gallery = styled.div`
   width: 100%;
   height: calc(100vh - 48px);
@@ -111,11 +96,9 @@ const GalleryInner = styled.div`
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, setCurrentSlide}) {
-  const prevRef = useRef(null);
-  const prevMouseHovered = useMouseHovered(prevRef, {bound: false, whenHovered: true});
-  const nextRef = useRef(null);
-  const nextMouseHovered = useMouseHovered(nextRef, {bound: false, whenHovered: true});
   const [isNext, setIsNext] = useState(true);
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+  const setCustomCursorContent = useStore(state => state.setCustomCursorContent);
 
   const handleClose = () => {
     if(closeParentHandler) {
@@ -130,16 +113,20 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
     setIsNext(false)
     if (current === 0) {
       setCurrentSlide(slides.length - 1)
+      setCustomCursorContent(`${slides.length}/${slides.length}`)
     } else {
       setCurrentSlide(current - 1)
+      setCustomCursorContent(`${currentSlide}/${slides.length}`)
     }
   }
   const handleNext = (current) => {
     setIsNext(true)
     if (current === slides.length - 1) {
       setCurrentSlide(0)
+      setCustomCursorContent(`1/${slides.length}`)
     } else {
       setCurrentSlide(current + 1)
+      setCustomCursorContent(`${currentSlide + 2}/${slides.length}`)
     }
   }
 
@@ -157,19 +144,29 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
           </div>
           {slides.length > 1 && <p className="swipe-text">&larr; &rarr;</p>}
           <Button
-            ref={prevRef}
             className="prev"
             onClick={() => handlePrev(currentSlide)}
-            disabled={slides.length <= 1}>
-            <MouseText x={prevMouseHovered.elX} y={prevMouseHovered.elY} className="mouse-text">Prev</MouseText>
-          </Button>
+            onMouseEnter={() => {
+              setCustomCursorIsVisible(true)
+              setCustomCursorContent(`${currentSlide === 0 ? slides.length : currentSlide}/${slides.length}`)
+            }}
+            onMouseLeave={() => {
+              setCustomCursorIsVisible(false)
+              setCustomCursorContent(false)
+            }}
+            disabled={slides.length <= 1}/>
           <Button
-            ref={nextRef}
             className="next"
             onClick={() => handleNext(currentSlide)}
-            disabled={slides.length <= 1}>
-            <MouseText x={nextMouseHovered.elX} y={nextMouseHovered.elY} className="mouse-text">Next</MouseText>
-          </Button>
+            onMouseEnter={() => {
+              setCustomCursorIsVisible(true)
+              setCustomCursorContent(`${currentSlide === slides.length -1 ? 1 : currentSlide + 2}/${slides.length}`)
+            }}
+            onMouseLeave={() => {
+              setCustomCursorIsVisible(false)
+              setCustomCursorContent(false)
+            }}
+            disabled={slides.length <= 1}/>
         </GalleryInner>
       </Gallery>
       <CloseButton closeHandler={handleClose} border={false} />
