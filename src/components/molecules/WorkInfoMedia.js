@@ -11,6 +11,9 @@ const Holder = styled.div`
     height: 0;
     padding-bottom: 66.6667%;
   }
+  .caption {
+    display: none;
+  }
 `;
 
 

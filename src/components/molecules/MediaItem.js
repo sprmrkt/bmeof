@@ -22,6 +22,10 @@ const Holder = styled.div`
     object-fit: cover;
     object-position: center;
   }
+  .caption {
+    text-align: left;
+    font-weight: 100;
+  }
 `
 
 function MediaItem({media, embedCanPlay}) {
@@ -33,7 +37,7 @@ function MediaItem({media, embedCanPlay}) {
       <GatsbyImage
         alt={media.image.alt || ""}
         image={media.image.gatsbyImageData} />
-      {media.caption && <p>{media.caption.text}</p>}
+      {media.caption && <p className="caption">{media.caption.text}</p>}
     </Holder>
   )
 
@@ -46,7 +50,7 @@ function MediaItem({media, embedCanPlay}) {
         <source src={media.video.url} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-      {media.caption && <p>{media.caption.text}</p>}
+      {media.caption && <p className="caption">{media.caption.text}</p>}
     </Holder>
   );
 

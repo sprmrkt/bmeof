@@ -169,7 +169,7 @@ function EmbedItem({embed, canPlay, poster, caption}) {
         }}>
         <img alt={embed.title} src={poster.url || embed.thumbnail_url} />
         <PlayButton />
-        {caption && <p>{caption.text}</p>}
+        {caption && <p className="caption">{caption.text}</p>}
       </button>
 
       <CSSTransition
