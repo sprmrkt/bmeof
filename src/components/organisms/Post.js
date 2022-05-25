@@ -10,9 +10,19 @@ const ExternalLink = styled.p`
   transition: color 0.5s linear;
   font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
+  .large-text-outer {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      display: inline-block;
+      transition: transform 3s linear;
+    }
+  }
+  
   &:hover {
     @media ( ${props => props.theme.breakpoints.md} ) {
       color: rgb(70, 70, 70);
+      .large-text-outer {
+        transform: translateX(min(100vw - 100% - 24px, 0px));
+      }
     }
   }
 `;
