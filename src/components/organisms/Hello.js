@@ -5,24 +5,26 @@ import PrismicRichText from "../atoms/PrismicRichText";
 import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
-  height: 100%;
+  height: calc(100vh - 48px);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 `;
 
-const Inner = styled.div`
+const TextHolder = styled.div`
   padding: 15px;
-  @media( ${props => props.theme.breakpoints.md} ) {
+  height: 100%;
+  @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px;
   }
+
   > :first-child { margin-top: 0; }
+
   > :last-child { margin-bottom: 0; }
 `;
-
-function Belief(props) {
+function Hello(props) {
   const data = useStaticQuery(graphql`
-      query BeliefQuery {
-          prismicBelief {
+      query StudioQuery {
+          prismicHello {
               data {
                   text {
                       richText
@@ -31,14 +33,15 @@ function Belief(props) {
           }
       }
   `)
+  const {text} = data.prismicHello.data;
   return (
     <Holder>
-      <Inner className="p-large">
-        <PrismicRichText render={data.prismicBelief.data.text.richText} />
-      </Inner>
+        <TextHolder>
+          <div className="p-large"><PrismicRichText render={text.richText} /></div>
+        </TextHolder>
       <CloseButton closeHandler={props.closeHandler} />
     </Holder>
   )
 }
 
-export default Belief;
+export default Hello;

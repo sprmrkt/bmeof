@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {graphql, useStaticQuery} from "gatsby";
 import PrismicRichText from "../atoms/PrismicRichText";
-import {GatsbyImage} from "gatsby-plugin-image";
 import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
@@ -11,87 +10,32 @@ const Holder = styled.div`
   -webkit-overflow-scrolling: touch;
 `;
 
-const Grid = styled.div`
-  height: calc(100vh - 48px);
-  display: flex;
-  flex-direction: column;
+const Inner = styled.div`
   padding: 15px;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    display: grid;
-    grid-template-columns: 5fr 3fr;
-    grid-gap: 24px;
+  @media( ${props => props.theme.breakpoints.md} ) {
     padding: 24px;
   }
-  p {
-    margin: 0;
-  }
-`;
-
-const Address = styled.div`
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .contact {
-    display: none;
-    @media( ${props => props.theme.breakpoints.md} ) {
-      display: block;
-      margin-top: auto;
-    }
-  }
-`;
-
-const ImageHolder = styled.div`
-  margin-top: auto;
-  .gatsby-image-wrapper {
-    mix-blend-mode: multiply;
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-  }
-  .contact {
-    margin-top: 15px;
-    @media( ${props => props.theme.breakpoints.md} ) {
-      display: none;
-    }
-  }
+  > :first-child { margin-top: 0; }
+  > :last-child { margin-bottom: 0; }
 `;
 
 function Studio(props) {
   const data = useStaticQuery(graphql`
-      query StudioQuery {
-          prismicStudio {
+      query BeliefQuery {
+          prismicBelief {
               data {
-                  address {
+                  text {
                       richText
-                  }
-                  contact {
-                      richText
-                  }
-                  image {
-                      alt
-                      gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
                   }
               }
           }
       }
   `)
-  const {address, image, contact} = data.prismicStudio.data;
   return (
     <Holder>
-      <Grid>
-        <Address>
-          <div className="p-large"><PrismicRichText render={address.richText} /></div>
-          <div className="contact"><PrismicRichText render={contact.richText} /></div>
-        </Address>
-
-        <ImageHolder>
-          <GatsbyImage alt={image.alt || 'Studio shot'} image={image.gatsbyImageData} />
-          <div className="contact"><PrismicRichText render={contact.richText} /></div>
-        </ImageHolder>
-
-      </Grid>
+      <Inner className="p-large">
+        <PrismicRichText render={data.prismicBelief.data.text.richText} />
+      </Inner>
       <CloseButton closeHandler={props.closeHandler} />
     </Holder>
   )

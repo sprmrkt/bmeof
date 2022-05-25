@@ -4,13 +4,11 @@ import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
 import WorkList from "../components/organisms/WorkList";
 import LoopingScroll from "../components/organisms/LoopingScroll";
-import ProductList from "../components/organisms/ProductList";
-import Belief from "../components/organisms/Belief";
 import Studio from "../components/organisms/Studio";
+import Hello from "../components/organisms/Hello";
 import {graphql} from "gatsby";
 import Extras from "../components/organisms/Extras";
 import GalleryHolder from "../components/molecules/GalleryHolder";
-// import {Events} from "react-scroll";
 
 const Holder = styled.div`
   width: 100%;
@@ -34,19 +32,19 @@ function IndexPage({data}) {
         <GalleryHolder slides={primary_gallery}/>
       </Accordion>
       <Accordion
-        id="belief"
-        button="Think">
-        <Belief />
-      </Accordion>
-      <Accordion
         id="work"
-        button="Make">
+        button="Work">
         <WorkList work={work} />
       </Accordion>
       <Accordion
         id="studio"
         button="Studio">
         <Studio />
+      </Accordion>
+      <Accordion
+        id="hello"
+        button="Hello">
+        <Hello />
       </Accordion>
       <Extras />
       <LoopingScroll />

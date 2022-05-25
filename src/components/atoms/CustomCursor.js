@@ -9,6 +9,7 @@ const Holder = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2000;
   pointer-events: none;
 `;
 
@@ -20,7 +21,6 @@ const Cursor = styled.div.attrs(props => ({
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 2000;
   opacity: 0;
   transition: transform 150ms ease-out;
   @media ( ${props => props.theme.breakpoints.md} ) {
