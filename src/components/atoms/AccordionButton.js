@@ -14,35 +14,50 @@ const Button = styled.button`
   width: 100%;
   text-align: left;
   padding-left: 12px;
-  transition: color 0.25s linear;
+  transition: all 0.25s linear;
   white-space: normal;
 
+  .large-text-outer {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      display: inline-block;
+      transition: transform 3s linear;
+    }
+  }
+  
   .large-text-wrapper {
     display: inline-block;
     transition: transform 0.25s linear;
   }
+
   &:hover {
-    @media( ${props => props.theme.breakpoints.md} ) {
-      color: rgb(70,70,70);
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      color: rgb(70, 70, 70);
+      .large-text-outer {
+        transform: translateX(min(100vw - 100% - 24px, 0px));
+      }
     }
   }
+
   &.is-open {
     .large-text-wrapper {
       transform: translateY(-8px);
     }
-    @media( ${props => props.theme.breakpoints.md} ) {
+
+    @media ( ${props => props.theme.breakpoints.md} ) {
       .large-text-wrapper {
         transform: translateY(-0.04em);
       }
     }
   }
+
   @supports (-moz-appearance:none) {
     .large-text-wrapper {
       display: block;
       transform: translateY(0.1em);
     }
+
     &.is-open {
-      @media( ${props => props.theme.breakpoints.md} ) {
+      @media ( ${props => props.theme.breakpoints.md} ) {
         .large-text-wrapper {
           transform: translateY(0.06em);
         }
@@ -52,7 +67,7 @@ const Button = styled.button`
 `;
 
 function AccordionButton({open, toggleOpen, text}) {
-  const buttonClasses = classNames('accordion-title', { 'is-open': open });
+  const buttonClasses = classNames('accordion-title', {'is-open': open});
   const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
 
   return (
@@ -61,7 +76,9 @@ function AccordionButton({open, toggleOpen, text}) {
       onMouseEnter={() => setCustomCursorIsVisible(true)}
       onMouseLeave={() => setCustomCursorIsVisible(false)}
       onClick={() => toggleOpen()}>
-      <span className="large-text-wrapper">{text}</span>
+      <span className="large-text-outer">
+        <span className="large-text-wrapper">{text}</span>
+      </span>
     </Button>
   )
 }
