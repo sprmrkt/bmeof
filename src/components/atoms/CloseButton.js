@@ -67,7 +67,7 @@ function CloseButton({closeHandler, border}) {
       </Holder>
       <Copyright className="close-copyright">
         <p>&copy;</p>
-        <p>We help good brands and people think<br /> and make things differently.</p>
+        <p>We help good people and brands<br/> think and make things differently.</p>
       </Copyright>
     </>
   )
