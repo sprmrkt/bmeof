@@ -120,7 +120,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
         setCustomCursorContent(`${currentSlide}/${slides.length}`)
       }
     }
-  }, [currentSlide, isNext, slides]);
+  }, [currentSlide, isNext, slides, setCustomCursorContent]);
 
   const handleClose = () => {
     if(closeParentHandler) {
