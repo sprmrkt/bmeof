@@ -154,7 +154,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
   });
 
   return (
-    <Holder>
+    <Holder className="work-gallery">
       <Gallery {...swipeHandlers}>
         <GalleryInner>
           <div className="inner-for-hiding-overflow">

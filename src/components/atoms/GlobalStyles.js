@@ -55,34 +55,6 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  .large-kerning {
-    .letter-g,
-    .letter-o {
-      transition: all 0.25s linear;
-      display: inline;
-
-      &:hover {
-        color: red;
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
-
-    .letter-g {
-      margin-left: -0.5%;
-      margin-right: -0.5%;
-    }
-
-    .letter-o {
-      margin-left: -0.5%;
-      margin-right: -0.5%;
-
-      &:first-child {
-        margin-left: 0;
-      }
-    }
-  }
-
   h2, .h2,
   h3, .h3,
   h4, .h4,
