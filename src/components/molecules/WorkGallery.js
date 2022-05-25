@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useLayoutEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import WorkSlides from "./WorkSlides";
@@ -96,9 +96,30 @@ const GalleryInner = styled.div`
 `;
 
 function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, setCurrentSlide}) {
+  const firstUpdate = useRef(true);
   const [isNext, setIsNext] = useState(true);
   const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   const setCustomCursorContent = useStore(state => state.setCustomCursorContent);
+
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    if(isNext) {
+      if (currentSlide === slides.length - 1) {
+        setCustomCursorContent(`1/${slides.length}`)
+      } else {
+        setCustomCursorContent(`${currentSlide + 2}/${slides.length}`)
+      }
+    } else {
+      if (currentSlide === 0) {
+        setCustomCursorContent(`${slides.length}/${slides.length}`)
+      } else {
+        setCustomCursorContent(`${currentSlide}/${slides.length}`)
+      }
+    }
+  }, [currentSlide, isNext, slides]);
 
   const handleClose = () => {
     if(closeParentHandler) {
@@ -113,20 +134,16 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
     setIsNext(false)
     if (current === 0) {
       setCurrentSlide(slides.length - 1)
-      setCustomCursorContent(`${slides.length}/${slides.length}`)
     } else {
       setCurrentSlide(current - 1)
-      setCustomCursorContent(`${currentSlide}/${slides.length}`)
     }
   }
   const handleNext = (current) => {
     setIsNext(true)
     if (current === slides.length - 1) {
       setCurrentSlide(0)
-      setCustomCursorContent(`1/${slides.length}`)
     } else {
       setCurrentSlide(current + 1)
-      setCustomCursorContent(`${currentSlide + 2}/${slides.length}`)
     }
   }
 

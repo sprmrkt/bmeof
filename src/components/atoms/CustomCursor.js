@@ -53,7 +53,6 @@ function CustomCursor() {
 
   return (
     <Holder ref={ref}>
-      <p>{customCursorContent}</p>
       <Cursor x={elX} y={elY} customCursorIsVisible={customCursorIsVisible}>
         {!customCursorContent && <Dot/>}
         {customCursorContent && <Text>{customCursorContent}</Text>}
