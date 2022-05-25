@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Accordion from "../atoms/Accordion";
 import PostHolder from "./PostHolder";
+import {useStore} from "../../utils/store";
 
 const ExternalLink = styled.p`
   text-decoration: 0;
@@ -17,16 +18,25 @@ const ExternalLink = styled.p`
 `;
 
 function Post({post}) {
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   const {title, external_link} = post.data;
   if (external_link.url) return (
-    <ExternalLink className="h1"><a href={external_link.url} target="_blank"
-                                    rel="noopener noreferrer"><span className="large-text-wrapper">{title.text}</span></a></ExternalLink>
+    <ExternalLink className="h1">
+      <a
+        onMouseEnter={() => setCustomCursorIsVisible(true)}
+        onMouseLeave={() => setCustomCursorIsVisible(false)}
+        href={external_link.url}
+        target="_blank"
+        rel="noopener noreferrer">
+        <span className="large-text-wrapper">{title.text}</span>
+      </a>
+    </ExternalLink>
   )
   return (
     <Accordion
       id={post.uid}
       button={title.text}>
-      <PostHolder post={post}/>
+      <PostHolder post={post} />
     </Accordion>
   )
 }

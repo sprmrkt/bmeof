@@ -131,6 +131,10 @@ const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
+  .gatsby-image-wrapper {
+      pointer-events: none;
+  }
+
   // Specific to PrismicRichText component
   .block-img {
     img {

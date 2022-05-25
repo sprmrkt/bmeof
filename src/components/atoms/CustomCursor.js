@@ -31,8 +31,8 @@ const Cursor = styled.div.attrs(props => ({
 const Dot = styled.div`
   background-color: #ffff00;
   pointer-events: none;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
 `;

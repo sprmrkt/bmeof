@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import MediaItem from "./MediaItem";
@@ -10,9 +10,6 @@ const Holder = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 66.6667%;
-    .gatsby-image-wrapper {
-      pointer-events: none;
-    }
   }
 `;
 

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
+import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
   width: 100%;
@@ -101,7 +102,7 @@ const TextHolder = styled.div`
 
   &.open {
     background-color: ${props => props.theme.colors.white};
-    z-index: 20;
+    //z-index: 20;
     position: relative;
     border-bottom: 1px solid;
     width: calc(100% + 30px);
@@ -202,19 +203,21 @@ const WorkTile = ({
                     tileHeight,
                     tileWidth
                   }) => {
-
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   const tileClasses = classNames({
     open: open,
     even: even,
   })
-
   const textMarginWhenOpen = Math.max(tileHeight - tileWidth - 48 + 12, 0);
 
   return (
     <Holder
       className={tileClasses}>
       <ImageHolder>
-        <button onClick={() => toggleProjectHandler(true)}>
+        <button
+          onMouseEnter={() => setCustomCursorIsVisible(true)}
+          onMouseLeave={() => setCustomCursorIsVisible(false)}
+          onClick={() => toggleProjectHandler(true)}>
           <div className="media-holder"><MediaItem media={{image: image, video: video}} /></div>
           <Excerpt>
             <div className="inner p-large"><p>{excerpt.text || 'Add an excerpt in the CMS'}</p></div>
@@ -223,19 +226,31 @@ const WorkTile = ({
       </ImageHolder>
       <TextHolder className={tileClasses} textMarginWhenOpen={textMarginWhenOpen}>
         <p className="title">
-          <button onClick={() => toggleProjectHandler(true)}>{title}</button>
+          <button
+            onMouseEnter={() => setCustomCursorIsVisible(true)}
+            onMouseLeave={() => setCustomCursorIsVisible(false)}
+            onClick={() => toggleProjectHandler(true)}>{title}</button>
         </p>
         {open && <p className="info">
-          <button onClick={() => toggleInfoHandler()}>
+          <button
+            onMouseEnter={() => setCustomCursorIsVisible(true)}
+            onMouseLeave={() => setCustomCursorIsVisible(false)}
+            onClick={() => toggleInfoHandler()}>
             {!infoOpen && <><span className="info-text">Project Overview </span><span className="info-plus">+</span></>}
             {infoOpen && <><span className="close-info-text">Close</span><span className="close-info-cross">+</span></>}
           </button>
         </p>}
         {open && !infoOpen && <p className="close">
-          <button onClick={() => toggleProjectHandler(false)}>Back</button>
+          <button
+            onMouseEnter={() => setCustomCursorIsVisible(true)}
+            onMouseLeave={() => setCustomCursorIsVisible(false)}
+            onClick={() => toggleProjectHandler(false)}>Back</button>
         </p>}
         {open && infoOpen && <p className="close close-info-secondary">
-          <button onClick={() => toggleInfoHandler()} title="Close info"><span className="close-info-cross">+</span>
+          <button
+            onMouseEnter={() => setCustomCursorIsVisible(true)}
+            onMouseLeave={() => setCustomCursorIsVisible(false)}
+            onClick={() => toggleInfoHandler()} title="Close info"><span className="close-info-cross">+</span>
           </button>
         </p>}
       </TextHolder>
