@@ -5,6 +5,7 @@ import WorkSlides from "./WorkSlides";
 import CloseButton from "../atoms/CloseButton";
 import {useSwipeable} from "react-swipeable";
 import {useStore} from "../../utils/store";
+import StackedImages from "./StackedImages";
 
 const Holder = styled.div`
   height: 100%;
@@ -54,13 +55,11 @@ const Button = styled.button.attrs(props => ({
 `;
 
 const Gallery = styled.div`
-  width: 100%;
-  height: calc(100vh - 48px);
-  overflow: hidden;
-  padding: 15px;
-  position: relative;
-  scroll-snap-align: start;
+  display: none;
   @media ( ${props => props.theme.breakpoints.md} ) {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
     height: calc(100vh - 48px + 1px);
     min-height: calc(((100vw - 48px) * 0.75 * 0.6667) + 48px + 48px);
     padding: 24px;
@@ -186,7 +185,8 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
             disabled={slides.length <= 1}/>
         </GalleryInner>
       </Gallery>
-      <CloseButton closeHandler={handleClose} border={false} />
+      <StackedImages slides={slides}/>
+      <CloseButton closeHandler={handleClose} />
     </Holder>
   )
 }

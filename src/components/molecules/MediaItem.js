@@ -25,6 +25,10 @@ const Holder = styled.div`
   .caption {
     text-align: left;
     font-weight: 100;
+    font-size: 12px;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      font-size: 15px;
+    }
   }
 `
 
