@@ -16,11 +16,30 @@ const Button = styled.button`
   padding-left: 12px;
   transition: all 0.25s linear;
   white-space: normal;
+  position: relative;
+  
+  .hover-effect {
+    display: none;
+    @media( ${props => props.theme.breakpoints.md} ) {
+      display: block;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100%;
+      &:hover {
+        + .large-text-outer {
+          transform: translateX(min(100vw - 100% - 24px, 0px));
+        }
+      }
+    }
+  }
 
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
       display: inline-block;
-      transition: transform 3s linear;
+      transition: transform 1s linear;
     }
   }
   
@@ -32,9 +51,6 @@ const Button = styled.button`
   &:hover {
     @media ( ${props => props.theme.breakpoints.md} ) {
       color: rgb(70, 70, 70);
-      .large-text-outer {
-        transform: translateX(min(100vw - 100% - 24px, 0px));
-      }
     }
   }
 
@@ -76,6 +92,7 @@ function AccordionButton({open, toggleOpen, text}) {
       onMouseEnter={() => setCustomCursorIsVisible(true)}
       onMouseLeave={() => setCustomCursorIsVisible(false)}
       onClick={() => toggleOpen()}>
+      <span className="hover-effect"/>
       <span className="large-text-outer">
         <span className="large-text-wrapper">{text}</span>
       </span>
