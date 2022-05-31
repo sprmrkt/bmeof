@@ -59,7 +59,6 @@ const Gallery = styled.div`
   overflow: hidden;
   padding: 15px;
   position: relative;
-  border-bottom: 1px solid;
   scroll-snap-align: start;
   @media ( ${props => props.theme.breakpoints.md} ) {
     height: calc(100vh - 48px + 1px);

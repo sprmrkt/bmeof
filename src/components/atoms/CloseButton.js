@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
   width: 100%;
@@ -60,10 +61,14 @@ const Copyright = styled.div`
 
 function CloseButton({closeHandler, border}) {
   const holderClasses = classNames('close-button', { 'has-border': border })
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   return (
     <>
       <Holder className={holderClasses}>
-        <button onClick={() => closeHandler()} className="h1"><span className="large-text-wrapper">Close</span></button>
+        <button
+          onMouseEnter={() => setCustomCursorIsVisible(true)}
+          onMouseLeave={() => setCustomCursorIsVisible(false)}
+          onClick={() => closeHandler()} className="h1"><span className="large-text-wrapper">Close</span></button>
       </Holder>
       <Copyright className="close-copyright">
         <p>&copy;</p>
