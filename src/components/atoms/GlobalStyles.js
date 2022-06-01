@@ -104,7 +104,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .gatsby-image-wrapper {
-      pointer-events: none;
+    pointer-events: none;
   }
 
   // Specific to PrismicRichText component

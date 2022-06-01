@@ -55,7 +55,6 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
     if (open) {
       // Stop work content holder from scrolling
       parent.current.style.overflow = "hidden";
-      parent.current.style.scrollSnapType = "none";
       // Scroll the work content holder to show only the title of the open item
       scroller.scrollTo(itemUid, {
         duration: embedIsOpen ? 100 : timeout,
@@ -64,7 +63,6 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
         containerId: 'work-content',
         ignoreCancelEvents: true
       });
-
     } else {
       // Resume scrolling work content holder
       // scrollSnapType (see above where we set it to none) gets reset out in the

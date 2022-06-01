@@ -10,6 +10,7 @@ const Holder = styled.div`
 
 function LockScroll() {
   useLockBodyScroll();
+
   return (
     <Holder/>
   )

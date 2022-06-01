@@ -79,7 +79,7 @@ function Studio(props) {
         <PrismicRichText render={data.prismicStudio.data.text.richText} />
       </Inner>
       <GalleryHolder>
-        <PostGallery slides={data.prismicStudio.data.gallery} closeHandler={props.closeHandler} />}
+        <PostGallery slides={data.prismicStudio.data.gallery} closeHandler={props.closeHandler} />
       </GalleryHolder>
     </Holder>
   )

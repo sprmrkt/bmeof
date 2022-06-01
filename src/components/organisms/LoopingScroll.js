@@ -1,10 +1,14 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import {useOnScreen} from "../../hooks/useOnScreen";
 import Header from "../molecules/Header";
 import useScrollTrigger from "../../hooks/useScrollTrigger";
+import {useWindowSize} from "react-use";
 
 const Holder = styled.div`
+  display: none;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    display: block;
+  }
   .inner {
     position: relative;
     width: 100%;
@@ -23,18 +27,27 @@ const Holder = styled.div`
 
 function LoopingScroll() {
   const {tl, holderRef, gsap, st, q} = useScrollTrigger();
+  const size = useWindowSize();
 
   useEffect(() => {
-    if (!tl.current) {
-      tl.current = st.create({
-        trigger: holderRef.current,
-        start: "top top",
-        onEnter: () => {
-          window.scrollTo(0, 0);
-        }
-      });
+    if(size.width > 575) {
+      if (!tl.current) {
+        tl.current = st.create({
+          trigger: holderRef.current,
+          start: "top top",
+          onEnter: () => {
+            window.scrollTo(0, 0);
+          }
+        });
+      }
+    } else {
+      if (tl.current) {
+        tl.current.kill()
+        tl.current = null
+      }
     }
-  })
+
+  }, [size, tl, holderRef, st])
 
   return (
     <Holder ref={holderRef}>

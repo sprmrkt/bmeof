@@ -13,6 +13,10 @@ import GalleryHolder from "../components/molecules/GalleryHolder";
 const Holder = styled.div`
   width: 100%;
   overflow: hidden;
+  padding-bottom: 15px;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    padding-bottom: 0;
+  }
 
   h1, .h1 {
     margin-left: 12px;
@@ -29,7 +33,7 @@ function IndexPage({data}) {
       <Accordion
         id="title"
         button="Bear meets eagle on fire">
-        <GalleryHolder slides={primary_gallery}/>
+        <GalleryHolder slides={primary_gallery} />
       </Accordion>
       <Accordion
         id="work"

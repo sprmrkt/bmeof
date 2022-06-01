@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll/modules';
@@ -9,6 +9,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
 import AccordionButton from "./AccordionButton";
+
 
 const scrollTime = 500;
 const timeout = 1000;
@@ -97,7 +98,9 @@ const Content = styled.div`
 function Accordion({button, children, id}) {
   const size = useWindowSize();
   const [open, setOpen] = useState(false);
+  const beenOpened = useRef(null);
   const uid = id + '-' + uuidv4();
+  const uid2 = id + '-' + uuidv4();
   const projectIsOpen = useStore(state => state.projectIsOpen);
 
   // Set scroll on open
@@ -109,8 +112,16 @@ function Accordion({button, children, id}) {
         offset: projectIsOpen ? 0 : -48,
         ignoreCancelEvents: true
       });
+      beenOpened.current = true;
+    } else if(beenOpened.current) {
+      scroller.scrollTo(uid2, {
+        duration: scrollTime,
+        delay: scrollTime,
+        smooth: true,
+        ignoreCancelEvents: true
+      });
     }
-  }, [open, uid, size, projectIsOpen]);
+  }, [open, uid, uid2, size, projectIsOpen]);
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
@@ -126,6 +137,7 @@ function Accordion({button, children, id}) {
 
   return (
     <>
+      <Element name={uid2}/>
       <AccordionButton toggleOpen={() => setOpen(!open)} text={button} open={open}/>
       <Element name={uid}/>
       <CSSTransition
