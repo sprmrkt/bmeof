@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Header from "../molecules/Header";
 import useScrollTrigger from "../../hooks/useScrollTrigger";
 import {useWindowSize} from "react-use";
+import PropTypes from "prop-types";
+import LockScroll from "../atoms/LockScroll";
 
 const Holder = styled.div`
   display: none;
@@ -25,18 +27,19 @@ const Holder = styled.div`
   }
 `;
 
-function LoopingScroll() {
+function LoopingScroll({fixedBody}) {
   const {tl, holderRef, gsap, st, q} = useScrollTrigger();
   const size = useWindowSize();
 
   useEffect(() => {
     if(size.width > 575) {
-      if (!tl.current) {
+      if (!tl.current && fixedBody.current) {
         tl.current = st.create({
           trigger: holderRef.current,
           start: "top top",
+          scroller: fixedBody.current,
           onEnter: () => {
-            window.scrollTo(0, 0);
+            fixedBody.current.scrollTop = 0
           }
         });
       }
@@ -47,7 +50,7 @@ function LoopingScroll() {
       }
     }
 
-  }, [size, tl, holderRef, st])
+  }, [size, tl, holderRef, st, fixedBody])
 
   return (
     <Holder ref={holderRef}>
@@ -69,5 +72,9 @@ function LoopingScroll() {
     </Holder>
   )
 }
+
+LockScroll.propTypes = {
+  fixedBody: PropTypes.object,
+};
 
 export default LoopingScroll;

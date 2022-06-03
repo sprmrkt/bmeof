@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
@@ -9,10 +9,19 @@ import Hello from "../components/organisms/Hello";
 import {graphql} from "gatsby";
 import Extras from "../components/organisms/Extras";
 import GalleryHolder from "../components/molecules/GalleryHolder";
+import Header from "../components/molecules/Header";
 
 const Holder = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  overflow: hidden;
+  height: 100vh;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+`;
+
+const Inner = styled.div`
   padding-bottom: 15px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding-bottom: 0;
@@ -24,34 +33,56 @@ const Holder = styled.div`
 `;
 
 function IndexPage({data}) {
-
+  const fixedBodyRef = useRef(null);
   const {work, primary_gallery} = data.prismicHomepage.data;
 
   return (
-    <Holder>
+
+    <Holder id="fixed-body" ref={fixedBodyRef}>
       <Seo title="Home" />
-      <Accordion
-        id="title"
-        button="Bear meets eagle on fire">
-        <GalleryHolder slides={primary_gallery} />
-      </Accordion>
-      <Accordion
-        id="work"
-        button="Work">
-        <WorkList work={work} />
-      </Accordion>
-      <Accordion
-        id="studio"
-        button="Studio">
-        <Studio />
-      </Accordion>
-      <Accordion
-        id="hello"
-        button="Hello">
-        <Hello />
-      </Accordion>
-      <Extras />
-      <LoopingScroll />
+      <Header />
+      <main>
+        <Inner>
+          <Accordion
+            fixedBody={fixedBodyRef}
+            id="title"
+            button="Bear meets eagle on fire">
+            <GalleryHolder slides={primary_gallery} />
+          </Accordion>
+          <Accordion
+            fixedBody={fixedBodyRef}
+            id="work"
+            button="Work">
+            <WorkList work={work} />
+          </Accordion>
+          <Accordion
+            fixedBody={fixedBodyRef}
+            id="studio"
+            button="Studio">
+            <Studio />
+          </Accordion>
+          <Accordion
+            fixedBody={fixedBodyRef}
+            id="hello"
+            button="Hello">
+            <Hello />
+          </Accordion>
+          <Extras
+            fixedBody={fixedBodyRef} />
+          <p className="h1">
+            <span className="large-text-wrapper">
+                Some<br />
+                Some<br />
+                Some<br />
+                Some<br />
+                Some<br />
+                Some<br />
+                Some<br />
+            </span>
+          </p>
+          <LoopingScroll fixedBody={fixedBodyRef}/>
+        </Inner>
+      </main>
     </Holder>
   )
 }

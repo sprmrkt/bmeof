@@ -1,11 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {Element, scroller} from 'react-scroll/modules';
 import {CSSTransition} from "react-transition-group";
 import {v4 as uuidv4} from 'uuid';
 import LockScroll from "./LockScroll";
-import useWindowSize from "../../hooks/useWindowSize";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
 import AccordionButton from "./AccordionButton";
@@ -95,10 +94,9 @@ const Content = styled.div`
   }
 `;
 
-function Accordion({button, children, id}) {
-  const size = useWindowSize();
+function Accordion({button, children, id, fixedBody}) {
   const [open, setOpen] = useState(false);
-  const beenOpened = useRef(null);
+  // const beenOpened = useRef(null);
   const uid = id + '-' + uuidv4();
   const uid2 = id + '-' + uuidv4();
   const projectIsOpen = useStore(state => state.projectIsOpen);
@@ -106,22 +104,17 @@ function Accordion({button, children, id}) {
   // Set scroll on open
   useEffect(() => {
     if (open) {
+      // Scroll to accordion button end ( minus 48px )
       scroller.scrollTo(uid, {
         duration: projectIsOpen ? 100 : scrollTime,
         smooth: true,
         offset: projectIsOpen ? 0 : -48,
-        ignoreCancelEvents: true
+        ignoreCancelEvents: true,
+        containerId: 'fixed-body',
       });
-      beenOpened.current = true;
-    } else if(beenOpened.current) {
-      scroller.scrollTo(uid2, {
-        duration: scrollTime,
-        delay: scrollTime,
-        smooth: true,
-        ignoreCancelEvents: true
-      });
+      // beenOpened.current = true;
     }
-  }, [open, uid, uid2, size, projectIsOpen]);
+  }, [open, uid, uid2, projectIsOpen]);
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
@@ -149,7 +142,7 @@ function Accordion({button, children, id}) {
         classNames="accordion-content"
       >
         <Content id={`${id}-accordion-content`}>
-          <LockScroll/>
+          <LockScroll fixedBody={fixedBody}/>
           <div className={borderClasses} />
           <div className="accordion-inner">
             {childrenWithProps}
@@ -164,6 +157,7 @@ function Accordion({button, children, id}) {
 Accordion.propTypes = {
   button: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  fixedBody: PropTypes.object,
 };
 
 export default Accordion;

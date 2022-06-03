@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import styled from 'styled-components';
-import useLockBodyScroll from "../../hooks/useLockBodyScroll";
+import PropTypes from "prop-types";
 
 const Holder = styled.div`
   width: 0;
@@ -8,12 +8,22 @@ const Holder = styled.div`
   opacity: 0;
 `;
 
-function LockScroll() {
-  useLockBodyScroll();
+function LockScroll({fixedBody}) {
+  useLayoutEffect(() => {
+    let ourBody = fixedBody.current
+    // Prevent scrolling on mount
+    ourBody.style.overflow = "hidden";
+    // Re-enable scrolling when component unmounts
+    return () => (ourBody.style.overflow = "scroll");
+  });
 
   return (
     <Holder/>
   )
 }
+
+LockScroll.propTypes = {
+  fixedBody: PropTypes.object,
+};
 
 export default LockScroll;

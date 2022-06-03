@@ -186,7 +186,7 @@ function WorkGallery({closeHandler, closeParentHandler, slides, currentSlide, se
         </GalleryInner>
       </Gallery>
       <StackedImages slides={slides}/>
-      <CloseButton closeHandler={handleClose} />
+      <CloseButton closeHandler={() => handleClose()} />
     </Holder>
   )
 }

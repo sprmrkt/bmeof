@@ -25,7 +25,6 @@ function StackedImages({slides}) {
   return (
     <Holder>
       {slides.map((slide, i) => {
-          console.log()
           const holderClasses = classNames({'has-caption': (slide.primary && slide.primary.caption) || slide.caption})
           return (
             <MediaHolder key={i} className={holderClasses}>
