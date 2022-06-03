@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Accordion from "../components/atoms/Accordion";
@@ -10,13 +10,14 @@ import {graphql} from "gatsby";
 import Extras from "../components/organisms/Extras";
 import GalleryHolder from "../components/molecules/GalleryHolder";
 import Header from "../components/molecules/Header";
+import {useWindowSize} from "react-use";
 
 const Holder = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: var(--windowHeight);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 `;
@@ -35,6 +36,11 @@ const Inner = styled.div`
 function IndexPage({data}) {
   const fixedBodyRef = useRef(null);
   const {work, primary_gallery} = data.prismicHomepage.data;
+  const size = useWindowSize();
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--windowHeight', `${size.height}px`);
+  }, [size]);
 
   return (
 

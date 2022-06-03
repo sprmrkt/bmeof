@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
@@ -14,14 +14,12 @@ const Holder = styled.div`
 
   img {
     position: relative;
-    //z-index: 1;
   }
 
   svg {
     width: 50px;
     height: auto;
     position: absolute;
-    //z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -95,7 +93,7 @@ const OverlayHolder = styled.div`
     top: 50%;
     left: 50%;
     width: 100vw;
-    height: calc(100vh - 96px);
+    height: calc(var(--windowHeight) - 96px);
     transform: translate(-50%, -50%);
   }
 

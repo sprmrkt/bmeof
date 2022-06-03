@@ -34,7 +34,7 @@ const Copyright = styled.div`
   grid-gap: 24px;
   grid-template-columns: 1fr 3fr;
   align-items: end;
-  padding: 0 15px 15px;
+  padding: 0 15px calc(15px + 48px);
   @media( ${props => props.theme.breakpoints.md} ) {
     grid-template-columns: 1fr 1fr;
     padding: 0 24px 48px;

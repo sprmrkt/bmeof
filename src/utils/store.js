@@ -8,5 +8,9 @@ export const useStore = create(set => ({
   customCursorIsVisible: false,
   setCustomCursorIsVisible: (value) => set({ customCursorIsVisible: value }),
   customCursorContent: false,
-  setCustomCursorContent: (value) => set({ customCursorContent: value })
+  setCustomCursorContent: (value) => set({ customCursorContent: value }),
+  showEmbed: false,
+  setShowEmbed: (value) => set({ showEmbed: value }),
+  embedContent: null,
+  setEmbedContent: (value) => set({ showEmbed: value })
 }))

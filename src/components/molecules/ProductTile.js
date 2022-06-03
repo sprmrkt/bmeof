@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import PrismicRichText from "../atoms/PrismicRichText";
 
 const Holder = styled.div`
-  height: calc(100vh - 48px);
+  height: calc(var(--windowHeight) - 48px);
   position: relative;
   overflow: hidden;
 `;

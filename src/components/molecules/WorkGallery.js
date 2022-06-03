@@ -13,7 +13,12 @@ const Holder = styled.div`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
-  .close-copyright { padding-bottom: 0; }
+  .close-copyright {
+    padding-bottom: 15px;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      padding-bottom: 0;
+    }
+  }
 
   > :first-child { margin-top: 0; }
 

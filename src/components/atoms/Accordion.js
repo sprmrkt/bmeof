@@ -62,7 +62,7 @@ const Content = styled.div`
   &.accordion-content-enter-active,
   &.accordion-content-enter-done {
     .accordion-inner {
-      height: 100vh;
+      height: var(--windowHeight);
       transition: height ${timeout * 0.75}ms ${timeout * 0.25 + scrollTime}ms;
     }
 
@@ -74,7 +74,7 @@ const Content = styled.div`
 
   &.accordion-content-exit {
     .accordion-inner {
-      height: 100vh;
+      height: var(--windowHeight);
     }
 
     .border {

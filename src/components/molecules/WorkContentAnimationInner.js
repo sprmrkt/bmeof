@@ -33,12 +33,12 @@ const Content = styled.div`
   &.work-content-appear-done,
   &.work-content-enter-active,
   &.work-content-enter-done {
-    height: calc(100vh - 48px + 1px); // Plus 1px to hide the border on the top of the close button
+    height: calc(var(--windowHeight) - 48px + 1px); // Plus 1px to hide the border on the top of the close button
     transition: height ${timeout}ms;
   }
 
   &.work-content-exit {
-    height: calc(100vh - 48px + 1px); // Plus 1px to hide the border on the top of the close button
+    height: calc(var(--windowHeight) - 48px + 1px); // Plus 1px to hide the border on the top of the close button
   }
 
   &.work-content-exit-active {

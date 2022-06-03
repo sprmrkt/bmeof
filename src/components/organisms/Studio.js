@@ -26,7 +26,6 @@ const GalleryHolder = styled.div`
 
   .work-gallery {
     .close-copyright {
-      padding-bottom: 15px;
       @media ( ${props => props.theme.breakpoints.md} ) {
         padding-bottom: 48px;
       }
