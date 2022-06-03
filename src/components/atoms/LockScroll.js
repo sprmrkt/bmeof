@@ -14,7 +14,7 @@ function LockScroll({fixedBody}) {
     // Prevent scrolling on mount
     ourBody.style.overflow = "hidden";
     // Re-enable scrolling when component unmounts
-    return () => (ourBody.style.overflow = "scroll");
+    return () => (ourBody.style.overflow = "");
   });
 
   return (
