@@ -7,10 +7,10 @@ import PropTypes from "prop-types";
 import LockScroll from "../atoms/LockScroll";
 
 const Holder = styled.div`
-  display: none;
-  @media( ${props => props.theme.breakpoints.md} ) {
-    display: block;
-  }
+  // display: none;
+    // @media( ${props => props.theme.breakpoints.md} ) {
+  //   display: block;
+  // }
   .inner {
     position: relative;
     width: 100%;
@@ -28,26 +28,21 @@ const Holder = styled.div`
 `;
 
 function LoopingScroll({fixedBody}) {
-  const {tl, holderRef, gsap, st, q} = useScrollTrigger();
+  const {tl, holderRef, st} = useScrollTrigger();
   const size = useWindowSize();
 
   useEffect(() => {
-    if(size.width > 575) {
-      if (!tl.current && fixedBody.current) {
-        tl.current = st.create({
-          trigger: holderRef.current,
-          start: "top top",
-          scroller: fixedBody.current,
-          onEnter: () => {
-            fixedBody.current.scrollTop = 0
-          }
-        });
-      }
+    if (!tl.current && fixedBody) {
+      tl.current = st.create({
+        trigger: holderRef.current,
+        start: "top top",
+        scroller: fixedBody.current,
+        onEnter: () => {
+          fixedBody.current.scrollTop = 0
+        }
+      });
     } else {
-      if (tl.current) {
-        tl.current.kill()
-        tl.current = null
-      }
+      st.refresh()
     }
 
   }, [size, tl, holderRef, st, fixedBody])
@@ -63,9 +58,9 @@ function LoopingScroll({fixedBody}) {
         Eagle<br />
         On<br />
         Fire<br />
-        Think<br />
-        Make<br />
+        Work<br />
         Studio<br />
+        Hello<br />
         </span>
         </p>
       </div>

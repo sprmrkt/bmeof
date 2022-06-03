@@ -69,17 +69,6 @@ function IndexPage({data}) {
           </Accordion>
           <Extras
             fixedBody={fixedBodyRef} />
-          <p className="h1">
-            <span className="large-text-wrapper">
-                Some<br />
-                Some<br />
-                Some<br />
-                Some<br />
-                Some<br />
-                Some<br />
-                Some<br />
-            </span>
-          </p>
           <LoopingScroll fixedBody={fixedBodyRef}/>
         </Inner>
       </main>

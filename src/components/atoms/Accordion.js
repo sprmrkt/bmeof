@@ -8,6 +8,7 @@ import LockScroll from "./LockScroll";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
 import AccordionButton from "./AccordionButton";
+import useScrollTrigger from "../../hooks/useScrollTrigger";
 
 
 const scrollTime = 500;
@@ -96,10 +97,10 @@ const Content = styled.div`
 
 function Accordion({button, children, id, fixedBody}) {
   const [open, setOpen] = useState(false);
-  // const beenOpened = useRef(null);
   const uid = id + '-' + uuidv4();
   const uid2 = id + '-' + uuidv4();
   const projectIsOpen = useStore(state => state.projectIsOpen);
+  const {st} = useScrollTrigger();
 
   // Set scroll on open
   useEffect(() => {
@@ -112,9 +113,17 @@ function Accordion({button, children, id, fixedBody}) {
         ignoreCancelEvents: true,
         containerId: 'fixed-body',
       });
-      // beenOpened.current = true;
     }
   }, [open, uid, uid2, projectIsOpen]);
+
+  useEffect(() => {
+    if (!open) {
+      const myRefresh = setTimeout(() => {
+        st.refresh()
+      }, scrollTime + timeout + 500);
+      return () => clearTimeout(myRefresh);
+    }
+  }, [open]);
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
