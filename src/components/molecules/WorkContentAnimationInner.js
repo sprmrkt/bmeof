@@ -48,7 +48,6 @@ const Content = styled.div`
 `;
 
 function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileHeight}) {
-  const embedIsOpen = useStore(state => state.embedIsOpen)
   const offsetHeight = tileHeight - 48;
 
   useEffect(() => {
@@ -57,9 +56,9 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
       parent.current.style.overflow = "hidden";
       // Scroll the work content holder to show only the title of the open item
       scroller.scrollTo(itemUid, {
-        duration: embedIsOpen ? 100 : timeout,
+        duration: timeout,
         smooth: true,
-        offset: embedIsOpen ? offsetHeight + 48 : offsetHeight,
+        offset: offsetHeight,
         containerId: 'work-content',
         ignoreCancelEvents: true
       });
@@ -78,7 +77,7 @@ function WorkContentAnimation({open, children, parent, parentUid, itemUid, tileH
         ignoreCancelEvents: true,
       });
     }
-  }, [open, parent, parentUid, offsetHeight, itemUid, embedIsOpen]);
+  }, [open, parent, parentUid, offsetHeight, itemUid]);
 
   return (
     <Content className="work-content">

@@ -6,14 +6,16 @@ import GlobalStyles from "../components/atoms/GlobalStyles";
 import {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
 import CustomCursor from "../components/atoms/CustomCursor";
+import EmbedOverlay from "../components/atoms/EmbedOverlay";
 
 
-function Index({location, children}) {
+function Index({children}) {
   return (
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
         {children}
+        <EmbedOverlay/>
         <CustomCursor />
       </>
     </ThemeProvider>

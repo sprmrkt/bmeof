@@ -123,7 +123,7 @@ function Accordion({button, children, id, fixedBody}) {
       }, scrollTime + timeout + 500);
       return () => clearTimeout(myRefresh);
     }
-  }, [open]);
+  }, [open, st]);
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
