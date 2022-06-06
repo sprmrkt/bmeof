@@ -100,6 +100,7 @@ function Accordion({button, children, id, fixedBody}) {
   const uid = id + '-' + uuidv4();
   const uid2 = id + '-' + uuidv4();
   const projectIsOpen = useStore(state => state.projectIsOpen);
+  const setAccordionIsOpen = useStore(state => state.setAccordionIsOpen);
   const {st} = useScrollTrigger();
 
   // Set scroll on open
@@ -140,7 +141,10 @@ function Accordion({button, children, id, fixedBody}) {
   return (
     <>
       <Element name={uid2}/>
-      <AccordionButton toggleOpen={() => setOpen(!open)} text={button} open={open}/>
+      <AccordionButton toggleOpen={() => {
+        setOpen(!open)
+        setAccordionIsOpen(!open)
+      }} text={button} open={open}/>
       <Element name={uid}/>
       <CSSTransition
         mountOnEnter

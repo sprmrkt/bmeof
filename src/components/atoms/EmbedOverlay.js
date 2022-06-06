@@ -113,8 +113,6 @@ function EmbedOverlay() {
   const embedContent = useStore(state => state.embedContent)
   const setEmbedContent = useStore(state => state.setEmbedContent)
 
-  console.log(embedIsOpen, embedContent);
-
   if(!embedContent) return null;
 
   return (

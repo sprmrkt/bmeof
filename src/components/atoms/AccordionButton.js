@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import {useStore} from "../../utils/store";
+import {useWindowSize} from "react-use";
 
 const Button = styled.button`
   font-size: 33.5vw;
@@ -17,24 +18,6 @@ const Button = styled.button`
   transition: all 0.25s linear;
   white-space: normal;
   position: relative;
-  
-  .hover-effect {
-    display: none;
-    @media( ${props => props.theme.breakpoints.md} ) {
-      display: block;
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      right: 0;
-      width: 100px;
-      height: 100%;
-      &:hover {
-        + .large-text-outer {
-          transform: translateX(min(100vw - 100% - 24px, 0px));
-        }
-      }
-    }
-  }
 
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
@@ -42,7 +25,7 @@ const Button = styled.button`
       transition: transform 1s linear;
     }
   }
-  
+
   .large-text-wrapper {
     display: inline-block;
     transition: transform 0.25s linear;
@@ -80,20 +63,45 @@ const Button = styled.button`
       }
     }
   }
+
+  &.is-moved {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      .large-text-outer {
+        transform: translateX(calc(-${props => props.moveDistance}px - 24px));
+      }
+    }
+  }
+  
 `;
 
 function AccordionButton({open, toggleOpen, text}) {
-  const buttonClasses = classNames('accordion-title', {'is-open': open});
   const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+  const setHorizontalHoverDistance = useStore(state => state.setHorizontalHoverDistance);
+  const size = useWindowSize();
+  const textRef = useRef(null);
+  const accordionIsOpen = useStore(state => state.accordionIsOpen);
+  const horizontalHoverDistance = useStore(state => state.horizontalHoverDistance);
+  const horizontalHover = useStore(state => state.horizontalHover);
+
+  useEffect(() => {
+    if(textRef.current) {
+      setHorizontalHoverDistance(textRef.current.clientWidth - size.width)
+    }
+  }, [size.width, textRef]);
+
+  const buttonClasses = classNames('accordion-title', {
+    'is-open': open,
+    'is-moved': horizontalHover && !accordionIsOpen
+  });
 
   return (
     <Button
       className={buttonClasses}
       onMouseEnter={() => setCustomCursorIsVisible(true)}
       onMouseLeave={() => setCustomCursorIsVisible(false)}
+      moveDistance={horizontalHoverDistance}
       onClick={() => toggleOpen()}>
-      <span className="hover-effect"/>
-      <span className="large-text-outer">
+      <span ref={textRef} className="large-text-outer">
         <span className="large-text-wrapper">{text}</span>
       </span>
     </Button>
