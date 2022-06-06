@@ -79,7 +79,6 @@ function AccordionButton({open, toggleOpen, text}) {
   const setHorizontalHoverDistance = useStore(state => state.setHorizontalHoverDistance);
   const size = useWindowSize();
   const textRef = useRef(null);
-  const accordionIsOpen = useStore(state => state.accordionIsOpen);
   const horizontalHoverDistance = useStore(state => state.horizontalHoverDistance);
   const horizontalHover = useStore(state => state.horizontalHover);
 
@@ -91,7 +90,7 @@ function AccordionButton({open, toggleOpen, text}) {
 
   const buttonClasses = classNames('accordion-title', {
     'is-open': open,
-    'is-moved': horizontalHover && !accordionIsOpen
+    'is-moved': horizontalHover
   });
 
   return (

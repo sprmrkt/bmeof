@@ -42,7 +42,7 @@ const Hover = styled.div`
     z-index: 100;
     top: 0;
     right: 0;
-    width: 50px;
+    width: 30px;
     height: 100%;
     display: ${props => props.accordionIsOpen ? 'none' : 'block'};
   }
