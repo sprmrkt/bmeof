@@ -5,6 +5,7 @@ import Accordion from "../atoms/Accordion";
 import PostHolder from "./PostHolder";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
+import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 
 const ExternalLink = styled.p`
   text-decoration: 0;
@@ -14,14 +15,6 @@ const ExternalLink = styled.p`
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
       display: inline-block;
-      transition: transform 1s linear;
-    }
-  }
-  &.is-moved {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      .large-text-outer {
-        transform: translateX(calc(-${props => props.moveDistance}px - 24px));
-      }
     }
   }
 
@@ -35,24 +28,18 @@ const ExternalLink = styled.p`
 function Post({post}) {
   const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   const {title, external_link} = post.data;
-  const horizontalHoverDistance = useStore(state => state.horizontalHoverDistance);
-  const horizontalHover = useStore(state => state.horizontalHover);
+  const hoverClass = useHorizontalHoverClassname();
 
-  const externalLinkClasses = classNames('h1', {
-    'is-moved': horizontalHover
-  });
   if (external_link.url) return (
     <ExternalLink
-      className={externalLinkClasses}
-      moveDistance={horizontalHoverDistance}
-    >
+      className="h1">
       <a
         onMouseEnter={() => setCustomCursorIsVisible(true)}
         onMouseLeave={() => setCustomCursorIsVisible(false)}
         href={external_link.url}
         target="_blank"
         rel="noopener noreferrer">
-        <span className="large-text-outer">
+        <span className={`large-text-outer ${hoverClass}`}>
           <span className="large-text-wrapper">{title.text}</span>
         </span>
       </a>

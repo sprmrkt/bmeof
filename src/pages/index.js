@@ -12,6 +12,7 @@ import GalleryHolder from "../components/molecules/GalleryHolder";
 import Header from "../components/molecules/Header";
 import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
+import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 
 const Holder = styled.div`
   position: fixed;
@@ -34,26 +35,10 @@ const Inner = styled.div`
   }
 `;
 
-
-const Hover = styled.div`
-  display: none;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    right: 0;
-    width: 30px;
-    height: 100%;
-    display: ${props => props.accordionIsOpen ? 'none' : 'block'};
-  }
-`;
-
 function IndexPage({data}) {
   const fixedBodyRef = useRef(null);
   const {work, primary_gallery} = data.prismicHomepage.data;
   const size = useWindowSize();
-  const setHorizontalHover = useStore(state => state.setHorizontalHover);
-  const accordionIsOpen = useStore(state => state.accordionIsOpen);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--windowHeight', `${size.height}px`);
@@ -61,11 +46,7 @@ function IndexPage({data}) {
 
   return (
     <>
-      <Hover
-        accordionIsOpen={accordionIsOpen}
-        onMouseEnter={() => setHorizontalHover(true)}
-        onMouseLeave={() => setHorizontalHover(false)}
-      />
+      <HorizontalHoverButton/>
       <Holder id="fixed-body" ref={fixedBodyRef}>
         <Seo title="Home" />
         <Header />

@@ -4,6 +4,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --windowHeight: 100vh;
+    --horizontalHoverDistance: 0px;
   }
 
   html {
@@ -307,6 +308,17 @@ const GlobalStyle = createGlobalStyle`
 
   .errorMsg {
     color: ${(props) => props.theme.colors.error};
+  }
+
+  .is-affected-by-horizontal-hover {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    &.horizontal-hover-is-on {
+        transition: transform 1.5s cubic-bezier(.15,1.03,.72,.94);
+      @media ( ${props => props.theme.breakpoints.md} ) {
+        transform: translateX(calc((var(--horizontalHoverDistance) + 24px) * -1));
+      }
+    }
   }
 `
 

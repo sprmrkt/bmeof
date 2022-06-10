@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import {useStore} from "../../utils/store";
 import {useWindowSize} from "react-use";
+import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 
 const Button = styled.button`
   font-size: 33.5vw;
@@ -22,7 +23,6 @@ const Button = styled.button`
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
       display: inline-block;
-      transition: transform 1s linear;
     }
   }
 
@@ -63,14 +63,6 @@ const Button = styled.button`
       }
     }
   }
-
-  &.is-moved {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      .large-text-outer {
-        transform: translateX(calc(-${props => props.moveDistance}px - 24px));
-      }
-    }
-  }
   
 `;
 
@@ -100,7 +92,7 @@ function AccordionButton({open, toggleOpen, text}) {
       onMouseLeave={() => setCustomCursorIsVisible(false)}
       moveDistance={horizontalHoverDistance}
       onClick={() => toggleOpen()}>
-      <span ref={textRef} className="large-text-outer">
+      <span ref={textRef} className={`large-text-outer ${useHorizontalHoverClassname()}`}>
         <span className="large-text-wrapper">{text}</span>
       </span>
     </Button>

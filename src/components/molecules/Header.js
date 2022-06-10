@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/img/bear.png";
-import {useStore} from "../../utils/store";
-import classNames from "classnames";
+import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 
 const Holder = styled.header`
   padding: 6px 12px 0 12px;
@@ -13,13 +12,6 @@ const Holder = styled.header`
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px 24px 0 24px;
     grid-template-columns: 1fr 1fr;
-    transition: transform 1s linear;
-  }
-
-  &.is-moved {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      transform: translateX(calc(-${props => props.moveDistance}px - 24px));
-    }
   }
 
   img {
@@ -49,16 +41,9 @@ const Holder = styled.header`
 `;
 
 function Header() {
-  const horizontalHoverDistance = useStore(state => state.horizontalHoverDistance);
-  const horizontalHover = useStore(state => state.horizontalHover);
-
-  const holderClasses = classNames({
-    'is-moved': horizontalHover
-  });
   return (
     <Holder
-      className={holderClasses}
-      moveDistance={horizontalHoverDistance}>
+      className={useHorizontalHoverClassname()}>
       <img src={logo} alt="Bear meets eagle on fire" />
       <p>We help good people and brands<br /> think and make things differently.</p>
     </Holder>

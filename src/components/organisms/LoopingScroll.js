@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import LockScroll from "../atoms/LockScroll";
 import {useStore} from "../../utils/store";
 import classNames from "classnames";
+import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 
 const Holder = styled.div`
   .inner {
@@ -27,15 +28,6 @@ const Holder = styled.div`
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
       display: inline-block;
-      transition: transform 1s linear;
-    }
-  }
-
-  &.is-moved {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      .large-text-outer {
-        transform: translateX(calc(-${props => props.moveDistance}px - 24px));
-      }
     }
   }
 `;
@@ -43,8 +35,6 @@ const Holder = styled.div`
 function LoopingScroll({fixedBody}) {
   const {tl, holderRef, st} = useScrollTrigger();
   const size = useWindowSize();
-  const horizontalHoverDistance = useStore(state => state.horizontalHoverDistance);
-  const horizontalHover = useStore(state => state.horizontalHover);
 
   useEffect(() => {
     if (!tl.current && fixedBody) {
@@ -69,19 +59,13 @@ function LoopingScroll({fixedBody}) {
 
   }, [size, tl, holderRef, st, fixedBody])
 
-  const holderClasses = classNames({
-    'is-moved': horizontalHover
-  });
-
   return (
     <Holder
-      ref={holderRef}
-      className={holderClasses}
-      moveDistance={horizontalHoverDistance}>
+      ref={holderRef}>
       <div className="inner">
         <Header />
         <p className="h1">
-        <span className="large-text-outer">
+        <span className={`large-text-outer ${useHorizontalHoverClassname()}`}>
         <span className="large-text-wrapper">
         Bear<br />
         Meets<br />
