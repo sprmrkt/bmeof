@@ -1,7 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import {useStore} from "../../utils/store";
-import classNames from "classnames";
 import {useMouse} from "react-use";
 
 const Holder = styled.div`
@@ -38,7 +37,7 @@ function HorizontalHoverButton() {
       // console.log( 'out' )
       setHorizontalHover(false)
     }
-  }, [ elX, elW ]);
+  }, [ elX, elW, accordionIsOpen, setHorizontalHover ]);
 
 
   return (

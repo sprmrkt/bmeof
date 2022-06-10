@@ -26,6 +26,9 @@ const Holder = styled.div`
   button {
     padding: 0;
     border: none;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      cursor: none;
+    }
   }
 `;
 const Excerpt = styled.div`
@@ -102,7 +105,6 @@ const TextHolder = styled.div`
 
   &.open {
     background-color: ${props => props.theme.colors.white};
-    //z-index: 20;
     position: relative;
     border-bottom: 1px solid;
     width: calc(100% + 30px);

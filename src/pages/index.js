@@ -11,7 +11,6 @@ import Extras from "../components/organisms/Extras";
 import GalleryHolder from "../components/molecules/GalleryHolder";
 import Header from "../components/molecules/Header";
 import {useWindowSize} from "react-use";
-import {useStore} from "../utils/store";
 import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 
 const Holder = styled.div`

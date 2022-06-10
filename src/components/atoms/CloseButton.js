@@ -17,7 +17,9 @@ const Holder = styled.div`
     display: block;
     padding: 12px 0;
     transition: color 0.5s linear;
-    @media( ${props => props.theme.breakpoints.md} ) {
+
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      cursor: none;
       padding: 12px 0 24px 0;
     }
 

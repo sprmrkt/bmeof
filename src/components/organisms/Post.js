@@ -4,14 +4,17 @@ import PropTypes from "prop-types";
 import Accordion from "../atoms/Accordion";
 import PostHolder from "./PostHolder";
 import {useStore} from "../../utils/store";
-import classNames from "classnames";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 
 const ExternalLink = styled.p`
   text-decoration: 0;
   transition: color 0.5s linear;
   font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
+  a {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      cursor: none;
+    }
+  }
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
       display: inline-block;

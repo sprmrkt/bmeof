@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {ReactComponent as PlayButton} from '../../assets/svg/play.inline.svg';
@@ -8,6 +8,12 @@ const Holder = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  
+  button {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      cursor: none;
+    }
+  }
 
   img {
     position: relative;

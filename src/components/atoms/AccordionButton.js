@@ -19,6 +19,9 @@ const Button = styled.button`
   transition: all 0.25s linear;
   white-space: normal;
   position: relative;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    cursor: none;
+  }
 
   .large-text-outer {
     @media ( ${props => props.theme.breakpoints.md} ) {
@@ -78,7 +81,7 @@ function AccordionButton({open, toggleOpen, text}) {
     if(textRef.current) {
       setHorizontalHoverDistance(textRef.current.clientWidth - size.width)
     }
-  }, [size.width, textRef]);
+  }, [size.width, textRef, setHorizontalHoverDistance]);
 
   const buttonClasses = classNames('accordion-title', {
     'is-open': open,
