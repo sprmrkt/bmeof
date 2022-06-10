@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import WorkInfoMedia from "./WorkInfoMedia";
 import PrismicRichText from "../atoms/PrismicRichText";
+import {useStore} from "../../utils/store";
 
 const timeout = 1000
 
@@ -25,6 +26,9 @@ const Holder = styled.div`
     left: 0;
     opacity: 0;
     z-index: 200;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      cursor: none;
+    }
   }
 
   &.work-info-appear,
@@ -101,6 +105,7 @@ const TextHolder = styled.div`
 `;
 
 function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText, tags}) {
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
 
   const handleClick = (i) => {
     setTimeout(() => {
@@ -139,7 +144,11 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText, tags})
               i={i} />
           )}
         </Images>
-        <button className="close-info" onClick={() => closeHandler()} title="Close info" />
+        <button
+          className="close-info"
+          onMouseEnter={() => setCustomCursorIsVisible(true)}
+          onMouseLeave={() => setCustomCursorIsVisible(false)}
+          onClick={() => closeHandler()} title="Close info" />
       </Holder>
     </CSSTransition>
   )

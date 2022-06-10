@@ -74,8 +74,6 @@ function AccordionButton({open, toggleOpen, text}) {
   const setHorizontalHoverDistance = useStore(state => state.setHorizontalHoverDistance);
   const size = useWindowSize();
   const textRef = useRef(null);
-  const horizontalHoverDistance = useStore(state => state.horizontalHoverDistance);
-  const horizontalHover = useStore(state => state.horizontalHover);
 
   useEffect(() => {
     if(textRef.current) {
@@ -84,8 +82,7 @@ function AccordionButton({open, toggleOpen, text}) {
   }, [size.width, textRef, setHorizontalHoverDistance]);
 
   const buttonClasses = classNames('accordion-title', {
-    'is-open': open,
-    'is-moved': horizontalHover
+    'is-open': open
   });
 
   return (
@@ -93,7 +90,6 @@ function AccordionButton({open, toggleOpen, text}) {
       className={buttonClasses}
       onMouseEnter={() => setCustomCursorIsVisible(true)}
       onMouseLeave={() => setCustomCursorIsVisible(false)}
-      moveDistance={horizontalHoverDistance}
       onClick={() => toggleOpen()}>
       <span ref={textRef} className={`large-text-outer ${useHorizontalHoverClassname()}`}>
         <span className="large-text-wrapper">{text}</span>
