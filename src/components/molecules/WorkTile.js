@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
 import {useStore} from "../../utils/store";
+import PrismicRichText from "../atoms/PrismicRichText";
 
 const Holder = styled.div`
   width: 100%;
@@ -222,7 +223,9 @@ const WorkTile = ({
           onClick={() => toggleProjectHandler(true)}>
           <div className="media-holder"><MediaItem media={{image: image, video: video}} /></div>
           <Excerpt>
-            <div className="inner p-large"><p>{excerpt.text || 'Add an excerpt in the CMS'}</p></div>
+            <div className="inner p-large">
+              <PrismicRichText render={excerpt.richText}/>
+            </div>
           </Excerpt>
         </button>
       </ImageHolder>

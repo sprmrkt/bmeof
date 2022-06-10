@@ -139,7 +139,7 @@ export const homePageQuery = graphql`
                                         text
                                     }
                                     excerpt {
-                                        text
+                                        richText
                                     }
                                     body {
                                         ... on PrismicWorkDataBodyStandardSlide {
