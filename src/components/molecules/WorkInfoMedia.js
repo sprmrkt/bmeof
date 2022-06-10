@@ -7,6 +7,7 @@ import {useStore} from "../../utils/store";
 const Holder = styled.div`
   button {
     position: relative;
+    display: block;
     width: 100%;
     height: 0;
     padding-bottom: 66.6667%;
