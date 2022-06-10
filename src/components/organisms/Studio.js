@@ -11,14 +11,21 @@ const Holder = styled.div`
 `;
 
 const Inner = styled.div`
+  min-height: calc(var(--windowHeight) - 48px - 48px);
   padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  grid-gap: 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px;
+    grid-template-columns: 3fr 3fr 2fr;
   }
 
-  > :first-child { margin-top: 0; }
-
-  > :last-child { margin-bottom: 0; }
+  > div {
+    > :first-child { margin-top: 0; }
+    > :last-child { margin-bottom: 0; }
+  }
 `;
 
 const GalleryHolder = styled.div`
@@ -39,6 +46,9 @@ function Studio(props) {
           prismicStudio {
               data {
                   text {
+                      richText
+                  }
+                  text_2 {
                       richText
                   }
                   gallery {
@@ -75,7 +85,8 @@ function Studio(props) {
   return (
     <Holder>
       <Inner className="p-large">
-        <PrismicRichText render={data.prismicStudio.data.text.richText} />
+        <div><PrismicRichText render={data.prismicStudio.data.text.richText} /></div>
+        <div><PrismicRichText render={data.prismicStudio.data.text_2.richText} /></div>
       </Inner>
       <GalleryHolder>
         <PostGallery slides={data.prismicStudio.data.gallery} closeHandler={props.closeHandler} />

@@ -77,8 +77,8 @@ const GlobalStyle = createGlobalStyle`
     line-height: 27px;
     margin-bottom: 0.75em;
     @media ( ${props => props.theme.breakpoints.md} ) {
-      font-size: 72px;
-      line-height: 66px;
+      font-size: 40px;
+      line-height: 36px;
     }
   }
 
@@ -314,7 +314,7 @@ const GlobalStyle = createGlobalStyle`
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 
     &.horizontal-hover-is-on {
-        transition: transform 1.5s cubic-bezier(.15,1.03,.72,.94);
+      transition: transform 1.5s cubic-bezier(.15, 1.03, .72, .94);
       @media ( ${props => props.theme.breakpoints.md} ) {
         transform: translateX(calc((var(--horizontalHoverDistance) + 24px) * -1));
       }
