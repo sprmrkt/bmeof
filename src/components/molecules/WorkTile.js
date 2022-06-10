@@ -5,6 +5,7 @@ import classNames from "classnames";
 import MediaItem from "./MediaItem";
 import {useStore} from "../../utils/store";
 import PrismicRichText from "../atoms/PrismicRichText";
+import WorkTileText from "./WorkTileText";
 
 const Holder = styled.div`
   width: 100%;
@@ -94,105 +95,6 @@ const ImageHolder = styled.div`
   }
 `;
 
-const TextHolder = styled.div`
-  height: 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 2fr;
-  grid-gap: 24px;
-  align-items: center;
-  width: 100%;
-  transition: all 0.25s;
-  margin-top: 0;
-
-  &.open {
-    background-color: ${props => props.theme.colors.white};
-    position: relative;
-    border-bottom: 1px solid;
-    width: calc(100% + 30px);
-    margin-left: -15px;
-    padding: 0 15px;
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      width: calc(200% + 72px);
-      margin-left: -24px;
-      padding: 0 24px;
-      margin-top: ${props => props.textMarginWhenOpen}px;
-      &.even {
-        margin-left: calc(-100% - 48px);
-      }
-    }
-  }
-
-  .title {
-    grid-column: span 3;
-  }
-
-  .close {
-    &.close-info-secondary {
-      display: none;
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        display: block;
-      }
-    }
-
-    button {
-      text-align: right;
-    }
-  }
-
-  p {
-    margin: 0;
-
-    button {
-      line-height: 48px;
-      width: 100%;
-      text-align: left;
-      display: inline-block;
-    }
-  }
-
-  .info, .close {
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  .info {
-    .info-text {
-      display: none;
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        display: inline;
-      }
-    }
-
-    .close-info-text {
-      display: none;
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        display: inline;
-      }
-    }
-
-    .close-info-cross {
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        display: none;
-      }
-    }
-  }
-
-  &.open {
-    .title {
-      grid-column: span 1;
-    }
-
-    .info, .close {
-      opacity: 1;
-    }
-  }
-
-  .close-info-cross {
-    transform: rotate(45deg);
-    display: inline-block;
-  }
-`;
-
 const WorkTile = ({
                     toggleProjectHandler,
                     toggleInfoHandler,
@@ -224,41 +126,20 @@ const WorkTile = ({
           <div className="media-holder"><MediaItem media={{image: image, video: video}} /></div>
           <Excerpt>
             <div className="inner p-large">
-              <PrismicRichText render={excerpt.richText}/>
+              <PrismicRichText render={excerpt.richText} />
             </div>
           </Excerpt>
         </button>
       </ImageHolder>
-      <TextHolder className={tileClasses} textMarginWhenOpen={textMarginWhenOpen}>
-        <p className="title">
-          <button
-            onMouseEnter={() => setCustomCursorIsVisible(true)}
-            onMouseLeave={() => setCustomCursorIsVisible(false)}
-            onClick={() => toggleProjectHandler(true)}>{title}</button>
-        </p>
-        {open && <p className="info">
-          <button
-            onMouseEnter={() => setCustomCursorIsVisible(true)}
-            onMouseLeave={() => setCustomCursorIsVisible(false)}
-            onClick={() => toggleInfoHandler()}>
-            {!infoOpen && <><span className="info-text">Project Overview </span><span className="info-plus">+</span></>}
-            {infoOpen && <><span className="close-info-text">Close</span><span className="close-info-cross">+</span></>}
-          </button>
-        </p>}
-        {open && !infoOpen && <p className="close">
-          <button
-            onMouseEnter={() => setCustomCursorIsVisible(true)}
-            onMouseLeave={() => setCustomCursorIsVisible(false)}
-            onClick={() => toggleProjectHandler(false)}>Back</button>
-        </p>}
-        {open && infoOpen && <p className="close close-info-secondary">
-          <button
-            onMouseEnter={() => setCustomCursorIsVisible(true)}
-            onMouseLeave={() => setCustomCursorIsVisible(false)}
-            onClick={() => toggleInfoHandler()} title="Close info"><span className="close-info-cross">+</span>
-          </button>
-        </p>}
-      </TextHolder>
+      <WorkTileText
+        tileClasses={tileClasses}
+        textMarginWhenOpen={textMarginWhenOpen}
+        open={open}
+        toggleProjectHandler={(val)=> toggleProjectHandler(val)}
+        title={title}
+        toggleInfoHandler={(val) => toggleInfoHandler(val)}
+        infoOpen={infoOpen}
+      />
     </Holder>
   )
 };
