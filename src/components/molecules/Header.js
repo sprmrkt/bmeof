@@ -30,13 +30,6 @@ const Holder = styled.header`
       font-size: 15px;
       line-height: 16px;
     }
-
-    br {
-      display: none;
-      @media ( ${props => props.theme.breakpoints.sm} ) {
-        display: inline;
-      }
-    }
   }
 `;
 
