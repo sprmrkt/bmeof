@@ -8,6 +8,18 @@ const Holder = styled.div`
   height: calc(100vh - 48px);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  
+  .close-copyright {
+    padding-bottom: 15px;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      padding-bottom: 24px !important;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+  
 `;
 
 const TextHolder = styled.div`

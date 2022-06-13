@@ -7,7 +7,10 @@ import {useStore} from "../../utils/store";
 const Holder = styled.div`
   width: 100%;
   overflow: hidden;
-  padding: 0 0 0 12px;
+  padding: 0;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    padding: 0 0 0 12px;
+  }
   
   &.has-border {
     border-top: 1px solid;
