@@ -5,6 +5,7 @@ import Accordion from "../atoms/Accordion";
 import PostHolder from "./PostHolder";
 import {useStore} from "../../utils/store";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
+import {manualKerning} from "../../utils/helpers";
 
 const ExternalLink = styled.p`
   text-decoration: 0;
@@ -43,7 +44,7 @@ function Post({post}) {
         target="_blank"
         rel="noopener noreferrer">
         <span className={`large-text-outer ${hoverClass}`}>
-          <span className="large-text-wrapper">{title.text}</span>
+          <span className="large-text-wrapper">{manualKerning(title.text)}</span>
         </span>
       </a>
     </ExternalLink>
