@@ -5,7 +5,7 @@ import PrismicRichText from "../atoms/PrismicRichText";
 import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
-  height: calc(100vh - 48px);
+  height: calc(100% - 48px);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   
