@@ -320,6 +320,24 @@ const GlobalStyle = createGlobalStyle`
       }
     }
   }
+  
+  .manual-kerning {
+      .letter-w + .letter-o {
+          margin-left: -1.5vw;
+      }
+      .letter-o + .letter-r {
+          margin-left: -0.25vw;
+      }
+      .letter-a + .letter-g {
+          margin-left: -2.2vw;
+      }
+      .letter-d + .letter-i {
+          margin-left: -0.5vw;
+      }
+      .letter-i + .letter-o {
+          margin-left: -0.5vw;
+      }
+  }
 `
 
 export default GlobalStyle

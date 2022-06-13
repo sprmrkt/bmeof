@@ -5,6 +5,7 @@ import classNames from "classnames";
 import {useStore} from "../../utils/store";
 import {useWindowSize} from "react-use";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
+import {manualKerning} from "../../utils/helpers";
 
 const Button = styled.button`
   font-size: 33.5vw;
@@ -92,7 +93,7 @@ function AccordionButton({open, toggleOpen, text}) {
       onMouseLeave={() => setCustomCursorIsVisible(false)}
       onClick={() => toggleOpen()}>
       <span ref={textRef} className={`large-text-outer ${useHorizontalHoverClassname()}`}>
-        <span className="large-text-wrapper">{text}</span>
+        <span className="large-text-wrapper">{manualKerning(text)}</span>
       </span>
     </Button>
   )
