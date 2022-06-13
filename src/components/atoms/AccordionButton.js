@@ -35,7 +35,7 @@ const Button = styled.button`
     transition: transform 0.25s linear;
   }
 
-  &:hover {
+  .manual-kerning:hover {
     @media ( ${props => props.theme.breakpoints.md} ) {
       color: rgb(70, 70, 70);
     }

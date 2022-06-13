@@ -22,7 +22,7 @@ const ExternalLink = styled.p`
     }
   }
 
-  &:hover {
+  .manual-kerning:hover {
     @media ( ${props => props.theme.breakpoints.md} ) {
       color: rgb(70, 70, 70);
     }
