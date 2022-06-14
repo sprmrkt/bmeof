@@ -29,27 +29,31 @@ const TextHolder = styled.div`
         margin-left: calc(-100% - 48px);
       }
     }
+
     .title-toggle-project {
       display: none;
-      @media( ${props => props.theme.breakpoints.md} ) {
+      @media ( ${props => props.theme.breakpoints.md} ) {
         display: initial;
       }
     }
+
     .title-toggle-info {
       display: block;
-      @media( ${props => props.theme.breakpoints.md} ) {
+      @media ( ${props => props.theme.breakpoints.md} ) {
         display: none;
       }
     }
+
     .title {
       grid-column: span 2;
-      @media( ${props => props.theme.breakpoints.md} ) {
+      @media ( ${props => props.theme.breakpoints.md} ) {
         grid-column: span 1;
       }
     }
+
     .toggle-info, .toggle-project {
-       opacity: 1;
-     }
+      opacity: 1;
+    }
   }
 
   p {
@@ -62,7 +66,7 @@ const TextHolder = styled.div`
       display: inline-block;
     }
   }
-  
+
 `;
 
 const Title = styled.p`
@@ -71,10 +75,11 @@ const Title = styled.p`
   .plus {
     display: inline-block;
     transition: transform 0.25s;
+    transform: translateY(0.025rem);
   }
-  
+
   &.infoOpen .plus {
-    transform: rotate(45deg);
+    transform: translateY(0.05rem) rotate(45deg);
   }
 `;
 
@@ -85,27 +90,30 @@ const ToggleInfo = styled.p`
     opacity: 0;
     transition: opacity 0.25s;
   }
+
+  button {
+    display: inline-flex !important;
+    align-items: center;
+
+    .cross {
+      display: inline-block;
+      transition: transform 0.25s;
+      margin-left: 0.5rem;
+      transform: translateY(0.025rem);
+    }
+  }
+
+  &.infoOpen {
+    .cross {
+      transform: translateY(0.05rem) rotate(45deg);
+    }
+  }
 `;
 
 const ToggleProject = styled.p`
   opacity: 0;
   transition: opacity 0.25s;
   justify-self: end;
-  button {
-    .cross {
-      transform: rotate(45deg);
-      display: inline-block;
-      @media( ${props => props.theme.breakpoints.md} ) {
-        display: none;
-      }
-    }
-    .back {
-      display: none;
-      @media( ${props => props.theme.breakpoints.md} ) {
-        display: inline;
-      }
-    }
-  }
 `;
 
 
@@ -141,20 +149,18 @@ function WorkTileText({
 
       </Title>
 
-      {open && <ToggleInfo className="toggle-info">
+      {open && <ToggleInfo className={`toggle-info ${infoOpen ? 'infoOpen' : ''}`}>
         <button
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleInfoHandler()}>{infoOpen ? 'Close' : 'Project Overview +'}</button>
+          onClick={() => toggleInfoHandler()}><span>Project Overview</span><span className="cross">+</span></button>
       </ToggleInfo>}
 
       {open && <ToggleProject className="toggle-project">
         <button
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleProjectHandler(false)}>
-          <span className="cross mobile">+</span>
-          <span className="back desktop">Back</span>
+          onClick={() => toggleProjectHandler(false)}>Back
         </button>
       </ToggleProject>}
 
