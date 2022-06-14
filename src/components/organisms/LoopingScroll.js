@@ -6,8 +6,14 @@ import {useWindowSize} from "react-use";
 import PropTypes from "prop-types";
 import LockScroll from "../atoms/LockScroll";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
+import {manualKerning} from "../../utils/helpers";
 
 const Holder = styled.div`
+  display: none;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    display: block;
+  }
+
   .inner {
     position: relative;
     width: 100%;
@@ -35,24 +41,16 @@ function LoopingScroll({fixedBody}) {
   const size = useWindowSize();
 
   useEffect(() => {
-    if (!tl.current && fixedBody) {
+    if (!tl.current && fixedBody && size.width > 575) {
       tl.current = st.create({
         trigger: holderRef.current,
         start: "top top",
         scroller: fixedBody.current,
         // markers: true,
         onEnter: () => {
-          // console.log('scroll-enter-start', fixedBody.current.scrollTop, fixedBody.current.style.overflow)
-          if (size.width < 575) {
-            setTimeout(() => fixedBody.current.scrollTop = 0, 1);
-          } else {
             fixedBody.current.scrollTop = 0
-          }
-          // console.log('scroll-enter-end', fixedBody.current.scrollTop, fixedBody.current.style.overflow)
         }
       });
-    } else {
-      st.refresh()
     }
 
   }, [size, tl, holderRef, st, fixedBody])
@@ -65,14 +63,7 @@ function LoopingScroll({fixedBody}) {
         <p className="h1">
         <span className={`large-text-outer ${useHorizontalHoverClassname()}`}>
         <span className="large-text-wrapper">
-        Bear<br />
-        Meets<br />
-        Eagle<br />
-        On<br />
-        Fire<br />
-        Work<br />
-        Studio<br />
-        Hello<br />
+          {manualKerning('Bear meets eagle on fire work studio hello')}
         </span>
         </span>
         </p>
@@ -81,7 +72,7 @@ function LoopingScroll({fixedBody}) {
   )
 }
 
-LockScroll.propTypes = {
+LoopingScroll.propTypes = {
   fixedBody: PropTypes.object,
 };
 

@@ -136,7 +136,10 @@ function Accordion({button, children, id, fixedBody}) {
     if (React.isValidElement(child)) {
       return React.cloneElement(child, {
         parentUid: uid,
-        closeHandler: () => setOpen(false),
+        closeHandler: () => {
+          setOpen(false)
+          setAccordionIsOpen(false)
+        },
       });
     }
     return child;
