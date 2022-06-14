@@ -9,6 +9,7 @@ import {useStore} from "../../utils/store";
 import classNames from "classnames";
 import AccordionButton from "./AccordionButton";
 import useScrollTrigger from "../../hooks/useScrollTrigger";
+import {useWindowSize} from "react-use";
 
 
 const scrollTime = 500;
@@ -102,6 +103,7 @@ function Accordion({button, children, id, fixedBody}) {
   const projectIsOpen = useStore(state => state.projectIsOpen);
   const setAccordionIsOpen = useStore(state => state.setAccordionIsOpen);
   const {st} = useScrollTrigger();
+  const size = useWindowSize();
 
   // Set scroll on open
   useEffect(() => {
@@ -116,6 +118,10 @@ function Accordion({button, children, id, fixedBody}) {
       });
     }
   }, [open, uid, uid2, projectIsOpen]);
+
+  useEffect(() => {
+    setOpen(false)
+  }, [size]);
 
   useEffect(() => {
     if (!open) {
