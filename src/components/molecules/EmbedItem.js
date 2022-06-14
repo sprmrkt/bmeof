@@ -9,10 +9,10 @@ const Holder = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  display: none;
-  @media( ${props => props.theme.breakpoints.md} ) {
-    display: block;
-  }
+  // display: none;
+  // @media( ${props => props.theme.breakpoints.md} ) {
+  //   display: block;
+  // }
 
   button {
     @media ( ${props => props.theme.breakpoints.md} ) {
@@ -105,10 +105,10 @@ function EmbedItem({embed, canPlay, poster, caption}) {
           {caption && <p className="caption">{caption.text}</p>}
         </button>
       </Holder>
-      <MobileEmbedHolder>
-        <div className="mobile-embed-holder" dangerouslySetInnerHTML={{__html: embed.html}} />
-        {caption && <p className="caption">{caption.text}</p>}
-      </MobileEmbedHolder>
+      {/*<MobileEmbedHolder>*/}
+      {/*  <div className="mobile-embed-holder" dangerouslySetInnerHTML={{__html: embed.html}} />*/}
+      {/*  {caption && <p className="caption">{caption.text}</p>}*/}
+      {/*</MobileEmbedHolder>*/}
     </>
   )
 
