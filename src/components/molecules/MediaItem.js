@@ -24,6 +24,7 @@ const Holder = styled.div`
     display: block;
   }
   .caption {
+    position: relative;
     text-align: left;
     font-weight: 100;
     font-size: 12px;
