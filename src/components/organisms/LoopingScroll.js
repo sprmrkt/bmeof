@@ -40,8 +40,9 @@ function LoopingScroll({fixedBody}) {
   const size = useWindowSize();
 
   useEffect(() => {
-    if (!tl.current && fixedBody && size.width > 575) {
+    if (!tl.current && fixedBody && size.width > 767) {
       tl.current = st.create({
+        id: 'looping-scroll',
         trigger: holderRef.current,
         start: "top top",
         scroller: fixedBody.current,
@@ -50,6 +51,16 @@ function LoopingScroll({fixedBody}) {
             fixedBody.current.scrollTop = 0
         }
       });
+      // console.log('doesnt exist, creating it');
+    } else if (size.width > 767 && st.getById('looping-scroll')) {
+      st.getById('looping-scroll').refresh();
+      // console.log('exists desktop, so we are refeshing it');
+    } else if( size.width < 768 && st.getById('looping-scroll')) {
+      st.getById('looping-scroll').kill();
+      tl.current = null;
+      // console.log('exists mobile, so we are killing it and resetting tl ref');
+    } else {
+      // console.log('doesnt exist mobile');
     }
 
   }, [size, tl, holderRef, st, fixedBody])
