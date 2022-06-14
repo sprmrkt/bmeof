@@ -40,6 +40,7 @@ const OverlayHolder = styled.div`
     .cross {
       left: auto;
       right: 15px;
+      transform: rotate(45deg);
       @media ( ${props => props.theme.breakpoints.md} ) {
         left: auto;
         right: 24px;
@@ -130,7 +131,7 @@ function EmbedOverlay() {
           setEmbedIsOpen(false);
         }}>
           <p className="exit-text">Exit full screen</p>
-          <p className="cross">X</p>
+          <p className="cross">+</p>
         </button>
         <div dangerouslySetInnerHTML={{__html: embedContent}} />
       </OverlayHolder>
