@@ -8,6 +8,7 @@ import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname
 import {manualKerning} from "../../utils/helpers";
 
 const ExternalLink = styled.p`
+  overflow: hidden;
   text-decoration: 0;
   transition: color 0.5s linear;
   font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";

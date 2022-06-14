@@ -4,7 +4,6 @@ import Header from "../molecules/Header";
 import useScrollTrigger from "../../hooks/useScrollTrigger";
 import {useWindowSize} from "react-use";
 import PropTypes from "prop-types";
-import LockScroll from "../atoms/LockScroll";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 import {manualKerning} from "../../utils/helpers";
 

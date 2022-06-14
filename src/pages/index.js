@@ -13,6 +13,7 @@ import Header from "../components/molecules/Header";
 import {useWindowSize} from "react-use";
 import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 import {useStore} from "../utils/store";
+import MobileAccordionOpenEndSpace from "../components/atoms/MobileAccordionOpenEndSpace";
 
 const Holder = styled.div`
   position: fixed;
@@ -35,19 +36,10 @@ const Inner = styled.div`
   }
 `;
 
-const Spacer = styled.div`
-  width: 100%;
-  height: var(--windowHeight);
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    display: none;
-  }
-`;
-
 function IndexPage({data}) {
   const fixedBodyRef = useRef(null);
   const {work, primary_gallery} = data.prismicHomepage.data;
   const size = useWindowSize();
-  const accordionIsOpen = useStore(state => state.accordionIsOpen);
 
   useEffect(() => {
     document.documentElement.style.setProperty('--windowHeight', `${size.height}px`);
@@ -88,7 +80,7 @@ function IndexPage({data}) {
             <Extras
               fixedBody={fixedBodyRef} />
             <LoopingScroll fixedBody={fixedBodyRef} />
-            {accordionIsOpen && <Spacer/>}
+            <MobileAccordionOpenEndSpace/>
           </Inner>
         </main>
       </Holder>
