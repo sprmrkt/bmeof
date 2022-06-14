@@ -337,6 +337,15 @@ const GlobalStyle = createGlobalStyle`
       .letter-i + .letter-o {
           margin-left: -0.5vw;
       }
+      .letter-b + .letter-e {
+          margin-left: -0.5vw;
+      }
+      .letter-m + .letter-e {
+          margin-left: -0.75vw;
+      }
+      .letter-e + .letter-e {
+          margin-left: -0.5vw;
+      }
   }
 `
 
