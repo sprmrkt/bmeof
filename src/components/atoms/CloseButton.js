@@ -45,21 +45,11 @@ const Copyright = styled.div`
     padding: 0 24px 48px;
   }
   p {
-    font-size: 12px;
-    line-height: 12px;
     margin-bottom: 12px;
     margin-top: 0;
     @media( ${props => props.theme.breakpoints.md} ) {
-      font-size: 15px;
-      line-height: 16px;
       margin-bottom: 24px;
       margin-top: 0;
-    }
-    br {
-      display: none;
-      @media( ${props => props.theme.breakpoints.sm} ) {
-        display: inline;
-      }
     }
   }
 `;
