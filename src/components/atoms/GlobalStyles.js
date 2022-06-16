@@ -36,7 +36,6 @@ const GlobalStyle = createGlobalStyle`
   ol, ul, li,
   code, kbd, pre, samp {
     font-family: 'Gotham', "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    line-height: 16px;
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -65,10 +64,13 @@ const GlobalStyle = createGlobalStyle`
   h3, .h3,
   h4, .h4,
   h5, .h5,
-  h6, .h6 { font-size: 15px; }
-
-  .p, p, li {
-    font-size: 15px;
+  h6, .h6, .p, p, li {
+    font-size: 13px;
+    line-height: 14px;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      font-size: 15px;
+      line-height: 16px;
+    }
   }
 
   .p-large p, p.large {
@@ -293,13 +295,17 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
 
     font-family: inherit;
-    font-size: 15px;
     text-decoration: none;
     white-space: nowrap;
     border: none;
 
     color: inherit;
     background-color: transparent;
+
+    font-size: 13px;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      font-size: 15px;
+    }
 
     &:hover {
       text-decoration: none;
@@ -320,32 +326,39 @@ const GlobalStyle = createGlobalStyle`
       }
     }
   }
-  
+
   .manual-kerning {
-      .letter-w + .letter-o {
-          margin-left: -1.5vw;
-      }
-      .letter-o + .letter-r {
-          margin-left: -0.25vw;
-      }
-      .letter-a + .letter-g {
-          margin-left: -2.2vw;
-      }
-      .letter-d + .letter-i {
-          margin-left: -0.5vw;
-      }
-      .letter-i + .letter-o {
-          margin-left: -0.5vw;
-      }
-      .letter-b + .letter-e {
-          margin-left: -0.5vw;
-      }
-      .letter-m + .letter-e {
-          margin-left: -0.75vw;
-      }
-      .letter-e + .letter-e {
-          margin-left: -0.5vw;
-      }
+    .letter-w + .letter-o {
+      margin-left: -1.5vw;
+    }
+
+    .letter-o + .letter-r {
+      margin-left: -0.25vw;
+    }
+
+    .letter-a + .letter-g {
+      margin-left: -2.2vw;
+    }
+
+    .letter-d + .letter-i {
+      margin-left: -0.5vw;
+    }
+
+    .letter-i + .letter-o {
+      margin-left: -0.5vw;
+    }
+
+    .letter-b + .letter-e {
+      margin-left: -0.5vw;
+    }
+
+    .letter-m + .letter-e {
+      margin-left: -0.75vw;
+    }
+
+    .letter-e + .letter-e {
+      margin-left: -0.5vw;
+    }
   }
 `
 

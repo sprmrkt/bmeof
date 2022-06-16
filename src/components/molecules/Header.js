@@ -22,15 +22,6 @@ const Holder = styled.header`
       width: 75px;
     }
   }
-
-  p {
-    font-size: 12px;
-    line-height: 12px;
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      font-size: 15px;
-      line-height: 16px;
-    }
-  }
 `;
 
 function Header() {
