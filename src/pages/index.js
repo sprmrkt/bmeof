@@ -12,8 +12,6 @@ import GalleryHolder from "../components/molecules/GalleryHolder";
 import Header from "../components/molecules/Header";
 import {useWindowSize} from "react-use";
 import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
-import {useStore} from "../utils/store";
-import MobileAccordionOpenEndSpace from "../components/atoms/MobileAccordionOpenEndSpace";
 
 const Holder = styled.div`
   position: fixed;
@@ -80,7 +78,6 @@ function IndexPage({data}) {
             <Extras
               fixedBody={fixedBodyRef} />
             <LoopingScroll fixedBody={fixedBodyRef} />
-            <MobileAccordionOpenEndSpace/>
           </Inner>
         </main>
       </Holder>

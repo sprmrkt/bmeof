@@ -102,7 +102,6 @@ function Accordion({button, children, id, fixedBody}) {
   const uid2 = id + '-' + uuidv4();
   const projectIsOpen = useStore(state => state.projectIsOpen);
   const setAccordionIsOpen = useStore(state => state.setAccordionIsOpen);
-  const {st} = useScrollTrigger();
   const size = useWindowSize();
 
   // Set scroll on open
@@ -123,14 +122,6 @@ function Accordion({button, children, id, fixedBody}) {
     setOpen(false)
   }, [size]);
 
-  useEffect(() => {
-    if (!open) {
-      const myRefresh = setTimeout(() => {
-        st.refresh()
-      }, scrollTime + timeout + 500);
-      return () => clearTimeout(myRefresh);
-    }
-  }, [open, st]);
 
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
