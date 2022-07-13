@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from "prop-types";
 import {CSSTransition} from "react-transition-group";
 import {useStore} from "../../utils/store";
 
@@ -113,8 +112,9 @@ function EmbedOverlay() {
   const setEmbedIsOpen = useStore(state => state.setEmbedIsOpen)
   const embedContent = useStore(state => state.embedContent)
   const setEmbedContent = useStore(state => state.setEmbedContent)
+  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
 
-  if(!embedContent) return null;
+  if (!embedContent) return null;
 
   return (
     <CSSTransition
@@ -126,10 +126,13 @@ function EmbedOverlay() {
       classNames="overlay-holder"
     >
       <OverlayHolder>
-        <button className="close" onClick={() => {
-          setEmbedContent(null);
-          setEmbedIsOpen(false);
-        }}>
+        <button className="close"
+                onMouseEnter={() => setCustomCursorIsVisible(true)}
+                onMouseLeave={() => setCustomCursorIsVisible(false)}
+                onClick={() => {
+                  setEmbedContent(null);
+                  setEmbedIsOpen(false);
+                }}>
           <p className="exit-text">Exit full screen</p>
           <p className="cross">+</p>
         </button>
