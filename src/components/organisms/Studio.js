@@ -30,9 +30,16 @@ const Inner = styled.div`
   grid-gap: 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px;
-    grid-template-columns: 3fr 3fr 2fr;
   }
 
+  p {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      margin-bottom: 0.75em;
+      font-size: 40px;
+      line-height: 36px;
+    }
+  }
   > div {
     > :first-child { margin-top: 0; }
 
@@ -96,7 +103,7 @@ function Studio(props) {
   `)
   return (
     <Holder>
-      <Inner className="p-large">
+      <Inner className="p">
         <div><PrismicRichText render={data.prismicStudio.data.text.richText} /></div>
         <div><PrismicRichText render={data.prismicStudio.data.text_2.richText} /></div>
       </Inner>
