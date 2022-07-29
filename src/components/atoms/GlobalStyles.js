@@ -74,11 +74,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .p-large p, p.large {
-    font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 30px;
-    line-height: 27px;
+    font-size: 13px;
+    line-height: 14px;
     margin-bottom: 0.75em;
     @media ( ${props => props.theme.breakpoints.md} ) {
+      font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       font-size: 40px;
       line-height: 36px;
     }

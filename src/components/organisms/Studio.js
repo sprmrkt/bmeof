@@ -30,9 +30,8 @@ const Inner = styled.div`
   grid-gap: 24px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px;
-    grid-template-columns: 3fr 3fr 2fr;
   }
-
+  
   > div {
     > :first-child { margin-top: 0; }
 
@@ -96,7 +95,7 @@ function Studio(props) {
   `)
   return (
     <Holder>
-      <Inner className="p-large">
+      <Inner className="p-large p-large-mobile">
         <div><PrismicRichText render={data.prismicStudio.data.text.richText} /></div>
         <div><PrismicRichText render={data.prismicStudio.data.text_2.richText} /></div>
       </Inner>
