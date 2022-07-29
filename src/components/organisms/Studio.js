@@ -95,7 +95,7 @@ function Studio(props) {
   `)
   return (
     <Holder>
-      <Inner className="p-large p-large-mobile">
+      <Inner className="p-large">
         <div><PrismicRichText render={data.prismicStudio.data.text.richText} /></div>
         <div><PrismicRichText render={data.prismicStudio.data.text_2.richText} /></div>
       </Inner>
