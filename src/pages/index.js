@@ -12,6 +12,9 @@ import GalleryHolder from "../components/molecules/GalleryHolder";
 import Header from "../components/molecules/Header";
 import {useWindowSize} from "react-use";
 import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
+import useHorizontalHoverClassname from "../hooks/useHorizontalHoverClassname";
+import {manualKerning} from "../utils/helpers";
+import HeadingOne from "../components/molecules/HeadingOne";
 
 const Holder = styled.div`
   position: fixed;
@@ -51,12 +54,13 @@ function IndexPage({data}) {
         <Header />
         <main>
           <Inner>
-            <Accordion
-              fixedBody={fixedBodyRef}
-              id="title"
-              button="Bear meets eagle on fire">
-              <GalleryHolder slides={primary_gallery} />
-            </Accordion>
+            <HeadingOne/>
+            {/*<Accordion*/}
+            {/*  fixedBody={fixedBodyRef}*/}
+            {/*  id="title"*/}
+            {/*  button="Bear meets eagle on fire">*/}
+            {/*  <GalleryHolder slides={primary_gallery} />*/}
+            {/*</Accordion>*/}
             <Accordion
               fixedBody={fixedBodyRef}
               id="work"
