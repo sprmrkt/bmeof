@@ -55,12 +55,6 @@ function IndexPage({data}) {
         <main>
           <Inner>
             <HeadingOne/>
-            {/*<Accordion*/}
-            {/*  fixedBody={fixedBodyRef}*/}
-            {/*  id="title"*/}
-            {/*  button="Bear meets eagle on fire">*/}
-            {/*  <GalleryHolder slides={primary_gallery} />*/}
-            {/*</Accordion>*/}
             <Accordion
               fixedBody={fixedBodyRef}
               id="work"
@@ -81,6 +75,12 @@ function IndexPage({data}) {
             </Accordion>
             <Extras
               fixedBody={fixedBodyRef} />
+            <Accordion
+              fixedBody={fixedBodyRef}
+              id="gravy"
+              button="Gravy">
+              <GalleryHolder slides={primary_gallery} />
+            </Accordion>
             <LoopingScroll fixedBody={fixedBodyRef} />
           </Inner>
         </main>
