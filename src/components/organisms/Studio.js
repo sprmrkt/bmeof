@@ -31,7 +31,7 @@ const Inner = styled.div`
   @media ( ${props => props.theme.breakpoints.md} ) {
     padding: 24px;
   }
-  
+
   > div {
     > :first-child { margin-top: 0; }
 
@@ -100,7 +100,7 @@ function Studio(props) {
         <div><PrismicRichText render={data.prismicStudio.data.text_2.richText} /></div>
       </Inner>
       <GalleryHolder>
-        <PostGallery slides={data.prismicStudio.data.gallery} closeHandler={props.closeHandler} />
+        <PostGallery slides={props.slides} closeHandler={props.closeHandler} />
       </GalleryHolder>
     </Holder>
   )

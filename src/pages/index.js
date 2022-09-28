@@ -65,7 +65,7 @@ function IndexPage({data}) {
               fixedBody={fixedBodyRef}
               id="studio"
               button="Studio">
-              <Studio />
+              <Studio slides={primary_gallery} />
             </Accordion>
             <Accordion
               fixedBody={fixedBodyRef}
