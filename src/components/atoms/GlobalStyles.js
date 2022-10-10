@@ -359,6 +359,17 @@ const GlobalStyle = createGlobalStyle`
     .letter-e + .letter-e {
       margin-left: -0.5vw;
     }
+
+      .letter-r + .letter-a {
+          margin-left: 1.5vw;
+      }
+      .letter-a + .letter-v {
+          margin-left: -5.5vw;
+      }
+
+      .letter-v + .letter-y {
+          margin-left: 1.2vw;
+      }
   }
 `
 

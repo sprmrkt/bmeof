@@ -37,7 +37,7 @@ const Inner = styled.div`
 
 function IndexPage({data}) {
   const fixedBodyRef = useRef(null);
-  const {work, primary_gallery} = data.prismicHomepage.data;
+  const {work} = data.prismicHomepage.data;
   const size = useWindowSize();
 
   useEffect(() => {
@@ -87,33 +87,6 @@ export const homePageQuery = graphql`
     query {
         prismicHomepage {
             data {
-                primary_gallery {
-                    image {
-                        dimensions {
-                            width
-                            height
-                        }
-                        alt
-                        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                        url(imgixParams: {width: 1000})
-                    }
-                    embed_poster {
-                        url
-                    }
-                    video {
-                        url
-                    }
-                    embed {
-                        html
-                        height
-                        width
-                        thumbnail_url
-                        title
-                    }
-                    caption {
-                        text
-                    }
-                }
                 work {
                     work_item {
                         document {

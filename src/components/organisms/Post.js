@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import Accordion from "../atoms/Accordion";
-import PostHolder from "./PostHolder";
 import {useStore} from "../../utils/store";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 import {manualKerning} from "../../utils/helpers";
