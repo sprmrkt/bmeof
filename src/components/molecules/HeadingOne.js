@@ -12,6 +12,12 @@ const Holder = styled.h1`
       display: inline-block;
     }
   }
+
+  .manual-kerning:hover {
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      color: rgb(70, 70, 70);
+    }
+  }
 `;
 
 function HeadingOne() {
