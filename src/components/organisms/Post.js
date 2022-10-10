@@ -6,6 +6,7 @@ import PostHolder from "./PostHolder";
 import {useStore} from "../../utils/store";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 import {manualKerning} from "../../utils/helpers";
+import GalleryHolder from "../molecules/GalleryHolder";
 
 const ExternalLink = styled.p`
   overflow: hidden;
@@ -30,7 +31,7 @@ const ExternalLink = styled.p`
   }
 `;
 
-function Post({post}) {
+function Post({post, fixedBody}) {
   const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   const {title, external_link} = post.data;
   const hoverClass = useHorizontalHoverClassname();
@@ -52,9 +53,10 @@ function Post({post}) {
   )
   return (
     <Accordion
+      fixedBody={fixedBody}
       id={post.uid}
       button={title.text}>
-      <PostHolder post={post} />
+      <GalleryHolder slides={post.data.gallery} />
     </Accordion>
   )
 }

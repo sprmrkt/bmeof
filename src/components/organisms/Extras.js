@@ -2,7 +2,7 @@ import React from 'react';
 import {graphql, useStaticQuery} from "gatsby";
 import Post from "./Post";
 
-function Extras() {
+function Extras({fixedBody}) {
 
   const data = useStaticQuery(graphql`
       query ExtrasQuery {
@@ -63,7 +63,7 @@ function Extras() {
 
   if (data.prismicHomepage.data.extras.length < 1) return null;
 
-  return data.prismicHomepage.data.extras.map((node, i) => <Post key={i} post={node.post.document}/>);
+  return data.prismicHomepage.data.extras.map((node, i) => <Post key={i} post={node.post.document} fixedBody={fixedBody}/>);
 }
 
 export default Extras;

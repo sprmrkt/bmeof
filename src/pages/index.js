@@ -63,7 +63,7 @@ function IndexPage({data}) {
               fixedBody={fixedBodyRef}
               id="studio"
               button="Studio">
-              <Studio slides={primary_gallery} />
+              <Studio />
             </Accordion>
             <Accordion
               fixedBody={fixedBodyRef}
@@ -73,12 +73,6 @@ function IndexPage({data}) {
             </Accordion>
             <Extras
               fixedBody={fixedBodyRef} />
-            <Accordion
-              fixedBody={fixedBodyRef}
-              id="gravy"
-              button="Gravy">
-              <GalleryHolder slides={primary_gallery} />
-            </Accordion>
             <LoopingScroll fixedBody={fixedBodyRef} />
           </Inner>
         </main>
