@@ -1,154 +1,76 @@
-import React, {useEffect, useRef} from "react";
-import Seo from "../components/molecules/Seo";
+import React from "react";
 import styled from "styled-components";
-import Accordion from "../components/atoms/Accordion";
-import WorkList from "../components/organisms/WorkList";
-import LoopingScroll from "../components/organisms/LoopingScroll";
-import Studio from "../components/organisms/Studio";
-import Hello from "../components/organisms/Hello";
-import {graphql} from "gatsby";
-import Extras from "../components/organisms/Extras";
-import GalleryHolder from "../components/molecules/GalleryHolder";
-import Header from "../components/molecules/Header";
-import {useWindowSize} from "react-use";
-import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
-import HeadingOne from "../components/molecules/HeadingOne";
+import logo from "../assets/img/bear.png";
+import Seo from "../components/molecules/Seo";
 
 const Holder = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--windowHeight);
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  @media ( ${props => props.theme.breakpoints.md} ) {
+    padding: 100px;
+  }
 `;
 
 const Inner = styled.div`
-  padding-bottom: 15px;
-  @media ( ${props => props.theme.breakpoints.md} ) {
-    padding-bottom: 0;
-  }
+  width: 100%;
+  max-width: 650px;
 
-  h1, .h1 {
-    margin-left: 12px;
+  p {
+    font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 40px;
+    line-height: 1.1;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      font-size: 60px;
+    }
+    &.link {
+      font-family: 'Gotham', "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 20px;
+      margin-top: 40px;
+    }
   }
 `;
 
-function IndexPage({data}) {
-  const fixedBodyRef = useRef(null);
-  const {work} = data.prismicHomepage.data;
-  const size = useWindowSize();
+const LogoHolder = styled.div`
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  grid-gap: 20px;
+  align-items: center;
+  margin-bottom: 40px;
 
-  useEffect(() => {
-    document.documentElement.style.setProperty('--windowHeight', `${size.height}px`);
-  }, [size]);
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  p {
+    font-size: 20px;
+    line-height: 0.9;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      font-size: 30px;
+    }
+  }
+`;
+
+function IndexPage() {
+
 
   return (
     <>
-      <HorizontalHoverButton/>
-      <Holder id="fixed-body" ref={fixedBodyRef}>
-        <Seo title="Home" />
-        <Header />
-        <main>
-          <Inner>
-            <HeadingOne/>
-            <Accordion
-              fixedBody={fixedBodyRef}
-              id="work"
-              button="Work">
-              <WorkList work={work} />
-            </Accordion>
-            <Accordion
-              fixedBody={fixedBodyRef}
-              id="studio"
-              button="Studio">
-              <Studio />
-            </Accordion>
-            <Accordion
-              fixedBody={fixedBodyRef}
-              id="hello"
-              button="Hello">
-              <Hello />
-            </Accordion>
-            <Extras
-              fixedBody={fixedBodyRef} />
-            <LoopingScroll fixedBody={fixedBodyRef} />
-          </Inner>
-        </main>
+      <Seo title="Bear Meets Eagle On Fire" />
+      <Holder>
+        <Inner>
+          <LogoHolder>
+            <img src={logo} alt="Bear meets eagle on fire" />
+            <p>Bear Meets <br/>Eagle On Fire</p>
+          </LogoHolder>
+          <p>We help good people and brands think and make things differently.</p>
+          <p className="link"><a href="mailto:micah@beareaglefire.com" target="_blank" rel="noopener noreferrer">say hello</a></p>
+        </Inner>
       </Holder>
     </>
   )
 }
 
 export default IndexPage;
-
-export const homePageQuery = graphql`
-    query {
-        prismicHomepage {
-            data {
-                work {
-                    work_item {
-                        document {
-                            ... on PrismicWork {
-                                id
-                                tags
-                                data {
-                                    info {
-                                        richText
-                                    }
-                                    tile_image {
-                                        alt
-                                        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                                    }
-                                    tile_video {
-                                        url
-                                    }
-                                    title {
-                                        text
-                                    }
-                                    excerpt {
-                                        richText
-                                    }
-                                    body {
-                                        ... on PrismicWorkDataBodyStandardSlide {
-                                            id
-                                            slice_type
-                                            primary {
-                                                image {
-                                                    dimensions {
-                                                        width
-                                                        height
-                                                    }
-                                                    alt
-                                                    gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                                                    url(imgixParams: {width: 1000})
-                                                }
-                                                embed_poster {
-                                                    url
-                                                }
-                                                video {
-                                                    url
-                                                }
-                                                embed {
-                                                    html
-                                                    height
-                                                    width
-                                                    thumbnail_url
-                                                    title
-                                                }
-                                                caption {
-                                                    text
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
