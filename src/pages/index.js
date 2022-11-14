@@ -22,6 +22,9 @@ const Holder = styled.div`
   height: var(--windowHeight);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  main {
+    overflow: hidden;
+  }
 `;
 
 const Inner = styled.div`
