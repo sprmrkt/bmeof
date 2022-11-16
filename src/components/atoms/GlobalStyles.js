@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     ${(props) => props.theme.fluidType(0)};
+    overscroll-behavior-y: none;
 
     * { box-sizing: border-box; }
   }
@@ -21,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: ${(props) => props.theme.colors.black};
     background-color: ${(props) => props.theme.colors.white};
+    overscroll-behavior-y: none;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -360,16 +362,17 @@ const GlobalStyle = createGlobalStyle`
       margin-left: -0.5vw;
     }
 
-      .letter-r + .letter-a {
-          margin-left: 1.5vw;
-      }
-      .letter-a + .letter-v {
-          margin-left: -5.5vw;
-      }
+    .letter-r + .letter-a {
+      margin-left: 1.5vw;
+    }
 
-      .letter-v + .letter-y {
-          margin-left: 1.2vw;
-      }
+    .letter-a + .letter-v {
+      margin-left: -5.5vw;
+    }
+
+    .letter-v + .letter-y {
+      margin-left: 1.2vw;
+    }
   }
 `
 

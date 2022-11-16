@@ -22,6 +22,7 @@ const Holder = styled.div`
   height: var(--windowHeight);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: none;
   main {
     overflow: hidden;
   }
