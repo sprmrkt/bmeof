@@ -33,30 +33,43 @@ const Holder = styled.div`
 `;
 
 function LoopingScroll({fixedBody}) {
-  const {tl, holderRef, st} = useScrollTrigger();
+  const {tl, holderRef, st, gsap} = useScrollTrigger();
   const size = useWindowSize();
   const accordionIsOpen = useStore(state => state.accordionIsOpen);
 
   useEffect(() => {
+
     if (!tl.current && fixedBody) {
-      tl.current = st.create({
-        id: 'looping-scroll',
-        trigger: holderRef.current,
-        start: "top top",
-        scroller: fixedBody.current,
-        // markers: true,
-        onEnter: () => {
-          // console.log(fixedBody.current.scrollTop)
-          fixedBody.current.scrollTop = 0
-          // console.log('triggered enter')
-          // console.log(fixedBody.current.scrollTop)
-        },
-        onLeave: () => {
-          // console.log(fixedBody.current.scrollTop)
-          fixedBody.current.scrollTop = 0
-          // console.log('triggered end')
-          // console.log(fixedBody.current.scrollTop)
-        }
+      st.config({
+        ignoreMobileResize: true
+      })
+      let mm = gsap.matchMedia();
+      tl.current = mm.add("(min-width: 768px)", () => {
+
+        // this setup code only runs when viewport is at least 800px wide
+        st.create({
+          id: 'looping-scroll',
+          trigger: holderRef.current,
+          start: "top top",
+          scroller: fixedBody.current,
+          markers: true,
+          onEnter: () => {
+            // console.log(fixedBody.current.scrollTop)
+            fixedBody.current.scrollTop = 0
+            // console.log('triggered enter')
+            // console.log(fixedBody.current.scrollTop)
+          },
+          onLeave: () => {
+            // console.log(fixedBody.current.scrollTop)
+            fixedBody.current.scrollTop = 0
+            // console.log('triggered end')
+            // console.log(fixedBody.current.scrollTop)
+          }
+        });
+
+        return () => { // optional
+          // custom cleanup code here (runs when it STOPS matching)
+        };
       });
       // console.log('doesnt exist, creating it');
     } else if (st.getById('looping-scroll')) {
@@ -64,13 +77,13 @@ function LoopingScroll({fixedBody}) {
       // console.log('exists, so we are refreshing it');
     }
 
-  }, [size, tl, holderRef, st, fixedBody])
+  }, [size, tl, holderRef, st, fixedBody, gsap])
 
 
   useEffect(() => {
     if (!accordionIsOpen) {
       const myRefresh = setTimeout(() => {
-        st.getById('looping-scroll').refresh()
+        if (st.getById('looping-scroll')) { st.getById('looping-scroll').refresh() }
         console.log('refreshed after close')
       }, 1500);
       return () => clearTimeout(myRefresh);
