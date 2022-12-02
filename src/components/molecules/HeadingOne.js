@@ -4,6 +4,7 @@ import {manualKerning} from "../../utils/helpers";
 import {Element, scroller} from "react-scroll";
 import {useStore} from "../../utils/store";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const Holder = styled.h1`
   cursor: none;
@@ -20,7 +21,7 @@ const Holder = styled.h1`
   }
 `;
 
-function HeadingOne() {
+function HeadingOne({footer}) {
   const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
   const clickHandler = () => {
     scroller.scrollTo('heading-one-end', {
@@ -38,9 +39,13 @@ function HeadingOne() {
         <span className={`large-text-outer ${useHorizontalHoverClassname()}`}>
           <span className="large-text-wrapper">{manualKerning('Bear meets eagle on fire')}</span>
         </span>
-      <Element name="heading-one-end"></Element>
+      {!footer && <Element name="heading-one-end"></Element>}
     </Holder>
   )
 }
+
+HeadingOne.propTypes = {
+  footer: PropTypes.bool,
+};
 
 export default HeadingOne;

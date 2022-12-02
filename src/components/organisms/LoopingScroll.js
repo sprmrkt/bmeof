@@ -9,7 +9,10 @@ import {manualKerning} from "../../utils/helpers";
 import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
-
+  display: none;
+  @media( ${props => props.theme.breakpoints.md} ) {
+    display: block;
+  }
   .inner {
     position: relative;
     width: 100%;
@@ -52,7 +55,7 @@ function LoopingScroll({fixedBody}) {
           trigger: holderRef.current,
           start: "top top",
           scroller: fixedBody.current,
-          markers: true,
+          // markers: true,
           onEnter: () => {
             // console.log(fixedBody.current.scrollTop)
             fixedBody.current.scrollTop = 0

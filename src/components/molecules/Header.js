@@ -3,7 +3,7 @@ import styled from "styled-components";
 import logo from "../../assets/img/bear.png";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 
-const Holder = styled.header`
+const Holder = styled.div`
   padding: 6px 12px 0 12px;
   display: grid;
   grid-gap: 24px;
