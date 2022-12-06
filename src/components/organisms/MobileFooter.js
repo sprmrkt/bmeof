@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeadingOne from "../molecules/HeadingOne";
-import Header from "../molecules/Header";
 import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
@@ -18,8 +16,6 @@ function MobileFooter() {
   const accordionIsOpen = useStore(state => state.accordionIsOpen);
   return (
     <Holder>
-      <HeadingOne footer/>
-      <Header/>
       {accordionIsOpen && <AccordionOpenSpacer/>}
     </Holder>
   )

@@ -45,6 +45,12 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "G-KRTZLC26QL",
+      },
+    },
+    {
       resolve: 'gatsby-source-prismic',
       options: {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
