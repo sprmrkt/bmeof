@@ -13,6 +13,7 @@ import Header from "../components/molecules/Header";
 import {useWindowSize} from "react-use";
 import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 import HeadingOne from "../components/molecules/HeadingOne";
+import MobileFooter from "../components/organisms/MobileFooter";
 
 const Holder = styled.div`
   position: fixed;
@@ -78,6 +79,7 @@ function IndexPage({data}) {
             <Extras
               fixedBody={fixedBodyRef} />
             <LoopingScroll fixedBody={fixedBodyRef} />
+            <MobileFooter/>
           </Inner>
         </main>
       </Holder>
