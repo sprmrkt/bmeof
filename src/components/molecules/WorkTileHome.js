@@ -13,15 +13,11 @@ const Holder = styled.div`
   background-color: ${(props) => props.theme.colors.white};
   @media (${(props) => props.theme.breakpoints.md}) {
     padding: 24px 12px 0 24px;
-    // min-height: 70vw;
     display: flex;
     flex-direction: column;
     &.even {
       padding: 24px 24px 0 12px;
     }
-  }
-  @media (${(props) => props.theme.breakpoints.lg}) {
-    // min-height: calc(100vh - 96px + 1px);
   }
 
   button {
@@ -44,7 +40,7 @@ const Excerpt = styled.div`
 
   p {
     white-space: normal;
-    margin: 0 24px 24px 0;
+    margin: 16px 24px 24px 16px;
   }
 
   .inner {
@@ -53,7 +49,7 @@ const Excerpt = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    opacity: 0.15;
     transition: opacity 0.25s ease-in-out;
     border-right: 1px solid;
     border-bottom: 1px solid;
@@ -70,7 +66,7 @@ const ImageHolder = styled.div`
       }
 
       .media-holder {
-        opacity: 0;
+        opacity: 0.15;
       }
     }
   }

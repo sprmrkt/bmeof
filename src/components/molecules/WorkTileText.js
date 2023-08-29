@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import {useStore} from "../../utils/store";
+import { useStore } from "../../utils/store";
 
 const TextHolder = styled.div`
   height: 48px;
@@ -14,17 +14,17 @@ const TextHolder = styled.div`
   margin-top: 0;
 
   &.open {
-    background-color: ${props => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.white};
     position: relative;
     border-bottom: 1px solid;
     width: calc(100% + 30px);
     margin-left: -15px;
     padding: 0 15px;
-    @media ( ${props => props.theme.breakpoints.md} ) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       width: calc(200% + 72px);
       margin-left: -24px;
       padding: 0 24px;
-      margin-top: ${props => props.textMarginWhenOpen}px;
+      margin-top: ${(props) => props.textMarginWhenOpen}px;
       &.even {
         margin-left: calc(-100% - 48px);
       }
@@ -32,26 +32,27 @@ const TextHolder = styled.div`
 
     .title-toggle-project {
       display: none;
-      @media ( ${props => props.theme.breakpoints.md} ) {
+      @media (${(props) => props.theme.breakpoints.md}) {
         display: initial;
       }
     }
 
     .title-toggle-info {
       display: block;
-      @media ( ${props => props.theme.breakpoints.md} ) {
+      @media (${(props) => props.theme.breakpoints.md}) {
         display: none;
       }
     }
 
     .title {
       grid-column: span 2;
-      @media ( ${props => props.theme.breakpoints.md} ) {
+      @media (${(props) => props.theme.breakpoints.md}) {
         grid-column: span 1;
       }
     }
 
-    .toggle-info, .toggle-project {
+    .toggle-info,
+    .toggle-project {
       opacity: 1;
     }
   }
@@ -66,7 +67,6 @@ const TextHolder = styled.div`
       display: inline-block;
     }
   }
-
 `;
 
 const Title = styled.p`
@@ -85,7 +85,7 @@ const Title = styled.p`
 
 const ToggleInfo = styled.p`
   display: none;
-  @media ( ${props => props.theme.breakpoints.md} ) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     display: block;
     opacity: 0;
     transition: opacity 0.25s;
@@ -114,58 +114,65 @@ const ToggleProject = styled.p`
   opacity: 0;
   transition: opacity 0.25s;
   justify-self: end;
+  padding-right: 1rem;
 `;
 
-
 function WorkTileText({
-                        tileClasses,
-                        textMarginWhenOpen,
-                        open,
-                        toggleProjectHandler,
-                        title,
-                        toggleInfoHandler,
-                        infoOpen
-                      }) {
-
-  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+  tileClasses,
+  textMarginWhenOpen,
+  open,
+  toggleProjectHandler,
+  title,
+  toggleInfoHandler,
+  infoOpen,
+}) {
+  const setCustomCursorIsVisible = useStore(
+    (state) => state.setCustomCursorIsVisible
+  );
   return (
     <TextHolder className={tileClasses} textMarginWhenOpen={textMarginWhenOpen}>
-
-      <Title className={`title ${infoOpen ? 'infoOpen' : ''}`}>
-
+      <Title className={`title ${infoOpen ? "infoOpen" : ""}`}>
         <button
           className="title-toggle-project"
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleProjectHandler(!open)}>{title}</button>
+          // onClick={() => toggleProjectHandler(!open)}
+        >
+          {title}
+        </button>
 
-        {open && <button
-          className="mobile title-toggle-info"
-          onMouseEnter={() => setCustomCursorIsVisible(true)}
-          onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleInfoHandler(!infoOpen)}>
-          <span>{title}</span> <span className="plus">+</span>
-        </button>}
-
+        {open && (
+          <button
+            className="mobile title-toggle-info"
+            onMouseEnter={() => setCustomCursorIsVisible(true)}
+            onMouseLeave={() => setCustomCursorIsVisible(false)}
+            // onClick={() => toggleInfoHandler(!infoOpen)}
+          >
+            <span>{title}</span> <span className="plus">+</span>
+          </button>
+        )}
       </Title>
-
+      {/* 
       {open && <ToggleInfo className={`toggle-info ${infoOpen ? 'infoOpen' : ''}`}>
         <button
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
           onClick={() => toggleInfoHandler()}><span>Project Overview</span><span className="cross">+</span></button>
-      </ToggleInfo>}
+      </ToggleInfo>} */}
 
-      {open && <ToggleProject className="toggle-project">
-        <button
-          onMouseEnter={() => setCustomCursorIsVisible(true)}
-          onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleProjectHandler(false)}>Back
-        </button>
-      </ToggleProject>}
-
+      {open && (
+        <ToggleProject className="toggle-project">
+          <button
+            onMouseEnter={() => setCustomCursorIsVisible(true)}
+            onMouseLeave={() => setCustomCursorIsVisible(false)}
+            // onClick={() => toggleProjectHandler(false)}
+          >
+            Back
+          </button>
+        </ToggleProject>
+      )}
     </TextHolder>
-  )
+  );
 }
 
 WorkTileText.propTypes = {
@@ -179,3 +186,4 @@ WorkTileText.propTypes = {
 };
 
 export default WorkTileText;
+

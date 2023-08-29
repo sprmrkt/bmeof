@@ -32,7 +32,7 @@ const SpareTileBorder = styled.div`
 
 function WorkList(props) {
   const holderRef = useRef(null);
-  console.log("props", props.work);
+  // console.log("props", props.work);
   return (
     <Holder ref={holderRef} id="work-content">
       <Grid>
