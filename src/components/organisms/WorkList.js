@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-// import WorkHolder from "../molecules/WorkHolder";
+import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from "prop-types";
 import CloseButton from "../atoms/CloseButton";
-import { Link } from "gatsby";
 
 const Holder = styled.div`
   height: 100%;
@@ -38,16 +37,14 @@ function WorkList(props) {
     <Holder ref={holderRef} id="work-content">
       <Grid>
         {props.work.map((node, i) => (
-          // <WorkHolder
-          //   key={i}
-          //   {...props}
-          //   parent={holderRef}
-          //   node={node.work_item.document}
-          //   even={i % 2 === 1}
-          // />
-          <Link to={`/work/${node.work_item.document.id}`}>
-            {node.work_item.document.data.title.text}
-          </Link>
+          <WorkHolder
+            key={i}
+            {...props}
+            parent={holderRef}
+            node={node.work_item.document}
+            even={i % 2 === 1}
+            uid={`/work/${node.work_item.document.id}`}
+          />
         ))}
         {props.work.length % 2 === 1 && <SpareTileBorder />}
       </Grid>

@@ -1,21 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
-import WorkTile from "../components/molecules/WorkTile";
 import WorkGallery from "../components/molecules/WorkGallery";
-import WorkContentAnimation from "../components/molecules/WorkContentAnimation";
 import WorkInfo from "../components/molecules/WorkInfo";
-import { scroller, Element } from "react-scroll";
+import { Element } from "react-scroll";
 import useWindowSize from "../hooks/useWindowSize";
 import { useStore } from "../utils/store";
 import { convertToSlug } from "../utils/helpers";
 import { graphql } from "gatsby";
+import WorkTilePage from "../components/molecules/WorkTilePage";
 
 function WorkHolderTemplate({ data }) {
   console.log("data", data);
 
-  const [openContent, setOpenContent] = useState(false);
-  const [openInfo, setOpenInfo] = useState(false);
+  const [openContent, setOpenContent] = useState(true);
+  const [openInfo, setOpenInfo] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
   const { title, tile_image, tile_video, info, body, excerpt } =
     data.prismicWork.data;
@@ -42,7 +40,7 @@ function WorkHolderTemplate({ data }) {
     <>
       <Element name={itemUid}>
         <div ref={tileHolder}>
-          <WorkTile
+          <WorkTilePage
             title={title.text}
             tileHeight={tileHeight}
             tileWidth={tileWidth}
@@ -51,7 +49,6 @@ function WorkHolderTemplate({ data }) {
             video={tile_video}
             open={openContent}
             infoOpen={openInfo}
-            // even={props.even}
             toggleProjectHandler={(toggle) => toggleHandler(toggle)}
             toggleInfoHandler={() => setOpenInfo(!openInfo)}
           />
@@ -83,17 +80,6 @@ function WorkHolderTemplate({ data }) {
     </>
   );
 }
-
-// WorkHolderTemplate.propTypes = {
-//   parent: PropTypes.object.isRequired,
-//   parentUid: PropTypes.string.isRequired,
-//   even: PropTypes.bool,
-//   node: PropTypes.object.isRequired,
-// };
-
-// WorkHolderTemplate.defaultProps = {
-//   even: false,
-// };
 
 export default WorkHolderTemplate;
 

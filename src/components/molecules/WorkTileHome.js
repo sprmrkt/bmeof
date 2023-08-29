@@ -5,7 +5,6 @@ import classNames from "classnames";
 import MediaItem from "./MediaItem";
 import { useStore } from "../../utils/store";
 import PrismicRichText from "../atoms/PrismicRichText";
-import WorkTileText from "./WorkTileText";
 
 const Holder = styled.div`
   width: 100%;
@@ -95,19 +94,7 @@ const ImageHolder = styled.div`
   }
 `;
 
-const WorkTile = ({
-  toggleProjectHandler,
-  toggleInfoHandler,
-  open,
-  infoOpen,
-  even,
-  title,
-  image,
-  video,
-  excerpt,
-  tileHeight,
-  tileWidth,
-}) => {
+const WorkTileHome = ({ open, even, image, video, excerpt }) => {
   const setCustomCursorIsVisible = useStore(
     (state) => state.setCustomCursorIsVisible
   );
@@ -115,37 +102,29 @@ const WorkTile = ({
     open: open,
     even: even,
   });
-  const textMarginWhenOpen = Math.max(tileHeight - tileWidth - 48 + 12, 0);
 
   return (
     <Holder className={tileClasses}>
-      {/* <ImageHolder>
+      <ImageHolder>
         <button
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleProjectHandler(true)}>
-          <div className="media-holder"><MediaItem media={{image: image, video: video}} /></div>
+        >
+          <div className="media-holder">
+            <MediaItem media={{ image: image, video: video }} />
+          </div>
           <Excerpt>
             <div className="inner p-large">
               <PrismicRichText render={excerpt.richText} />
             </div>
           </Excerpt>
         </button>
-      </ImageHolder> */}
-      <WorkTileText
-        tileClasses={tileClasses}
-        textMarginWhenOpen={textMarginWhenOpen}
-        open={open}
-        toggleProjectHandler={(val) => toggleProjectHandler(val)}
-        title={title}
-        toggleInfoHandler={(val) => toggleInfoHandler(val)}
-        infoOpen={infoOpen}
-      />
+      </ImageHolder>
     </Holder>
   );
 };
 
-WorkTile.propTypes = {
+WorkTileHome.propTypes = {
   toggleProjectHandler: PropTypes.func.isRequired,
   toggleInfoHandler: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
@@ -159,5 +138,5 @@ WorkTile.propTypes = {
   tileWidth: PropTypes.number,
 };
 
-export default WorkTile;
+export default WorkTileHome;
 
