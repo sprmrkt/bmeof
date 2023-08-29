@@ -1,22 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import WorkGallery from "../components/molecules/WorkGallery";
 import WorkInfo from "../components/molecules/WorkInfo";
-import { Element } from "react-scroll";
-import useWindowSize from "../hooks/useWindowSize";
-import { useStore } from "../utils/store";
 import { convertToSlug } from "../utils/helpers";
 import { graphql } from "gatsby";
 import WorkTileText from "../components/molecules/WorkTileText";
 
 function WorkHolderTemplate({ data }) {
-  const [openContent, setOpenContent] = useState(true);
   const [openInfo, setOpenInfo] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const { title, tile_image, tile_video, info, body, excerpt } =
-    data.prismicWork.data;
+  const { title, info, body } = data.prismicWork.data;
   const itemUid = convertToSlug(title.text) + "-" + uuidv4();
-  const size = useWindowSize();
 
   const toggleHandler = (toggle) => {
     setOpenInfo(true);
@@ -40,6 +34,7 @@ function WorkHolderTemplate({ data }) {
 
       {!openInfo && (
         <WorkGallery
+          project={true}
           itemUid={itemUid}
           slides={body}
           currentSlide={currentSlide}

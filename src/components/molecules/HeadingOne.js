@@ -1,7 +1,7 @@
 import React from "react";
 import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 import { manualKerning } from "../../utils/helpers";
-import { Element, scroller } from "react-scroll";
+import { Element } from "react-scroll";
 import { useStore } from "../../utils/store";
 import styled from "styled-components";
 import PropTypes from "prop-types";

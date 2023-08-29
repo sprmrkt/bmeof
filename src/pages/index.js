@@ -6,6 +6,7 @@ import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 import HeadingOne from "../components/molecules/HeadingOne";
 import MobileFooter from "../components/organisms/MobileFooter";
 import HomeLink from "../components/atoms/HomeLink";
+import Extras from "../components/organisms/Extras";
 
 const Holder = styled.div`
   position: fixed;
@@ -46,7 +47,7 @@ function IndexPage() {
             <HomeLink link="/work" text="WORK" />
             <HomeLink link="/studio" text="STUDIO" />
             <HomeLink link="/hello" text="HELLO" />
-            <HomeLink link="/gravy" text="GRAVY" />
+            <Extras />
             <MobileFooter />
           </Inner>
         </main>

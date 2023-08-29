@@ -7,6 +7,7 @@ import { useSwipeable } from "react-swipeable";
 import { useStore } from "../../utils/store";
 import StackedImages from "./StackedImages";
 import NavHolder from "../atoms/NavHolder";
+import { Link } from "gatsby";
 
 const Holder = styled.div`
   height: 100%;
@@ -111,6 +112,8 @@ function WorkGallery({
   slides,
   currentSlide,
   setCurrentSlide,
+  extra,
+  project,
 }) {
   const firstUpdate = useRef(true);
   const [isNext, setIsNext] = useState(true);
@@ -175,7 +178,8 @@ function WorkGallery({
   return (
     <Holder className="work-gallery">
       <NavHolder>
-        <button onClick={() => closeHandler()}>Back</button>
+        {project && <button onClick={() => closeHandler()}>Back</button>}
+        {extra && <Link to="/">Back</Link>}
       </NavHolder>
 
       <Gallery {...swipeHandlers}>
@@ -235,6 +239,8 @@ WorkGallery.propTypes = {
   currentSlide: PropTypes.number.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
   slides: PropTypes.array.isRequired,
+  extra: PropTypes.bool,
+  project: PropTypes.bool,
 };
 
 export default WorkGallery;

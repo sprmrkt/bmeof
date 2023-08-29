@@ -16,6 +16,16 @@ exports.createPages = ({ actions, graphql }) => {
           id
         }
       }
+      posts: allPrismicPost {
+        nodes {
+          id
+          data {
+            external_link {
+              url
+            }
+          }
+        }
+      }
     }
   `).then((result) => {
     if (result.errors) {
@@ -32,6 +42,19 @@ exports.createPages = ({ actions, graphql }) => {
           id: post.id,
         },
       });
+    });
+
+    const extraPosts = result.data.posts.nodes;
+    extraPosts.forEach((post) => {
+      if (!post.data.external_link.url || post.data.external_link.url === "") {
+        createPage({
+          path: `/extras/${post.id}`,
+          component: path.resolve("./src/templates/ExtrasTemplate.js"),
+          context: {
+            id: post.id,
+          },
+        });
+      }
     });
   });
 };
