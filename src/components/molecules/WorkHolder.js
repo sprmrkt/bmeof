@@ -37,15 +37,13 @@ function WorkHolder(props) {
               even={props.even}
             />
           </div>
-        </Element>
+        </Element>{" "}
       </Link>
     </>
   );
 }
 
 WorkHolder.propTypes = {
-  parent: PropTypes.object.isRequired,
-  parentUid: PropTypes.string.isRequired,
   even: PropTypes.bool,
   node: PropTypes.object.isRequired,
 };

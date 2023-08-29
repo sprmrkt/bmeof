@@ -90,7 +90,7 @@ const ImageHolder = styled.div`
   }
 `;
 
-const WorkTileHome = ({ open, even, image, video, excerpt }) => {
+const WorkTileHome = ({ title, open, even, image, video, excerpt }) => {
   const setCustomCursorIsVisible = useStore(
     (state) => state.setCustomCursorIsVisible
   );
@@ -116,15 +116,12 @@ const WorkTileHome = ({ open, even, image, video, excerpt }) => {
           </Excerpt>
         </button>
       </ImageHolder>
+      <p>{title}</p>
     </Holder>
   );
 };
 
 WorkTileHome.propTypes = {
-  toggleProjectHandler: PropTypes.func.isRequired,
-  toggleInfoHandler: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  infoOpen: PropTypes.bool.isRequired,
   even: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   excerpt: PropTypes.object.isRequired,

@@ -2,11 +2,9 @@ import React, { useRef } from "react";
 import styled from "styled-components";
 import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from "prop-types";
-import CloseButton from "../atoms/CloseButton";
 
 const Holder = styled.div`
   height: 100%;
-  overflow: scroll;
   -webkit-overflow-scrolling: touch;
   .close-button {
     border-top: 1px solid;
@@ -32,7 +30,6 @@ const SpareTileBorder = styled.div`
 
 function WorkList(props) {
   const holderRef = useRef(null);
-  // console.log("props", props.work);
   return (
     <Holder ref={holderRef} id="work-content">
       <Grid>
@@ -40,7 +37,6 @@ function WorkList(props) {
           <WorkHolder
             key={i}
             {...props}
-            parent={holderRef}
             node={node.work_item.document}
             even={i % 2 === 1}
             uid={`/work/${node.work_item.document.id}`}
@@ -48,13 +44,11 @@ function WorkList(props) {
         ))}
         {props.work.length % 2 === 1 && <SpareTileBorder />}
       </Grid>
-      <CloseButton closeHandler={props.closeHandler} border={false} />
     </Holder>
   );
 }
 
 WorkList.propTypes = {
-  parentUid: PropTypes.string,
   closeHandler: PropTypes.func,
   work: PropTypes.array.isRequired,
 };

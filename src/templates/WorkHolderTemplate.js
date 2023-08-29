@@ -7,11 +7,9 @@ import useWindowSize from "../hooks/useWindowSize";
 import { useStore } from "../utils/store";
 import { convertToSlug } from "../utils/helpers";
 import { graphql } from "gatsby";
-import WorkTilePage from "../components/molecules/WorkTilePage";
+import WorkTileText from "../components/molecules/WorkTileText";
 
 function WorkHolderTemplate({ data }) {
-  console.log("data", data);
-
   const [openContent, setOpenContent] = useState(true);
   const [openInfo, setOpenInfo] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -19,64 +17,36 @@ function WorkHolderTemplate({ data }) {
     data.prismicWork.data;
   const itemUid = convertToSlug(title.text) + "-" + uuidv4();
   const size = useWindowSize();
-  const setProjectIsOpen = useStore((state) => state.setProjectIsOpen);
-  const tileHolder = useRef(null);
-  const [tileHeight, setTileHeight] = useState(0);
-  const [tileWidth, setTileWidth] = useState(0);
-
-  useEffect(() => {
-    if (tileHolder.current) {
-      setTileHeight(tileHolder.current.clientHeight);
-      setTileWidth(tileHolder.current.clientWidth);
-    }
-  }, [size, setTileHeight, setTileWidth, tileHolder]);
 
   const toggleHandler = (toggle) => {
-    setOpenContent(toggle);
-    setProjectIsOpen(toggle);
+    setOpenInfo(true);
   };
 
   return (
     <>
-      <Element name={itemUid}>
-        <div ref={tileHolder}>
-          <WorkTilePage
-            title={title.text}
-            tileHeight={tileHeight}
-            tileWidth={tileWidth}
-            excerpt={excerpt}
-            image={tile_image}
-            video={tile_video}
-            open={openContent}
-            infoOpen={openInfo}
-            toggleProjectHandler={(toggle) => toggleHandler(toggle)}
-            toggleInfoHandler={() => setOpenInfo(!openInfo)}
+      {openInfo && (
+        <>
+          <WorkTileText title={title.text} />
+          <WorkInfo
+            infoText={info}
+            tags={data.prismicWork.tags}
+            setCurrentSlide={(i) => setCurrentSlide(i)}
+            open={openInfo}
+            closeHandler={() => setOpenInfo(false)}
+            slides={body}
           />
-        </div>
-      </Element>
-      {/* <WorkContentAnimation
-        // {...props}
-        open={openContent}
-        itemUid={itemUid}
-        tileHeight={tileHeight}
-      > */}
-      <WorkInfo
-        infoText={info}
-        tags={data.prismicWork.tags}
-        setCurrentSlide={(i) => setCurrentSlide(i)}
-        open={openInfo}
-        closeHandler={() => setOpenInfo(false)}
-        slides={body}
-      />
-      <WorkGallery
-        itemUid={itemUid}
-        slides={body}
-        currentSlide={currentSlide}
-        setCurrentSlide={(i) => setCurrentSlide(i)}
-        closeHandler={(toggle) => toggleHandler(toggle)}
-        // closeParentHandler={() => props.closeHandler()}
-      />
-      {/* </WorkContentAnimation> */}
+        </>
+      )}
+
+      {!openInfo && (
+        <WorkGallery
+          itemUid={itemUid}
+          slides={body}
+          currentSlide={currentSlide}
+          setCurrentSlide={(i) => setCurrentSlide(i)}
+          closeHandler={(toggle) => toggleHandler(toggle)}
+        />
+      )}
     </>
   );
 }
