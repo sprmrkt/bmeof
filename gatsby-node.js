@@ -24,7 +24,6 @@ exports.createPages = ({ actions, graphql }) => {
 
     // Create Work pages
     const workPosts = result.data.work.nodes;
-    console.log("work", workPosts);
     workPosts.forEach((post) => {
       createPage({
         path: `/work/${post.id}`,

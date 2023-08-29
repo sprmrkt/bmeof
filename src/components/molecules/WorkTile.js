@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
-import {useStore} from "../../utils/store";
+import { useStore } from "../../utils/store";
 import PrismicRichText from "../atoms/PrismicRichText";
 import WorkTileText from "./WorkTileText";
 
@@ -11,24 +11,24 @@ const Holder = styled.div`
   width: 100%;
   padding: 15px 15px 0 15px;
   border-top: 1px solid;
-  background-color: ${props => props.theme.colors.white};
-  @media ( ${props => props.theme.breakpoints.md} ) {
+  background-color: ${(props) => props.theme.colors.white};
+  @media (${(props) => props.theme.breakpoints.md}) {
     padding: 24px 12px 0 24px;
-    min-height: 70vw;
+    // min-height: 70vw;
     display: flex;
     flex-direction: column;
     &.even {
       padding: 24px 24px 0 12px;
     }
   }
-  @media ( ${props => props.theme.breakpoints.lg} ) {
-    min-height: calc(100vh - 96px + 1px);
+  @media (${(props) => props.theme.breakpoints.lg}) {
+    // min-height: calc(100vh - 96px + 1px);
   }
 
   button {
     padding: 0;
     border: none;
-    @media ( ${props => props.theme.breakpoints.md} ) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       cursor: none;
     }
   }
@@ -62,7 +62,7 @@ const Excerpt = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  @media ( ${props => props.theme.breakpoints.md} ) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     &:hover {
       ${Excerpt} {
         .inner {
@@ -96,29 +96,30 @@ const ImageHolder = styled.div`
 `;
 
 const WorkTile = ({
-                    toggleProjectHandler,
-                    toggleInfoHandler,
-                    open,
-                    infoOpen,
-                    even,
-                    title,
-                    image,
-                    video,
-                    excerpt,
-                    tileHeight,
-                    tileWidth
-                  }) => {
-  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+  toggleProjectHandler,
+  toggleInfoHandler,
+  open,
+  infoOpen,
+  even,
+  title,
+  image,
+  video,
+  excerpt,
+  tileHeight,
+  tileWidth,
+}) => {
+  const setCustomCursorIsVisible = useStore(
+    (state) => state.setCustomCursorIsVisible
+  );
   const tileClasses = classNames({
     open: open,
     even: even,
-  })
+  });
   const textMarginWhenOpen = Math.max(tileHeight - tileWidth - 48 + 12, 0);
 
   return (
-    <Holder
-      className={tileClasses}>
-      <ImageHolder>
+    <Holder className={tileClasses}>
+      {/* <ImageHolder>
         <button
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
@@ -130,18 +131,18 @@ const WorkTile = ({
             </div>
           </Excerpt>
         </button>
-      </ImageHolder>
+      </ImageHolder> */}
       <WorkTileText
         tileClasses={tileClasses}
         textMarginWhenOpen={textMarginWhenOpen}
         open={open}
-        toggleProjectHandler={(val)=> toggleProjectHandler(val)}
+        toggleProjectHandler={(val) => toggleProjectHandler(val)}
         title={title}
         toggleInfoHandler={(val) => toggleInfoHandler(val)}
         infoOpen={infoOpen}
       />
     </Holder>
-  )
+  );
 };
 
 WorkTile.propTypes = {
@@ -159,3 +160,4 @@ WorkTile.propTypes = {
 };
 
 export default WorkTile;
+

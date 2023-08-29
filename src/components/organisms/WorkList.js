@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import WorkHolder from "../molecules/WorkHolder";
+// import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from "prop-types";
 import CloseButton from "../atoms/CloseButton";
 import { Link } from "gatsby";
