@@ -6,13 +6,15 @@ import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname
 import { manualKerning } from "../../utils/helpers";
 import HomeLink from "../atoms/HomeLink";
 
-const ExternalLink = styled.p`
+const ExternalLink = styled.div`
   overflow: hidden;
   text-decoration: 0;
   transition: color 0.5s linear;
   font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   a {
+    line-height: 0.8;
+
     @media (${(props) => props.theme.breakpoints.md}) {
       cursor: none;
     }
@@ -30,7 +32,7 @@ const ExternalLink = styled.p`
   }
 `;
 
-function Post({ post, fixedBody }) {
+function Post({ post }) {
   const setCustomCursorIsVisible = useStore(
     (state) => state.setCustomCursorIsVisible
   );

@@ -12,8 +12,8 @@ a {
   line-height: 0.8;
   text-transform: uppercase;
   letter-spacing: -0.025em;
-  display: block;
   overflow: hidden;
+  display: block;
   width: 100%;
   text-align: left;
   padding-left: 12px;
