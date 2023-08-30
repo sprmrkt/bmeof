@@ -144,14 +144,14 @@ function WorkGallery({
     }
   }, [currentSlide, isNext, slides, setCustomCursorContent]);
 
-  const handleClose = () => {
-    if (closeParentHandler) {
-      setTimeout(() => {
-        closeParentHandler();
-      }, 1500);
-    }
-    closeHandler(false);
-  };
+  // const handleClose = () => {
+  //   if (closeParentHandler) {
+  //     setTimeout(() => {
+  //       closeParentHandler();
+  //     }, 1500);
+  //   }
+  //   closeHandler(false);
+  // };
 
   const handlePrev = (current) => {
     setIsNext(false);
