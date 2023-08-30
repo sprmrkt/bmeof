@@ -1,7 +1,7 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
-const linkResolver = require('./src/utils/linkResolver');
+});
+const linkResolver = require("./src/utils/linkResolver");
 
 module.exports = {
   siteMetadata: {
@@ -21,14 +21,21 @@ module.exports = {
     "gatsby-plugin-layout",
     `gatsby-plugin-sitemap`,
     {
-      resolve: 'gatsby-plugin-svgr',
+      resolve: "gatsby-plugin-snipcart-advanced",
+      options: {
+        publicApiKey: process.env.GATSBY_SNIPCART_API_KEY,
+        useSideCart: true,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-svgr",
       options: {
         prettier: true,
         svgo: true,
         svgoConfig: {
           plugins: [
             {
-              name: 'prefixIds',
+              name: "prefixIds",
               active: true,
             },
           ],
@@ -51,7 +58,7 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-prismic',
+      resolve: "gatsby-source-prismic",
       options: {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
         accessToken: process.env.PRISMIC_ACCESS_TOKEN,
@@ -75,4 +82,5 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
+
