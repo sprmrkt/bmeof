@@ -1,17 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import {graphql, useStaticQuery} from "gatsby";
+import React from "react";
+import styled from "styled-components";
+import { graphql, useStaticQuery } from "gatsby";
 import PrismicRichText from "../atoms/PrismicRichText";
 import PostGallery from "../molecules/PostGallery";
 
 const Holder = styled.div`
   height: calc(100% - 48px);
-  overflow: scroll;
   -webkit-overflow-scrolling: touch;
 
   .close-copyright {
     padding-bottom: 15px;
-    @media ( ${props => props.theme.breakpoints.md} ) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       padding-bottom: 24px !important;
     }
 
@@ -28,14 +27,18 @@ const Inner = styled.div`
   grid-template-columns: 1fr;
   align-content: start;
   grid-gap: 24px;
-  @media ( ${props => props.theme.breakpoints.md} ) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     padding: 24px;
   }
 
   > div {
-    > :first-child { margin-top: 0; }
+    > :first-child {
+      margin-top: 0;
+    }
 
-    > :last-child { margin-bottom: 0; }
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -44,7 +47,7 @@ const GalleryHolder = styled.div`
 
   .work-gallery {
     .close-copyright {
-      @media ( ${props => props.theme.breakpoints.md} ) {
+      @media (${(props) => props.theme.breakpoints.md}) {
         padding-bottom: 48px;
       }
     }
@@ -53,57 +56,64 @@ const GalleryHolder = styled.div`
 
 function Studio(props) {
   const data = useStaticQuery(graphql`
-      query BeliefQuery {
-          prismicStudio {
-              data {
-                  text {
-                      richText
-                  }
-                  text_2 {
-                      richText
-                  }
-                  gallery {
-                      image {
-                          dimensions {
-                              width
-                              height
-                          }
-                          alt
-                          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                          url(imgixParams: {width: 1000})
-                      }
-                      embed_poster {
-                          url
-                      }
-                      video {
-                          url
-                      }
-                      embed {
-                          html
-                          height
-                          width
-                          thumbnail_url
-                          title
-                      }
-                      caption {
-                          text
-                      }
-                  }
-              }
+    query BeliefQuery {
+      prismicStudio {
+        data {
+          text {
+            richText
           }
+          text_2 {
+            richText
+          }
+          gallery {
+            image {
+              dimensions {
+                width
+                height
+              }
+              alt
+              gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+              url(imgixParams: { width: 1000 })
+            }
+            embed_poster {
+              url
+            }
+            video {
+              url
+            }
+            embed {
+              html
+              height
+              width
+              thumbnail_url
+              title
+            }
+            caption {
+              text
+            }
+          }
+        }
       }
-  `)
+    }
+  `);
   return (
     <Holder>
       <Inner className="p-large">
-        <div><PrismicRichText render={data.prismicStudio.data.text.richText} /></div>
-        <div><PrismicRichText render={data.prismicStudio.data.text_2.richText} /></div>
+        <div>
+          <PrismicRichText render={data.prismicStudio.data.text.richText} />
+        </div>
+        <div>
+          <PrismicRichText render={data.prismicStudio.data.text_2.richText} />
+        </div>
       </Inner>
       <GalleryHolder>
-        <PostGallery slides={data.prismicStudio.data.gallery} closeHandler={props.closeHandler} />
+        <PostGallery
+          slides={data.prismicStudio.data.gallery}
+          closeHandler={props.closeHandler}
+        />
       </GalleryHolder>
     </Holder>
-  )
+  );
 }
 
 export default Studio;

@@ -1,34 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
-import {useStore} from "../../utils/store";
+import { useStore } from "../../utils/store";
 import PrismicRichText from "../atoms/PrismicRichText";
-import WorkTileText from "./WorkTileText";
 
 const Holder = styled.div`
   width: 100%;
   padding: 15px 15px 0 15px;
   border-top: 1px solid;
-  background-color: ${props => props.theme.colors.white};
-  @media ( ${props => props.theme.breakpoints.md} ) {
+  background-color: ${(props) => props.theme.colors.white};
+  @media (${(props) => props.theme.breakpoints.md}) {
     padding: 24px 12px 0 24px;
-    min-height: 70vw;
     display: flex;
     flex-direction: column;
     &.even {
       padding: 24px 24px 0 12px;
     }
   }
-  @media ( ${props => props.theme.breakpoints.lg} ) {
-    min-height: calc(100vh - 96px + 1px);
-  }
 
   button {
     padding: 0;
     border: none;
-    @media ( ${props => props.theme.breakpoints.md} ) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       cursor: none;
     }
   }
@@ -45,7 +40,7 @@ const Excerpt = styled.div`
 
   p {
     white-space: normal;
-    margin: 0 24px 24px 0;
+    margin: 16px 24px 24px 16px;
   }
 
   .inner {
@@ -54,7 +49,7 @@ const Excerpt = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    opacity: 0.15;
     transition: opacity 0.25s ease-in-out;
     border-right: 1px solid;
     border-bottom: 1px solid;
@@ -62,7 +57,7 @@ const Excerpt = styled.div`
 `;
 
 const ImageHolder = styled.div`
-  @media ( ${props => props.theme.breakpoints.md} ) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     &:hover {
       ${Excerpt} {
         .inner {
@@ -71,7 +66,7 @@ const ImageHolder = styled.div`
       }
 
       .media-holder {
-        opacity: 0;
+        opacity: 0.15;
       }
     }
   }
@@ -95,35 +90,25 @@ const ImageHolder = styled.div`
   }
 `;
 
-const WorkTile = ({
-                    toggleProjectHandler,
-                    toggleInfoHandler,
-                    open,
-                    infoOpen,
-                    even,
-                    title,
-                    image,
-                    video,
-                    excerpt,
-                    tileHeight,
-                    tileWidth
-                  }) => {
-  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+const WorkTileHome = ({ title, open, even, image, video, excerpt }) => {
+  const setCustomCursorIsVisible = useStore(
+    (state) => state.setCustomCursorIsVisible
+  );
   const tileClasses = classNames({
     open: open,
     even: even,
-  })
-  const textMarginWhenOpen = Math.max(tileHeight - tileWidth - 48 + 12, 0);
+  });
 
   return (
-    <Holder
-      className={tileClasses}>
+    <Holder className={tileClasses}>
       <ImageHolder>
         <button
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => toggleProjectHandler(true)}>
-          <div className="media-holder"><MediaItem media={{image: image, video: video}} /></div>
+        >
+          <div className="media-holder">
+            <MediaItem media={{ image: image, video: video }} />
+          </div>
           <Excerpt>
             <div className="inner p-large">
               <PrismicRichText render={excerpt.richText} />
@@ -131,24 +116,12 @@ const WorkTile = ({
           </Excerpt>
         </button>
       </ImageHolder>
-      <WorkTileText
-        tileClasses={tileClasses}
-        textMarginWhenOpen={textMarginWhenOpen}
-        open={open}
-        toggleProjectHandler={(val)=> toggleProjectHandler(val)}
-        title={title}
-        toggleInfoHandler={(val) => toggleInfoHandler(val)}
-        infoOpen={infoOpen}
-      />
+      <p>{title}</p>
     </Holder>
-  )
+  );
 };
 
-WorkTile.propTypes = {
-  toggleProjectHandler: PropTypes.func.isRequired,
-  toggleInfoHandler: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  infoOpen: PropTypes.bool.isRequired,
+WorkTileHome.propTypes = {
   even: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   excerpt: PropTypes.object.isRequired,
@@ -158,4 +131,5 @@ WorkTile.propTypes = {
   tileWidth: PropTypes.number,
 };
 
-export default WorkTile;
+export default WorkTileHome;
+

@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import {CSSTransition} from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import WorkInfoMedia from "./WorkInfoMedia";
 import PrismicRichText from "../atoms/PrismicRichText";
-import {useStore} from "../../utils/store";
+import { useStore } from "../../utils/store";
 
-const timeout = 1000
+const timeout = 1000;
 
 const Holder = styled.div`
   overflow: scroll;
@@ -14,7 +14,7 @@ const Holder = styled.div`
   padding: 0 15px;
   border-bottom: 1px solid;
   position: relative;
-  @media ( ${props => props.theme.breakpoints.sm} ) {
+  @media (${(props) => props.theme.breakpoints.sm}) {
     padding: 0 24px;
   }
 
@@ -26,7 +26,7 @@ const Holder = styled.div`
     left: 0;
     opacity: 0;
     z-index: 200;
-    @media ( ${props => props.theme.breakpoints.md} ) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       cursor: none;
     }
   }
@@ -40,12 +40,12 @@ const Holder = styled.div`
   &.work-info-appear-done,
   &.work-info-enter-active,
   &.work-info-enter-done {
-    height: calc(100vh - 96px);
+    height: calc(100vh - 48px);
     transition: height ${timeout}ms;
   }
 
   &.work-info-exit {
-    height: calc(100vh - 96px);
+    height: calc(100vh - 48px);
   }
 
   &.work-info-exit-active {
@@ -56,7 +56,7 @@ const Holder = styled.div`
 
 const Images = styled.div`
   display: none;
-  @media ( ${props => props.theme.breakpoints.sm} ) {
+  @media (${(props) => props.theme.breakpoints.sm}) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 24px;
@@ -73,46 +73,64 @@ const TextHolder = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 24px;
   padding-top: 15px;
-  @media ( ${props => props.theme.breakpoints.sm} ) {
+  @media (${(props) => props.theme.breakpoints.sm}) {
     padding-top: 24px;
     grid-template-columns: 2fr 1fr 1fr;
   }
-  
-  p, li {
+
+  p,
+  li {
     font-weight: 100;
   }
 
   .tags {
-    @media ( ${props => props.theme.breakpoints.sm} ) {
+    @media (${(props) => props.theme.breakpoints.sm}) {
       grid-column: 3/4;
     }
     ul {
       list-style: none;
       margin: 0;
       padding-left: 0;
-      > :first-child { margin-top: 0; }
-      > :last-child { margin-bottom: 0; }
+      > :first-child {
+        margin-top: 0;
+      }
+      > :last-child {
+        margin-bottom: 0;
+      }
       li {
         color: #808080;
       }
     }
   }
-  
+
   > div {
-    > :first-child { margin-top: 0; }
-    > :last-child { margin-bottom: 0; }
+    > :first-child {
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
-function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText, tags}) {
-  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
+function WorkInfo({
+  open,
+  slides,
+  closeHandler,
+  setCurrentSlide,
+  infoText,
+  tags,
+}) {
+  const setCustomCursorIsVisible = useStore(
+    (state) => state.setCustomCursorIsVisible
+  );
 
   const handleClick = (i) => {
     setTimeout(() => {
       setCurrentSlide(i);
     }, timeout);
     closeHandler();
-  }
+  };
 
   return (
     <CSSTransition
@@ -128,30 +146,37 @@ function WorkInfo({open, slides, closeHandler, setCurrentSlide, infoText, tags})
           <div className="text">
             <PrismicRichText render={infoText.richText} />
           </div>
-          {tags.length > 0 && <div className="tags">
-            <ul>
-              {tags.map((tag, i) => <li key={i}>{tag}</li>)}
-            </ul>
-          </div>}
+          {tags.length > 0 && (
+            <div className="tags">
+              <ul>
+                {tags.map((tag, i) => (
+                  <li key={i}>{tag}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </TextHolder>
         <Images>
-          {slides.map((slide, i) =>
+          {slides.map((slide, i) => (
             <WorkInfoMedia
               key={i}
               handleClick={() => handleClick(i)}
               media={slide.primary}
               totalImages={slides.length}
-              i={i} />
-          )}
+              i={i}
+            />
+          ))}
         </Images>
         <button
           className="close-info"
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
-          onClick={() => closeHandler()} title="Close info" />
+          onClick={() => closeHandler()}
+          title="Close info"
+        />
       </Holder>
     </CSSTransition>
-  )
+  );
 }
 
 WorkInfo.propTypes = {
