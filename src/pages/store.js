@@ -57,7 +57,7 @@ const store = () => {
             className="snipcart-add-item"
             data-item-id="silver-stacking-ring"
             data-item-price={19.99}
-            data-item-url="/store"
+            data-item-url="/"
             data-item-name="Silver Stacking Ring"
             data-item-custom1-name="Size"
             data-item-custom1-options="6|6.5|7|7.5|8|8.5|9"
@@ -109,10 +109,6 @@ const store = () => {
             data-item-price={19.99}
             data-item-url="/"
             data-item-name="Product 3"
-            data-item-custom1-name="Size"
-            data-item-custom1-options="6|6.5|7|7.5|8|8.5|9"
-            data-item-custom2-name="This is a gift"
-            data-item-custom2-type="checkbox"
           >
             Add to cart
           </button>
