@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 
 const Holder = styled.h1`
   cursor: none;
+  line-height: 0.78;
   .large-text-outer {
     @media (${(props) => props.theme.breakpoints.md}) {
       display: inline-block;

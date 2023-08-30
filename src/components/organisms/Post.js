@@ -13,7 +13,7 @@ const ExternalLink = styled.div`
   font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   a {
-    line-height: 0.8;
+    line-height: 0.78;
 
     @media (${(props) => props.theme.breakpoints.md}) {
       cursor: none;

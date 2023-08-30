@@ -8,8 +8,11 @@ import PropTypes from "prop-types";
 const Holder = styled.div`
 
 a {
-  font-size: 33.5vw;
+
   line-height: 0.78;
+
+  font-size: 33.5vw;
+ 
   text-transform: uppercase;
   letter-spacing: -0.025em;
   overflow: hidden;
