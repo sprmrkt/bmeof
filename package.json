@@ -4,7 +4,11 @@
   "description": "Studio site",
   "version": "0.1.0",
   "author": "Will McLean <willmcl@gmail.com>",
+  "resolutions": {
+    "source-map": "^0.8.0-beta.0"
+  },
   "dependencies": {
+    "source-map": "^0.8.0-beta.0",
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "@contentful/rich-text-types": "^15.11.1",
     "@prismicio/react": "^2.1.2",
@@ -75,3 +79,4 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
+
