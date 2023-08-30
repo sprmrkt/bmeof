@@ -1,6 +1,8 @@
 import { GatsbyImage } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
+import Draggable from "react-draggable"; // The default
+import { useWindowSize } from "react-use";
 
 const Holder = styled.div`
   position: absolute;
@@ -8,9 +10,14 @@ const Holder = styled.div`
   height: 100%;
   min-height: 100vh;
 
-  .gatsby-image-wrapper {
-    top: ${(props) => props.randomTopPercentage}%;
-    left: ${(props) => props.randomLeftPercentage}%;
+  .react-draggable {
+    height: 4rem;
+    width: 4rem;
+  }
+`;
+
+const Sticker = styled.div`
+  img {
     position: fixed;
     z-index: 20;
     height: 4rem;
@@ -19,22 +26,30 @@ const Holder = styled.div`
 `;
 
 function Stickers({ data }) {
+  const { height, width } = useWindowSize();
   return (
     <Holder>
       {data.stickers.nodes.map((sticker, i) => {
         // Generate a random topPercentage and leftPercentage for each sticker
         const randomTopPercentage =
-          Math.floor(Math.random() * (90 - 10 + 1)) + 10;
+          Math.floor(Math.random() * (height - 50 + 1)) + height;
         const randomLeftPercentage =
-          Math.floor(Math.random() * (90 - 10 + 1)) + 10;
+          Math.floor(Math.random() * (width - 50 + 1)) + height;
 
         return (
-          <div key={i} top={randomTopPercentage} left={randomLeftPercentage}>
-            <GatsbyImage
-              image={sticker.data.image.gatsbyImageData}
-              alt={sticker.data.image.alt || "sticker"}
-            />
-          </div>
+          <Draggable
+            defaultPosition={{
+              x: randomTopPercentage,
+              y: randomLeftPercentage,
+            }}
+          >
+            <Sticker key={i}>
+              <GatsbyImage
+                image={sticker.data.image.gatsbyImageData}
+                alt={sticker.data.image.alt || "sticker"}
+              />
+            </Sticker>
+          </Draggable>
         );
       })}
     </Holder>

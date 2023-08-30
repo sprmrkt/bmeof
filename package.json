@@ -8,7 +8,6 @@
     "source-map": "^0.8.0-beta.0"
   },
   "dependencies": {
-    "source-map": "^0.8.0-beta.0",
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "@contentful/rich-text-types": "^15.11.1",
     "@prismicio/react": "^2.1.2",
@@ -43,6 +42,7 @@
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-draggable": "^4.4.5",
     "react-helmet": "^6.1.0",
     "react-is": "^17.0.2",
     "react-scroll": "^1.8.5",
@@ -51,6 +51,7 @@
     "react-use": "^17.3.2",
     "showdown": "^2.0.0",
     "smoothscroll-polyfill": "^0.4.4",
+    "source-map": "^0.8.0-beta.0",
     "styled-components": "^5.3.3",
     "uuid": "^8.3.2",
     "yup": "^0.32.11",
@@ -79,4 +80,3 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
-
