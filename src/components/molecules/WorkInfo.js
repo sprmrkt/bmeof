@@ -173,7 +173,7 @@ function WorkInfo({
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
           onClick={() => closeHandler()}
-          title="Close info"
+          title="Close info section"
         />
       </Holder>
     </CSSTransition>
