@@ -7,10 +7,6 @@ import NavHolder from "../components/atoms/NavHolder";
 const Holder = styled.div`
   height: calc(100% - 48px);
   -webkit-overflow-scrolling: touch;
-
-  .snipcart .snipcart-cart-header {
-    padding: 50px;
-  }
 `;
 
 const Inner = styled.div`
