@@ -9,7 +9,7 @@ const Holder = styled.div`
 
 a {
   font-size: 33.5vw;
-  line-height: 0.8;
+  line-height: 0.78;
   text-transform: uppercase;
   letter-spacing: -0.025em;
   overflow: hidden;

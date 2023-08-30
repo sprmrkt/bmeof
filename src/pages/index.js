@@ -47,6 +47,8 @@ function IndexPage() {
             <HomeLink link="/work" text="WORK" />
             <HomeLink link="/studio" text="STUDIO" />
             <HomeLink link="/hello" text="HELLO" />
+            <HomeLink link="/store" text="STORE" />
+
             <Extras />
             <MobileFooter />
           </Inner>
