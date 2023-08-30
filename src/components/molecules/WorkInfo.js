@@ -169,10 +169,11 @@ function WorkInfo({
         </Images>
         <button
           className="close-info"
+          aria-label="close button"
           onMouseEnter={() => setCustomCursorIsVisible(true)}
           onMouseLeave={() => setCustomCursorIsVisible(false)}
           onClick={() => closeHandler()}
-          title="Close info"
+          title="Close info section"
         />
       </Holder>
     </CSSTransition>
@@ -189,3 +190,4 @@ WorkInfo.propTypes = {
 };
 
 export default WorkInfo;
+

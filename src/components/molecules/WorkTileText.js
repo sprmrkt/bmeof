@@ -27,12 +27,8 @@ function WorkTileText({ title }) {
   );
   return (
     <Holder>
-      <p
-        className="title"
-        onMouseEnter={() => setCustomCursorIsVisible(true)}
-        onMouseLeave={() => setCustomCursorIsVisible(false)}
-      >
-        {title}
+      <p className="title">
+        <strong>{title}</strong>
       </p>
 
       <Link
