@@ -25,6 +25,8 @@ const Sticker = styled.div`
     position: fixed;
     cursor: pointer;
     z-index: 20;
+    height: 6rem;
+    width: 6rem;
   }
 `;
 
