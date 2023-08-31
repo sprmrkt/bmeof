@@ -14,11 +14,13 @@ exports.createPages = ({ actions, graphql }) => {
       work: allPrismicWork {
         nodes {
           id
+          uid
         }
       }
       posts: allPrismicPost {
         nodes {
           id
+          uid
           data {
             external_link {
               url
@@ -36,7 +38,7 @@ exports.createPages = ({ actions, graphql }) => {
     const workPosts = result.data.work.nodes;
     workPosts.forEach((post) => {
       createPage({
-        path: `/work/${post.id}`,
+        path: `/work/${post.uid}`,
         component: path.resolve("./src/templates/WorkHolderTemplate.js"),
         context: {
           id: post.id,
@@ -48,7 +50,7 @@ exports.createPages = ({ actions, graphql }) => {
     extraPosts.forEach((post) => {
       if (!post.data.external_link.url || post.data.external_link.url === "") {
         createPage({
-          path: `/extras/${post.id}`,
+          path: `/extras/${post.uid}`,
           component: path.resolve("./src/templates/ExtrasTemplate.js"),
           context: {
             id: post.id,

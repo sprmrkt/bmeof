@@ -39,7 +39,7 @@ function WorkList(props) {
             {...props}
             node={node.work_item.document}
             even={i % 2 === 1}
-            uid={`/work/${node.work_item.document.id}`}
+            uid={`/work/${node.work_item.document.uid}`}
           />
         ))}
         {props.work.length % 2 === 1 && <SpareTileBorder />}
