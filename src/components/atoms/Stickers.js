@@ -32,15 +32,13 @@ const Sticker = styled.div`
 `;
 
 function Stickers({ data }) {
+  const { height, width } = useWindowSize();
+
   const getStickers = (data) => {
     return data.stickers.nodes.map((sticker, i) => {
       // Generate a random yPos and xPos for each sticker
-      const randomYPos = Math.floor(
-        Math.random() * (window.innerHeight - 50 + 1)
-      );
-      const randomXPos = Math.floor(
-        Math.random() * (window.innerWidth - 50 + 1)
-      );
+      const randomYPos = Math.floor(Math.random() * (height - 100 + 1));
+      const randomXPos = Math.floor(Math.random() * (width - 50 + 1));
 
       return (
         <Draggable
