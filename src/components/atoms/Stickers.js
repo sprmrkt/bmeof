@@ -9,10 +9,11 @@ const Holder = styled.div`
   width: 100vw;
   height: 100%;
   min-height: 100vh;
+  z-index: 20;
 
   .react-draggable {
-    height: 4rem;
-    width: 4rem;
+    height: 6rem;
+    width: 6rem;
   }
 `;
 
@@ -24,8 +25,6 @@ const Sticker = styled.div`
     position: fixed;
     cursor: pointer;
     z-index: 20;
-    height: 4rem;
-    width: 4rem;
   }
 `;
 
@@ -42,7 +41,11 @@ function Stickers({ data }) {
 
         return (
           <Draggable
-            positionOffset={{
+            // positionOffset={{
+            //   x: randomTopPercentage,
+            //   y: randomLeftPercentage,
+            // }}
+            defaultPosition={{
               x: randomTopPercentage,
               y: randomLeftPercentage,
             }}

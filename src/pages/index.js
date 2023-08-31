@@ -8,8 +8,6 @@ import MobileFooter from "../components/organisms/MobileFooter";
 import HomeLink from "../components/atoms/HomeLink";
 import Extras from "../components/organisms/Extras";
 import { graphql } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image";
-import { useRandomPercentages } from "../utils/useRandomPercentages";
 import Stickers from "../components/atoms/Stickers";
 
 const Holder = styled.div`
