@@ -17,7 +17,6 @@ a {
   text-transform: uppercase;
   letter-spacing: -0.025em;
   overflow: hidden;
-  display: block;
   width: 100%;
   text-align: left;
   padding-left: 12px;

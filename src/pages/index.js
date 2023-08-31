@@ -7,6 +7,8 @@ import HeadingOne from "../components/molecules/HeadingOne";
 import MobileFooter from "../components/organisms/MobileFooter";
 import HomeLink from "../components/atoms/HomeLink";
 import Extras from "../components/organisms/Extras";
+import { graphql } from "gatsby";
+import Stickers from "../components/atoms/Stickers";
 
 const Holder = styled.div`
   position: fixed;
@@ -34,7 +36,9 @@ const Inner = styled.div`
   }
 `;
 
-function IndexPage() {
+function IndexPage({ data }) {
+  console.log("data", data);
+
   return (
     <>
       <HorizontalHoverButton />
@@ -42,8 +46,11 @@ function IndexPage() {
         <Seo title="Home" />
         <Header />
         <main>
+          {/* <Stickers></Stickers> */}
+          <Stickers data={data} />
           <Inner>
             <HeadingOne />
+
             <HomeLink link="/work" text="WORK" />
             <HomeLink link="/studio" text="STUDIO" />
             <HomeLink link="/hello" text="HELLO" />
@@ -59,4 +66,23 @@ function IndexPage() {
 }
 
 export default IndexPage;
+
+export const homeQuery = graphql`
+  query homeQuery {
+    stickers: allPrismicSticker {
+      nodes {
+        id
+        data {
+          link {
+            url
+          }
+          image {
+            gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+            alt
+          }
+        }
+      }
+    }
+  }
+`;
 
