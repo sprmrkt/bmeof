@@ -17,8 +17,12 @@ const Holder = styled.div`
 `;
 
 const Sticker = styled.div`
+  cursor: pointer;
+  z-index: 20;
+
   img {
     position: fixed;
+    cursor: pointer;
     z-index: 20;
     height: 4rem;
     width: 4rem;
@@ -38,12 +42,13 @@ function Stickers({ data }) {
 
         return (
           <Draggable
-            defaultPosition={{
+            positionOffset={{
               x: randomTopPercentage,
               y: randomLeftPercentage,
             }}
+            key={i}
           >
-            <Sticker key={i}>
+            <Sticker>
               <GatsbyImage
                 image={sticker.data.image.gatsbyImageData}
                 alt={sticker.data.image.alt || "sticker"}
