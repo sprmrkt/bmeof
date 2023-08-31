@@ -1,5 +1,5 @@
 import { GatsbyImage } from "gatsby-plugin-image";
-import React from "react";
+import React, { useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable"; // The default
 import { useWindowSize } from "react-use";
@@ -20,6 +20,7 @@ const Holder = styled.div`
 const Sticker = styled.div`
   cursor: pointer;
   z-index: 20;
+  position: fixed;
 
   img {
     position: fixed;
@@ -32,34 +33,31 @@ const Sticker = styled.div`
 
 function Stickers({ data }) {
   const { height, width } = useWindowSize();
-  return (
-    <Holder>
-      {data.stickers.nodes.map((sticker, i) => {
-        // Generate a random topPercentage and leftPercentage for each sticker
-        const randomTopPercentage =
-          Math.floor(Math.random() * (height - 50 + 1)) + height;
-        const randomLeftPercentage =
-          Math.floor(Math.random() * (width - 50 + 1)) + height;
 
-        return (
-          <Draggable
-            positionOffset={{
-              x: randomTopPercentage,
-              y: randomLeftPercentage,
-            }}
-            key={i}
-          >
-            <Sticker>
-              <GatsbyImage
-                image={sticker.data.image.gatsbyImageData}
-                alt={sticker.data.image.alt || "sticker"}
-              />
-            </Sticker>
-          </Draggable>
-        );
-      })}
-    </Holder>
-  );
+  const stickers = data.stickers.nodes.map((sticker, i) => {
+    // Generate a random yPos and xPos for each sticker
+    const randomYPos = Math.floor(Math.random() * (height - 50 + 1));
+    const randomXPos = Math.floor(Math.random() * (width - 50 + 1));
+
+    return (
+      <Draggable
+        positionOffset={{
+          x: randomXPos,
+          y: randomYPos,
+        }}
+        key={i}
+      >
+        <Sticker>
+          <GatsbyImage
+            image={sticker.data.image.gatsbyImageData}
+            alt={sticker.data.image.alt || "sticker"}
+          />
+        </Sticker>
+      </Draggable>
+    );
+  });
+
+  return <Holder>{stickers}</Holder>;
 }
 
 export default Stickers;
