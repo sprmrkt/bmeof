@@ -43,11 +43,7 @@ function Stickers({ data }) {
 
         return (
           <Draggable
-            // positionOffset={{
-            //   x: randomTopPercentage,
-            //   y: randomLeftPercentage,
-            // }}
-            defaultPosition={{
+            positionOffset={{
               x: randomTopPercentage,
               y: randomLeftPercentage,
             }}
