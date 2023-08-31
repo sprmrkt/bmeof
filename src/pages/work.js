@@ -27,6 +27,7 @@ export const workQuery = graphql`
           work_item {
             document {
               ... on PrismicWork {
+                uid
                 id
                 tags
                 data {
