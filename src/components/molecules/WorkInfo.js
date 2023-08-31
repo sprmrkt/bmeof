@@ -146,15 +146,6 @@ function WorkInfo({
           <div className="text">
             <PrismicRichText render={infoText.richText} />
           </div>
-          {tags.length > 0 && (
-            <div className="tags">
-              <ul>
-                {tags.map((tag, i) => (
-                  <li key={i}>{tag}</li>
-                ))}
-              </ul>
-            </div>
-          )}
         </TextHolder>
         <Images>
           {slides.map((slide, i) => (
