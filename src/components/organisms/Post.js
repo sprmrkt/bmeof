@@ -59,7 +59,7 @@ function Post({ post }) {
       </ExternalLink>
     );
   return (
-    <HomeLink link={`extras/${post.id}`} text={title.text}>
+    <HomeLink link={`extras/${post.uid}`} text={title.text}>
       {title.text}
     </HomeLink>
   );
