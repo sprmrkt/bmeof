@@ -1,9 +1,9 @@
-import { GatsbyImage } from "gatsby-plugin-image";
-import React, { useEffect } from "react";
+import {GatsbyImage} from "gatsby-plugin-image";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import Draggable from "react-draggable"; // The default
-import { useWindowSize } from "react-use";
-import { useState } from "react";
+import {useWindowSize} from "react-use";
+import {useState} from "react";
 
 const Holder = styled.div`
   position: absolute;
@@ -13,8 +13,12 @@ const Holder = styled.div`
   z-index: 20;
 
   .react-draggable {
-    height: 6rem;
-    width: 6rem;
+    height: 30vh;
+    width: 30vh;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      height: 50vh;
+      width: 50vh;
+    }
   }
 `;
 
@@ -27,12 +31,17 @@ const Sticker = styled.div`
     position: fixed;
     cursor: pointer;
     z-index: 20;
-    height: 6rem;
-    width: 6rem;
+    height: 30vh;
+    width: 30vh;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+      height: 50vh;
+      width: 50vh;
+    }
   }
 `;
-function Stickers({ data }) {
-  const { height, width } = useWindowSize();
+
+function Stickers({data}) {
+  const {height, width} = useWindowSize();
   const [stickers, setStickers] = useState([]);
 
   useEffect(() => {
@@ -64,6 +73,7 @@ function Stickers({ data }) {
     };
 
     generateStickers();
+    
   }, [data.stickers.nodes, height, width]);
 
   return <Holder>{stickers}</Holder>;

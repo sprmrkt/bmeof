@@ -48,7 +48,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     const extraPosts = result.data.posts.nodes;
     extraPosts.forEach((post) => {
-      if (!post.data.external_link.url || post.data.external_link.url === "") {
+      if (post.data.external_link === null) {
         createPage({
           path: `/extras/${post.uid}`,
           component: path.resolve("./src/templates/ExtrasTemplate.js"),

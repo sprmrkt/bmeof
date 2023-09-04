@@ -40,7 +40,7 @@ function Post({ post }) {
   const { title, external_link } = post.data;
   const hoverClass = useHorizontalHoverClassname();
 
-  if (external_link.url)
+  if (external_link !== null)
     return (
       <ExternalLink className="h1">
         <a
