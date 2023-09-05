@@ -10,7 +10,6 @@ import { Link } from "gatsby";
 const Holder = styled.div`
   height: 100%;
   position: relative;
-  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
   .close-copyright {
