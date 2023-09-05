@@ -9,16 +9,6 @@ const Holder = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  // display: none;
-  // @media( ${(props) => props.theme.breakpoints.md} ) {
-  //   display: block;
-  // }
-
-  button {
-    @media (${(props) => props.theme.breakpoints.md}) {
-      cursor: none;
-    }
-  }
 
   img {
     position: relative;
@@ -80,9 +70,6 @@ const Holder = styled.div`
 
 function EmbedItem({ embed, canPlay, poster, caption }) {
   const setEmbedIsOpen = useStore((state) => state.setEmbedIsOpen);
-  const setCustomCursorIsVisible = useStore(
-    (state) => state.setCustomCursorIsVisible
-  );
   const setEmbedContent = useStore((state) => state.setEmbedContent);
 
   const html = embed.html;
@@ -95,8 +82,6 @@ function EmbedItem({ embed, canPlay, poster, caption }) {
         <Holder>
           <button
             className="open-overlay"
-            onMouseEnter={() => setCustomCursorIsVisible(true)}
-            onMouseLeave={() => setCustomCursorIsVisible(false)}
             onClick={() => {
               setEmbedContent(newHtml);
               setEmbedIsOpen(true);

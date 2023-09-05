@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import MediaItem from "./MediaItem";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const timeout = 500;
 
@@ -62,18 +62,21 @@ const Holder = styled.div`
     transform: translateX(100%);
     transition: transform ${timeout}ms;
   }
-`
+`;
 
-function WorkSlides({slides, currentSlide, isNext}) {
-
+function WorkSlides({ slides, currentSlide, isNext }) {
   // Method for this left to right and then right to left animation is from here:
   // https://stackoverflow.com/questions/69809477/right-and-left-sliding-with-react-transition-group
 
   return (
-    <TransitionGroup childFactory={child => React.cloneElement(child, {
-      classNames: isNext ? "right-to-left" : "left-to-right",
-      timeout: timeout
-    })}>
+    <TransitionGroup
+      childFactory={(child) =>
+        React.cloneElement(child, {
+          classNames: isNext ? "right-to-left" : "left-to-right",
+          timeout: timeout,
+        })
+      }
+    >
       <CSSTransition
         key={currentSlide}
         timeout={timeout}
@@ -81,12 +84,14 @@ function WorkSlides({slides, currentSlide, isNext}) {
       >
         <Holder>
           <MediaHolder>
-          <MediaItem media={slides[currentSlide].primary || slides[currentSlide]} />
+            <MediaItem
+              media={slides[currentSlide].primary || slides[currentSlide]}
+            />
           </MediaHolder>
         </Holder>
       </CSSTransition>
     </TransitionGroup>
-  )
+  );
 }
 
 WorkSlides.propTypes = {

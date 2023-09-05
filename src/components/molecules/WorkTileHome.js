@@ -3,8 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
-import { useStore } from "../../utils/store";
-import PrismicRichText from "../atoms/PrismicRichText";
+import { PrismicRichText } from "@prismicio/react";
 
 const Holder = styled.div`
   width: 100%;
@@ -17,14 +16,6 @@ const Holder = styled.div`
     flex-direction: column;
     &.even {
       padding: 24px 24px 0 12px;
-    }
-  }
-
-  button {
-    padding: 0;
-    border: none;
-    @media (${(props) => props.theme.breakpoints.md}) {
-      cursor: none;
     }
   }
 `;
@@ -71,7 +62,7 @@ const ImageHolder = styled.div`
     }
   }
 
-  button {
+  .inner-holder {
     width: 100%;
     height: 0;
     padding-bottom: 100%;
@@ -91,9 +82,6 @@ const ImageHolder = styled.div`
 `;
 
 const WorkTileHome = ({ title, open, even, image, video, excerpt }) => {
-  const setCustomCursorIsVisible = useStore(
-    (state) => state.setCustomCursorIsVisible
-  );
   const tileClasses = classNames({
     open: open,
     even: even,
@@ -102,19 +90,16 @@ const WorkTileHome = ({ title, open, even, image, video, excerpt }) => {
   return (
     <Holder className={tileClasses}>
       <ImageHolder>
-        <button
-          onMouseEnter={() => setCustomCursorIsVisible(true)}
-          onMouseLeave={() => setCustomCursorIsVisible(false)}
-        >
+        <div className="inner-holder">
           <div className="media-holder">
             <MediaItem media={{ image: image, video: video }} />
           </div>
           <Excerpt>
             <div className="inner p-large">
-              <PrismicRichText render={excerpt.richText} />
+              <PrismicRichText field={excerpt.richText} />
             </div>
           </Excerpt>
-        </button>
+        </div>
       </ImageHolder>
       <p>{title}</p>
     </Holder>

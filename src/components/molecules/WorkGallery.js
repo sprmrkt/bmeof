@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import WorkSlides from "./WorkSlides";
-// import CloseButton from "../atoms/CloseButton";
 import { useSwipeable } from "react-swipeable";
 import { useStore } from "../../utils/store";
 import StackedImages from "./StackedImages";
@@ -43,7 +42,6 @@ const Button = styled.button.attrs((props) => ({
   left: 0;
   display: none;
   @media (${(props) => props.theme.breakpoints.md}) {
-    cursor: none;
     display: block;
   }
 
@@ -108,50 +106,13 @@ const GalleryInner = styled.div`
 
 function WorkGallery({
   closeHandler,
-  closeParentHandler,
   slides,
   currentSlide,
   setCurrentSlide,
   extra,
   project,
 }) {
-  const firstUpdate = useRef(true);
   const [isNext, setIsNext] = useState(true);
-  const setCustomCursorIsVisible = useStore(
-    (state) => state.setCustomCursorIsVisible
-  );
-  const setCustomCursorContent = useStore(
-    (state) => state.setCustomCursorContent
-  );
-
-  useLayoutEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    if (isNext) {
-      if (currentSlide === slides.length - 1) {
-        setCustomCursorContent(`1/${slides.length}`);
-      } else {
-        setCustomCursorContent(`${currentSlide + 2}/${slides.length}`);
-      }
-    } else {
-      if (currentSlide === 0) {
-        setCustomCursorContent(`${slides.length}/${slides.length}`);
-      } else {
-        setCustomCursorContent(`${currentSlide}/${slides.length}`);
-      }
-    }
-  }, [currentSlide, isNext, slides, setCustomCursorContent]);
-
-  // const handleClose = () => {
-  //   if (closeParentHandler) {
-  //     setTimeout(() => {
-  //       closeParentHandler();
-  //     }, 1500);
-  //   }
-  //   closeHandler(false);
-  // };
 
   const handlePrev = (current) => {
     setIsNext(false);
@@ -195,35 +156,11 @@ function WorkGallery({
           <Button
             className="prev"
             onClick={() => handlePrev(currentSlide)}
-            onMouseEnter={() => {
-              setCustomCursorIsVisible(true);
-              setCustomCursorContent(
-                `${currentSlide === 0 ? slides.length : currentSlide}/${
-                  slides.length
-                }`
-              );
-            }}
-            onMouseLeave={() => {
-              setCustomCursorIsVisible(false);
-              setCustomCursorContent(false);
-            }}
             disabled={slides.length <= 1}
           />
           <Button
             className="next"
             onClick={() => handleNext(currentSlide)}
-            onMouseEnter={() => {
-              setCustomCursorIsVisible(true);
-              setCustomCursorContent(
-                `${currentSlide === slides.length - 1 ? 1 : currentSlide + 2}/${
-                  slides.length
-                }`
-              );
-            }}
-            onMouseLeave={() => {
-              setCustomCursorIsVisible(false);
-              setCustomCursorContent(false);
-            }}
             disabled={slides.length <= 1}
           />
         </GalleryInner>
