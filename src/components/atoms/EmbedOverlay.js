@@ -59,7 +59,6 @@ const OverlayHolder = styled.div`
 `;
 
 function EmbedOverlay() {
-  const embedIsOpen = useStore((state) => state.embedIsOpen);
   const setEmbedIsOpen = useStore((state) => state.setEmbedIsOpen);
   const embedContent = useStore((state) => state.embedContent);
   const setEmbedContent = useStore((state) => state.setEmbedContent);

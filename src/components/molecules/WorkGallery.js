@@ -1,9 +1,8 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import WorkSlides from "./WorkSlides";
 import { useSwipeable } from "react-swipeable";
-import { useStore } from "../../utils/store";
 import StackedImages from "./StackedImages";
 import NavHolder from "../atoms/NavHolder";
 import { Link } from "gatsby";

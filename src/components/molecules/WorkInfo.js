@@ -109,8 +109,6 @@ function WorkInfo({ slides, closeHandler, setCurrentSlide, infoText }) {
             key={i}
             handleClick={() => handleClick(i)}
             media={slide.primary}
-            totalImages={slides.length}
-            i={i}
           />
         ))}
       </Images>
