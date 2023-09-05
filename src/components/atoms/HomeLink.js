@@ -1,7 +1,6 @@
 import { Link } from "gatsby";
 import React from "react";
 import styled from "styled-components";
-import { manualKerning } from "../../utils/helpers";
 import PropTypes from "prop-types";
 
 const Holder = styled.div`
@@ -16,34 +15,13 @@ const Holder = styled.div`
     padding-left: 12px;
     white-space: normal;
     cursor: pointer;
-
-    .large-text-outer {
-      @media (${(props) => props.theme.breakpoints.md}) {
-        display: inline-block;
-      }
-    }
-
-    .large-text-wrapper {
-      display: inline-block;
-    }
-
-    @supports (-moz-appearance: none) {
-      .large-text-wrapper {
-        display: block;
-      }
-    }
   }
 `;
 
 const HomeLink = ({ link, text }) => {
-  console.log("link", link, text);
   return (
     <Holder>
-      <Link to={link}>
-        <span className="large-text-outer">
-          <span className="large-text-wrapper">{manualKerning(text)}</span>
-        </span>
-      </Link>
+      <Link to={link}>{text}</Link>
     </Holder>
   );
 };
