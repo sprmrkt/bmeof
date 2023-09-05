@@ -2,7 +2,6 @@ import React from "react";
 import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Header from "../components/molecules/Header";
-import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 import HeadingOne from "../components/molecules/HeadingOne";
 import MobileFooter from "../components/organisms/MobileFooter";
 import HomeLink from "../components/atoms/HomeLink";
@@ -35,17 +34,14 @@ const Inner = styled.div`
 `;
 
 function IndexPage() {
-
   return (
     <>
-      <HorizontalHoverButton />
       <Holder>
         <Seo title="Home" />
         <Header />
         <main>
           <Inner>
             <HeadingOne />
-
             <HomeLink link="/work" text="WORK" />
             <HomeLink link="/studio" text="STUDIO" />
             <HomeLink link="/hello" text="HELLO" />

@@ -81,7 +81,6 @@ const GlobalStyle = createGlobalStyle`
     @supports (-moz-appearance:none) {
       .large-text-wrapper {
         display: block;
-        transform: translateY(0.1em);
       }
     }
   }
@@ -185,11 +184,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     transition: color 0.5s linear;
 
-    &:hover {
-      @media ( ${(props) => props.theme.breakpoints.md} ) {
-        color: rgb(70, 70, 70);
-      }
-    }
+   
   }
 
   sup, sub {

@@ -5,7 +5,6 @@ import Header from "../components/molecules/Header";
 // import useHorizontalHoverClassname from "../hooks/useHorizontalHoverClassname";
 import { manualKerning } from "../utils/helpers";
 // import {useStore} from "../utils/store";
-import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
 
 const Outer = styled.div`
   position: fixed;
@@ -30,7 +29,6 @@ const NotFoundPage = () => {
   const fixedBodyRef = useRef(null);
   return (
     <>
-      <HorizontalHoverButton />
       <Outer id="fixed-body" ref={fixedBodyRef}>
         <Seo title="404: Not found" />
         <Header />
