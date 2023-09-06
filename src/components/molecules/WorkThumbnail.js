@@ -17,7 +17,7 @@ const Holder = styled.div`
   }
 `;
 
-function WorkInfoMedia({ media, handleClick }) {
+function WorkThumbnail({ media, handleClick }) {
   return (
     <Holder>
       <button onClick={() => handleClick()}>
@@ -27,12 +27,10 @@ function WorkInfoMedia({ media, handleClick }) {
   );
 }
 
-WorkInfoMedia.propTypes = {
-  i: PropTypes.number.isRequired,
+WorkThumbnail.propTypes = {
   media: PropTypes.object.isRequired,
-  totalImages: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 };
 
-export default WorkInfoMedia;
+export default WorkThumbnail;
 

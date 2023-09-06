@@ -39,7 +39,7 @@ exports.createPages = ({ actions, graphql }) => {
     workPosts.forEach((post) => {
       createPage({
         path: `/work/${post.uid}`,
-        component: path.resolve("./src/templates/WorkHolderTemplate.js"),
+        component: path.resolve("./src/templates/WorkTemplate.js"),
         context: {
           id: post.id,
         },
@@ -48,7 +48,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     const extraPosts = result.data.posts.nodes;
     extraPosts.forEach((post) => {
-      if (post.data.external_link.url === null) {
+      if (post.data.external_link && post.data.external_link.url === null) {
         createPage({
           path: `/extras/${post.uid}`,
           component: path.resolve("./src/templates/ExtrasTemplate.js"),

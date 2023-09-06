@@ -4,13 +4,14 @@ import PropTypes from "prop-types";
 import WorkSlides from "./WorkSlides";
 import { useSwipeable } from "react-swipeable";
 import StackedImages from "./StackedImages";
-import NavHolder from "../atoms/NavHolder";
-import { Link } from "gatsby";
 
 const Holder = styled.div`
-  height: 100%;
-  position: relative;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
   -webkit-overflow-scrolling: touch;
+  background-color: red;
 
   > :first-child {
     margin-top: 0;
@@ -55,7 +56,7 @@ const Button = styled.button.attrs((props) => ({
   }
 `;
 
-const Gallery = styled.div`
+const Slides = styled.div`
   display: none;
   @media (${(props) => props.theme.breakpoints.md}) {
     width: 100%;
@@ -70,7 +71,7 @@ const Gallery = styled.div`
   }
 `;
 
-const GalleryInner = styled.div`
+const SlidesInner = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
@@ -95,13 +96,10 @@ const GalleryInner = styled.div`
   }
 `;
 
-function WorkGallery({
-  closeHandler,
+function Gallery({
   slides,
   currentSlide,
   setCurrentSlide,
-  extra,
-  project,
 }) {
   const [isNext, setIsNext] = useState(true);
 
@@ -129,13 +127,8 @@ function WorkGallery({
 
   return (
     <Holder className="work-gallery">
-      <NavHolder>
-        {project && <button onClick={() => closeHandler()}>Back</button>}
-        {extra && <Link to="/">Back</Link>}
-      </NavHolder>
-
-      <Gallery {...swipeHandlers}>
-        <GalleryInner>
+      <Slides {...swipeHandlers}>
+        <SlidesInner>
           <div className="inner-for-hiding-overflow">
             <WorkSlides
               slides={slides}
@@ -154,22 +147,19 @@ function WorkGallery({
             onClick={() => handleNext(currentSlide)}
             disabled={slides.length <= 1}
           />
-        </GalleryInner>
-      </Gallery>
+        </SlidesInner>
+      </Slides>
       <StackedImages slides={slides} />
     </Holder>
   );
 }
 
-WorkGallery.propTypes = {
-  closeHandler: PropTypes.func.isRequired,
+Gallery.propTypes = {
   closeParentHandler: PropTypes.func,
   currentSlide: PropTypes.number.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
   slides: PropTypes.array.isRequired,
-  extra: PropTypes.bool,
-  project: PropTypes.bool,
 };
 
-export default WorkGallery;
+export default Gallery;
 

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from "prop-types";
-import WorkGallery from "./WorkGallery";
+import Gallery from "./Gallery";
 
 function PostGallery({slides, closeHandler}) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  return <WorkGallery slides={slides} setCurrentSlide={(val) => setCurrentSlide(val)} currentSlide={currentSlide}
-                      closeHandler={closeHandler} />
+  return <Gallery slides={slides} setCurrentSlide={(val) => setCurrentSlide(val)} currentSlide={currentSlide}
+                  closeHandler={closeHandler} />
 }
 
 PostGallery.propTypes = {
