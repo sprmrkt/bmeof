@@ -1,29 +1,27 @@
-import { createGlobalStyle } from "styled-components";
+import {createGlobalStyle} from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
- .snipcart-cart-button--highlight, .snipcart__box--badge-highlight  {
-  background-image: none !important;
-  background: black !important;
- }
+  .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
+    background-image: none !important;
+    background: black !important;
+  }
 
- .snipcart-cart-button {
-  background: black !important;
- }
- .snipcart__actions--link {
-  color: black !important;
- }
+  .snipcart-cart-button {
+    background: black !important;
+  }
 
- .snipcart__icon--blue-dark path {
-  fill: black !important;
-}
+  .snipcart__actions--link {
+    color: black !important;
+  }
 
-.snipcart__icon--blue-light path {
-  fill: black !important;
-}
+  .snipcart__icon--blue-dark path {
+    fill: black !important;
+  }
 
-
- 
+  .snipcart__icon--blue-light path {
+    fill: black !important;
+  }
 
 
   :root {
@@ -78,12 +76,13 @@ const GlobalStyle = createGlobalStyle`
   h1, .h1 {
     font-size: 33.5vw;
     font-kerning: normal;
-    @supports (-moz-appearance:none) {
-      .large-text-wrapper {
-        display: block;
-        transform: translateY(0.1em);
-      }
-    }
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 0.75;
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    margin: 0;
   }
 
   h2, .h2,
@@ -185,11 +184,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     transition: color 0.5s linear;
 
-    &:hover {
-      @media ( ${(props) => props.theme.breakpoints.md} ) {
-        color: rgb(70, 70, 70);
-      }
-    }
+
   }
 
   sup, sub {

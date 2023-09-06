@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { useStore } from "../../utils/store";
 import { Link } from "gatsby";
 
 const Holder = styled.div`
@@ -22,22 +21,13 @@ const Holder = styled.div`
 `;
 
 function WorkTileText({ title }) {
-  const setCustomCursorIsVisible = useStore(
-    (state) => state.setCustomCursorIsVisible
-  );
   return (
     <Holder>
       <p className="title">
         <strong>{title}</strong>
       </p>
 
-      <Link
-        onMouseEnter={() => setCustomCursorIsVisible(true)}
-        onMouseLeave={() => setCustomCursorIsVisible(false)}
-        to="/work"
-      >
-        Back
-      </Link>
+      <Link to="/work">Back</Link>
     </Holder>
   );
 }

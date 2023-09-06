@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import WorkGallery from "./WorkGallery";
+import Gallery from "./Gallery";
 
 const Holder = styled.div`
   height: calc(100vh - 48px);
@@ -13,7 +13,7 @@ function GalleryHolder(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   return (
     <Holder>
-      <WorkGallery
+      <Gallery
         extra={props.extra}
         slides={props.slides}
         setCurrentSlide={(val) => setCurrentSlide(val)}

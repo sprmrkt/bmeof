@@ -1,25 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import '../utils/fontface.css';
+import "../utils/fontface.css";
 
 import GlobalStyles from "../components/atoms/GlobalStyles";
-import {ThemeProvider} from "styled-components";
-import {theme} from "../utils/styling";
-import CustomCursor from "../components/atoms/CustomCursor";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../utils/styling";
 import EmbedOverlay from "../components/atoms/EmbedOverlay";
 import StickerHolder from "../components/organisms/StickerHolder";
 
-
-function Index({children}) {
-
+function Index({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <>
-        <StickerHolder />
+         <StickerHolder />
         <GlobalStyles />
         {children}
-        <EmbedOverlay/>
-        <CustomCursor />
+        <EmbedOverlay />
       </>
     </ThemeProvider>
   );
@@ -30,3 +26,4 @@ Index.propTypes = {
 };
 
 export default Index;
+
