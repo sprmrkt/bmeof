@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useMemo, useRef} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {GatsbyImage} from "gatsby-plugin-image";
@@ -24,8 +24,9 @@ const Holder = styled.div`
 `;
 
 function Sticker(props) {
-  const x = randomIntFromInterval(20, 80)
-  const y = randomIntFromInterval(20, 80)
+
+  const x = useMemo(() => randomIntFromInterval(20, 80), [])
+  const y = useMemo(() => randomIntFromInterval(20, 80), [])
 
   return (
     <Draggable>

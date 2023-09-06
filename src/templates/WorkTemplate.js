@@ -28,9 +28,13 @@ const Content = styled.div`
   }
 `;
 const TextHolder = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 24px;
   padding-top: 15px;
-  @media (${(props) => props.theme.breakpoints.sm}) {
+  @media ( ${props => props.theme.breakpoints.sm} ) {
     padding-top: 24px;
+    grid-template-columns: 2fr 1fr 1fr;
   }
 
   p,

@@ -9,7 +9,7 @@ const Holder = styled.div`
   position: relative;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  background-color: red;
+  background-color: ${(props) => props.theme.colors.white};
   
   &.absPositioned {
     position: absolute;
