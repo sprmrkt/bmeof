@@ -6,12 +6,16 @@ import { useSwipeable } from "react-swipeable";
 import StackedImages from "./StackedImages";
 
 const Holder = styled.div`
-  position: absolute;
-  top: 48px;
-  left: 0;
+  position: relative;
   width: 100%;
   -webkit-overflow-scrolling: touch;
   background-color: red;
+  
+  &.absPositioned {
+    position: absolute;
+    top: 48px;
+    left: 0;
+  }
 
   > :first-child {
     margin-top: 0;
@@ -100,6 +104,7 @@ function Gallery({
   slides,
   currentSlide,
   setCurrentSlide,
+  absolute,
 }) {
   const [isNext, setIsNext] = useState(true);
 
@@ -126,7 +131,7 @@ function Gallery({
   });
 
   return (
-    <Holder className="work-gallery">
+    <Holder className={`work-gallery ${absolute ? 'absPositioned' : ''}`}>
       <Slides {...swipeHandlers}>
         <SlidesInner>
           <div className="inner-for-hiding-overflow">
@@ -155,11 +160,15 @@ function Gallery({
 }
 
 Gallery.propTypes = {
-  closeParentHandler: PropTypes.func,
   currentSlide: PropTypes.number.isRequired,
   setCurrentSlide: PropTypes.func.isRequired,
   slides: PropTypes.array.isRequired,
+  absolute: PropTypes.bool,
 };
+
+Gallery.defaultProps = {
+  absolute: false,
+}
 
 export default Gallery;
 

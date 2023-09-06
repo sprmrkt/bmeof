@@ -78,7 +78,7 @@ function WorkTemplate({data}) {
 
       {openGallery && (
         <Gallery
-          project={true}
+          absolute={true}
           slides={body}
           currentSlide={currentSlide}
           setCurrentSlide={(i) => setCurrentSlide(i)}
