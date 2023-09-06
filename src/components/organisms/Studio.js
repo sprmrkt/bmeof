@@ -7,17 +7,6 @@ import PostGallery from "../molecules/PostGallery";
 const Holder = styled.div`
   height: calc(100% - 48px);
   -webkit-overflow-scrolling: touch;
-
-  .close-copyright {
-    padding-bottom: 15px;
-    @media (${(props) => props.theme.breakpoints.md}) {
-      padding-bottom: 24px !important;
-    }
-
-    p {
-      margin-bottom: 0;
-    }
-  }
 `;
 
 const Inner = styled.div`
@@ -44,14 +33,6 @@ const Inner = styled.div`
 
 const GalleryHolder = styled.div`
   border-top: 1px solid;
-
-  .work-gallery {
-    .close-copyright {
-      @media (${(props) => props.theme.breakpoints.md}) {
-        padding-bottom: 48px;
-      }
-    }
-  }
 `;
 
 function Studio(props) {

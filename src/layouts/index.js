@@ -5,19 +5,17 @@ import "../utils/fontface.css";
 import GlobalStyles from "../components/atoms/GlobalStyles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "../utils/styling";
-import CustomCursor from "../components/atoms/CustomCursor";
 import EmbedOverlay from "../components/atoms/EmbedOverlay";
-// import StickerHolder from "../components/organisms/StickerHolder";
+import StickerHolder from "../components/organisms/StickerHolder";
 
 function Index({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <>
-        {/* <StickerHolder /> */}
+         <StickerHolder />
         <GlobalStyles />
         {children}
         <EmbedOverlay />
-        <CustomCursor />
       </>
     </ThemeProvider>
   );

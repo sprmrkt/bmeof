@@ -3,7 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
-import { PrismicRichText } from "@prismicio/react";
+import PrismicRichText from "../atoms/PrismicRichText";
+import {Link} from "gatsby";
 
 const Holder = styled.div`
   width: 100%;
@@ -48,6 +49,11 @@ const Excerpt = styled.div`
 `;
 
 const ImageHolder = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  
   @media (${(props) => props.theme.breakpoints.md}) {
     &:hover {
       ${Excerpt} {
@@ -57,64 +63,53 @@ const ImageHolder = styled.div`
       }
 
       .media-holder {
-        opacity: 0.15;
+        opacity: 0;
       }
     }
   }
 
-  .inner-holder {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    display: block;
-    position: relative;
-
-    .media-holder {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
-      transition: opacity 0.1s ease-in-out;
-    }
+  .media-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    transition: opacity 0.1s ease-in-out;
   }
 `;
 
-const WorkTileHome = ({ title, open, even, image, video, excerpt }) => {
+const WorkTile = (props) => {
+  const {title, tile_image, tile_video, excerpt} = props.work.data;
   const tileClasses = classNames({
-    open: open,
-    even: even,
+    workTile: true,
+    even: props.even,
   });
 
   return (
-    <Holder className={tileClasses}>
-      <ImageHolder>
-        <div className="inner-holder">
+    <Link to={`/work/${props.work.uid}`} className="workTileHolder">
+      <Holder className={tileClasses}>
+        <ImageHolder>
           <div className="media-holder">
-            <MediaItem media={{ image: image, video: video }} />
+            <MediaItem media={{
+              image: tile_image, video: tile_video
+            }} />
           </div>
           <Excerpt>
             <div className="inner p-large">
-              <PrismicRichText field={excerpt.richText} />
+              <PrismicRichText render={excerpt.richText} />
             </div>
           </Excerpt>
-        </div>
-      </ImageHolder>
-      <p>{title}</p>
-    </Holder>
+        </ImageHolder>
+        <p>{title.text}</p>
+      </Holder>
+    </Link>
   );
 };
 
-WorkTileHome.propTypes = {
+WorkTile.propTypes = {
   even: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  excerpt: PropTypes.object.isRequired,
-  image: PropTypes.object.isRequired,
-  video: PropTypes.object.isRequired,
-  tileHeight: PropTypes.number,
-  tileWidth: PropTypes.number,
+  work: PropTypes.object.isRequired,
 };
 
-export default WorkTileHome;
-
+export default WorkTile;
