@@ -1,8 +1,8 @@
 import React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import Post from "./Post";
+import PostPreviewLink from "./PostPreviewLink";
 
-function Extras() {
+function PostList() {
   const data = useStaticQuery(graphql`
     query ExtrasQuery {
       prismicHomepage {
@@ -66,9 +66,9 @@ function Extras() {
   if (data.prismicHomepage.data.extras.length < 1) return null;
 
   return data.prismicHomepage.data.extras.map((node, i) => (
-    <Post key={i} post={node.post.document} />
+    <PostPreviewLink key={i} post={node.post.document} />
   ));
 }
 
-export default Extras;
+export default PostList;
 
