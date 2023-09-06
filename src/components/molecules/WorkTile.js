@@ -3,8 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import MediaItem from "./MediaItem";
-import { useStore } from "../../utils/store";
 import PrismicRichText from "../atoms/PrismicRichText";
+import {Link} from "gatsby";
 
 const Holder = styled.div`
   width: 100%;
@@ -17,14 +17,6 @@ const Holder = styled.div`
     flex-direction: column;
     &.even {
       padding: 24px 24px 0 12px;
-    }
-  }
-
-  button {
-    padding: 0;
-    border: none;
-    @media (${(props) => props.theme.breakpoints.md}) {
-      cursor: none;
     }
   }
 `;
@@ -57,6 +49,11 @@ const Excerpt = styled.div`
 `;
 
 const ImageHolder = styled.div`
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  
   @media (${(props) => props.theme.breakpoints.md}) {
     &:hover {
       ${Excerpt} {
@@ -66,70 +63,53 @@ const ImageHolder = styled.div`
       }
 
       .media-holder {
-        opacity: 0.15;
+        opacity: 0;
       }
     }
   }
 
-  button {
-    width: 100%;
-    height: 0;
-    padding-bottom: 100%;
-    display: block;
-    position: relative;
-
-    .media-holder {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
-      transition: opacity 0.1s ease-in-out;
-    }
+  .media-holder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    transition: opacity 0.1s ease-in-out;
   }
 `;
 
-const WorkTileHome = ({ title, open, even, image, video, excerpt }) => {
-  const setCustomCursorIsVisible = useStore(
-    (state) => state.setCustomCursorIsVisible
-  );
+const WorkTile = (props) => {
+  const {title, tile_image, tile_video, excerpt} = props.work.data;
   const tileClasses = classNames({
-    open: open,
-    even: even,
+    even: props.even,
   });
 
   return (
+    <Link to={`/work/${props.work.uid}`}>
     <Holder className={tileClasses}>
       <ImageHolder>
-        <button
-          onMouseEnter={() => setCustomCursorIsVisible(true)}
-          onMouseLeave={() => setCustomCursorIsVisible(false)}
-        >
-          <div className="media-holder">
-            <MediaItem media={{ image: image, video: video }} />
+        <div className="media-holder">
+          <MediaItem media={{
+            image: tile_image, video: tile_video
+          }} />
+        </div>
+        <Excerpt>
+          <div className="inner p-large">
+            <PrismicRichText render={excerpt.richText} />
           </div>
-          <Excerpt>
-            <div className="inner p-large">
-              <PrismicRichText render={excerpt.richText} />
-            </div>
-          </Excerpt>
-        </button>
+        </Excerpt>
       </ImageHolder>
-      <p>{title}</p>
+      <p>{title.text}</p>
     </Holder>
+    </Link>
   );
 };
 
-WorkTileHome.propTypes = {
+WorkTile.propTypes = {
   even: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  excerpt: PropTypes.object.isRequired,
-  image: PropTypes.object.isRequired,
-  video: PropTypes.object.isRequired,
-  tileHeight: PropTypes.number,
-  tileWidth: PropTypes.number,
+  work: PropTypes.object.isRequired,
 };
 
-export default WorkTileHome;
+export default WorkTile;
 

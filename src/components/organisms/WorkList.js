@@ -1,14 +1,11 @@
-import React, { useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import WorkHolder from "../molecules/WorkHolder";
 import PropTypes from "prop-types";
+import WorkTile from "../molecules/WorkTile";
 
 const Holder = styled.div`
   height: 100%;
   -webkit-overflow-scrolling: touch;
-  .close-button {
-    border-top: 1px solid;
-  }
 `;
 
 const Grid = styled.div`
@@ -29,18 +26,18 @@ const SpareTileBorder = styled.div`
 `;
 
 function WorkList(props) {
-  const holderRef = useRef(null);
   return (
-    <Holder ref={holderRef} id="work-content">
+    <Holder>
       <Grid>
         {props.work.map((node, i) => (
-          <WorkHolder
-            key={i}
-            {...props}
-            node={node.work_item.document}
-            even={i % 2 === 1}
-            uid={`/work/${node.work_item.document.uid}`}
-          />
+          // <WorkHolder
+          //   key={i}
+          //   {...props}
+          //   node={node.work_item.document}
+          //   even={i % 2 === 1}
+          //   uid={`/work/${node.work_item.document.uid}`}
+          // />
+          <WorkTile work={node.work_item.document} even={i % 2 === 1}/>
         ))}
         {props.work.length % 2 === 1 && <SpareTileBorder />}
       </Grid>
@@ -49,7 +46,6 @@ function WorkList(props) {
 }
 
 WorkList.propTypes = {
-  closeHandler: PropTypes.func,
   work: PropTypes.array.isRequired,
 };
 
