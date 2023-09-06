@@ -15,6 +15,12 @@ const Grid = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
   }
+  .workTileHolder:first-child,
+  .workTileHolder:nth-child(2) {
+    .workTile {
+      border-top: none;
+    }
+  }
 `;
 
 const SpareTileBorder = styled.div`
@@ -30,13 +36,6 @@ function WorkList(props) {
     <Holder>
       <Grid>
         {props.work.map((node, i) => (
-          // <WorkHolder
-          //   key={i}
-          //   {...props}
-          //   node={node.work_item.document}
-          //   even={i % 2 === 1}
-          //   uid={`/work/${node.work_item.document.uid}`}
-          // />
           <WorkTile work={node.work_item.document} even={i % 2 === 1}/>
         ))}
         {props.work.length % 2 === 1 && <SpareTileBorder />}

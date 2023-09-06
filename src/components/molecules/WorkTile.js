@@ -82,26 +82,27 @@ const ImageHolder = styled.div`
 const WorkTile = (props) => {
   const {title, tile_image, tile_video, excerpt} = props.work.data;
   const tileClasses = classNames({
+    workTile: true,
     even: props.even,
   });
 
   return (
-    <Link to={`/work/${props.work.uid}`}>
-    <Holder className={tileClasses}>
-      <ImageHolder>
-        <div className="media-holder">
-          <MediaItem media={{
-            image: tile_image, video: tile_video
-          }} />
-        </div>
-        <Excerpt>
-          <div className="inner p-large">
-            <PrismicRichText render={excerpt.richText} />
+    <Link to={`/work/${props.work.uid}`} className="workTileHolder">
+      <Holder className={tileClasses}>
+        <ImageHolder>
+          <div className="media-holder">
+            <MediaItem media={{
+              image: tile_image, video: tile_video
+            }} />
           </div>
-        </Excerpt>
-      </ImageHolder>
-      <p>{title.text}</p>
-    </Holder>
+          <Excerpt>
+            <div className="inner p-large">
+              <PrismicRichText render={excerpt.richText} />
+            </div>
+          </Excerpt>
+        </ImageHolder>
+        <p>{title.text}</p>
+      </Holder>
     </Link>
   );
 };
@@ -112,4 +113,3 @@ WorkTile.propTypes = {
 };
 
 export default WorkTile;
-
