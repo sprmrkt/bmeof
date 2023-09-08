@@ -1,17 +1,16 @@
-import React, {useMemo, useRef} from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {GatsbyImage} from "gatsby-plugin-image";
 import Draggable from "react-draggable";
-import {useWindowSize} from "react-use";
 import {randomIntFromInterval} from "../../utils/helpers";
 
 const Holder = styled.div`
   cursor: pointer;
   z-index: 20;
   position: fixed;
-  top: ${props => props.y}%;
-  left: ${props => props.x}%;
+  top: ${props => props.y}vh;
+  left: ${props => props.x}vw;
 
   .gatsby-image-wrapper {
     width: 25vh;
