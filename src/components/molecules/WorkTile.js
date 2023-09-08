@@ -63,7 +63,7 @@ const ImageHolder = styled.div`
       }
 
       .media-holder {
-        opacity: 0;
+        opacity: 0.15;
       }
     }
   }
