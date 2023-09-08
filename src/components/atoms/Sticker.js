@@ -8,7 +8,7 @@ import {randomIntFromInterval} from "../../utils/helpers";
 const Holder = styled.div`
   cursor: pointer;
   z-index: 20;
-  position: fixed;
+  position: absolute;
   top: ${props => props.y}vh;
   left: ${props => props.x}vw;
 

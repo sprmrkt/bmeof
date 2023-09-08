@@ -12,9 +12,12 @@ function Index({children}) {
   return (
     <ThemeProvider theme={theme}>
       <>
-        <StickerHolder />
+
         <GlobalStyles />
-        {children}
+        <div>
+          <StickerHolder />
+          {children}
+        </div>
         <EmbedOverlay />
       </>
     </ThemeProvider>
