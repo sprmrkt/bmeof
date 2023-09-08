@@ -5,6 +5,8 @@ import Header from "../components/molecules/Header";
 import PostList from "../components/organisms/PostList";
 import {Link} from "gatsby";
 import {manualKerning} from "../utils/helpers";
+import AniLink from "gatsby-plugin-transition-link/AniLink";
+
 
 const Holder = styled.div`
   position: fixed;
@@ -36,7 +38,7 @@ function IndexPage() {
           <Header />
           <Inner>
             <h1>{manualKerning('Bear meets eagle on fire')}</h1>
-            <p className="h1"><Link to="/work">{manualKerning('Work')}</Link></p>
+            <p className="h1"><AniLink fade to="/work">{manualKerning('Work')}</AniLink></p>
             <p className="h1"><Link to="/studio">{manualKerning('Studio')}</Link></p>
             <p className="h1"><Link to="/hello">{manualKerning('Hello')}</Link></p>
             <p className="h1"><Link to="/store">{manualKerning('Store')}</Link></p>

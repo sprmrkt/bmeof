@@ -18,8 +18,13 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-styled-components`,
-    "gatsby-plugin-layout",
     `gatsby-plugin-sitemap`,
+    {
+      resolve: "gatsby-plugin-transition-link",
+      options: {
+        layout: require.resolve(`./src/layouts/index.js`)
+      }
+    },
     {
       resolve: "gatsby-plugin-snipcart-advanced",
       options: {
