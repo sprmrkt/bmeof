@@ -7,15 +7,16 @@ import {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
 import EmbedOverlay from "../components/atoms/EmbedOverlay";
 import StickerHolder from "../components/organisms/StickerHolder";
+import GlobalNav from "../components/organisms/GlobalNav";
 
 function Index({children}) {
   return (
     <ThemeProvider theme={theme}>
       <>
-
         <GlobalStyles />
         <div>
-          <StickerHolder />
+          {/* <StickerHolder /> */}
+          <GlobalNav />
           {children}
         </div>
         <EmbedOverlay />
