@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {useRef} from "react";
+import React, {useState, useEffect, useRef} from "react";
+import {useLocation} from "@reach/router";
 
 import styled from "styled-components";
 import Header from "../molecules/Header";
@@ -46,14 +46,6 @@ const TranslateWrapper = styled.div`
 `;
 
 function GlobalNav() {
-  // store
-  const {navActive} = useStore();
-
-  //state
-  const [transitionIndex, setTransitionIndex] = useState(null);
-  const [translateUp, setTranslateUp] = useState(0);
-  const [translateDown, setTranslateDown] = useState(0);
-
   // variables
   const links = [
     {
@@ -82,7 +74,32 @@ function GlobalNav() {
     },
   ];
 
+  // ref
+  const wrapperRef = useRef(null);
+
+  // store
+  const {navActive} = useStore();
+
+  //state
+  const location = useLocation();
+  const [transitionIndex, setTransitionIndex] = useState(
+    Math.floor((links?.length - 1) / 2)
+  );
+  const [translateUp, setTranslateUp] = useState(0);
+  const [translateDown, setTranslateDown] = useState(0);
+
   // lifecycle
+  useEffect(() => {
+    const el = wrapperRef?.current;
+    if (!el || location.pathname === "/") return;
+
+    const windowHeight = typeof window !== "undefined" && window.innerHeight;
+
+    el.scrollTo(0, el.scrollHeight / 2);
+    setTranslateUp((windowHeight / 2 + 200) * -1);
+    setTranslateDown(windowHeight / 2 + 200);
+  }, [wrapperRef]);
+
   useEffect(() => {
     if (!navActive) return;
 
@@ -94,7 +111,7 @@ function GlobalNav() {
   // render
   return (
     <Container active={navActive}>
-      <div>
+      <div ref={wrapperRef}>
         <TranslateWrapper distance={translateUp}>
           <Header />
         </TranslateWrapper>
