@@ -57,7 +57,7 @@ export default NavLink;
 
 NavLink.propTypes = {
   link: propTypes.shape({
-    ref: propTypes.shape({current: propTypes.instanceOf(Element)}),
+    ref: propTypes.shape({current: propTypes.string}),
     id: propTypes.number,
     slug: propTypes.string,
     label: propTypes.string,
