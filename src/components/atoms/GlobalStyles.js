@@ -83,6 +83,10 @@ const GlobalStyle = createGlobalStyle`
     text-align: left;
     white-space: normal;
     margin: 0;
+
+    .letter {
+      transform: translateY(8%);
+    }
   }
 
   h2, .h2,
