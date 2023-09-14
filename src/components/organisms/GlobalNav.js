@@ -18,6 +18,8 @@ const Container = styled.nav`
 
   z-index: 100;
   pointer-events: ${({active}) => (active ? "auto" : "none")};
+  opacity: ${({active}) => (active ? 1 : 0)};
+  transition: opacity 0ms ${({active}) => (active ? `0ms` : `300ms`)};
 
   & > *:first-child {
     overflow-x: hidden;
@@ -41,7 +43,7 @@ const TranslateWrapper = styled.div`
 
   transition: transform 300ms linear;
   transform: translateY(${({distance}) => `${distance}px` || "0"});
-  // will-change: transform;
+
   z-index: 1;
 `;
 
