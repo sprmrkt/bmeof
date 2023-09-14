@@ -1,80 +1,53 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {navigate} from "gatsby";
 import propTypes from "prop-types";
-import styled from "styled-components";
 
 import {manualKerning} from "../../utils/helpers";
-
-const ButtonLink = styled.button`
-  display: block;
-  background-color: #c6c6c6;
-
-  transition: transform 300ms linear;
-  transform: translateY(${({distance}) => `${distance}px` || "0"});
-  will-change: transform;
-  z-index: 1;
-`;
 
 function NavLink({
   link,
   index,
-  isTransitioning,
-  setIsTransitioning,
-  transitionIndex,
   setTransitionIndex,
+  setTranslateUp,
+  setTranslateDown,
 }) {
-  // state
-  const [translateDistance, setTranslateDistance] = useState(0);
-
   // methods
-  const calculateTransitionDistance = el => {
+  const calculateTransitionDistance = () => {
+    const el = link?.ref?.current;
+    if (!el) return;
+
     const {top, bottom, height} = el?.getBoundingClientRect();
 
     const windowHeight = window?.innerHeight;
+    const elHeight = height / 4;
+    const up = (bottom + elHeight) * -1;
+    const down = windowHeight - top + elHeight;
 
-    if (index <= transitionIndex) {
-      const up = (bottom + height / 4) * -1;
-      setTranslateDistance(up);
-    } else if (index > transitionIndex) {
-      const down = windowHeight - top + height / 4;
-      setTranslateDistance(down);
-    }
+    setTranslateUp(up);
+    setTranslateDown(down);
   };
 
   const handleNavigate = () => {
-    setIsTransitioning(true);
-    setTransitionIndex(index);
     navigate(link.slug);
+    setTransitionIndex(index);
+    calculateTransitionDistance();
 
     setTimeout(() => {
-      setIsTransitioning(false);
       setTransitionIndex(null);
-      //   navigate(`/`);
+      setTranslateUp(0);
+      setTranslateDown(0);
     }, [3000]);
   };
 
-  // lifecycle
-  useEffect(() => {
-    if (!link?.ref?.current) return;
-
-    if (!isTransitioning) {
-      setTranslateDistance(0);
-      return;
-    }
-
-    calculateTransitionDistance(link.ref.current);
-  }, [isTransitioning, link.ref.current]);
-
   // render
   return (
-    <ButtonLink
+    <button
       ref={link.ref}
       role="button"
       className="h1"
-      distance={translateDistance}
       onClick={() => handleNavigate(link.slug)}>
       {manualKerning(link.label)}
-    </ButtonLink>
+    </button>
   );
 }
 
@@ -88,9 +61,8 @@ NavLink.propTypes = {
     label: propTypes.string,
   }),
   index: propTypes.number,
-  isTransitioning: propTypes.bool,
-  setIsTransitioning: propTypes.func,
-  transitionIndex: propTypes.number,
   setTransitionIndex: propTypes.func,
+  setTranslateUp: propTypes.func,
+  setTranslateDown: propTypes.func,
 };
 

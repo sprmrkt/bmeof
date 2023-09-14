@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useRef} from "react";
 
 import styled from "styled-components";
@@ -6,9 +6,8 @@ import Header from "../molecules/Header";
 import PostList from "../organisms/PostList";
 import NavLink from "../molecules/NavLink";
 import {manualKerning} from "../../utils/helpers";
-import {node} from "prop-types";
 
-const Holder = styled.nav`
+const Container = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
@@ -18,7 +17,7 @@ const Holder = styled.nav`
 
   z-index: 100;
 
-  main {
+  & > *:first-child {
     overflow-x: hidden;
     overflow-y: scroll;
 
@@ -26,29 +25,28 @@ const Holder = styled.nav`
   }
 `;
 
-const Main = styled.main`
-  position: relative;
-`;
-
 const Heading = styled.h1`
   background-color: #c6c6c6;
 `;
 
-const Inner = styled.div`
-  display: flex;
-  flex-direction: column;
+const TranslateWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: block;
 
-  padding-bottom: 15px;
-  @media (${props => props.theme.breakpoints.md}) {
-    padding-bottom: 0;
-  }
+  background-color: #c6c6c6;
+
+  transition: transform 300ms linear;
+  transform: translateY(${({distance}) => `${distance}px` || "0"});
+  will-change: transform;
+  z-index: 1;
 `;
 
 function GlobalNav() {
-  const nodeRef = useRef(null);
-
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionIndex, setTransitionIndex] = useState(null);
+
+  const [translateUp, setTranslateUp] = useState(0);
+  const [translateDown, setTranslateDown] = useState(0);
 
   const links = [
     {
@@ -77,34 +75,38 @@ function GlobalNav() {
     },
   ];
 
-  useEffect(() => {
-    console.log(`isTransitioning: ${isTransitioning}`);
-  }, [isTransitioning]);
-
   return (
-    <Holder>
-      <Main ref={nodeRef}>
-        <Header />
+    <Container>
+      <div>
+        <TranslateWrapper distance={translateUp}>
+          <Header />
+        </TranslateWrapper>
 
-        <Inner>
+        <TranslateWrapper distance={translateUp}>
           <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+        </TranslateWrapper>
 
-          {links.map((link, linkIndex) => (
+        {links.map((link, linkIndex) => (
+          <TranslateWrapper
+            distance={
+              linkIndex <= transitionIndex ? translateUp : translateDown
+            }>
             <NavLink
-              key={link.id}
+              key={link?.id}
               link={link}
               index={linkIndex}
-              isTransitioning={isTransitioning}
-              setIsTransitioning={setIsTransitioning}
-              transitionIndex={transitionIndex}
               setTransitionIndex={setTransitionIndex}
+              setTranslateUp={setTranslateUp}
+              setTranslateDown={setTranslateDown}
             />
-          ))}
+          </TranslateWrapper>
+        ))}
 
+        <TranslateWrapper distance={translateDown}>
           <PostList />
-        </Inner>
-      </Main>
-    </Holder>
+        </TranslateWrapper>
+      </div>
+    </Container>
   );
 }
 
