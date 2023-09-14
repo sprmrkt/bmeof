@@ -3,22 +3,27 @@ import PropTypes from "prop-types";
 import "../utils/fontface.css";
 
 import GlobalStyles from "../components/atoms/GlobalStyles";
-import {ThemeProvider} from "styled-components";
+import styled, {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
 import EmbedOverlay from "../components/atoms/EmbedOverlay";
 import StickerHolder from "../components/organisms/StickerHolder";
 import GlobalNav from "../components/organisms/GlobalNav";
+
+const Main = styled.main`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+`;
 
 function Index({children}) {
   return (
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
-        <div>
-          {/* <StickerHolder /> */}
-          <GlobalNav />
-          {children}
-        </div>
+        <StickerHolder />
+        <GlobalNav />
+        <Main>{children}</Main>
         <EmbedOverlay />
       </>
     </ThemeProvider>

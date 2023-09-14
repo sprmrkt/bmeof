@@ -3,6 +3,7 @@ import {navigate} from "gatsby";
 import propTypes from "prop-types";
 
 import {manualKerning} from "../../utils/helpers";
+import {useStore} from "../../utils/store";
 
 function NavLink({
   link,
@@ -11,8 +12,11 @@ function NavLink({
   setTranslateUp,
   setTranslateDown,
 }) {
+  //store
+  const {closeNav} = useStore();
+
   // methods
-  const calculateTransitionDistance = () => {
+  const calculateTranslateDistance = () => {
     const el = link?.ref?.current;
     if (!el) return;
 
@@ -29,14 +33,12 @@ function NavLink({
 
   const handleNavigate = () => {
     navigate(link.slug);
-    setTransitionIndex(index);
-    calculateTransitionDistance();
 
     setTimeout(() => {
-      setTransitionIndex(null);
-      setTranslateUp(0);
-      setTranslateDown(0);
-    }, [3000]);
+      closeNav();
+      setTransitionIndex(index);
+      calculateTranslateDistance();
+    }, [100]);
   };
 
   // render

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useRef} from "react";
 
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import Header from "../molecules/Header";
 import PostList from "../organisms/PostList";
 import NavLink from "../molecules/NavLink";
 import {manualKerning} from "../../utils/helpers";
+import {useStore} from "../../utils/store";
 
 const Container = styled.nav`
   position: fixed;
@@ -16,10 +17,11 @@ const Container = styled.nav`
   overflow: hidden;
 
   z-index: 100;
+  pointer-events: ${({active}) => (active ? "auto" : "none")};
 
   & > *:first-child {
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
 
     height: 100%;
   }
@@ -34,20 +36,25 @@ const TranslateWrapper = styled.div`
   width: 100%;
   display: block;
 
-  background-color: #c6c6c6;
+  background-color: ${({theme}) => theme.colors.white};
+  outline: 1px solid ${({theme}) => theme.colors.white};
 
   transition: transform 300ms linear;
   transform: translateY(${({distance}) => `${distance}px` || "0"});
-  will-change: transform;
+  // will-change: transform;
   z-index: 1;
 `;
 
 function GlobalNav() {
-  const [transitionIndex, setTransitionIndex] = useState(null);
+  // store
+  const {navActive} = useStore();
 
+  //state
+  const [transitionIndex, setTransitionIndex] = useState(null);
   const [translateUp, setTranslateUp] = useState(0);
   const [translateDown, setTranslateDown] = useState(0);
 
+  // variables
   const links = [
     {
       ref: useRef(null),
@@ -75,8 +82,18 @@ function GlobalNav() {
     },
   ];
 
+  // lifecycle
+  useEffect(() => {
+    if (!navActive) return;
+
+    setTransitionIndex(null);
+    setTranslateUp(0);
+    setTranslateDown(0);
+  }, [navActive]);
+
+  // render
   return (
-    <Container>
+    <Container active={navActive}>
       <div>
         <TranslateWrapper distance={translateUp}>
           <Header />
