@@ -10,8 +10,8 @@ const Holder = styled.div`
   width: 100%;
   padding: 15px 15px 0 15px;
   border-top: 1px solid;
-  background-color: ${(props) => props.theme.colors.white};
-  @media (${(props) => props.theme.breakpoints.md}) {
+  background-color: ${props => props.theme.colors.white};
+  @media (${props => props.theme.breakpoints.md}) {
     padding: 24px 12px 0 24px;
     display: flex;
     flex-direction: column;
@@ -53,8 +53,8 @@ const ImageHolder = styled.div`
   height: 0;
   padding-bottom: 100%;
   position: relative;
-  
-  @media (${(props) => props.theme.breakpoints.md}) {
+
+  @media (${props => props.theme.breakpoints.md}) {
     &:hover {
       ${Excerpt} {
         .inner {
@@ -79,32 +79,44 @@ const ImageHolder = styled.div`
   }
 `;
 
-const WorkTile = (props) => {
+const WorkTile = props => {
   const {title, tile_image, tile_video, excerpt} = props.work.data;
+  const link = props?.work?.uid && `/work/${props.work.uid}`;
   const tileClasses = classNames({
     workTile: true,
     even: props.even,
   });
 
-  return (
-    <Link to={`/work/${props.work.uid}`} className="workTileHolder">
-      <Holder className={tileClasses}>
-        <ImageHolder>
-          <div className="media-holder">
-            <MediaItem media={{
-              image: tile_image, video: tile_video
-            }} />
+  const content = (
+    <Holder className={tileClasses}>
+      <ImageHolder>
+        <div className="media-holder">
+          <MediaItem
+            media={{
+              image: tile_image,
+              video: tile_video,
+            }}
+          />
+        </div>
+        <Excerpt>
+          <div className="inner p-large">
+            <PrismicRichText render={excerpt?.richText} />
           </div>
-          <Excerpt>
-            <div className="inner p-large">
-              <PrismicRichText render={excerpt.richText} />
-            </div>
-          </Excerpt>
-        </ImageHolder>
-        <p>{title.text}</p>
-      </Holder>
-    </Link>
+        </Excerpt>
+      </ImageHolder>
+      {title?.text && <p>{title.text}</p>}
+    </Holder>
   );
+
+  if (link) {
+    return (
+      <Link to={link} className="workTileHolder">
+        {content}
+      </Link>
+    );
+  } else {
+    return <div className="workTileHolder">{content}</div>;
+  }
 };
 
 WorkTile.propTypes = {
@@ -113,3 +125,4 @@ WorkTile.propTypes = {
 };
 
 export default WorkTile;
+

@@ -15,7 +15,6 @@ const Holder = styled.div`
     position: absolute;
     top: 48px;
     left: 0;
-    margin-top: 48px;
   }
 
   > :first-child {

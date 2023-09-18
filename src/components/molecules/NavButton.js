@@ -1,8 +1,8 @@
 import React from "react";
-import {navigate} from "gatsby";
+import {Link} from "gatsby";
 import styled from "styled-components";
 
-const Button = styled.button`
+const Button = styled(Link)`
   position: fixed;
   top: 0;
   width: 100%;
@@ -11,11 +11,7 @@ const Button = styled.button`
 `;
 
 const NavButton = ({link}) => {
-  const handleNavigate = () => {
-    navigate(link);
-  };
-
-  return <Button onClick={handleNavigate} />;
+  return <Button to={link} />;
 };
 
 export default NavButton;

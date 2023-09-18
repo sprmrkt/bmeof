@@ -7,7 +7,6 @@ import NavButton from "../components/molecules/NavButton";
 import WorkList from "../components/organisms/WorkList";
 
 const Container = styled.div`
-  overflow: hidden;
   margin-top: 48px;
 `;
 

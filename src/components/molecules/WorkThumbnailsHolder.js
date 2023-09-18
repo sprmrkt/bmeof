@@ -5,7 +5,7 @@ import WorkThumbnail from "./WorkThumbnail";
 
 const Holder = styled.div`
   display: none;
-  @media (${(props) => props.theme.breakpoints.sm}) {
+  @media (${props => props.theme.breakpoints.sm}) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 24px;
@@ -17,8 +17,8 @@ const Holder = styled.div`
   }
 `;
 
-function WorkThumbnailsHolder({ slides, openGalleryHandler, setCurrentSlide }) {
-  const handleClick = (i) => {
+function WorkThumbnailsHolder({slides, openGalleryHandler, setCurrentSlide}) {
+  const handleClick = i => {
     setTimeout(() => {
       setCurrentSlide(i);
     });
@@ -26,15 +26,15 @@ function WorkThumbnailsHolder({ slides, openGalleryHandler, setCurrentSlide }) {
   };
 
   return (
-      <Holder>
-        {slides.map((slide, i) => (
-          <WorkThumbnail
-            key={i}
-            handleClick={() => handleClick(i)}
-            media={slide.primary}
-          />
-        ))}
-      </Holder>
+    <Holder>
+      {slides.map((slide, i) => (
+        <WorkThumbnail
+          key={i}
+          handleClick={() => handleClick(i)}
+          media={slide.primary}
+        />
+      ))}
+    </Holder>
   );
 }
 
