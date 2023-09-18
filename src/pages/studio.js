@@ -1,16 +1,22 @@
-import { Link } from "gatsby";
+import {navigate} from "gatsby";
 import React from "react";
-import NavHolder from "../components/atoms/NavHolder";
+import styled from "styled-components";
+
+import CloseButton from "../components/atoms/CloseButton";
+import NavButton from "../components/molecules/NavButton";
 import Studio from "../components/organisms/Studio";
+
+const Container = styled.div`
+  margin-top: 48px;
+`;
 
 const studio = () => {
   return (
-    <div>
-      <NavHolder>
-        <Link to="/">Back</Link>
-      </NavHolder>
+    <Container>
+      <NavButton link={`/`} />
       <Studio />
-    </div>
+      <CloseButton closeHandler={() => navigate(`/`)} />
+    </Container>
   );
 };
 

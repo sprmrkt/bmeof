@@ -10,7 +10,10 @@ import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
 
 const Container = styled.div`
   position: relative;
+  min-height: calc(100vh - 48px);
   margin-top: 48px;
+  background-color: ${({theme}) => theme.colors.white};
+
   z-index: 100;
 `;
 const Title = styled.div`

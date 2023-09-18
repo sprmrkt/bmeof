@@ -1,11 +1,15 @@
-import { Link } from "gatsby";
+import {navigate} from "gatsby";
 import React from "react";
 import styled from "styled-components";
+
+import CloseButton from "../components/atoms/CloseButton";
+import NavButton from "../components/molecules/NavButton";
+
 import bear from "../assets/img/bear.png";
-import NavHolder from "../components/atoms/NavHolder";
 
 const Holder = styled.div`
   height: calc(100% - 48px);
+  margin-top: 48px;
   -webkit-overflow-scrolling: touch;
 `;
 
@@ -16,12 +20,12 @@ const Inner = styled.div`
 
   grid-template-columns: 1fr 1fr;
 
-  @media (${(props) => props.theme.breakpoints.md}) {
+  @media (${props => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr 1fr;
   }
   align-content: start;
   grid-gap: 24px;
-  @media (${(props) => props.theme.breakpoints.md}) {
+  @media (${props => props.theme.breakpoints.md}) {
     padding: 24px;
   }
 
@@ -38,9 +42,7 @@ const Inner = styled.div`
 const store = () => {
   return (
     <Holder>
-      <NavHolder>
-        <Link to="/">Back</Link>
-      </NavHolder>
+      <NavButton link={`/`} />
       <Inner>
         <section>
           <h2>Silver Stacking Ring</h2>
@@ -62,8 +64,7 @@ const store = () => {
             data-item-custom1-name="Size"
             data-item-custom1-options="6|6.5|7|7.5|8|8.5|9"
             data-item-custom2-name="This is a gift"
-            data-item-custom2-type="checkbox"
-          >
+            data-item-custom2-type="checkbox">
             Add to cart
           </button>
         </section>
@@ -87,8 +88,7 @@ const store = () => {
             data-item-image={bear}
             data-item-name="Product 2"
             data-item-custom2-name="Custom"
-            data-item-custom2-options="Custom 1|Custom 2|Custom 3[+50.00]"
-          >
+            data-item-custom2-options="Custom 1|Custom 2|Custom 3[+50.00]">
             Add to cart
           </button>
         </section>
@@ -108,12 +108,12 @@ const store = () => {
             data-item-id="product-3"
             data-item-price={19.99}
             data-item-url="/"
-            data-item-name="Product 3"
-          >
+            data-item-name="Product 3">
             Add to cart
           </button>
         </section>
       </Inner>
+      <CloseButton closeHandler={() => navigate(`/`)} />
     </Holder>
   );
 };
