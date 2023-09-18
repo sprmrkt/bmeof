@@ -77,7 +77,7 @@ function WorkTemplate({data}) {
 
     const main = document.querySelector("main");
     main.scrollTo(0, 0);
-  }, [document]);
+  }, []);
 
   return (
     <Container>
