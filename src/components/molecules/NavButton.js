@@ -10,9 +10,9 @@ const Button = styled.button`
   z-index: 50;
 `;
 
-const NavButton = () => {
+const NavButton = ({link}) => {
   const handleNavigate = () => {
-    navigate(-1);
+    navigate(link);
   };
 
   return <Button onClick={handleNavigate} />;

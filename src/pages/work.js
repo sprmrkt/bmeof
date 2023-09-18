@@ -14,9 +14,9 @@ const Container = styled.div`
 const Work = ({data}) => {
   return (
     <Container>
-      <NavButton />
+      <NavButton link={`/`} />
       <WorkList work={data.prismicHomepage.data.work} />
-      <CloseButton closeHandler={() => navigate(-1)} />
+      <CloseButton closeHandler={() => navigate(`/`)} />
     </Container>
   );
 };
