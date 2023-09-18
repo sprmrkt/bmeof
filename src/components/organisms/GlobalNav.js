@@ -19,7 +19,7 @@ const Container = styled.nav`
   pointer-events: ${({active}) => (active ? "auto" : "none")};
 
   z-index: 100;
-  transition: opacity 0ms ${({active}) => (active ? `0ms` : `300ms`)};
+  transition: opacity 0ms ${({active}) => (active ? `300ms` : `0ms`)};
 
   & > *:first-child {
     overflow-x: hidden;
@@ -58,25 +58,25 @@ function GlobalNav() {
     {
       ref: useRef(null),
       id: 1,
-      slug: "/work",
+      slug: "/work/",
       label: "Work",
     },
     {
       ref: useRef(null),
       id: 2,
-      slug: "/studio",
+      slug: "/studio/",
       label: "Studio",
     },
     {
       ref: useRef(null),
       id: 3,
-      slug: "/hello",
+      slug: "/hello/",
       label: "Hello",
     },
     {
       ref: useRef(null),
       id: 4,
-      slug: "/store",
+      slug: "/store/",
       label: "Store",
     },
   ];
@@ -85,7 +85,7 @@ function GlobalNav() {
   const wrapperRef = useRef(null);
 
   // store
-  const {navActive} = useStore();
+  const {navActive, closeNav} = useStore();
 
   //state
   const location = useLocation();
@@ -98,11 +98,25 @@ function GlobalNav() {
     const el = wrapperRef?.current;
     if (!el || location.pathname === "/") return;
 
-    const windowHeight = typeof window !== "undefined" && window.innerHeight;
+    const currentLink = links.find(link =>
+      location.pathname.includes(link.slug)
+    );
 
-    // el.scrollTo(0, el.scrollHeight / 2);
-    // setTranslateUp((windowHeight / 2) * -1);
-    // setTranslateDown(windowHeight / 2 + 200);
+    const currentLinkIndex = links.findIndex(
+      link => link.slug === currentLink.slug
+    );
+
+    setTransitionIndex(currentLinkIndex);
+
+    const {top, height} = currentLink?.ref?.current?.getBoundingClientRect();
+
+    el.scrollTo(0, top);
+
+    const up = -height + 48;
+    const down = height + height / 2;
+
+    setTranslateUp(up);
+    setTranslateDown(down);
   }, [wrapperRef]);
 
   useEffect(() => {
@@ -112,10 +126,6 @@ function GlobalNav() {
     setTranslateUp(0);
     setTranslateDown(0);
   }, [navActive]);
-
-  useEffect(() => {
-    console.log(`transitionIndex`, transitionIndex);
-  }, [transitionIndex]);
 
   // render
   return (
