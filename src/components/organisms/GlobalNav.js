@@ -16,9 +16,9 @@ const Container = styled.nav`
   height: 100vh;
   overflow: hidden;
 
-  z-index: 100;
   pointer-events: ${({active}) => (active ? "auto" : "none")};
-  opacity: ${({active}) => (active ? 1 : 0)};
+
+  z-index: 100;
   transition: opacity 0ms ${({active}) => (active ? `0ms` : `300ms`)};
 
   & > *:first-child {
@@ -39,9 +39,14 @@ const TranslateWrapper = styled.div`
   display: block;
 
   background-color: ${({theme}) => theme.colors.white};
-  outline: 1px solid ${({theme}) => theme.colors.white};
+  border-bottom: 1px solid ${({active}) => (active ? "black" : "transparent")};
+  outline: 1px solid
+    ${({active, theme}) => (active ? "transparent" : theme.colors.white)};
 
-  transition: transform 300ms linear;
+  transition:
+    transform 300ms linear,
+    border-color 300ms ease-in-out,
+    outline-color 300ms ease-in-out;
   transform: translateY(${({distance}) => `${distance}px` || "0"});
 
   z-index: 1;
@@ -84,9 +89,7 @@ function GlobalNav() {
 
   //state
   const location = useLocation();
-  const [transitionIndex, setTransitionIndex] = useState(
-    Math.floor((links?.length - 1) / 2)
-  );
+  const [transitionIndex, setTransitionIndex] = useState(null);
   const [translateUp, setTranslateUp] = useState(0);
   const [translateDown, setTranslateDown] = useState(0);
 
@@ -97,9 +100,9 @@ function GlobalNav() {
 
     const windowHeight = typeof window !== "undefined" && window.innerHeight;
 
-    el.scrollTo(0, el.scrollHeight / 2);
-    setTranslateUp((windowHeight / 2 + 200) * -1);
-    setTranslateDown(windowHeight / 2 + 200);
+    // el.scrollTo(0, el.scrollHeight / 2);
+    // setTranslateUp((windowHeight / 2) * -1);
+    // setTranslateDown(windowHeight / 2 + 200);
   }, [wrapperRef]);
 
   useEffect(() => {
@@ -109,6 +112,10 @@ function GlobalNav() {
     setTranslateUp(0);
     setTranslateDown(0);
   }, [navActive]);
+
+  useEffect(() => {
+    console.log(`transitionIndex`, transitionIndex);
+  }, [transitionIndex]);
 
   // render
   return (
@@ -126,7 +133,8 @@ function GlobalNav() {
           <TranslateWrapper
             distance={
               linkIndex <= transitionIndex ? translateUp : translateDown
-            }>
+            }
+            active={linkIndex === transitionIndex}>
             <NavLink
               key={link?.id}
               link={link}

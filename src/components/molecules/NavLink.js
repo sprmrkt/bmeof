@@ -24,7 +24,7 @@ function NavLink({
 
     const windowHeight = window?.innerHeight;
     const elHeight = height / 4;
-    const up = (bottom + elHeight) * -1;
+    const up = -(bottom - 48);
     const down = windowHeight - top + elHeight;
 
     setTranslateUp(up);

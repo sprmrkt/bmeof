@@ -1,19 +1,23 @@
 import React from "react";
-import WorkList from "../components/organisms/WorkList";
-import { graphql, Link } from "gatsby";
+import {graphql, navigate} from "gatsby";
 import styled from "styled-components";
-import NavHolder from "../components/atoms/NavHolder";
 
-const Holder = styled.div``;
+import CloseButton from "../components/atoms/CloseButton";
+import NavButton from "../components/molecules/NavButton";
+import WorkList from "../components/organisms/WorkList";
 
-const Work = ({ data }) => {
+const Container = styled.div`
+  overflow: hidden;
+  margin-top: 48px;
+`;
+
+const Work = ({data}) => {
   return (
-    <Holder>
-      <NavHolder>
-        <Link to="/">Back</Link>
-      </NavHolder>
+    <Container>
+      <NavButton />
       <WorkList work={data.prismicHomepage.data.work} />
-    </Holder>
+      <CloseButton closeHandler={() => navigate(-1)} />
+    </Container>
   );
 };
 

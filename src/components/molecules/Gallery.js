@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import WorkSlides from "./WorkSlides";
-import { useSwipeable } from "react-swipeable";
+import {useSwipeable} from "react-swipeable";
 import StackedImages from "./StackedImages";
 
 const Holder = styled.div`
   position: relative;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  background-color: ${(props) => props.theme.colors.white};
-  
+  background-color: ${props => props.theme.colors.white};
+
   &.absPositioned {
     position: absolute;
     top: 48px;
     left: 0;
+    margin-top: 48px;
   }
 
   > :first-child {
@@ -26,7 +27,7 @@ const Holder = styled.div`
   }
 `;
 
-const Button = styled.button.attrs((props) => ({
+const Button = styled.button.attrs(props => ({
   disabled: props.disabled,
 }))`
   position: absolute;
@@ -37,7 +38,7 @@ const Button = styled.button.attrs((props) => ({
   top: 0;
   left: 0;
   display: none;
-  @media (${(props) => props.theme.breakpoints.md}) {
+  @media (${props => props.theme.breakpoints.md}) {
     display: block;
   }
 
@@ -62,7 +63,7 @@ const Button = styled.button.attrs((props) => ({
 
 const Slides = styled.div`
   display: none;
-  @media (${(props) => props.theme.breakpoints.md}) {
+  @media (${props => props.theme.breakpoints.md}) {
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -94,21 +95,16 @@ const SlidesInner = styled.div`
     top: 100%;
     left: 0;
     text-transform: uppercase;
-    @media (${(props) => props.theme.breakpoints.md}) {
+    @media (${props => props.theme.breakpoints.md}) {
       display: none;
     }
   }
 `;
 
-function Gallery({
-  slides,
-  currentSlide,
-  setCurrentSlide,
-  absolute,
-}) {
+function Gallery({slides, currentSlide, setCurrentSlide, absolute}) {
   const [isNext, setIsNext] = useState(true);
 
-  const handlePrev = (current) => {
+  const handlePrev = current => {
     setIsNext(false);
     if (current === 0) {
       setCurrentSlide(slides.length - 1);
@@ -116,7 +112,7 @@ function Gallery({
       setCurrentSlide(current - 1);
     }
   };
-  const handleNext = (current) => {
+  const handleNext = current => {
     setIsNext(true);
     if (current === slides.length - 1) {
       setCurrentSlide(0);
@@ -131,7 +127,7 @@ function Gallery({
   });
 
   return (
-    <Holder className={`work-gallery ${absolute ? 'absPositioned' : ''}`}>
+    <Holder className={`work-gallery ${absolute ? "absPositioned" : ""}`}>
       <Slides {...swipeHandlers}>
         <SlidesInner>
           <div className="inner-for-hiding-overflow">
@@ -168,7 +164,7 @@ Gallery.propTypes = {
 
 Gallery.defaultProps = {
   absolute: false,
-}
+};
 
 export default Gallery;
 
