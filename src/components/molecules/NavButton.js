@@ -7,6 +7,7 @@ const Button = styled.button`
   top: 0;
   width: 100%;
   height: 48px;
+  z-index: 50;
 `;
 
 const NavButton = () => {
