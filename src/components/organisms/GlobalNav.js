@@ -15,10 +15,12 @@ const Container = styled.nav`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  opacity: ${({hide}) => (hide ? "0" : "1")};
   pointer-events: ${({active}) => (active ? "auto" : "none")};
 
   z-index: 100;
-  // transition: opacity 0ms ${({active}) => (active ? `0ms` : `300ms`)};
+  transition: opacity ${({active}) => (active ? "300ms" : "0ms")} ease-in-out;
 
   & > *:first-child {
     overflow-x: hidden;
@@ -91,6 +93,7 @@ function GlobalNav() {
   const [transitionIndex, setTransitionIndex] = useState(null);
   const [translateUp, setTranslateUp] = useState(0);
   const [translateDown, setTranslateDown] = useState(0);
+  const [hide, setHide] = useState(false);
 
   // lifecycle
   useEffect(() => {
@@ -134,9 +137,23 @@ function GlobalNav() {
     }
   }, [workActive]);
 
+  useEffect(() => {
+    if (!navActive && !workActive) {
+      setHide(false);
+    }
+  }, [navActive, workActive]);
+
+  useEffect(() => {
+    if (location.pathname.match(/^\/work\/.+/)) {
+      setHide(true);
+    } else {
+      setHide(false);
+    }
+  }, [location.pathname]);
+
   // render
   return (
-    <Container active={navActive} hide={!navActive && !workActive}>
+    <Container active={navActive} hide={hide}>
       <div ref={wrapperRef}>
         <TranslateWrapper distance={translateUp}>
           <Header />

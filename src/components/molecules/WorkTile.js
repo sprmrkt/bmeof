@@ -141,6 +141,7 @@ const WorkTile = ({
   return (
     <Button
       ref={workRef}
+      data-id={work.id}
       role="button"
       className="workTileHolder"
       onClick={handleNavigate}>

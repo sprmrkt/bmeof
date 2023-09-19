@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
+import {useLocation} from "@reach/router";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import WorkTile from "../molecules/WorkTile";
@@ -45,11 +46,51 @@ const TranslateWrapper = styled.div`
 `;
 
 function WorkList({works}) {
+  // ref
+  const holderRef = useRef(null);
+
+  //store
   const {workActive} = useStore();
 
+  // state
+  const location = useLocation();
   const [transitionIndex, setTransitionIndex] = useState(null);
   const [translateUp, setTranslateUp] = useState(0);
   const [translateDown, setTranslateDown] = useState(0);
+
+  // lifecycle
+  useEffect(() => {
+    const el = holderRef?.current;
+    if (
+      !el ||
+      location.pathname === "/work/" ||
+      typeof document === "undefined" ||
+      typeof window === "undefined"
+    )
+      return;
+
+    const currentWork = works.find(work =>
+      location.pathname.includes(work.uid)
+    );
+
+    const currentWorkIndex = works.findIndex(
+      work => work.uid === currentWork.uid
+    );
+    setTransitionIndex(currentWorkIndex);
+
+    const currentEl = document?.querySelector(`[data-id="${currentWork.id}"]`);
+
+    const {top, bottom, height} = currentEl?.getBoundingClientRect();
+
+    el.scrollTo(0, top);
+
+    const windowHeight = window?.innerHeight;
+    const up = -bottom + 48;
+    const down = windowHeight - top;
+
+    setTranslateUp(up);
+    setTranslateDown(down);
+  }, [holderRef]);
 
   useEffect(() => {
     if (!workActive) return;
@@ -60,7 +101,7 @@ function WorkList({works}) {
   }, [workActive]);
 
   return (
-    <Holder>
+    <Holder ref={holderRef}>
       <Grid>
         {works?.map((work, i) => (
           <TranslateWrapper
