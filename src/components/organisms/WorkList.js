@@ -64,7 +64,11 @@ function WorkList({works}) {
       <Grid>
         {works?.map((work, i) => (
           <TranslateWrapper
-            distance={i <= transitionIndex ? translateUp : translateDown}>
+            distance={
+              i <= transitionIndex || (i % 2 === 1 && i - 1 === transitionIndex)
+                ? translateUp
+                : translateDown
+            }>
             <WorkTile
               work={work}
               even={i % 2 === 0}
