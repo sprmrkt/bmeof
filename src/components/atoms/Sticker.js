@@ -19,6 +19,8 @@ const Holder = styled.div`
   pointer-events: ${({active}) => (active ? "auto" : "none")};
   opacity: ${({active}) => (active ? "1" : "0")};
 
+  z-index: ${({active}) => (active ? "200" : "0")};
+
   .gatsby-image-wrapper {
     width: 25vh;
     height: auto;
@@ -29,7 +31,7 @@ const Holder = styled.div`
   }
 `;
 
-function Sticker(props) {
+function Sticker({sticker, src, className}) {
   // store
   const {navActive} = useStore();
 
@@ -39,17 +41,23 @@ function Sticker(props) {
   return (
     <Draggable>
       <Holder x={x} y={y} active={navActive}>
-        <GatsbyImage
-          image={props.sticker.data.image.gatsbyImageData}
-          alt={props.sticker.data.image.alt || "sticker"}
-        />
+        {src ? (
+          <img src={src} draggable="false" className={className} />
+        ) : (
+          <GatsbyImage
+            className={className}
+            image={sticker.data.image.gatsbyImageData}
+            alt={sticker.data.image.alt || "sticker"}
+          />
+        )}
       </Holder>
     </Draggable>
   );
 }
 
 Sticker.propTypes = {
-  sticker: PropTypes.object.isRequired,
+  sticker: PropTypes.object,
+  src: PropTypes.string,
 };
 
 export default Sticker;
