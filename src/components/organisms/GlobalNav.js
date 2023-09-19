@@ -15,11 +15,10 @@ const Container = styled.nav`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-
   pointer-events: ${({active}) => (active ? "auto" : "none")};
 
   z-index: 100;
-  transition: opacity 0ms ${({active}) => (active ? `300ms` : `0ms`)};
+  // transition: opacity 0ms ${({active}) => (active ? `0ms` : `300ms`)};
 
   & > *:first-child {
     overflow-x: hidden;
@@ -85,7 +84,7 @@ function GlobalNav() {
   const wrapperRef = useRef(null);
 
   // store
-  const {navActive, closeNav} = useStore();
+  const {navActive, workActive} = useStore();
 
   //state
   const location = useLocation();
@@ -127,9 +126,17 @@ function GlobalNav() {
     setTranslateDown(0);
   }, [navActive]);
 
+  useEffect(() => {
+    if (!workActive) {
+      setTranslateUp(prev => prev - 50);
+    } else {
+      setTranslateUp(prev => prev + 50);
+    }
+  }, [workActive]);
+
   // render
   return (
-    <Container active={navActive}>
+    <Container active={navActive} hide={!navActive && !workActive}>
       <div ref={wrapperRef}>
         <TranslateWrapper distance={translateUp}>
           <Header />

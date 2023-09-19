@@ -1,10 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React, {useRef} from "react";
+import {navigate} from "gatsby";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import classNames from "classnames";
+
 import MediaItem from "./MediaItem";
 import PrismicRichText from "../atoms/PrismicRichText";
-import {Link} from "gatsby";
+
+import {useStore} from "../../utils/store";
+
+const Button = styled.button`
+  width: 100%;
+`;
 
 const Holder = styled.div`
   width: 100%;
@@ -18,6 +25,9 @@ const Holder = styled.div`
     &.even {
       padding: 24px 24px 0 12px;
     }
+  }
+  p {
+    text-align: left;
   }
 `;
 const Excerpt = styled.div`
@@ -79,44 +89,81 @@ const ImageHolder = styled.div`
   }
 `;
 
-const WorkTile = props => {
-  const {title, tile_image, tile_video, excerpt} = props.work.data;
-  const link = props?.work?.uid && `/work/${props.work.uid}`;
+const WorkTile = ({
+  even,
+  work,
+  index,
+  setTransitionIndex,
+  setTranslateUp,
+  setTranslateDown,
+}) => {
+  const {title, tile_image, tile_video, excerpt} = work.data;
+
+  //store
+  const {workActive, closeWork} = useStore();
+
+  // refs
+  const workRef = useRef(null);
+
+  // variables
+  const link = work.uid && `/work/${work.uid}`;
   const tileClasses = classNames({
     workTile: true,
-    even: props.even,
+    even: even,
   });
 
-  const content = (
-    <Holder className={tileClasses}>
-      <ImageHolder>
-        <div className="media-holder">
-          <MediaItem
-            media={{
-              image: tile_image,
-              video: tile_video,
-            }}
-          />
-        </div>
-        <Excerpt>
-          <div className="inner p-large">
-            <PrismicRichText render={excerpt?.richText} />
-          </div>
-        </Excerpt>
-      </ImageHolder>
-      {title?.text && <p>{title.text}</p>}
-    </Holder>
-  );
+  // methods
+  const calculateTranslateDistance = () => {
+    const el = workRef?.current;
+    if (!el) return;
 
-  if (link) {
-    return (
-      <Link to={link} className="workTileHolder">
-        {content}
-      </Link>
-    );
-  } else {
-    return <div className="workTileHolder">{content}</div>;
-  }
+    const {top, bottom} = el?.getBoundingClientRect();
+
+    const windowHeight = window?.innerHeight;
+
+    const up = -bottom + 96;
+    const down = windowHeight - top;
+
+    setTranslateUp(up);
+    setTranslateDown(down);
+  };
+
+  const handleNavigate = () => {
+    navigate(link);
+
+    setTimeout(() => {
+      closeWork();
+      setTransitionIndex(index);
+      calculateTranslateDistance();
+    }, [100]);
+  };
+
+  return (
+    <Button
+      ref={workRef}
+      role="button"
+      className="workTileHolder"
+      onClick={handleNavigate}>
+      <Holder className={tileClasses}>
+        <ImageHolder>
+          <div className="media-holder">
+            <MediaItem
+              media={{
+                image: tile_image,
+                video: tile_video,
+              }}
+            />
+          </div>
+          <Excerpt>
+            <div className="inner p-large">
+              <PrismicRichText render={excerpt?.richText} />
+            </div>
+          </Excerpt>
+        </ImageHolder>
+        {workActive && <p>{title.text}</p>}
+      </Holder>
+    </Button>
+  );
 };
 
 WorkTile.propTypes = {

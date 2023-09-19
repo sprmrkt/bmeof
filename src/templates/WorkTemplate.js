@@ -1,20 +1,17 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import {graphql, Link} from "gatsby";
 import styled from "styled-components";
 import {PrismicRichText} from "@prismicio/react";
 
 import Gallery from "../components/molecules/Gallery";
-import WorkNav from "../components/molecules/WorkNav";
+import NavButton from "../components/molecules/NavButton";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
-// import WorkThumbnail from "../components/molecules/WorkThumbnail";
 
 const Container = styled.div`
   position: relative;
   min-height: calc(100vh - 48px);
   margin-top: 48px;
   background-color: ${({theme}) => theme.colors.white};
-
-  z-index: 100;
 `;
 const Title = styled.div`
   height: 48px;
@@ -64,11 +61,6 @@ const TextHolder = styled.div`
 function WorkTemplate({data}) {
   const {title, info, body} = data.prismicWork.data;
 
-  const works = data.prismicHomepage.data.work.map(
-    ({work_item: {document}}) => ({id: document.id, ...document.data})
-  );
-  const index = works.findIndex(item => item.id === data.prismicWork.id);
-
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -81,12 +73,7 @@ function WorkTemplate({data}) {
 
   return (
     <Container>
-      <WorkNav
-        link="/work"
-        current={{...data.prismicWork.data, title: null}}
-        sibling={index % 2 === 0 ? works[index + 1] : works[index - 1]}
-        even={index % 2 === 0}
-      />
+      <NavButton link={`/work`} />
 
       <Title>
         <p className="title">
@@ -181,29 +168,6 @@ export const query = graphql`
         }
       }
       tags
-    }
-
-    prismicHomepage {
-      data {
-        work {
-          work_item {
-            document {
-              ... on PrismicWork {
-                id
-                data {
-                  tile_image {
-                    alt
-                    gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                  }
-                  tile_video {
-                    url
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 `;

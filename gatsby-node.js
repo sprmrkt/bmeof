@@ -6,8 +6,8 @@
 
 const path = require("path");
 
-exports.createPages = ({ actions, graphql }) => {
-  const { createPage } = actions;
+exports.createPages = ({actions, graphql}) => {
+  const {createPage} = actions;
 
   return graphql(`
     {
@@ -29,25 +29,26 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then((result) => {
+  `).then(result => {
     if (result.errors) {
       return Promise.reject(result.errors);
     }
 
     // Create Work pages
     const workPosts = result.data.work.nodes;
-    workPosts.forEach((post) => {
+    workPosts.forEach(post => {
       createPage({
         path: `/work/${post.uid}`,
         component: path.resolve("./src/templates/WorkTemplate.js"),
         context: {
           id: post.id,
+          layout: "work",
         },
       });
     });
 
     const extraPosts = result.data.posts.nodes;
-    extraPosts.forEach((post) => {
+    extraPosts.forEach(post => {
       if (post.data.external_link && post.data.external_link.url === null) {
         createPage({
           path: `/extras/${post.uid}`,
@@ -59,5 +60,14 @@ exports.createPages = ({ actions, graphql }) => {
       }
     });
   });
+};
+
+exports.onCreatePage = ({page, actions}) => {
+  const {createPage} = actions;
+
+  if (page.path.match(/work/)) {
+    page.context.layout = "work";
+    createPage(page);
+  }
 };
 

@@ -1,62 +1,23 @@
-import React from "react";
-import {graphql, navigate} from "gatsby";
-import styled from "styled-components";
+import React, {useEffect} from "react";
 
-import CloseButton from "../components/atoms/CloseButton";
-import NavButton from "../components/molecules/NavButton";
-import WorkList from "../components/organisms/WorkList";
+import Seo from "../components/molecules/Seo";
+import {useStore} from "../utils/store";
 
-const Container = styled.div`
-  margin-top: 48px;
-`;
+const Work = () => {
+  // state
+  const {setWorkActive} = useStore();
 
-const Work = ({data}) => {
+  // lifecycle
+  useEffect(() => {
+    setWorkActive(true);
+  }, []);
+
   return (
-    <Container>
-      <NavButton link={`/`} />
-      <WorkList work={data.prismicHomepage.data.work} />
-      <CloseButton closeHandler={() => navigate(`/`)} />
-    </Container>
+    <>
+      <Seo title="Work" />
+    </>
   );
 };
 
 export default Work;
-
-export const workQuery = graphql`
-  query {
-    prismicHomepage {
-      data {
-        work {
-          work_item {
-            document {
-              ... on PrismicWork {
-                uid
-                id
-                tags
-                data {
-                  info {
-                    richText
-                  }
-                  tile_image {
-                    alt
-                    gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                  }
-                  tile_video {
-                    url
-                  }
-                  title {
-                    text
-                  }
-                  excerpt {
-                    richText
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
