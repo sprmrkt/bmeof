@@ -86,7 +86,13 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
 
     .letter {
-      transform: translateY(8%);
+      transform: translateY(-3%);
+    }
+
+    @-moz-document url-prefix() {
+      .letter {
+        transform: translateY(8%);
+      }
     }
   }
 
@@ -355,7 +361,7 @@ const GlobalStyle = createGlobalStyle`
 
   .manual-kerning {
     display: flex;
-    
+
     .letter-w + .letter-o {
       margin-left: -1.5vw;
     }

@@ -8,6 +8,7 @@ const Holder = styled.div`
   position: relative;
   width: 100%;
   display: block;
+  will-change: transform;
 `;
 
 const TitleBar = styled.div`
@@ -22,6 +23,7 @@ const TitleBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  will-change: opacity;
   p {
     margin: 0;
   }

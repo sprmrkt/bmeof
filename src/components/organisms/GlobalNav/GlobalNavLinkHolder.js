@@ -10,6 +10,7 @@ const Holder = styled.div`
   display: block;
   background-color: ${({theme}) => theme.colors.white};
   z-index: 1;
+  will-change: transform;
 
   button {
     background: indianred;
@@ -24,6 +25,7 @@ const Border = styled.div`
   height: 2px;
   background-color: black;
   transform-origin: left;
+  will-change: transform;
 `;
 
 const Close = styled.button`
