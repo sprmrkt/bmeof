@@ -2,15 +2,14 @@ import React from "react";
 import {navigate} from "gatsby";
 import propTypes from "prop-types";
 
-import {manualKerning} from "../../utils/helpers";
-import {useStore} from "../../utils/store";
+import {manualKerning} from "../../../utils/helpers";
+import {useStore} from "../../../utils/store";
 
 function GlobalNavLink({
   link,
   index,
 }) {
   //store
-  const {closeNav} = useStore();
   const { setNavSplitIndex } = useStore();
   const { setNavUpPosition } = useStore();
   const { setNavDownPosition } = useStore();
@@ -35,7 +34,6 @@ function GlobalNavLink({
     navigate(link.slug);
 
     setTimeout(() => {
-      closeNav();
       setNavSplitIndex(index);
       calculateTranslateDistance();
     }, [100]);

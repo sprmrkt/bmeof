@@ -13,18 +13,7 @@ const Container = styled.div`
   margin-top: 48px;
   background-color: ${({theme}) => theme.colors.white};
 `;
-const Title = styled.div`
-  height: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  border-bottom: 1px solid;
-  padding: 0 15px;
-  @media (${props => props.theme.breakpoints.md}) {
-    padding: 0 24px;
-  }
-`;
+
 const Content = styled.div`
   padding: 0 15px;
   @media (${props => props.theme.breakpoints.sm}) {
@@ -74,16 +63,6 @@ function WorkTemplate({data}) {
   return (
     <Container>
 
-      <Title>
-        <p className="title">
-          <strong>{title.text}</strong>
-        </p>
-        {!openGallery && <Link to="/work">Back</Link>}
-        {openGallery && (
-          <button onClick={() => setOpenGallery(false)}>Close gallery</button>
-        )}
-      </Title>
-
       <Content>
         <TextHolder>
           <div className="text">
@@ -99,6 +78,7 @@ function WorkTemplate({data}) {
 
       {openGallery && (
         <Gallery
+          closeHandler={() => setOpenGallery(false)}
           absolute
           slides={body}
           currentSlide={currentSlide}

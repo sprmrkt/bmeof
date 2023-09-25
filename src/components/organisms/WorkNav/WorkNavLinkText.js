@@ -20,7 +20,7 @@ const Holder = styled.div`
   }
 `;
 
-function WorkTileText({ title }) {
+function WorkNavLinkText({ title }) {
   return (
     <Holder>
       <p className="title">
@@ -32,9 +32,9 @@ function WorkTileText({ title }) {
   );
 }
 
-WorkTileText.propTypes = {
+WorkNavLinkText.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-export default WorkTileText;
+export default WorkNavLinkText;
 

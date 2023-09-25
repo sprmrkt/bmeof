@@ -13,8 +13,15 @@ const Holder = styled.div`
 
   &.absPositioned {
     position: absolute;
-    top: 48px;
+    top: 0;
     left: 0;
+  }
+  
+  .temp-close-button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 100;
   }
 
   > :first-child {
@@ -100,7 +107,7 @@ const SlidesInner = styled.div`
   }
 `;
 
-function Gallery({slides, currentSlide, setCurrentSlide, absolute}) {
+function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}) {
   const [isNext, setIsNext] = useState(true);
 
   const handlePrev = current => {
@@ -150,6 +157,7 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute}) {
         </SlidesInner>
       </Slides>
       <StackedImages slides={slides} />
+      <button className="temp-close-button" onClick={() => closeHandler()}>Temporary close gallery button</button>
     </Holder>
   );
 }

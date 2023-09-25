@@ -2,10 +2,11 @@ import React from "react";
 import {useStaticQuery, graphql, navigate, Link} from "gatsby";
 import styled from "styled-components";
 
-import CloseButton from "../atoms/CloseButton";
-import WorkList from "./WorkList";
+import CloseButton from "../../atoms/CloseButton";
+import WorkNavInner from "./WorkNavInner";
 
-import {useStore} from "../../utils/store";
+import {useStore} from "../../../utils/store";
+import WorkNavLinkHolder from "./WorkNavLinkHolder";
 
 const Container = styled.div`
   position: fixed;
@@ -18,7 +19,6 @@ const Container = styled.div`
   pointer-events: ${({active}) => (active ? "auto" : "none")};
 
   z-index: 1;
-  transition: opacity 0ms ${({active}) => (active ? `300ms` : `0ms`)};
 
   & > div:first-child {
     position: relative;
@@ -30,52 +30,27 @@ const Container = styled.div`
   }
 `;
 
-const TranslateLink = styled(Link)`
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 48px;
-  z-index: 50;
-
-  transition: transform 300ms linear;
-  transform: translateY(${({distance}) => `${distance}` || "0"});
-`;
-
-const TranslateWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  display: block;
-
-  transition: transform 300ms linear;
-  transform: translateY(${({distance}) => `${distance}` || "0"});
-
-  z-index: 1;
-`;
-
-const WorkLayout = () => {
+const WorkNav = () => {
   const data = useStaticQuery(workQuery);
-  const {workActive} = useStore();
+  const {workNavSplitIndex, workNavDownPosition} = useStore();
 
   const works = data?.prismicHomepage?.data?.work?.map(
     ({work_item}) => work_item?.document
   );
 
   return (
-    <Container active={workActive}>
+    <Container active={workNavSplitIndex === null}>
       <div>
-        <TranslateLink to={`/`} distance={!workActive ? `-48px` : `0px`} />
-
-        <WorkList works={works} />
-
-        <TranslateWrapper distance={!workActive ? `100%` : `0px`}>
+        <WorkNavInner works={works} />
+        <WorkNavLinkHolder position={workNavSplitIndex === null ? 0 : workNavDownPosition}>
           <CloseButton />
-        </TranslateWrapper>
+        </WorkNavLinkHolder>
       </div>
     </Container>
   );
 };
 
-export default WorkLayout;
+export default WorkNav;
 
 const workQuery = graphql`
   query {

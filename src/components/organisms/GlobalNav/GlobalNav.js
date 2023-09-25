@@ -1,11 +1,11 @@
 import React, {useRef} from "react";
 
 import styled from "styled-components";
-import Header from "../molecules/Header";
-import GlobalNavLink from "../molecules/GlobalNavLink";
-import {manualKerning} from "../../utils/helpers";
-import {useStore} from "../../utils/store";
-import GlobalNavLinkHolder from "../atoms/GlobalNavLinkHolder";
+import Header from "../../molecules/Header";
+import GlobalNavLink from "./GlobalNavLink";
+import {manualKerning} from "../../../utils/helpers";
+import {useStore} from "../../../utils/store";
+import GlobalNavLinkHolder from "./GlobalNavLinkHolder";
 
 const Container = styled.nav`
   position: fixed;

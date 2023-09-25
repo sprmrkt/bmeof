@@ -7,8 +7,8 @@ import styled, {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
 import EmbedOverlay from "../components/atoms/EmbedOverlay";
 import StickerHolder from "../components/organisms/StickerHolder";
-import GlobalNav from "../components/organisms/GlobalNav";
-import WorkLayout from "../components/organisms/WorkLayout";
+import GlobalNav from "../components/organisms/GlobalNav/GlobalNav";
+import WorkNav from "../components/organisms/WorkNav/WorkNav";
 
 const Main = styled.main`
   position: relative;
@@ -24,7 +24,7 @@ function Index({children, pageContext}) {
         <GlobalStyles />
         <StickerHolder />
         <GlobalNav />
-        {pageContext.layout === "work" && <WorkLayout />}
+        {pageContext.layout === "work" && <WorkNav />}
         <Main>{children}</Main>
         <EmbedOverlay />
       </>

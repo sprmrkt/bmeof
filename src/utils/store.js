@@ -7,11 +7,8 @@ export const useStore = create(set => ({
   embedContent: null,
   setEmbedContent: value => set({embedContent: value}),
   horizontalHover: false,
-  // nav
-  navActive: false,
-  setNavActive: value => set({navActive: value}),
-  closeNav: () => set({navActive: false}),
 
+  // nav
   navSplitIndex: null,
   setNavSplitIndex: value => set({navSplitIndex: value}),
   navUpPosition: 0,
@@ -25,8 +22,16 @@ export const useStore = create(set => ({
   }),
 
   // work
-  workActive: false,
-  setWorkActive: value => set({workActive: value}),
-  closeWork: () => set({workActive: false}),
+  workNavSplitIndex: null,
+  setWorkNavSplitIndex: value => set({workNavSplitIndex: value}),
+  workNavUpPosition: 0,
+  setWorkNavUpPosition: value => set({workNavUpPosition: value}),
+  workNavDownPosition: 0,
+  setWorkNavDownPosition: value => set({workNavDownPosition: value}),
+  closeWorkNav: value => set({
+    workNavDownPosition: 0,
+    workNavUpPosition: 0,
+    workNavSplitIndex: null,
+  }),
 }));
 
