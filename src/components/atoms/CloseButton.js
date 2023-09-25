@@ -55,13 +55,18 @@ const Copyright = styled.div`
   }
 `;
 
-function CloseButton({closeHandler, border}) {
+function CloseButton({border}) {
   const holderClasses = classNames("close-button", {"has-border": border});
+  const { closeNavNew } = useStore();
+
+  const clickHandler = () => {
+    closeNavNew();
+  }
 
   return (
     <>
       <Holder className={holderClasses}>
-        <button onClick={() => closeHandler()} className="h1">
+        <button onClick={() => clickHandler()} className="h1">
           {manualKerning(`Close`)}
         </button>
       </Holder>
@@ -77,7 +82,6 @@ function CloseButton({closeHandler, border}) {
 }
 
 CloseButton.propTypes = {
-  closeHandler: PropTypes.func.isRequired,
   border: PropTypes.bool,
 };
 

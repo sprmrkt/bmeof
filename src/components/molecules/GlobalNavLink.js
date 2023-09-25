@@ -5,15 +5,15 @@ import propTypes from "prop-types";
 import {manualKerning} from "../../utils/helpers";
 import {useStore} from "../../utils/store";
 
-function NavLink({
+function GlobalNavLink({
   link,
   index,
-  setTransitionIndex,
-  setTranslateUp,
-  setTranslateDown,
 }) {
   //store
   const {closeNav} = useStore();
+  const { setNavSplitIndex } = useStore();
+  const { setNavUpPosition } = useStore();
+  const { setNavDownPosition } = useStore();
 
   // methods
   const calculateTranslateDistance = () => {
@@ -27,8 +27,8 @@ function NavLink({
     const up = -(bottom - 48);
     const down = windowHeight - top + elHeight;
 
-    setTranslateUp(up);
-    setTranslateDown(down);
+    setNavUpPosition(up);
+    setNavDownPosition(down);
   };
 
   const handleNavigate = () => {
@@ -36,7 +36,7 @@ function NavLink({
 
     setTimeout(() => {
       closeNav();
-      setTransitionIndex(index);
+      setNavSplitIndex(index);
       calculateTranslateDistance();
     }, [100]);
   };
@@ -53,9 +53,9 @@ function NavLink({
   );
 }
 
-export default NavLink;
+export default GlobalNavLink;
 
-NavLink.propTypes = {
+GlobalNavLink.propTypes = {
   link: propTypes.shape({
     ref: propTypes.shape({current: propTypes.string}),
     id: propTypes.number,
@@ -63,8 +63,5 @@ NavLink.propTypes = {
     label: propTypes.string,
   }),
   index: propTypes.number,
-  setTransitionIndex: propTypes.func,
-  setTranslateUp: propTypes.func,
-  setTranslateDown: propTypes.func,
 };
 

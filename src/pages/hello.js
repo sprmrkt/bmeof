@@ -14,9 +14,8 @@ const Container = styled.div`
 const hello = () => {
   return (
     <Container>
-      <NavButton link={`/`} />
       <Hello />
-      <CloseButton closeHandler={() => navigate(`/`)} />
+      <CloseButton />
     </Container>
   );
 };

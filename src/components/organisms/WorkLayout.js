@@ -68,7 +68,7 @@ const WorkLayout = () => {
         <WorkList works={works} />
 
         <TranslateWrapper distance={!workActive ? `100%` : `0px`}>
-          <CloseButton closeHandler={() => navigate(`/`)} />
+          <CloseButton />
         </TranslateWrapper>
       </div>
     </Container>

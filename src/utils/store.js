@@ -11,6 +11,19 @@ export const useStore = create(set => ({
   navActive: false,
   setNavActive: value => set({navActive: value}),
   closeNav: () => set({navActive: false}),
+
+  navSplitIndex: null,
+  setNavSplitIndex: value => set({navSplitIndex: value}),
+  navUpPosition: 0,
+  setNavUpPosition: value => set({navUpPosition: value}),
+  navDownPosition: 0,
+  setNavDownPosition: value => set({navDownPosition: value}),
+  closeNavNew: value => set({
+    navDownPosition: 0,
+    navUpPosition: 0,
+    navSplitIndex: null,
+  }),
+
   // work
   workActive: false,
   setWorkActive: value => set({workActive: value}),

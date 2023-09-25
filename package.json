@@ -16,6 +16,7 @@
     "classnames": "^2.3.2",
     "cross-env": "^7.0.3",
     "formik": "^2.4.3",
+    "framer-motion": "^10.16.4",
     "gatsby": "^5.12.3",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-google-tagmanager": "^5.12.0",

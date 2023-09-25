@@ -73,7 +73,6 @@ function WorkTemplate({data}) {
 
   return (
     <Container>
-      <NavButton link={`/work`} />
 
       <Title>
         <p className="title">

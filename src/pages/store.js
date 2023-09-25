@@ -42,7 +42,6 @@ const Inner = styled.div`
 const store = () => {
   return (
     <Holder>
-      <NavButton link={`/`} />
       <Inner>
         <section>
           <h2>Silver Stacking Ring</h2>
@@ -113,7 +112,7 @@ const store = () => {
           </button>
         </section>
       </Inner>
-      <CloseButton closeHandler={() => navigate(`/`)} />
+      <CloseButton />
     </Holder>
   );
 };
