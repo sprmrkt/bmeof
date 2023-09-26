@@ -16,15 +16,10 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-layout`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sitemap`,
-    {
-      resolve: "gatsby-plugin-transition-link",
-      options: {
-        layout: require.resolve(`./src/layouts/index.js`)
-      }
-    },
     {
       resolve: "gatsby-plugin-snipcart-advanced",
       options: {
@@ -69,7 +64,7 @@ module.exports = {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
         accessToken: process.env.PRISMIC_ACCESS_TOKEN,
         customTypesApiToken: process.env.PRISMIC_CUSTOM_TYPES_API_TOKEN,
-        linkResolver: (doc) => linkResolver(doc),
+        linkResolver: doc => linkResolver(doc),
       },
     },
     {

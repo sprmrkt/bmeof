@@ -32,7 +32,7 @@ const GlobalStyle = createGlobalStyle`
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    ${(props) => props.theme.fluidType(0)};
+    ${props => props.theme.fluidType(0)};
     overscroll-behavior-y: none;
 
     * { box-sizing: border-box; }
@@ -42,9 +42,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     // Use system fonts: https://css-tricks.com/snippets/css/system-font-stack/
     font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color: ${(props) => props.theme.colors.black};
-    background-color: ${(props) => props.theme.colors.white};
+    color: ${props => props.theme.colors.black};
+    background-color: ${props => props.theme.colors.white};
     overscroll-behavior-y: none;
+    overflow: hidden;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -83,6 +84,16 @@ const GlobalStyle = createGlobalStyle`
     text-align: left;
     white-space: normal;
     margin: 0;
+
+    .letter {
+      transform: translateY(-3%);
+    }
+
+    @-moz-document url-prefix() {
+      .letter {
+        transform: translateY(8%);
+      }
+    }
   }
 
   h2, .h2,
@@ -92,7 +103,7 @@ const GlobalStyle = createGlobalStyle`
   h6, .h6, .p, p, li {
     font-size: 13px;
     line-height: 14px;
-    @media ( ${(props) => props.theme.breakpoints.md} ) {
+    @media ( ${props => props.theme.breakpoints.md} ) {
       font-size: 15px;
       line-height: 16px;
     }
@@ -102,7 +113,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 13px;
     line-height: 14px;
     margin-bottom: 0.75em;
-    @media ( ${(props) => props.theme.breakpoints.md} ) {
+    @media ( ${props => props.theme.breakpoints.md} ) {
       font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       font-size: 40px;
       line-height: 36px;
@@ -196,7 +207,7 @@ const GlobalStyle = createGlobalStyle`
   sub { top: 0.4em; }
 
   label {
-    ${(props) => props.theme.fluidType(-1)};
+    ${props => props.theme.fluidType(-1)};
     line-height: 1.2;
     font-weight: normal;
   }
@@ -222,7 +233,7 @@ const GlobalStyle = createGlobalStyle`
   textarea {
     display: block;
     font-family: inherit;
-    ${(props) => props.theme.fluidType(0)};
+    ${props => props.theme.fluidType(0)};
     padding: 0.2rem 0.5rem;
     margin-top: 24px;
     margin-bottom: 24px;
@@ -233,12 +244,12 @@ const GlobalStyle = createGlobalStyle`
     -webkit-appearance: none;
 
     &:focus {
-      border: 1px ${(props) => props.theme.colors.focus} solid;
+      border: 1px ${props => props.theme.colors.focus} solid;
     }
   }
 
   ::placeholder {
-    color: ${(props) => props.theme.colors.black};
+    color: ${props => props.theme.colors.black};
     opacity: 0.6;
   }
 
@@ -269,7 +280,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: inherit;
     line-height: inherit;
     outline: none;
-    color: ${(props) => props.theme.colors.black};
+    color: ${props => props.theme.colors.black};
   }
 
   select::-ms-expand {
@@ -282,7 +293,7 @@ const GlobalStyle = createGlobalStyle`
     border-radius: 0;
     padding: 0;
     margin: 0.5rem 0 1.5rem 0;
-    ${(props) => props.theme.fluidType(0)};
+    ${props => props.theme.fluidType(0)};
     cursor: pointer;
     line-height: 1.1;
     background-color: transparent;
@@ -295,7 +306,7 @@ const GlobalStyle = createGlobalStyle`
       content: "";
       width: 0.8rem;
       height: 0.5rem;
-      background-color: ${(props) => props.theme.colors.black};
+      background-color: ${props => props.theme.colors.black};
       clip-path: polygon(100% 0%, 0 0%, 50% 100%);
       justify-self: end;
     }
@@ -324,7 +335,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: transparent;
 
     font-size: 13px;
-    @media ( ${(props) => props.theme.breakpoints.md} ) {
+    @media ( ${props => props.theme.breakpoints.md} ) {
       font-size: 15px;
     }
 
@@ -334,7 +345,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .errorMsg {
-    color: ${(props) => props.theme.colors.error};
+    color: ${props => props.theme.colors.error};
   }
 
   .is-affected-by-horizontal-hover {
@@ -342,13 +353,15 @@ const GlobalStyle = createGlobalStyle`
 
     &.horizontal-hover-is-on {
       transition: transform 1.5s cubic-bezier(.15, 1.03, .72, .94);
-      @media ( ${(props) => props.theme.breakpoints.md} ) {
+      @media ( ${props => props.theme.breakpoints.md} ) {
         transform: translateX(calc((var(--horizontalHoverDistance) + 24px) * -1));
       }
     }
   }
 
   .manual-kerning {
+    display: flex;
+
     .letter-w + .letter-o {
       margin-left: -1.5vw;
     }

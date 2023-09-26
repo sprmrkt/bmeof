@@ -1,38 +1,34 @@
 import React, {useState} from "react";
-import {v4 as uuidv4} from "uuid";
-import Gallery from "../components/molecules/Gallery";
-import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
-import {convertToSlug} from "../utils/helpers";
-import {graphql, Link} from "gatsby";
+import {graphql} from "gatsby";
 import styled from "styled-components";
 import {PrismicRichText} from "@prismicio/react";
-import WorkThumbnail from "../components/molecules/WorkThumbnail";
 
-const Title = styled.div`
-  height: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+import Gallery from "../components/molecules/Gallery";
+import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
+import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
+import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
+
+const Container = styled.div`
   position: relative;
-  border-bottom: 1px solid;
-  padding: 0 15px;
-  @media (${(props) => props.theme.breakpoints.md}) {
-    padding: 0 24px;
-  }
+  min-height: calc(100vh - 48px);
+  margin-top: 48px;
+  background-color: ${({theme}) => theme.colors.white};
 `;
 
 const Content = styled.div`
   padding: 0 15px;
-  @media (${(props) => props.theme.breakpoints.sm}) {
+  @media (${props => props.theme.breakpoints.sm}) {
     padding: 0 24px;
   }
+
+  overflow: hidden;
 `;
 const TextHolder = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 24px;
   padding-top: 15px;
-  @media ( ${props => props.theme.breakpoints.sm} ) {
+  @media (${props => props.theme.breakpoints.sm}) {
     padding-top: 24px;
     grid-template-columns: 2fr 1fr 1fr;
   }
@@ -52,20 +48,17 @@ const TextHolder = styled.div`
   }
 `;
 
-function WorkTemplate({data}) {
+function WorkTemplate(props) {
+  const {info, body} = props.data.prismicWork.data;
+  useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
+  useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
+
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const {title, info, body} = data.prismicWork.data;
 
   return (
-    <>
-      <Title>
-        <p className="title">
-          <strong>{title.text}</strong>
-        </p>
-        {!openGallery && <Link to="/work">Back</Link>}
-        {openGallery && <button onClick={() => setOpenGallery(false)}>Close gallery</button>}
-      </Title>
+    <Container>
+
       <Content>
         <TextHolder>
           <div className="text">
@@ -73,83 +66,84 @@ function WorkTemplate({data}) {
           </div>
         </TextHolder>
         <WorkThumbnailsHolder
-          setCurrentSlide={(i) => setCurrentSlide(i)}
+          setCurrentSlide={i => setCurrentSlide(i)}
           openGalleryHandler={() => setOpenGallery(true)}
           slides={body}
         />
       </Content>
 
-
       {openGallery && (
         <Gallery
-          absolute={true}
+          closeHandler={() => setOpenGallery(false)}
+          absolute
           slides={body}
           currentSlide={currentSlide}
-          setCurrentSlide={(i) => setCurrentSlide(i)}
+          setCurrentSlide={i => setCurrentSlide(i)}
         />
       )}
-    </>
+    </Container>
   );
 }
 
 export default WorkTemplate;
 
 export const query = graphql`
-    query ($id: String) {
-        prismicWork(id: { eq: $id }) {
-            data {
-                info {
-                    richText
-                }
-                excerpt {
-                    richText
-                }
-                tile_image {
-                    alt
-                    gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                }
-                tile_video {
-                    url
-                }
-                title {
-                    text
-                }
-                body {
-                    ... on PrismicWorkDataBodyStandardSlide {
-                        id
-                        slice_type
-                        primary {
-                            image {
-                                dimensions {
-                                    width
-                                    height
-                                }
-                                alt
-                                gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                                url(imgixParams: { width: 1000 })
-                            }
-                            embed_poster {
-                                url
-                            }
-                            video {
-                                url
-                            }
-                            embed {
-                                html
-                                height
-                                width
-                                thumbnail_url
-                                title
-                            }
-                            caption {
-                                text
-                            }
-                        }
-                    }
-                }
-            }
-            tags
+  query ($id: String) {
+    prismicWork(id: {eq: $id}) {
+      id
+      data {
+        info {
+          richText
         }
+        excerpt {
+          richText
+        }
+        tile_image {
+          alt
+          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+        }
+        tile_video {
+          url
+        }
+        title {
+          text
+        }
+        body {
+          ... on PrismicWorkDataBodyStandardSlide {
+            id
+            slice_type
+            primary {
+              image {
+                dimensions {
+                  width
+                  height
+                }
+                alt
+                gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                url(imgixParams: {width: 1000})
+              }
+              embed_poster {
+                url
+              }
+              video {
+                url
+              }
+              embed {
+                html
+                height
+                width
+                thumbnail_url
+                title
+              }
+              caption {
+                text
+              }
+            }
+          }
+        }
+      }
+      tags
     }
+  }
 `;
 

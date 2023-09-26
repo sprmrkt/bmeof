@@ -1,18 +1,24 @@
-import { Link } from "gatsby";
 import React from "react";
-import NavHolder from "../components/atoms/NavHolder";
-import Hello from "../components/organisms/Hello";
+import styled from "styled-components";
 
-const hello = () => {
+import CloseButton from "../components/atoms/CloseButton";
+import Hello from "../components/organisms/Hello";
+import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
+
+const Container = styled.div`
+  height: calc(100% - 48px);
+  margin-top: 48px;
+`;
+
+const HelloPage = (props) => {
+  useInitialGlobalNavSplit(props.globalNav, 'hello', 2);
   return (
-    <div>
-      <NavHolder>
-        <Link to="/">Back</Link>
-      </NavHolder>
+    <Container>
       <Hello />
-    </div>
+      <CloseButton />
+    </Container>
   );
 };
 
-export default hello;
+export default HelloPage;
 

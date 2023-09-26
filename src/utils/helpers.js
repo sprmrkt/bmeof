@@ -1,5 +1,5 @@
 import React from "react";
-export const convertToSlug = (Text) => {
+export const convertToSlug = Text => {
   return (
     "/" +
     Text.toLowerCase()
@@ -8,22 +8,34 @@ export const convertToSlug = (Text) => {
   );
 };
 
-export const manualKerning = (text) => {
-  let elements = [];
-  text.split("").forEach((letter) => {
-    elements.push(
-      <span className={`letter-${letter.toLowerCase()}`}>{letter}</span>
+export const manualKerning = text => {
+  const words = text.split(" ").map(word => {
+    const letters = word.split("").map((letter, i) => {
+      return (
+        <span key={i} className={`letter letter-${letter.toLowerCase()}`}>
+          {letter}
+        </span>
+      );
+    });
+
+    return (
+      <span key={word} className="manual-kerning">
+        {letters}
+      </span>
     );
   });
+
   return (
-    <span className="manual-kerning">
-      {elements.map((letter, i) => (
-        <React.Fragment key={i}>{letter}</React.Fragment>
+    <div>
+      {words.map((word, i) => (
+        <React.Fragment key={i}>{word}</React.Fragment>
       ))}
-    </span>
+    </div>
   );
 };
 
-export const randomIntFromInterval = (min, max) =>{ // min and max included
-  return Math.floor(Math.random() * (max - min + 1) + min)
-}
+export const randomIntFromInterval = (min, max) => {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
