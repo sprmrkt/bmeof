@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {graphql} from "gatsby";
 import styled from "styled-components";
 import {PrismicRichText} from "@prismicio/react";
@@ -6,6 +6,7 @@ import {PrismicRichText} from "@prismicio/react";
 import Gallery from "../components/molecules/Gallery";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
+import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
 
 const Container = styled.div`
   position: relative;
@@ -50,16 +51,10 @@ const TextHolder = styled.div`
 function WorkTemplate(props) {
   const {info, body} = props.data.prismicWork.data;
   useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
+  useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
 
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-
-  // useEffect(() => {
-  //   if (typeof document === "undefined") return;
-  //
-  //   const main = document.querySelector("main");
-  //   main.scrollTo(0, 0);
-  // }, []);
 
   return (
     <Container>

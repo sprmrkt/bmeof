@@ -99,12 +99,8 @@ const Title = styled.div`
   }
 `;
 
-const WorkNavLink = ({
-                       even,
-                       work,
-                       index,
-                     }) => {
-  const {title, tile_image, tile_video, excerpt} = work.data;
+const WorkNavLink = (props) => {
+  const {title, tile_image, tile_video, excerpt} = props.work.data;
 
   //store
   const {
@@ -115,19 +111,16 @@ const WorkNavLink = ({
     setWorkNavDownPosition,
   } = useStore();
 
-  // refs
-  const workRef = useRef(null);
-
   // variables
-  const link = work.uid && `/work/${work.uid}`;
+  const link = props.work.uid && `/work/${props.work.uid}`;
   const tileClasses = classNames({
     workTile: true,
-    even: even,
+    even: props.even,
   });
 
   // methods
   const calculateTranslateDistance = () => {
-    const el = workRef?.current;
+    const el = props.workNavRef?.current.querySelector(`#work-${props.work.id}`);
     if (!el) return;
 
     const {top, bottom} = el?.getBoundingClientRect();
@@ -143,15 +136,15 @@ const WorkNavLink = ({
 
   const handleNavigate = () => {
     navigate(link);
-    setWorkNavSplitIndex(index);
+    setWorkNavSplitIndex(props.index);
     calculateTranslateDistance();
     setNavUpPosition(navUpPosition - 50);
   };
 
   return (
     <Button
-      ref={workRef}
-      data-id={work.id}
+      id={`work-${props.work.id}`}
+      data-id={props.work.id}
       role="button"
       className="workTileHolder"
       onClick={handleNavigate}>

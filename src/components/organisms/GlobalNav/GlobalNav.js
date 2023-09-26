@@ -29,7 +29,7 @@ const Heading = styled.h1`
   overflow: hidden;
 `;
 
-const GlobalNav = forwardRef((props, wrapperRef) => {
+const GlobalNav = forwardRef((props, globalNavRef) => {
   // variables
   const links = [
     {
@@ -62,7 +62,7 @@ const GlobalNav = forwardRef((props, wrapperRef) => {
   // render
   return (
     <Container active={navSplitIndex === null}>
-      <div ref={wrapperRef} className="global-nav-wrapper">
+      <div ref={globalNavRef} className="global-nav-wrapper">
         <GlobalNavLinkHolder position={navUpPosition}>
           <Header />
         </GlobalNavLinkHolder>
@@ -79,7 +79,7 @@ const GlobalNav = forwardRef((props, wrapperRef) => {
             }
             active={linkIndex === navSplitIndex}>
             <GlobalNavLink
-              wrapperRef={wrapperRef}
+              globalNavRef={globalNavRef}
               link={link}
               index={linkIndex}
             />

@@ -8,7 +8,7 @@ import {useStore} from "../../../utils/store";
 function GlobalNavLink({
   link,
   index,
-  wrapperRef,
+  globalNavRef,
 }) {
   //store
   const { setNavSplitIndex } = useStore();
@@ -17,7 +17,7 @@ function GlobalNavLink({
 
   // methods
   const calculateTranslateDistance = () => {
-    const el = wrapperRef.current.querySelector(`#${link.id}`);
+    const el = globalNavRef.current.querySelector(`#${link.id}`);
     if (!el) return;
 
     const {top, bottom, height} = el?.getBoundingClientRect();

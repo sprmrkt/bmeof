@@ -35,5 +35,7 @@ export const useStore = create(set => ({
     workNavUpPosition: 0,
     workNavSplitIndex: null,
   }),
+  workNavSplitHappenedOnce: false,
+  setWorkNavSplitHappenedOnce: value => set({workNavSplitHappenedOnce: value}),
 }));
 

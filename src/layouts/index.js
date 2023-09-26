@@ -21,19 +21,27 @@ const Main = styled.main`
 
 function Index({children, pageContext}) {
 
-  const wrapperRef = useRef(null);
+  const globalNavRef = useRef(null);
+  const workNavRef = useRef(null);
   const size = useWindowSize();
-  const { closeNav, closeWorkNav } = useStore();
+  const { closeNav, closeWorkNav, setWorkNavSplitHappenedOnce } = useStore();
 
   useEffect(() => {
     closeNav();
     closeWorkNav();
-  }, [size])
+  }, [size, closeNav, closeWorkNav]);
+
+  useEffect(() => {
+    if(pageContext.layout !== "work") {
+      setWorkNavSplitHappenedOnce(true);
+    }
+  }, [pageContext.layout, setWorkNavSplitHappenedOnce])
 
   const renderChildren = () => {
     return React.Children.map(children, (child) => {
       return React.cloneElement(child, {
-        globalNav: wrapperRef,
+        globalNav: globalNavRef,
+        workNav: workNavRef,
       });
     });
   };
@@ -43,8 +51,8 @@ function Index({children, pageContext}) {
       <>
         <GlobalStyles />
         <StickerHolder />
-        <GlobalNav ref={wrapperRef}/>
-        {pageContext.layout === "work" && <WorkNav />}
+        <GlobalNav ref={globalNavRef}/>
+        <WorkNav ref={workNavRef} visible={pageContext.layout === "work"}/>
         <Main>{renderChildren()}</Main>
         <EmbedOverlay />
       </>

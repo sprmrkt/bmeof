@@ -11,11 +11,19 @@ exports.createPages = ({actions, graphql}) => {
 
   return graphql(`
     {
-      work: allPrismicWork {
-        nodes {
-          id
-          uid
-        }
+      work: prismicHomepage {
+          data {
+              work {
+                  work_item {
+                      document {
+                          ... on PrismicWork {
+                              uid
+                              id
+                          }
+                      }
+                  }
+              }
+          }
       }
       posts: allPrismicPost {
         nodes {
@@ -35,14 +43,16 @@ exports.createPages = ({actions, graphql}) => {
     }
 
     // Create Work pages
-    const workPosts = result.data.work.nodes;
-    workPosts.forEach(post => {
+    const workPosts = result.data.work.data.work;
+    workPosts.forEach((post, i) => {
+      const page = post.work_item.document;
       createPage({
-        path: `/work/${post.uid}`,
+        path: `/work/${page.uid}`,
         component: path.resolve("./src/templates/WorkTemplate.js"),
         context: {
-          id: post.id,
+          id: page.id,
           layout: "work",
+          index: i,
         },
       });
     });
