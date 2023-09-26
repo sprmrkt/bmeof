@@ -1,11 +1,10 @@
-import {navigate} from "gatsby";
 import React from "react";
 import styled from "styled-components";
 
 import CloseButton from "../components/atoms/CloseButton";
-import NavButton from "../components/molecules/NavButton";
 
 import bear from "../assets/img/bear.png";
+import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 
 const Holder = styled.div`
   height: calc(100% - 48px);
@@ -39,7 +38,8 @@ const Inner = styled.div`
     }
   }
 `;
-const store = () => {
+const StorePage = (props) => {
+  useInitialGlobalNavSplit(props.globalNav, 'store', 3);
   return (
     <Holder>
       <Inner>
@@ -117,5 +117,5 @@ const store = () => {
   );
 };
 
-export default store;
+export default StorePage;
 

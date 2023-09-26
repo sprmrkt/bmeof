@@ -1,16 +1,16 @@
-import {navigate} from "gatsby";
 import React from "react";
 import styled from "styled-components";
 
 import CloseButton from "../components/atoms/CloseButton";
-import NavButton from "../components/molecules/NavButton";
 import Studio from "../components/organisms/Studio";
+import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 
 const Container = styled.div`
   margin-top: 48px;
 `;
 
-const studio = () => {
+const StudioPage = (props) => {
+  useInitialGlobalNavSplit(props.globalNav, 'studio', 1);
   return (
     <Container>
       <Studio />
@@ -19,5 +19,5 @@ const studio = () => {
   );
 };
 
-export default studio;
+export default StudioPage;
 

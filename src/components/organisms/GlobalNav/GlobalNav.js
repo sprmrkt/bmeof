@@ -84,6 +84,14 @@ const GlobalNav = forwardRef((props, wrapperRef) => {
             />
           </GlobalNavLinkHolder>
         ))}
+
+        <GlobalNavLinkHolder position={navDownPosition}>
+          <Header />
+        </GlobalNavLinkHolder>
+
+        <GlobalNavLinkHolder position={navDownPosition}>
+          <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+        </GlobalNavLinkHolder>
       </div>
     </Container>
   );
