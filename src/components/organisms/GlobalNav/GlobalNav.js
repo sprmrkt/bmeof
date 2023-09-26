@@ -26,6 +26,7 @@ const Container = styled.nav`
 
 const Heading = styled.h1`
   background: lightblue;
+  overflow: hidden;
 `;
 
 const GlobalNav = forwardRef((props, wrapperRef) => {
