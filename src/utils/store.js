@@ -20,6 +20,8 @@ export const useStore = create(set => ({
     navUpPosition: 0,
     navSplitIndex: null,
   }),
+  globalNavSplitHappenedOnce: false,
+  setGlobalNavSplitHappenedOnce: value => set({globalNavSplitHappenedOnce: value}),
 
   // work
   workNavSplitIndex: null,

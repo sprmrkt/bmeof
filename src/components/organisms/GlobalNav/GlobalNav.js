@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {forwardRef, useRef} from "react";
 
 import styled from "styled-components";
 import Header from "../../molecules/Header";
@@ -28,37 +28,34 @@ const Heading = styled.h1`
   background: lightblue;
 `;
 
-function GlobalNav() {
+const GlobalNav = forwardRef((props, wrapperRef) => {
   // variables
   const links = [
     {
       ref: useRef(null),
-      id: 1,
+      id: 'work',
       slug: "/work/",
       label: "Work",
     },
     {
       ref: useRef(null),
-      id: 2,
+      id: 'studio',
       slug: "/studio/",
       label: "Studio",
     },
     {
       ref: useRef(null),
-      id: 3,
+      id: 'hello',
       slug: "/hello/",
       label: "Hello",
     },
     {
       ref: useRef(null),
-      id: 4,
+      id: 'store',
       slug: "/store/",
       label: "Store",
     },
   ];
-
-  // ref
-  const wrapperRef = useRef(null);
 
   // store
   const { navSplitIndex, setNavSplitIndex } = useStore();
@@ -68,7 +65,7 @@ function GlobalNav() {
   // render
   return (
     <Container active={navSplitIndex === null}>
-      <div ref={wrapperRef}>
+      <div ref={wrapperRef} className="global-nav-wrapper">
         <GlobalNavLinkHolder position={navUpPosition}>
           <Header />
         </GlobalNavLinkHolder>
@@ -79,12 +76,12 @@ function GlobalNav() {
 
         {links.map((link, linkIndex) => (
           <GlobalNavLinkHolder
+            key={linkIndex}
             position={
               linkIndex <= navSplitIndex ? navUpPosition : navDownPosition
             }
             active={linkIndex === navSplitIndex}>
             <GlobalNavLink
-              key={link?.id}
               link={link}
               index={linkIndex}
             />
@@ -93,7 +90,7 @@ function GlobalNav() {
       </div>
     </Container>
   );
-}
+})
 
 export default GlobalNav;
 

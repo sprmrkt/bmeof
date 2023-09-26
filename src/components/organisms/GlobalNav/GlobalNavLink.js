@@ -43,6 +43,7 @@ function GlobalNavLink({
   return (
     <button
       ref={link.ref}
+      id={link.id}
       role="button"
       className="h1"
       onClick={() => handleNavigate(link.slug)}>
@@ -56,7 +57,7 @@ export default GlobalNavLink;
 GlobalNavLink.propTypes = {
   link: propTypes.shape({
     ref: propTypes.shape({current: propTypes.string}),
-    id: propTypes.number,
+    id: propTypes.string,
     slug: propTypes.string,
     label: propTypes.string,
   }),

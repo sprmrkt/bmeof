@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import PropTypes from "prop-types";
 import "../utils/fontface.css";
 
@@ -18,14 +18,30 @@ const Main = styled.main`
 `;
 
 function Index({children, pageContext}) {
+
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    // Works!
+    // console.log(wrapperRef.current)
+  }, [])
+
+  const renderChildren = () => {
+    return React.Children.map(children, (child) => {
+      return React.cloneElement(child, {
+        globalNav: wrapperRef,
+      });
+    });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
         <StickerHolder />
-        <GlobalNav />
+        <GlobalNav ref={wrapperRef}/>
         {pageContext.layout === "work" && <WorkNav />}
-        <Main>{children}</Main>
+        <Main>{renderChildren()}</Main>
         <EmbedOverlay />
       </>
     </ThemeProvider>
