@@ -41,7 +41,7 @@ const Close = styled.button`
 `;
 
 function GlobalNavLinkHolder(props) {
-  const { closeNavNew } = useStore();
+  const { closeNav } = useStore();
   return (
     <Holder
       as={motion.div}
@@ -65,7 +65,7 @@ function GlobalNavLinkHolder(props) {
           duration: 1,
         }}
       />
-      {props.active && <Close onClick={() => closeNavNew()}/>}
+      {props.active && <Close onClick={() => closeNav()}/>}
     </Holder>
   )
 }

@@ -15,7 +15,7 @@ export const useStore = create(set => ({
   setNavUpPosition: value => set({navUpPosition: value}),
   navDownPosition: 0,
   setNavDownPosition: value => set({navDownPosition: value}),
-  closeNavNew: value => set({
+  closeNav: value => set({
     navDownPosition: 0,
     navUpPosition: 0,
     navSplitIndex: null,

@@ -57,10 +57,10 @@ const Copyright = styled.div`
 
 function CloseButton({border}) {
   const holderClasses = classNames("close-button", {"has-border": border});
-  const { closeNavNew } = useStore();
+  const { closeNav } = useStore();
 
   const clickHandler = () => {
-    closeNavNew();
+    closeNav();
   }
 
   return (

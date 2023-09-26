@@ -9,6 +9,8 @@ import EmbedOverlay from "../components/atoms/EmbedOverlay";
 import StickerHolder from "../components/organisms/StickerHolder";
 import GlobalNav from "../components/organisms/GlobalNav/GlobalNav";
 import WorkNav from "../components/organisms/WorkNav/WorkNav";
+import {useWindowSize} from "react-use";
+import {useStore} from "../utils/store";
 
 const Main = styled.main`
   position: relative;
@@ -20,11 +22,13 @@ const Main = styled.main`
 function Index({children, pageContext}) {
 
   const wrapperRef = useRef(null);
+  const size = useWindowSize();
+  const { closeNav, closeWorkNav } = useStore();
 
   useEffect(() => {
-    // Works!
-    // console.log(wrapperRef.current)
-  }, [])
+    closeNav();
+    closeWorkNav();
+  }, [size])
 
   const renderChildren = () => {
     return React.Children.map(children, (child) => {
