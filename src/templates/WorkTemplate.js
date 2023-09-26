@@ -5,6 +5,7 @@ import {PrismicRichText} from "@prismicio/react";
 
 import Gallery from "../components/molecules/Gallery";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
+import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 
 const Container = styled.div`
   position: relative;
@@ -46,18 +47,19 @@ const TextHolder = styled.div`
   }
 `;
 
-function WorkTemplate({data}) {
-  const {info, body} = data.prismicWork.data;
+function WorkTemplate(props) {
+  const {info, body} = props.data.prismicWork.data;
+  useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
 
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-
-    const main = document.querySelector("main");
-    main.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   if (typeof document === "undefined") return;
+  //
+  //   const main = document.querySelector("main");
+  //   main.scrollTo(0, 0);
+  // }, []);
 
   return (
     <Container>
