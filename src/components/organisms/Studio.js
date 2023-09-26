@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {graphql, useStaticQuery} from "gatsby";
 import PrismicRichText from "../atoms/PrismicRichText";
-import PostGallery from "../molecules/PostGallery";
 import Gallery from "../molecules/Gallery";
 
 const Holder = styled.div`

@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {graphql, Link} from "gatsby";
+import {graphql} from "gatsby";
 import styled from "styled-components";
 import {PrismicRichText} from "@prismicio/react";
 
 import Gallery from "../components/molecules/Gallery";
-import NavButton from "../components/molecules/NavButton";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
 
 const Container = styled.div`
@@ -48,7 +47,7 @@ const TextHolder = styled.div`
 `;
 
 function WorkTemplate({data}) {
-  const {title, info, body} = data.prismicWork.data;
+  const {info, body} = data.prismicWork.data;
 
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);

@@ -1,5 +1,5 @@
 import React from "react";
-import {useStaticQuery, graphql, navigate, Link} from "gatsby";
+import {useStaticQuery, graphql} from "gatsby";
 import styled from "styled-components";
 
 import CloseButton from "../../atoms/CloseButton";

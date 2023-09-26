@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
-import {useLocation} from "@reach/router";
+import React, {useRef} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import WorkNavLink from "./WorkNavLink";
@@ -28,23 +27,14 @@ const Grid = styled.div`
     }
   }
 `;
-
-const SpareTileBorder = styled.div`
-  border-top: 1px solid;
-  display: none;
-  @media (${props => props.theme.breakpoints.md}) {
-    display: block;
-  }
-`;
-
 function WorkNavInner({works}) {
   // ref
   const holderRef = useRef(null);
 
   // state
-  const { workNavSplitIndex, setWorkNavSplitIndex } = useStore();
-  const { workNavUpPosition, setWorkNavUpPosition } = useStore();
-  const { workNavDownPosition, setWorkNavDownPosition } = useStore();
+  const { workNavSplitIndex } = useStore();
+  const { workNavUpPosition } = useStore();
+  const { workNavDownPosition } = useStore();
 
   return (
     <Holder ref={holderRef}>
