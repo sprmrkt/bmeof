@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 
 import Seo from "../components/molecules/Seo";
 import {useStore} from "../utils/store";

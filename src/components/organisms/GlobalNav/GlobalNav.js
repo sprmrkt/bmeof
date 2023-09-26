@@ -1,4 +1,4 @@
-import React, {forwardRef, useRef} from "react";
+import React, {forwardRef} from "react";
 
 import styled from "styled-components";
 import Header from "../../molecules/Header";
@@ -32,25 +32,21 @@ const GlobalNav = forwardRef((props, wrapperRef) => {
   // variables
   const links = [
     {
-      ref: useRef(null),
       id: 'work',
       slug: "/work/",
       label: "Work",
     },
     {
-      ref: useRef(null),
       id: 'studio',
       slug: "/studio/",
       label: "Studio",
     },
     {
-      ref: useRef(null),
       id: 'hello',
       slug: "/hello/",
       label: "Hello",
     },
     {
-      ref: useRef(null),
       id: 'store',
       slug: "/store/",
       label: "Store",
@@ -58,9 +54,9 @@ const GlobalNav = forwardRef((props, wrapperRef) => {
   ];
 
   // store
-  const { navSplitIndex, setNavSplitIndex } = useStore();
-  const { navUpPosition, setNavUpPosition } = useStore();
-  const { navDownPosition, setNavDownPosition } = useStore();
+  const { navSplitIndex } = useStore();
+  const { navUpPosition } = useStore();
+  const { navDownPosition } = useStore();
 
   // render
   return (
@@ -82,6 +78,7 @@ const GlobalNav = forwardRef((props, wrapperRef) => {
             }
             active={linkIndex === navSplitIndex}>
             <GlobalNavLink
+              wrapperRef={wrapperRef}
               link={link}
               index={linkIndex}
             />
