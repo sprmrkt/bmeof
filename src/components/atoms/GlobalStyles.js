@@ -333,6 +333,7 @@ const GlobalStyle = createGlobalStyle`
 
     color: inherit;
     background-color: transparent;
+    margin: 0;
 
     font-size: 13px;
     @media ( ${props => props.theme.breakpoints.md} ) {
