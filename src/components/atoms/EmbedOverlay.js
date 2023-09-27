@@ -9,12 +9,18 @@ const OverlayHolder = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
-  color: #333;
   background-color: #000;
   transform-origin: bottom left;
   font-family: "Gotham", "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  pointer-events: ${({ active }) => (active ? "auto" : "none")};
+
+  transition: opacity 0.3s ease-in-out;
 
   .close {
     position: absolute;
@@ -50,34 +56,46 @@ const OverlayHolder = styled.div`
   object,
   embed {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: calc(var(--windowHeight) - 96px);
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 `;
 
-function EmbedOverlay() {
-  const setEmbedIsOpen = useStore((state) => state.setEmbedIsOpen);
-  const embedContent = useStore((state) => state.embedContent);
-  const setEmbedContent = useStore((state) => state.setEmbedContent);
+const Title = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  padding: 0 24px;
+  z-index: 10;
+  color: white;
+  mix-blend-mode: difference;
+`;
 
-  if (!embedContent) return null;
+function EmbedOverlay() {
+  const { embedIsOpen, setEmbedIsOpen, embedContent, setEmbedContent } =
+    useStore((state) => state);
 
   return (
-    <OverlayHolder>
-      <button
-        className="close"
-        onClick={() => {
-          setEmbedContent(null);
-          setEmbedIsOpen(false);
-        }}
-      >
-        <p className="exit-text">Exit full screen</p>
-        <p className="cross">+</p>
-      </button>
-      <div dangerouslySetInnerHTML={{ __html: embedContent }} />
+    <OverlayHolder active={embedIsOpen}>
+      <Title>
+        <button
+          className="close"
+          onClick={() => {
+            setEmbedContent(null);
+            setEmbedIsOpen(false);
+          }}>
+          <p className="exit-text">Exit full screen</p>
+          <p className="cross">+</p>
+        </button>
+      </Title>
+
+      {embedContent && (
+        <div dangerouslySetInnerHTML={{ __html: embedContent }} />
+      )}
     </OverlayHolder>
   );
 }
