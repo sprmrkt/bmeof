@@ -21,16 +21,16 @@ export default function useInitialGlobalNavSplit(
     const el = navRef?.current;
     if (!el || navSplitIndex !== null || globalNavSplitHappenedOnce) return;
 
-    // 2. Scroll global nav to work link
-    const workLink = el.querySelector(`#${id}`);
+    // 2. Scroll global nav to nav link
+    const navLink = el.querySelector(`#${id}`);
 
-    const { top } = workLink.getBoundingClientRect();
+    const { top } = navLink.getBoundingClientRect();
     el.scrollTo(0, top + el.scrollTop);
 
     // 3. Wait until the scroll (above) has definitely happened then...
     const split = setTimeout(() => {
       // 4. Calculate translate distance for nav up and down
-      const { top: newTop, bottom, height } = workLink.getBoundingClientRect();
+      const { top: newTop, bottom, height } = navLink.getBoundingClientRect();
       const windowHeight = window?.innerHeight;
       let up = -(bottom - 48);
       if (individualWorkPage) up -= 48;
