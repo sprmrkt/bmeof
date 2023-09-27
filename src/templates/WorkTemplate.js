@@ -64,7 +64,7 @@ const TitleBar = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   border-bottom: 1px solid black;
 
-  pointer-events: auto;
+  pointer-events: ${({ active }) => (active ? "auto" : "none")};
   will-change: opacity;
   p {
     margin: 0;
@@ -92,7 +92,7 @@ function WorkTemplate(props) {
 
   return (
     <Container>
-      <TitleBar>
+      <TitleBar active={!openGallery}>
         <button onClick={() => closeHandler()}>Back</button>
       </TitleBar>
 
@@ -109,15 +109,14 @@ function WorkTemplate(props) {
         />
       </Content>
 
-      {openGallery && (
-        <Gallery
-          closeHandler={() => setOpenGallery(false)}
-          absolute
-          slides={body}
-          currentSlide={currentSlide}
-          setCurrentSlide={(i) => setCurrentSlide(i)}
-        />
-      )}
+      <Gallery
+        active={openGallery}
+        closeHandler={() => setOpenGallery(false)}
+        absolute
+        slides={body}
+        currentSlide={currentSlide}
+        setCurrentSlide={(i) => setCurrentSlide(i)}
+      />
     </Container>
   );
 }

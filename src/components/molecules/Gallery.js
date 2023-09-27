@@ -1,26 +1,25 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import WorkSlides from "./WorkSlides";
-import {useSwipeable} from "react-swipeable";
+import { useSwipeable } from "react-swipeable";
 import StackedImages from "./StackedImages";
 
 const Holder = styled.div`
   position: relative;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-  background-color: ${props => props.theme.colors.white};
+
+  opacity: ${({ active }) => (active ? 1 : 0)};
+  pointer-events: ${({ active }) => (active ? "auto" : "none")};
+
+  transition: opacity 0.3s ease-in-out;
 
   &.absPositioned {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-  }
-  
-  .temp-close-button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
+    height: 100%;
     z-index: 100;
   }
 
@@ -33,7 +32,7 @@ const Holder = styled.div`
   }
 `;
 
-const Button = styled.button.attrs(props => ({
+const Button = styled.button.attrs((props) => ({
   disabled: props.disabled,
 }))`
   position: absolute;
@@ -44,7 +43,7 @@ const Button = styled.button.attrs(props => ({
   top: 0;
   left: 0;
   display: none;
-  @media (${props => props.theme.breakpoints.md}) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     display: block;
   }
 
@@ -69,16 +68,19 @@ const Button = styled.button.attrs(props => ({
 
 const Slides = styled.div`
   display: none;
-  @media (${props => props.theme.breakpoints.md}) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     width: 100%;
     overflow: hidden;
     position: relative;
+    top: 48px;
     height: calc(100vh - 48px);
     min-height: calc(((100vw - 48px) * 0.75 * 0.6667) + 48px + 48px);
     padding: 24px;
+    padding-top: 24px;
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 24px;
+    background-color: ${({ theme }) => theme.colors.white};
   }
 `;
 
@@ -101,16 +103,45 @@ const SlidesInner = styled.div`
     top: 100%;
     left: 0;
     text-transform: uppercase;
-    @media (${props => props.theme.breakpoints.md}) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       display: none;
     }
   }
 `;
 
-function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}) {
+const TitleBar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  z-index: 10;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  padding: 0 24px;
+
+  border-bottom: 1px solid black;
+
+  will-change: opacity;
+  p {
+    margin: 0;
+  }
+`;
+
+function Gallery({
+  active,
+  slides,
+  currentSlide,
+  setCurrentSlide,
+  absolute,
+  closeHandler,
+}) {
   const [isNext, setIsNext] = useState(true);
 
-  const handlePrev = current => {
+  const handlePrev = (current) => {
     setIsNext(false);
     if (current === 0) {
       setCurrentSlide(slides.length - 1);
@@ -118,7 +149,7 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
       setCurrentSlide(current - 1);
     }
   };
-  const handleNext = current => {
+  const handleNext = (current) => {
     setIsNext(true);
     if (current === slides.length - 1) {
       setCurrentSlide(0);
@@ -133,7 +164,13 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
   });
 
   return (
-    <Holder className={`work-gallery ${absolute ? "absPositioned" : ""}`}>
+    <Holder
+      active={active}
+      className={`work-gallery ${absolute ? "absPositioned" : ""}`}>
+      <TitleBar>
+        <button onClick={() => closeHandler()}>Back</button>
+      </TitleBar>
+
       <Slides {...swipeHandlers}>
         <SlidesInner>
           <div className="inner-for-hiding-overflow">
@@ -157,7 +194,6 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
         </SlidesInner>
       </Slides>
       <StackedImages slides={slides} />
-      <button className="temp-close-button" onClick={() => closeHandler()}>Temporary close gallery button</button>
     </Holder>
   );
 }

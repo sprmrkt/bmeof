@@ -11,6 +11,8 @@ import { useStore } from "../../../utils/store";
 
 const Button = styled.button`
   width: 100%;
+
+  z-index: 5;
 `;
 
 const Holder = styled.div`
