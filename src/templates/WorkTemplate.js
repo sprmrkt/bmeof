@@ -1,23 +1,24 @@
-import React, {useState} from "react";
-import {graphql} from "gatsby";
+import React, { useState } from "react";
+import { graphql } from "gatsby";
 import styled from "styled-components";
-import {PrismicRichText} from "@prismicio/react";
+import { PrismicRichText } from "@prismicio/react";
 
 import Gallery from "../components/molecules/Gallery";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
+import { useStore } from "../utils/store";
 
 const Container = styled.div`
   position: relative;
   min-height: calc(100vh - 48px);
   margin-top: 48px;
-  background-color: ${({theme}) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
 `;
 
 const Content = styled.div`
   padding: 0 15px;
-  @media (${props => props.theme.breakpoints.sm}) {
+  @media (${(props) => props.theme.breakpoints.sm}) {
     padding: 0 24px;
   }
 
@@ -28,7 +29,7 @@ const TextHolder = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 24px;
   padding-top: 15px;
-  @media (${props => props.theme.breakpoints.sm}) {
+  @media (${(props) => props.theme.breakpoints.sm}) {
     padding-top: 24px;
     grid-template-columns: 2fr 1fr 1fr;
   }
@@ -48,16 +49,52 @@ const TextHolder = styled.div`
   }
 `;
 
+const TitleBar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  padding: 0 24px;
+
+  display: flex;
+  justify-content: end;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.colors.white};
+  border-bottom: 1px solid black;
+
+  pointer-events: auto;
+  will-change: opacity;
+  p {
+    margin: 0;
+  }
+`;
+
 function WorkTemplate(props) {
-  const {info, body} = props.data.prismicWork.data;
-  useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
-  useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
+  const { info, body } = props.data.prismicWork.data;
+  useInitialGlobalNavSplit(props.globalNav, "work", 0, true);
+  useInitialWorkNavSplit(
+    props.workNav,
+    props.data.prismicWork.id,
+    props.pageContext.index
+  );
+
+  const { setNavUpPosition, navUpPosition, closeWorkNav } = useStore();
 
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const closeHandler = () => {
+    setNavUpPosition(navUpPosition + 50);
+    closeWorkNav();
+  };
+
   return (
     <Container>
+      <TitleBar>
+        <button onClick={() => closeHandler()}>Back</button>
+      </TitleBar>
 
       <Content>
         <TextHolder>
@@ -66,7 +103,7 @@ function WorkTemplate(props) {
           </div>
         </TextHolder>
         <WorkThumbnailsHolder
-          setCurrentSlide={i => setCurrentSlide(i)}
+          setCurrentSlide={(i) => setCurrentSlide(i)}
           openGalleryHandler={() => setOpenGallery(true)}
           slides={body}
         />
@@ -78,7 +115,7 @@ function WorkTemplate(props) {
           absolute
           slides={body}
           currentSlide={currentSlide}
-          setCurrentSlide={i => setCurrentSlide(i)}
+          setCurrentSlide={(i) => setCurrentSlide(i)}
         />
       )}
     </Container>
@@ -89,7 +126,7 @@ export default WorkTemplate;
 
 export const query = graphql`
   query ($id: String) {
-    prismicWork(id: {eq: $id}) {
+    prismicWork(id: { eq: $id }) {
       id
       data {
         info {
@@ -120,7 +157,7 @@ export const query = graphql`
                 }
                 alt
                 gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                url(imgixParams: {width: 1000})
+                url(imgixParams: { width: 1000 })
               }
               embed_poster {
                 url
