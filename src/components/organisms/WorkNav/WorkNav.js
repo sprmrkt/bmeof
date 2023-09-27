@@ -34,12 +34,22 @@ const Grid = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
   }
+
   .workTileHolder:first-child,
   .workTileHolder:nth-child(2) {
     .workTile {
       border-top: none;
     }
   }
+`;
+
+const LastEvenItem = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: aqua;
 `;
 
 const WorkNav = forwardRef((props, workNavRef) => {
@@ -75,6 +85,15 @@ const WorkNav = forwardRef((props, workNavRef) => {
               />
             </WorkNavLinkHolder>
           ))}
+          {works.length % 2 === 1 &&
+            <WorkNavLinkHolder
+              position={
+                workNavSplitIndex === works.length - 1 ? workNavUpPosition : workNavDownPosition
+              }>
+              <LastEvenItem />
+            </WorkNavLinkHolder>
+          }
+
         </Grid>
         <WorkNavLinkHolder position={workNavSplitIndex === null ? 0 : workNavDownPosition}>
           <CloseButton />
@@ -87,40 +106,40 @@ const WorkNav = forwardRef((props, workNavRef) => {
 export default WorkNav;
 
 const workQuery = graphql`
-  query {
-    prismicHomepage {
-      data {
-        work {
-          work_item {
-            document {
-              ... on PrismicWork {
-                uid
-                id
-                tags
-                data {
-                  info {
-                    richText
-                  }
-                  tile_image {
-                    alt
-                    gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                  }
-                  tile_video {
-                    url
-                  }
-                  title {
-                    text
-                  }
-                  excerpt {
-                    richText
-                  }
+    query {
+        prismicHomepage {
+            data {
+                work {
+                    work_item {
+                        document {
+                            ... on PrismicWork {
+                                uid
+                                id
+                                tags
+                                data {
+                                    info {
+                                        richText
+                                    }
+                                    tile_image {
+                                        alt
+                                        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                                    }
+                                    tile_video {
+                                        url
+                                    }
+                                    title {
+                                        text
+                                    }
+                                    excerpt {
+                                        richText
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
         }
-      }
     }
-  }
 `;
 

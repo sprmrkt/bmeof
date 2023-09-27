@@ -16,13 +16,6 @@ const Holder = styled.div`
     top: 0;
     left: 0;
   }
-  
-  .temp-close-button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 100;
-  }
 
   > :first-child {
     margin-top: 0;
@@ -79,6 +72,22 @@ const Slides = styled.div`
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 24px;
+  }
+`;
+
+const CloseButton = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 199;
+  height: 48px;
+  padding: 0 24px;
+  background-color: #f81e1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
   }
 `;
 
@@ -157,7 +166,9 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
         </SlidesInner>
       </Slides>
       <StackedImages slides={slides} />
-      <button className="temp-close-button" onClick={() => closeHandler()}>Temporary close gallery button</button>
+      {absolute && <CloseButton>
+        <button className="temp-close-button" onClick={() => closeHandler()}>Close</button>
+      </CloseButton>}
     </Holder>
   );
 }
