@@ -8,8 +8,8 @@ const Holder = styled.div`
   grid-gap: 24px;
   grid-template-columns: 1fr 3fr;
   align-items: center;
-  background-color: lightblue;
-  @media (${props => props.theme.breakpoints.md}) {
+
+  @media (${(props) => props.theme.breakpoints.md}) {
     padding: 24px 24px 0 24px;
     grid-template-columns: 1fr 1fr;
   }
@@ -18,7 +18,7 @@ const Holder = styled.div`
     width: 50px;
     height: auto;
     display: block;
-    @media (${props => props.theme.breakpoints.md}) {
+    @media (${(props) => props.theme.breakpoints.md}) {
       width: 75px;
     }
   }

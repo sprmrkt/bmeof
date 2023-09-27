@@ -15,7 +15,7 @@ const Holder = styled.div`
   }
 
   &.has-border {
-    border-top: 1px solid;
+    border-top: 2px solid;
   }
 
   button {

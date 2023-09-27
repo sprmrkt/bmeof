@@ -1,8 +1,8 @@
-import React, {forwardRef} from "react";
-import {useStaticQuery, graphql} from "gatsby";
+import React, { forwardRef } from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import CloseButton from "../../atoms/CloseButton";
-import {useStore} from "../../../utils/store";
+import { useStore } from "../../../utils/store";
 import WorkNavLinkHolder from "./WorkNavLinkHolder";
 import WorkNavLink from "./WorkNavLink";
 
@@ -14,13 +14,19 @@ const Container = styled.div`
   height: 100vh;
   overflow: visible;
   opacity: ${(props) => (props.visible ? 1 : 0)};
-  pointer-events: ${(props) => (props.active && props.visible ? "auto" : "none")};
+  background-color: ${({ active, theme }) => active && theme.colors.white};
+  pointer-events: ${(props) =>
+    props.active && props.visible ? "auto" : "none"};
   z-index: 1;
+
+  transition:
+    opacity 1s ease-in-out,
+    background-color 1s ease-in-out;
 
   .work-nav-container {
     position: relative;
     overflow-x: hidden;
-    overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
+    overflow-y: ${({ active }) => (active ? "scroll" : "hidden")};
     height: 100%;
   }
 `;
@@ -30,7 +36,7 @@ const Grid = styled.div`
   grid-template-columns: 1fr;
   padding-top: 48px;
 
-  @media (${props => props.theme.breakpoints.md}) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
   }
@@ -44,14 +50,11 @@ const Grid = styled.div`
 
 const WorkNav = forwardRef((props, workNavRef) => {
   const data = useStaticQuery(workQuery);
-  const {
-    workNavSplitIndex,
-    workNavUpPosition,
-    workNavDownPosition
-  } = useStore();
+  const { workNavSplitIndex, workNavUpPosition, workNavDownPosition } =
+    useStore();
 
   const works = data?.prismicHomepage?.data?.work?.map(
-    ({work_item}) => work_item?.document
+    ({ work_item }) => work_item?.document
   );
 
   return (
@@ -63,7 +66,8 @@ const WorkNav = forwardRef((props, workNavRef) => {
               index={i}
               title={work.data.title.text}
               position={
-                i <= workNavSplitIndex || (i % 2 === 1 && i - 1 === workNavSplitIndex)
+                i <= workNavSplitIndex ||
+                (i % 2 === 1 && i - 1 === workNavSplitIndex)
                   ? workNavUpPosition
                   : workNavDownPosition
               }>
@@ -76,13 +80,14 @@ const WorkNav = forwardRef((props, workNavRef) => {
             </WorkNavLinkHolder>
           ))}
         </Grid>
-        <WorkNavLinkHolder position={workNavSplitIndex === null ? 0 : workNavDownPosition}>
+        <WorkNavLinkHolder
+          position={workNavSplitIndex === null ? 0 : workNavDownPosition}>
           <CloseButton />
         </WorkNavLinkHolder>
       </div>
     </Container>
   );
-})
+});
 
 export default WorkNav;
 

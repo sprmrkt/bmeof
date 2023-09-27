@@ -1,15 +1,11 @@
 import React from "react";
-import {navigate} from "gatsby";
+import { navigate } from "gatsby";
 import propTypes from "prop-types";
 
-import {manualKerning} from "../../../utils/helpers";
-import {useStore} from "../../../utils/store";
+import { manualKerning } from "../../../utils/helpers";
+import { useStore } from "../../../utils/store";
 
-function GlobalNavLink({
-  link,
-  index,
-  globalNavRef,
-}) {
+function GlobalNavLink({ link, index, globalNavRef }) {
   //store
   const { setNavSplitIndex } = useStore();
   const { setNavUpPosition } = useStore();
@@ -20,7 +16,7 @@ function GlobalNavLink({
     const el = globalNavRef.current.querySelector(`#${link.id}`);
     if (!el) return;
 
-    const {top, bottom, height} = el?.getBoundingClientRect();
+    const { top, bottom, height } = el?.getBoundingClientRect();
 
     const windowHeight = window?.innerHeight;
     const elHeight = height / 4;
@@ -55,7 +51,7 @@ export default GlobalNavLink;
 
 GlobalNavLink.propTypes = {
   link: propTypes.shape({
-    ref: propTypes.shape({current: propTypes.string}),
+    ref: propTypes.shape({ current: propTypes.string }),
     id: propTypes.string,
     slug: propTypes.string,
     label: propTypes.string,

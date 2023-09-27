@@ -1,10 +1,10 @@
-import React, {forwardRef} from "react";
+import React, { forwardRef } from "react";
 
 import styled from "styled-components";
 import Header from "../../molecules/Header";
 import GlobalNavLink from "./GlobalNavLink";
-import {manualKerning} from "../../../utils/helpers";
-import {useStore} from "../../../utils/store";
+import { manualKerning } from "../../../utils/helpers";
+import { useStore } from "../../../utils/store";
 import GlobalNavLinkHolder from "./GlobalNavLinkHolder";
 
 const Container = styled.nav`
@@ -14,18 +14,17 @@ const Container = styled.nav`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  pointer-events: ${({active}) => (active ? "auto" : "none")};
+  pointer-events: ${({ active }) => (active ? "auto" : "none")};
   z-index: 100;
 
   & > *:first-child {
     overflow-x: hidden;
-    overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
+    overflow-y: ${({ active }) => (active ? "scroll" : "hidden")};
     height: 100%;
   }
 `;
 
 const Heading = styled.h1`
-  background: lightblue;
   overflow: hidden;
 `;
 
@@ -33,22 +32,22 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   // variables
   const links = [
     {
-      id: 'work',
+      id: "work",
       slug: "/work/",
       label: "Work",
     },
     {
-      id: 'studio',
+      id: "studio",
       slug: "/studio/",
       label: "Studio",
     },
     {
-      id: 'hello',
+      id: "hello",
       slug: "/hello/",
       label: "Hello",
     },
     {
-      id: 'store',
+      id: "store",
       slug: "/store/",
       label: "Store",
     },
@@ -86,17 +85,17 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
           </GlobalNavLinkHolder>
         ))}
 
-        <GlobalNavLinkHolder position={navDownPosition}>
+        {/* <GlobalNavLinkHolder position={navDownPosition}>
           <Header />
         </GlobalNavLinkHolder>
 
         <GlobalNavLinkHolder position={navDownPosition}>
           <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
-        </GlobalNavLinkHolder>
+        </GlobalNavLinkHolder> */}
       </div>
     </Container>
   );
-})
+});
 
 export default GlobalNav;
 

@@ -1,25 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import {motion} from "framer-motion";
-import {useStore} from "../../../utils/store";
+import { motion } from "framer-motion";
+import { useStore } from "../../../utils/store";
 
 const Holder = styled.div`
   position: relative;
   width: 100%;
   display: block;
-  background-color: ${({theme}) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
+  outline: 1px solid ${({ theme }) => theme.colors.white};
   z-index: 1;
   will-change: transform;
 
   button {
-    background: indianred;
     overflow: hidden;
   }
 `;
 const Border = styled.div`
   position: absolute;
-  top: calc(100% - 2px);
+  top: calc(100% - 1px);
   left: 0;
   width: 100%;
   height: 2px;
@@ -35,7 +35,6 @@ const Close = styled.button`
   left: 0;
   width: 100%;
   height: 48px;
-  background: lightgreen !important;
   pointer-events: auto;
   opacity: 0.2;
 `;
@@ -50,8 +49,7 @@ function GlobalNavLinkHolder(props) {
       }}
       transition={{
         duration: 1,
-      }}
-    >
+      }}>
       {props.children}
       <Border
         as={motion.div}
@@ -65,9 +63,9 @@ function GlobalNavLinkHolder(props) {
           duration: 1,
         }}
       />
-      {props.active && <Close onClick={() => closeNav()}/>}
+      {props.active && <Close onClick={() => closeNav()} />}
     </Holder>
-  )
+  );
 }
 
 GlobalNavLinkHolder.propTypes = {
@@ -80,3 +78,4 @@ GlobalNavLinkHolder.defaultProps = {
 };
 
 export default GlobalNavLinkHolder;
+

@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import {motion} from "framer-motion";
-import {useStore} from "../../../utils/store";
+import { motion } from "framer-motion";
+import { useStore } from "../../../utils/store";
 
 const Holder = styled.div`
   position: relative;
@@ -18,7 +18,6 @@ const TitleBar = styled.div`
   width: 100%;
   height: 48px;
   padding: 0 24px;
-  background: lightgreen !important;
   pointer-events: auto;
   display: flex;
   justify-content: space-between;
@@ -30,17 +29,13 @@ const TitleBar = styled.div`
 `;
 
 function GlobalNavLinkHolder(props) {
-  const {
-    workNavSplitIndex,
-    setNavUpPosition,
-    navUpPosition,
-    closeWorkNav
-  } = useStore();
+  const { workNavSplitIndex, setNavUpPosition, navUpPosition, closeWorkNav } =
+    useStore();
 
   const closeHandler = () => {
     setNavUpPosition(navUpPosition + 50);
     closeWorkNav();
-  }
+  };
 
   return (
     <Holder
@@ -50,8 +45,7 @@ function GlobalNavLinkHolder(props) {
       }}
       transition={{
         duration: 1,
-      }}
-    >
+      }}>
       {props.children}
       <TitleBar
         even={props.index % 2 === 0}
@@ -61,13 +55,12 @@ function GlobalNavLinkHolder(props) {
         }}
         animate={{
           opacity: props.index === workNavSplitIndex ? 1 : 0,
-        }}
-      >
+        }}>
         <p>{props.title}</p>
         <button onClick={() => closeHandler()}>Back</button>
       </TitleBar>
     </Holder>
-  )
+  );
 }
 
 GlobalNavLinkHolder.propTypes = {
@@ -75,3 +68,4 @@ GlobalNavLinkHolder.propTypes = {
 };
 
 export default GlobalNavLinkHolder;
+
