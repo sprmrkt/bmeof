@@ -65,7 +65,8 @@ const TitleBar = styled.div`
   border-bottom: 1px solid black;
 
   pointer-events: ${({ active }) => (active ? "auto" : "none")};
-  will-change: opacity;
+  opacity: ${({ active }) => (active ? 1 : 0)};
+
   p {
     margin: 0;
   }

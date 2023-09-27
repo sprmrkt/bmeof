@@ -10,10 +10,7 @@ const Holder = styled.div`
   width: 100%;
   -webkit-overflow-scrolling: touch;
 
-  opacity: ${({ active }) => (active ? 1 : 0)};
   pointer-events: ${({ active }) => (active ? "auto" : "none")};
-
-  transition: opacity 0.3s ease-in-out;
 
   &.absPositioned {
     position: fixed;
@@ -68,6 +65,9 @@ const Button = styled.button.attrs((props) => ({
 
 const Slides = styled.div`
   display: none;
+
+  opacity: ${({ active }) => (active ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
   @media (${(props) => props.theme.breakpoints.md}) {
     width: 100%;
     overflow: hidden;
@@ -171,7 +171,7 @@ function Gallery({
         <button onClick={() => closeHandler()}>Back</button>
       </TitleBar>
 
-      <Slides {...swipeHandlers}>
+      <Slides active={active} {...swipeHandlers}>
         <SlidesInner>
           <div className="inner-for-hiding-overflow">
             <WorkSlides
