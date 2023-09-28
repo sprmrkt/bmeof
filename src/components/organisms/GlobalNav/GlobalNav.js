@@ -1,5 +1,5 @@
 import React, {forwardRef} from "react";
-
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import Header from "../../molecules/Header";
 import GlobalNavLink from "./GlobalNavLink";
@@ -23,6 +23,9 @@ const Container = styled.nav`
     height: 100%;
   }
 `;
+
+const Inner=styled.div`
+`
 
 const Heading = styled.h1`
   background: ${({theme}) => theme.colors.white};
@@ -58,17 +61,23 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   const { navSplitIndex } = useStore();
   const { navUpPosition } = useStore();
   const { navDownPosition } = useStore();
+    const hoverRight = useStore((state) => state.hoverRight);
+
 
   // render
   return (
-    <Container active={navSplitIndex === null}>
-      <div ref={globalNavRef} className="global-nav-wrapper">
+    <Container
+    active={navSplitIndex === null}>
+      <motion.div ref={globalNavRef} className="global-nav-wrapper" animate={{ x: hoverRight ? "-10%" : 0 }}
+    transition={{duration: 1, ease: "easeOut",}}>
+        
+
         <GlobalNavLinkHolder position={navUpPosition}>
           <Header />
         </GlobalNavLinkHolder>
 
         <GlobalNavLinkHolder position={navUpPosition}>
-          <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+          <Heading >{manualKerning("Bear meets eagle on fire")}</Heading>
         </GlobalNavLinkHolder>
 
         {links.map((link, linkIndex) => (
@@ -93,7 +102,7 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
         <GlobalNavLinkHolder position={navDownPosition}>
           <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
         </GlobalNavLinkHolder>
-      </div>
+      </motion.div>
     </Container>
   );
 })

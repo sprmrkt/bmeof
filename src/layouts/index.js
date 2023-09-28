@@ -11,6 +11,7 @@ import GlobalNav from "../components/organisms/GlobalNav/GlobalNav";
 import WorkNav from "../components/organisms/WorkNav/WorkNav";
 import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
+import MenuHoverButton from "../components/atoms/MenuHoverButton";
 
 const Main = styled.main`
   position: relative;
@@ -24,7 +25,7 @@ function Index({children, pageContext}) {
   const globalNavRef = useRef(null);
   const workNavRef = useRef(null);
   const size = useWindowSize();
-  const { closeNav, closeWorkNav, setWorkNavSplitHappenedOnce } = useStore();
+  const { closeNav, closeWorkNav, setWorkNavSplitHappenedOnce, navSplitIndex } = useStore();
 
   useEffect(() => {
     closeNav();
@@ -52,6 +53,9 @@ function Index({children, pageContext}) {
         <GlobalStyles />
         <StickerHolder />
         <GlobalNav ref={globalNavRef}/>
+        {navSplitIndex === null && 
+                <MenuHoverButton />
+        }
         <WorkNav ref={workNavRef} visible={pageContext.layout === "work"}/>
         <Main>{renderChildren()}</Main>
         <EmbedOverlay />
