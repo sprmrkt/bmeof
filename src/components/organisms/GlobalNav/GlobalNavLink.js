@@ -1,7 +1,6 @@
 import React from "react";
 import {navigate} from "gatsby";
 import propTypes from "prop-types";
-
 import {manualKerning} from "../../../utils/helpers";
 import {useStore} from "../../../utils/store";
 

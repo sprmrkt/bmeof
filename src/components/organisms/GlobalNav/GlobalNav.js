@@ -52,6 +52,11 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       slug: "/store/",
       label: "Store",
     },
+    {
+      id: 'insta',
+      slug: "https://www.instagram.com/bearmeetseagleonfire/",
+      label: "Insta",
+    },
   ];
 
   // store
@@ -85,7 +90,6 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
             />
           </GlobalNavLinkHolder>
         ))}
-
         <GlobalNavLinkHolder position={navDownPosition}>
           <Header />
         </GlobalNavLinkHolder>
