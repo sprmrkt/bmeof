@@ -9,19 +9,23 @@ const OverlayHolder = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+
   color: #333;
   background-color: #000;
+
   transform-origin: bottom left;
   font-family: "Gotham", "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   .close {
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
     text-transform: uppercase;
 
     .exit-text,
@@ -38,7 +42,32 @@ const OverlayHolder = styled.div`
     .cross {
       left: auto;
       right: 15px;
-      transform: rotate(45deg);
+
+      width: 24px;
+      height: 24px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+
+      & > div {
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+
+        &:nth-child(1) {
+          transform-origin: center center;
+          transform: translateY(1px) rotate(45deg);
+        }
+
+        &:nth-child(2) {
+          transform-origin: center center;
+          transform: translateY(-1px) rotate(-45deg);
+        }
+      }
+
       @media (${(props) => props.theme.breakpoints.md}) {
         left: auto;
         right: 24px;
@@ -50,11 +79,10 @@ const OverlayHolder = styled.div`
   object,
   embed {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: calc(var(--windowHeight) - 96px);
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
   }
 `;
 
@@ -74,9 +102,12 @@ function EmbedOverlay() {
           setEmbedIsOpen(false);
         }}
       >
-        <p className="exit-text">Exit full screen</p>
-        <p className="cross">+</p>
+        <div className="cross">
+          <div></div>
+          <div></div>
+        </div>
       </button>
+
       <div dangerouslySetInnerHTML={{ __html: embedContent }} />
     </OverlayHolder>
   );
