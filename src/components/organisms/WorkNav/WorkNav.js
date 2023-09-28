@@ -50,7 +50,7 @@ const LastEvenItem = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: aqua;
+  background-color: ${({theme}) => theme.colors.white};
 `;
 
 const WorkNav = forwardRef((props, workNavRef) => {

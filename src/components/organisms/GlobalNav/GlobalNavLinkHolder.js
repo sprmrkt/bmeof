@@ -13,7 +13,6 @@ const Holder = styled.div`
   will-change: transform;
 
   button {
-    background: indianred;
     overflow: hidden;
   }
 `;
@@ -24,7 +23,7 @@ const Border = styled.div`
   width: 100%;
   height: 2px;
   background-color: black;
-  transform-origin: left;
+  transform-origin: right;
   will-change: transform;
 `;
 
@@ -35,7 +34,7 @@ const Close = styled.button`
   left: 0;
   width: 100%;
   height: 48px;
-  background: lightgreen !important;
+  background: transparent !important;
   pointer-events: auto;
   opacity: 0.2;
 `;

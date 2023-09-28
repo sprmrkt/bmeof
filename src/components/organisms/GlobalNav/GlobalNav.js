@@ -25,7 +25,7 @@ const Container = styled.nav`
 `;
 
 const Heading = styled.h1`
-  background: lightblue;
+  background: ${({theme}) => theme.colors.white};
   overflow: hidden;
 `;
 

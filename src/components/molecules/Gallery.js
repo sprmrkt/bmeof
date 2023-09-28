@@ -80,14 +80,15 @@ const CloseButton = styled.div`
   top: 0;
   right: 0;
   z-index: 199;
-  height: 48px;
+  height: 46px;
   padding: 0 24px;
-  background-color: #f81e1e;
+  background-color: ${props => props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
 
   button {
+    margin-top: 2px;
   }
 `;
 
