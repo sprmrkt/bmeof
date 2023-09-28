@@ -167,7 +167,7 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
       </Slides>
       <StackedImages slides={slides} />
       {absolute && <CloseButton>
-        <button className="temp-close-button" onClick={() => closeHandler()}>Close</button>
+        <button className="temp-close-button" onClick={() => closeHandler()}>Back</button>
       </CloseButton>}
     </Holder>
   );
