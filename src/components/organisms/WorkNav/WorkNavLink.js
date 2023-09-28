@@ -22,7 +22,7 @@ const Holder = styled.div`
     padding: 24px 12px 0 24px;
     display: flex;
     flex-direction: column;
-    &.even {
+    &.odd {
       padding: 24px 24px 0 12px;
     }
   }
@@ -115,7 +115,7 @@ const WorkNavLink = (props) => {
   const link = props.work.uid && `/work/${props.work.uid}`;
   const tileClasses = classNames({
     workTile: true,
-    even: props.even,
+    odd: props.odd,
   });
 
   // methods
@@ -173,7 +173,7 @@ const WorkNavLink = (props) => {
 };
 
 WorkNavLink.propTypes = {
-  even: PropTypes.bool.isRequired,
+  odd: PropTypes.bool.isRequired,
   work: PropTypes.object.isRequired,
 };
 

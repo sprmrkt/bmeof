@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {motion} from "framer-motion";
 import {useStore} from "../../../utils/store";
+import {useWindowSize} from "react-use";
 
 const Holder = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 10000;
-  width: 200%;
+  width: 100%;
   height: 48px;
   padding: 0 24px;
   background: lightgreen !important;
@@ -19,7 +20,9 @@ const Holder = styled.div`
   justify-content: space-between;
   align-items: center;
   will-change: opacity, transform;
-
+  @media (${props => props.theme.breakpoints.md}) {
+    width: 200%;
+  }
   p {
     margin: 0;
   }
@@ -32,6 +35,7 @@ function WorkNavLinkTitleBar(props) {
     setNavUpPosition,
     closeWorkNav,
   } = useStore();
+  const size = useWindowSize();
 
   const closeHandler = () => {
     setNavUpPosition(navUpPosition + 50);
@@ -45,7 +49,7 @@ function WorkNavLinkTitleBar(props) {
       active={props.index === workNavSplitIndex}
       animate={{
         y: props.position,
-        x: props.index === workNavSplitIndex && (props.index + 1) % 2 === 0 ? '-50%' : 0,
+        x: props.index === workNavSplitIndex && (props.index + 1) % 2 === 0 && size.width >= 768 ? '-50%' : 0,
       }}
       transition={{
         duration: 1,
