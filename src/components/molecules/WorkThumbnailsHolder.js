@@ -5,7 +5,7 @@ import WorkThumbnail from "./WorkThumbnail";
 
 const Holder = styled.div`
   display: none;
-  @media (${props => props.theme.breakpoints.sm}) {
+  @media (${props => props.theme.breakpoints.md}) {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 24px;
@@ -34,6 +34,7 @@ function WorkThumbnailsHolder({slides, openGalleryHandler, setCurrentSlide}) {
           media={slide.primary}
         />
       ))}
+
     </Holder>
   );
 }
