@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+import VideoPlayer from "../molecules/VideoPlayer";
 import { useStore } from "../../utils/store";
 
 const OverlayHolder = styled.div`
@@ -55,7 +57,6 @@ const OverlayHolder = styled.div`
       justify-content: center;
       align-items: center;
 
-
       & > div {
         width: 100%;
         height: 2px;
@@ -78,16 +79,6 @@ const OverlayHolder = styled.div`
       }
     }
   }
-
-  iframe,
-  object,
-  embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%
-  }
 `;
 
 function EmbedOverlay() {
@@ -103,17 +94,14 @@ function EmbedOverlay() {
         onClick={() => {
           setEmbedContent(null);
           setEmbedIsOpen(false);
-        }}
-      >
+        }}>
         <div className="cross">
           <div></div>
           <div></div>
         </div>
       </button>
 
-      {embedContent && (
-        <div dangerouslySetInnerHTML={{ __html: embedContent }} />
-      )}
+      {embedContent && <VideoPlayer content={embedContent} />}
     </OverlayHolder>
   );
 }
