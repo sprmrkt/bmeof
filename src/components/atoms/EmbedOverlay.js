@@ -16,6 +16,10 @@ const OverlayHolder = styled.div`
   color: #333;
   background-color: #000;
 
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  pointer-events: ${(props) => (props.active ? "auto" : "none")};
+  transition: opacity 0.3s ease-in-out;
+
   transform-origin: bottom left;
   font-family: "Gotham", "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -87,14 +91,13 @@ const OverlayHolder = styled.div`
 `;
 
 function EmbedOverlay() {
+  const embedIsOpen = useStore((state) => state.embedIsOpen);
   const setEmbedIsOpen = useStore((state) => state.setEmbedIsOpen);
   const embedContent = useStore((state) => state.embedContent);
   const setEmbedContent = useStore((state) => state.setEmbedContent);
 
-  if (!embedContent) return null;
-
   return (
-    <OverlayHolder>
+    <OverlayHolder active={embedIsOpen}>
       <button
         className="close"
         onClick={() => {
@@ -108,7 +111,9 @@ function EmbedOverlay() {
         </div>
       </button>
 
-      <div dangerouslySetInnerHTML={{ __html: embedContent }} />
+      {embedContent && (
+        <div dangerouslySetInnerHTML={{ __html: embedContent }} />
+      )}
     </OverlayHolder>
   );
 }
