@@ -43,7 +43,7 @@ function GlobalNavLink({
       to={`${link.slug}`}
       id={link.id}
       className="h1 button"
-      onClick={() => handleNavigate(link.slug)}>
+      onClick={() => handleNavigate()}>
       {manualKerning(link.label)}
     </Link>
   );

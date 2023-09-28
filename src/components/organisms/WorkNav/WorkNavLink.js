@@ -30,6 +30,7 @@ const Holder = styled.div`
 
   a {
     width: 100%;
+    display: block;
   }
 `;
 const Excerpt = styled.div`

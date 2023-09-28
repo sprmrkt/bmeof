@@ -13,6 +13,7 @@ const Holder = styled.div`
   will-change: transform;
 
   a.button {
+    display: block;
     overflow: hidden;
     text-decoration: none;
     font-size: 35vw;
@@ -42,7 +43,7 @@ const Close = styled.button`
 `;
 
 function GlobalNavLinkHolder(props) {
-  const { closeNav } = useStore();
+  const {closeNav} = useStore();
   return (
     <Holder
       as={motion.div}
@@ -66,7 +67,7 @@ function GlobalNavLinkHolder(props) {
           duration: 1,
         }}
       />
-      {props.active && <Close onClick={() => closeNav()}/>}
+      {props.active && <Close onClick={() => closeNav()} />}
     </Holder>
   )
 }
