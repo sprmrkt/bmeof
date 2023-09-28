@@ -12,8 +12,10 @@ const Holder = styled.div`
   z-index: 1;
   will-change: transform;
 
-  button {
+  a.button {
     overflow: hidden;
+    text-decoration: none;
+    font-size: 35vw;
   }
 `;
 const Border = styled.div`
