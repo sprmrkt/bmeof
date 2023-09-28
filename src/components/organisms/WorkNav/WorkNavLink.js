@@ -1,5 +1,5 @@
-import React, {useRef} from "react";
-import {navigate} from "gatsby";
+import React from "react";
+import {Link} from "gatsby";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import classNames from "classnames";
@@ -9,9 +9,6 @@ import PrismicRichText from "../../atoms/PrismicRichText";
 
 import {useStore} from "../../../utils/store";
 
-const Button = styled.button`
-  width: 100%;
-`;
 
 const Holder = styled.div`
   width: 100%;
@@ -29,6 +26,11 @@ const Holder = styled.div`
 
   p {
     text-align: left;
+  }
+
+  a {
+    width: 100%;
+    display: block;
   }
 `;
 const Excerpt = styled.div`
@@ -135,14 +137,14 @@ const WorkNavLink = (props) => {
   };
 
   const handleNavigate = () => {
-    navigate(link);
     setWorkNavSplitIndex(props.index);
     calculateTranslateDistance();
     setNavUpPosition(navUpPosition - 50);
   };
 
   return (
-    <Button
+    <Link
+      to={link}
       id={`work-${props.work.id}`}
       data-id={props.work.id}
       role="button"
@@ -168,7 +170,7 @@ const WorkNavLink = (props) => {
           <p>{title.text}</p>
         </Title>
       </Holder>
-    </Button>
+    </Link>
   );
 };
 
