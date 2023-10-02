@@ -57,8 +57,6 @@ function Gravy(props) {
   `);
   return (
     <Holder>
-      <Inner className="p-large">
-      </Inner>
       <GalleryHolder>
         <Gallery
           slides={data.prismicGravy.data.gallery}
