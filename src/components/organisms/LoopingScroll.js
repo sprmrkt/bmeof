@@ -5,7 +5,6 @@ import useScrollTrigger from "../../hooks/useScrollTrigger";
 import {useWindowSize} from "react-use";
 import PropTypes from "prop-types";
 import {manualKerning} from "../../utils/helpers";
-import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
   display: none;
@@ -37,7 +36,6 @@ const Heading = styled.h1`
 function LoopingScroll({fixedBody}) {
   const {tl, holderRef, st, gsap} = useScrollTrigger();
   const size = useWindowSize();
-  const accordionIsOpen = useStore(state => state.accordionIsOpen);
 
   useEffect(() => {
 
@@ -82,15 +80,7 @@ function LoopingScroll({fixedBody}) {
   }, [size, tl, holderRef, st, fixedBody, gsap])
 
 
-  useEffect(() => {
-    if (!accordionIsOpen) {
-      const myRefresh = setTimeout(() => {
-        if (st.getById('looping-scroll')) { st.getById('looping-scroll').refresh() }
-        console.log('refreshed after close')
-      }, 1500);
-      return () => clearTimeout(myRefresh);
-    }
-  }, [accordionIsOpen, st]);
+
 
   return (
     <Holder
