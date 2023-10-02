@@ -88,19 +88,7 @@ function LoopingScroll({fixedBody}) {
       <div className="inner">
         <Header />
         <p className="h1">
-        <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
-        </p>
-        <p className="h1">
-        <Heading>{manualKerning("Work")}</Heading>
-        </p>
-        <p className="h1">
-        <Heading>{manualKerning("Studio")}</Heading>
-        </p>
-        <p className="h1">
-        <Heading>{manualKerning("Hello")}</Heading>
-        </p>
-        <p className="h1">
-        <Heading>{manualKerning("Store")}</Heading>
+        <Heading>{manualKerning("Bear meets eagle on fire work studio hello store")}</Heading>
         </p>
       </div>
       <div className="end"/>
