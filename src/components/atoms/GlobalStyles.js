@@ -74,7 +74,7 @@ const GlobalStyle = createGlobalStyle`
     a:hover { text-decoration: none; }
   }
 
-  h1, .h1 {
+  h1, .h1, .h1.button {
     font-size: 33.5vw;
     font-kerning: normal;
     text-transform: uppercase;
