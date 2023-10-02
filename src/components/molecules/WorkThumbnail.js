@@ -12,7 +12,7 @@ const Holder = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 66.6667%;
-    cursor: pointer;
+    cursor: none !important;
   }
   .caption {
     display: none;

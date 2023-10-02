@@ -39,6 +39,7 @@ const Button = styled.button.attrs(props => ({
   top: 0;
   left: 0;
   display: none;
+  cursor: none !important;
   @media (${props => props.theme.breakpoints.md}) {
     display: block;
   }
