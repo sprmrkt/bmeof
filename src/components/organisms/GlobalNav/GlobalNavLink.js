@@ -32,6 +32,7 @@ function GlobalNavLink({
 
   const handleNavigate = () => {
     setTimeout(() => {
+      
       setNavSplitIndex(index);
       calculateTranslateDistance();
     }, [100]);
