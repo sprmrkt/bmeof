@@ -23,6 +23,18 @@ export const useStore = create(set => ({
   }),
   globalNavSplitHappenedOnce: false,
   setGlobalNavSplitHappenedOnce: value => set({globalNavSplitHappenedOnce: value}),
+  globalLinkWidth: 0,
+  setGlobalLinkWidth: (value) => {
+    set((state) => {
+      // Check if the new value is bigger than the current value
+      if (value > state.globalLinkWidth) {
+        return { globalLinkWidth: value };
+      } else {
+        return state; // Don't update if the new value is not bigger
+      }
+    });
+  },
+
 
   // home hover
 

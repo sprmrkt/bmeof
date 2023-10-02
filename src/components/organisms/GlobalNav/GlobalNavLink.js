@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {Link} from "gatsby";
 import propTypes from "prop-types";
 import {manualKerning} from "../../../utils/helpers";
@@ -10,10 +10,19 @@ function GlobalNavLink({
   globalNavRef,
 }) {
   //store
-  const { setNavSplitIndex } = useStore();
+  const { setNavSplitIndex, setGlobalLinkWidth, setNavDownPosition, setNavUpPosition } = useStore();
   
-  const { setNavUpPosition } = useStore();
-  const { setNavDownPosition } = useStore();
+  const linkRef = useRef(null);
+
+  useEffect(() => {
+    // Measure the width of the link element
+    if (linkRef.current) {
+      const { width } = linkRef.current.getBoundingClientRect();
+        // Update the globalLinkWidth state
+        setGlobalLinkWidth(width);
+        // console.log("new width", globalLinkWidth)
+      }
+  }, []); // Run this effect once after the initial render
 
   // methods
   const calculateTranslateDistance = () => {
@@ -41,7 +50,8 @@ function GlobalNavLink({
   // render
   return (
     <Link
-      to={`${link.slug}`}
+    ref={linkRef}
+    to={`${link.slug}`}
       id={link.id}
       className="h1 button"
       onClick={() => handleNavigate()}>

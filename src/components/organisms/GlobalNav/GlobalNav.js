@@ -61,9 +61,10 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   const {navSplitIndex} = useStore();
   const {navUpPosition} = useStore();
   const {navDownPosition} = useStore();
+  const {globalLinkWidth} = useStore();
   const hoverRight = useStore((state) => state.hoverRight);
 
-
+  console.log("global link width", globalLinkWidth)
   // render
   return (
     <Container
@@ -71,7 +72,7 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       <div ref={globalNavRef} className="global-nav-wrapper">
         <motion.div
           className="global-nav-inner"
-          animate={{x: hoverRight ? "-10%" : 0}}
+          animate={{x: hoverRight ? `-15%` : 0}}
           transition={{duration: 0.5}}>
 
           <GlobalNavLinkHolder position={navUpPosition}>
@@ -89,11 +90,14 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
                 linkIndex <= navSplitIndex ? navUpPosition : navDownPosition
               }
               active={linkIndex === navSplitIndex}>
-              <GlobalNavLink
+                
+                  <GlobalNavLink
                 globalNavRef={globalNavRef}
                 link={link}
                 index={linkIndex}
               />
+       
+              
             </GlobalNavLinkHolder>
           ))}
 
