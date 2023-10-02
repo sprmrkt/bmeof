@@ -37,5 +37,12 @@ export const useStore = create(set => ({
   }),
   workNavSplitHappenedOnce: false,
   setWorkNavSplitHappenedOnce: value => set({workNavSplitHappenedOnce: value}),
+
+  //custom gallery hover 
+
+  setCustomCursorIsVisible: (value) => set({ customCursorIsVisible: value }),
+  customCursorContent: false,
+  setCustomCursorContent: (value) => set({ customCursorContent: value }),
+  embedIsOpen: false,
 }));
 
