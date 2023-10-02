@@ -12,6 +12,7 @@ const Holder = styled.div`
   z-index: 1;
   will-change: transform;
 
+
   button {
     background: indianred;
     overflow: hidden;
