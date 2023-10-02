@@ -1,5 +1,5 @@
 import {createGlobalStyle} from "styled-components";
-import cursor from "../../assets/img/custom-cursor.png"
+import cursor from "../../assets/svg/cursor.svg"
 const GlobalStyle = createGlobalStyle`
 
   .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
@@ -195,7 +195,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
     transition: color 0.5s linear;
-    cursor: url(${cursor}), auto !important;
+    cursor: url(${cursor}) 4 12, auto !important;
   }
 
   sup, sub {
@@ -328,7 +328,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     white-space: nowrap;
     border: none;
-    cursor: url(${cursor}), auto !important;
+    cursor: url(${cursor}) 4 12, auto !important;
     color: inherit;
     background-color: transparent;
     margin: 0;
