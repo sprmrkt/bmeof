@@ -57,8 +57,13 @@ function WorkTemplate(props) {
   const [openGallery, setOpenGallery] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const openHandler = ()=> {
+    setOpenGallery(true)
+    document.getElementById("workHolder").scrollTo(0,0)
+  }
+
   return (
-    <Container>
+    <Container id="workHolder">
 
       <Content>
         <TextHolder>
@@ -68,7 +73,7 @@ function WorkTemplate(props) {
         </TextHolder>
         <WorkThumbnailsHolder
           setCurrentSlide={i => setCurrentSlide(i)}
-          openGalleryHandler={() => setOpenGallery(true)}
+          openGalleryHandler={() => openHandler()}
           slides={body}
         />
         <StackedImages slides={body} />
