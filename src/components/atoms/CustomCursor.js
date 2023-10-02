@@ -22,7 +22,6 @@ const Cursor = styled.div.attrs(props => ({
   top: 0;
   left: 0;
   opacity: 0;
-  transition: transform 150ms ease-out;
   @media ( ${props => props.theme.breakpoints.md} ) {
     opacity: ${props => props.customCursorIsVisible ? 1 : 0};
   }

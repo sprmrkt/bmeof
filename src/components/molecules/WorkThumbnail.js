@@ -20,20 +20,26 @@ const Holder = styled.div`
 `;
 
 function WorkThumbnail({ media, handleClick, totalImages, i }) {
-  const setCustomCursorIsVisible = useStore(state => state.setCustomCursorIsVisible);
-  const setCustomCursorContent = useStore(state => state.setCustomCursorContent);
+  const {
+    setCustomCursorIsVisible,
+    setCustomCursorContent
+  } = useStore();
+
+  const enterHandler = () => {
+    setCustomCursorIsVisible(true);
+    setCustomCursorContent(`${i + 1}/${totalImages}`);
+  }
+
+  const leaveHandler = () => {
+    setCustomCursorIsVisible(false);
+    setCustomCursorContent(false);
+  }
 
   return (
     <Holder>
       <button 
-       onMouseEnter={() => {
-        setCustomCursorIsVisible(true);
-        setCustomCursorContent(`${i + 1}/${totalImages}`);
-      }}
-      onMouseLeave={() => {
-        setCustomCursorIsVisible(false);
-        setCustomCursorContent(false);
-      }}
+       onMouseEnter={() => enterHandler()}
+      onMouseLeave={() => leaveHandler()}
       onClick={() => handleClick()}>
         <MediaItem media={media} embedCanPlay={false} />
       </button>
