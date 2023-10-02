@@ -11,6 +11,7 @@ function GlobalNavLink({
 }) {
   //store
   const { setNavSplitIndex } = useStore();
+  
   const { setNavUpPosition } = useStore();
   const { setNavDownPosition } = useStore();
 
