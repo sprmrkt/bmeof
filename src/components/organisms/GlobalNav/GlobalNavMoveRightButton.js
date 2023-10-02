@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useStore } from '../../utils/store';
+import { useStore } from '../../../utils/store';
 
 const Holder = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  width: 20%;
+  width: 5%;
   height: 100vh;
   display: flex;
   justify-content: flex-end;
@@ -21,14 +21,14 @@ const ButtonOverlay = styled.button`
   left: 0;
   width: 100%;
   height: 100%;
-  background: transparent;
+  background: rgba(255,0,0,0.1);
   border: none;
   cursor: pointer;
   outline: none;
   pointer-events: all;
 `;
 
-const MenuHoverButton = () => {
+const GlobalNavMoveRightButton = () => {
 
   const hoverRight = useStore((state) => state.hoverRight);
   const setHoverRight = useStore((state) => state.setHoverRight);
@@ -46,9 +46,6 @@ const MenuHoverButton = () => {
       <ButtonOverlay
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
-        style={{
-          backgroundColor: hoverRight ? 'rgba(0, 0, 0, 0.1)' : 'transparent', // Transparent background on hover
-        }}
       />
       <button
         style={{
@@ -62,4 +59,4 @@ const MenuHoverButton = () => {
   );
 };
 
-export default MenuHoverButton;
+export default GlobalNavMoveRightButton;

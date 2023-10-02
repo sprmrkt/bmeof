@@ -11,7 +11,7 @@ import GlobalNav from "../components/organisms/GlobalNav/GlobalNav";
 import WorkNav from "../components/organisms/WorkNav/WorkNav";
 import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
-import MenuHoverButton from "../components/atoms/MenuHoverButton";
+import GlobalNavMoveRightButton from "../components/organisms/GlobalNav/GlobalNavMoveRightButton";
 
 const Main = styled.main`
   position: relative;
@@ -54,7 +54,7 @@ function Index({children, pageContext}) {
         <StickerHolder />
         <GlobalNav ref={globalNavRef}/>
         {navSplitIndex === null && 
-                <MenuHoverButton />
+                <GlobalNavMoveRightButton />
         }
         <WorkNav ref={workNavRef} visible={pageContext.layout === "work"}/>
         <Main>{renderChildren()}</Main>

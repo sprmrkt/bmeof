@@ -1,5 +1,5 @@
 import React, {forwardRef} from "react";
-import { motion } from "framer-motion";
+import {motion} from "framer-motion";
 import styled from "styled-components";
 import Header from "../../molecules/Header";
 import GlobalNavLink from "./GlobalNavLink";
@@ -17,14 +17,14 @@ const Container = styled.nav`
   pointer-events: ${({active}) => (active ? "auto" : "none")};
   z-index: 100;
 
-  & > *:first-child {
+  .global-nav-wrapper {
     overflow-x: hidden;
     overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
     height: 100%;
   }
 `;
 
-const Inner=styled.div`
+const Inner = styled.div`
 `
 
 const Heading = styled.h1`
@@ -58,51 +58,54 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   ];
 
   // store
-  const { navSplitIndex } = useStore();
-  const { navUpPosition } = useStore();
-  const { navDownPosition } = useStore();
-    const hoverRight = useStore((state) => state.hoverRight);
+  const {navSplitIndex} = useStore();
+  const {navUpPosition} = useStore();
+  const {navDownPosition} = useStore();
+  const hoverRight = useStore((state) => state.hoverRight);
 
 
   // render
   return (
     <Container
-    active={navSplitIndex === null}>
-      <motion.div ref={globalNavRef} className="global-nav-wrapper" animate={{ x: hoverRight ? "-10%" : 0 }}
-    transition={{duration: 1, ease: "easeOut",}}>
-        
+      active={navSplitIndex === null}>
+      <div ref={globalNavRef} className="global-nav-wrapper">
+        <motion.div
+          className="global-nav-inner"
+          animate={{x: hoverRight ? "-10%" : 0}}
+          transition={{duration: 0.5}}>
 
-        <GlobalNavLinkHolder position={navUpPosition}>
-          <Header />
-        </GlobalNavLinkHolder>
-
-        <GlobalNavLinkHolder position={navUpPosition}>
-          <Heading >{manualKerning("Bear meets eagle on fire")}</Heading>
-        </GlobalNavLinkHolder>
-
-        {links.map((link, linkIndex) => (
-          <GlobalNavLinkHolder
-            key={linkIndex}
-            position={
-              linkIndex <= navSplitIndex ? navUpPosition : navDownPosition
-            }
-            active={linkIndex === navSplitIndex}>
-            <GlobalNavLink
-              globalNavRef={globalNavRef}
-              link={link}
-              index={linkIndex}
-            />
+          <GlobalNavLinkHolder position={navUpPosition}>
+            <Header />
           </GlobalNavLinkHolder>
-        ))}
 
-        <GlobalNavLinkHolder position={navDownPosition}>
-          <Header />
-        </GlobalNavLinkHolder>
+          <GlobalNavLinkHolder position={navUpPosition}>
+            <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+          </GlobalNavLinkHolder>
 
-        <GlobalNavLinkHolder position={navDownPosition}>
-          <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
-        </GlobalNavLinkHolder>
-      </motion.div>
+          {links.map((link, linkIndex) => (
+            <GlobalNavLinkHolder
+              key={linkIndex}
+              position={
+                linkIndex <= navSplitIndex ? navUpPosition : navDownPosition
+              }
+              active={linkIndex === navSplitIndex}>
+              <GlobalNavLink
+                globalNavRef={globalNavRef}
+                link={link}
+                index={linkIndex}
+              />
+            </GlobalNavLinkHolder>
+          ))}
+
+          <GlobalNavLinkHolder position={navDownPosition}>
+            <Header />
+          </GlobalNavLinkHolder>
+
+          <GlobalNavLinkHolder position={navDownPosition}>
+            <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+          </GlobalNavLinkHolder>
+        </motion.div>
+      </div>
     </Container>
   );
 })
