@@ -86,16 +86,9 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
             />
           </GlobalNavLinkHolder>
         ))}
-
         <GlobalNavLinkHolder position={navDownPosition}>
-          <Header />
-        </GlobalNavLinkHolder>
-
-        <GlobalNavLinkHolder position={navDownPosition}>
-          <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
-        </GlobalNavLinkHolder>
         <LoopingScroll fixedBody={globalNavRef} />
-
+        </GlobalNavLinkHolder>
       </div>
     </Container>
   );

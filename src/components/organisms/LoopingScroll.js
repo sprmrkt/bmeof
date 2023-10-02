@@ -4,7 +4,6 @@ import Header from "../molecules/Header";
 import useScrollTrigger from "../../hooks/useScrollTrigger";
 import {useWindowSize} from "react-use";
 import PropTypes from "prop-types";
-import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 import {manualKerning} from "../../utils/helpers";
 import {useStore} from "../../utils/store";
 
@@ -25,14 +24,14 @@ const Holder = styled.div`
     left: 0;
     top: calc(100vh - 2px);
     width: 100%;
-    height: 1px;
+    height: 0px;
   }
 
-  .large-text-outer {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      display: inline-block;
-    }
-  }
+`;
+
+const Heading = styled.h1`
+  background: ${({theme}) => theme.colors.white};
+  overflow: hidden;
 `;
 
 function LoopingScroll({fixedBody}) {
@@ -99,11 +98,19 @@ function LoopingScroll({fixedBody}) {
       <div className="inner">
         <Header />
         <p className="h1">
-        <span className={`large-text-outer ${useHorizontalHoverClassname()}`}>
-        <span className="large-text-wrapper">
-          {manualKerning('Bear meets eagle on fire work studio hello')}
-        </span>
-        </span>
+        <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+        </p>
+        <p className="h1">
+        <Heading>{manualKerning("Work")}</Heading>
+        </p>
+        <p className="h1">
+        <Heading>{manualKerning("Studio")}</Heading>
+        </p>
+        <p className="h1">
+        <Heading>{manualKerning("Hello")}</Heading>
+        </p>
+        <p className="h1">
+        <Heading>{manualKerning("Store")}</Heading>
         </p>
       </div>
       <div className="end"/>
