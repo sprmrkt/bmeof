@@ -13,9 +13,12 @@ const Holder = styled.div`
   will-change: transform;
 
 
-  button {
+  .button, button {
     background: indianred;
     overflow: hidden;
+  }
+  a.button {
+    display: block;
   }
 `;
 const Border = styled.div`

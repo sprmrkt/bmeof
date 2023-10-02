@@ -55,9 +55,9 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   ];
 
   // store
-  const { navSplitIndex } = useStore();
-  const { navUpPosition } = useStore();
-  const { navDownPosition } = useStore();
+  const {navSplitIndex} = useStore();
+  const {navUpPosition} = useStore();
+  const {navDownPosition} = useStore();
 
   // render
   return (
@@ -86,8 +86,10 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
           </GlobalNavLinkHolder>
         ))}
         <GlobalNavLinkHolder position={navDownPosition}>
-            <a className="h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank" rel="noreferrer">{manualKerning("Insta")}</a>
-</GlobalNavLinkHolder>
+          <a className="button h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank"
+             rel="noreferrer">{manualKerning("Insta")}</a>
+        </GlobalNavLinkHolder>
+
         <GlobalNavLinkHolder position={navDownPosition}>
           <Header />
         </GlobalNavLinkHolder>
