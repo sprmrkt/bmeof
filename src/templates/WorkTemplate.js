@@ -7,6 +7,7 @@ import Gallery from "../components/molecules/Gallery";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
+import StackedImages from "../components/molecules/StackedImages";
 
 const Container = styled.div`
   position: relative;
@@ -70,6 +71,8 @@ function WorkTemplate(props) {
           openGalleryHandler={() => setOpenGallery(true)}
           slides={body}
         />
+        <StackedImages slides={body} />
+
       </Content>
 
       {openGallery && (

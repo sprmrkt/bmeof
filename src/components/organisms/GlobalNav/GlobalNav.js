@@ -25,7 +25,7 @@ const Container = styled.nav`
 `;
 
 const Heading = styled.h1`
-  background: lightblue;
+  background: ${({theme}) => theme.colors.white};
   overflow: hidden;
 `;
 
@@ -51,7 +51,12 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       id: 'store',
       slug: "/store/",
       label: "Store",
-    }
+    },
+    {
+      id: 'gravy',
+      slug: "/gravy/",
+      label: "Gravy",
+    },
   ];
 
   // store
@@ -85,6 +90,7 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
             />
           </GlobalNavLinkHolder>
         ))}
+
         <GlobalNavLinkHolder position={navDownPosition}>
           <a className="button h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank"
              rel="noreferrer">{manualKerning("Insta")}</a>
