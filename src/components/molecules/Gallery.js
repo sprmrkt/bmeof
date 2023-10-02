@@ -206,7 +206,7 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
             onMouseEnter={() => {
               setCustomCursorIsVisible(true);
               setCustomCursorContent(
-                `${currentSlide === 0 ? slides.length : currentSlide}/${
+                `${currentSlide === slides.length - 1 ? 1 : currentSlide + 2}/${
                   slides.length
                 }`
               );

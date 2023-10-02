@@ -32,6 +32,9 @@ function WorkThumbnailsHolder({slides, openGalleryHandler, setCurrentSlide}) {
           key={i}
           handleClick={() => handleClick(i)}
           media={slide.primary}
+          totalImages={slides.length}
+          i={i}
+
         />
       ))}
     </Holder>
