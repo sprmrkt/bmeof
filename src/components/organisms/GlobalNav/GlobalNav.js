@@ -22,6 +22,10 @@ const Container = styled.nav`
     overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
     height: 100%;
   }
+
+  a.button {
+    font-size: 35vw;
+  }
 `;
 
 const Heading = styled.h1`
@@ -51,12 +55,7 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       id: 'store',
       slug: "/store/",
       label: "Store",
-    },
-    {
-      id: 'insta',
-      slug: "https://www.instagram.com/bearmeetseagleonfire/",
-      label: "Insta",
-    },
+    }
   ];
 
   // store
@@ -90,6 +89,9 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
             />
           </GlobalNavLinkHolder>
         ))}
+        <GlobalNavLinkHolder position={navDownPosition}>
+            <a className="button h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank" rel="noreferrer">{manualKerning("Insta")}</a>
+</GlobalNavLinkHolder>
         <GlobalNavLinkHolder position={navDownPosition}>
           <Header />
         </GlobalNavLinkHolder>
