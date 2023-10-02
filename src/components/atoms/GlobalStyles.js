@@ -195,7 +195,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
     transition: color 0.5s linear;
-    cursor: url(${cursor}) 4 12, auto !important;
+    cursor: url(${cursor}) 14 14, auto !important;
   }
 
   sup, sub {
