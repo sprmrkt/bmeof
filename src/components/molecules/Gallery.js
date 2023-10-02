@@ -75,6 +75,10 @@ const Slides = styled.div`
     grid-template-columns: 3fr 1fr;
     grid-gap: 24px;
   }
+  @media (${props => props.theme.breakpoints.xl}) {
+    height: 120vh;
+  }
+
 `;
 
 const CloseButton = styled.div`
