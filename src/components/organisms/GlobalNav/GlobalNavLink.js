@@ -31,8 +31,8 @@ function GlobalNavLink({
   };
 
   const handleNavigate = () => {
+    window.scrollTo(0,0)
     setTimeout(() => {
-      
       setNavSplitIndex(index);
       calculateTranslateDistance();
     }, [100]);
