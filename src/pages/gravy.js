@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const GravyPage = (props) => {
-  useInitialGlobalNavSplit(props.globalNav, 'gravy', 1);
+  useInitialGlobalNavSplit(props.globalNav, 'gravy', 4);
   return (
     <Container>
       <Gravy />
