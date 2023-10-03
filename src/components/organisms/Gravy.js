@@ -6,31 +6,6 @@ import Gallery from "../molecules/Gallery";
 const Holder = styled.div`
 `;
 
-const Inner = styled.div`
-  padding: 15px;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: start;
-  grid-gap: 24px;
-  @media (${(props) => props.theme.breakpoints.md}) {
-    padding: 24px;
-  }
-
-  > div {
-    > :first-child {
-      margin-top: 0;
-    }
-
-    > :last-child {
-      margin-bottom: 0;
-    }
-  }
-`;
-
-const GalleryHolder = styled.div`
-  border-top: 1px solid;
-`;
-
 function Gravy(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const data = useStaticQuery(graphql`
@@ -38,9 +13,9 @@ function Gravy(props) {
           prismicGravy {
               data {
                   gallery {
-                    caption {
-                        text
-                    }
+                      caption {
+                          text
+                      }
                       image {
                           dimensions {
                               width
@@ -57,13 +32,11 @@ function Gravy(props) {
   `);
   return (
     <Holder>
-      <GalleryHolder>
-        <Gallery
-          slides={data.prismicGravy.data.gallery}
-          setCurrentSlide={(val) => setCurrentSlide(val)}
-          currentSlide={currentSlide}
-        />
-      </GalleryHolder>
+      <Gallery
+        slides={data.prismicGravy.data.gallery}
+        setCurrentSlide={(val) => setCurrentSlide(val)}
+        currentSlide={currentSlide}
+      />
     </Holder>
   );
 }

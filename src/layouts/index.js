@@ -16,8 +16,6 @@ import CustomCursor from "../components/atoms/CustomCursor";
 const Main = styled.main`
   position: relative;
   width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
 `;
 
 function Index({children, pageContext}) {
