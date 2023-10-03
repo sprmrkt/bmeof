@@ -5,6 +5,7 @@ import CloseButton from "../../atoms/CloseButton";
 import {useStore} from "../../../utils/store";
 import WorkNavLinkHolder from "./WorkNavLinkHolder";
 import WorkNavLink from "./WorkNavLink";
+import {useWindowSize} from "react-use";
 
 const Container = styled.div`
   position: fixed;
@@ -13,14 +14,14 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: visible;
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  pointer-events: ${(props) => (props.active && props.visible ? "auto" : "none")};
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
+  pointer-events: ${(props) => (props.$active && props.$visible ? "auto" : "none")};
   z-index: 1;
 
   .work-nav-container {
     position: relative;
     overflow-x: hidden;
-    overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
+    overflow-y: ${({$active}) => ($active ? "scroll" : "hidden")};
     height: 100%;
   }
 `;
@@ -49,7 +50,7 @@ const LastEvenItem = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: aqua;
+  background-color: ${({theme}) => theme.colors.white};
 `;
 
 const WorkNav = forwardRef((props, workNavRef) => {
@@ -59,32 +60,42 @@ const WorkNav = forwardRef((props, workNavRef) => {
     workNavUpPosition,
     workNavDownPosition
   } = useStore();
+  const size = useWindowSize();
 
   const works = data?.prismicHomepage?.data?.work?.map(
     ({work_item}) => work_item?.document
   );
 
   return (
-    <Container active={workNavSplitIndex === null} visible={props.visible}>
+    <Container $active={workNavSplitIndex === null} $visible={props.visible}>
       <div ref={workNavRef} className="work-nav-container">
         <Grid>
-          {works?.map((work, i) => (
-            <WorkNavLinkHolder
-              index={i}
-              title={work.data.title.text}
-              position={
-                i <= workNavSplitIndex || (i % 2 === 1 && i - 1 === workNavSplitIndex)
-                  ? workNavUpPosition
-                  : workNavDownPosition
-              }>
-              <WorkNavLink
-                workNavRef={workNavRef}
-                work={work}
-                even={i % 2 === 0}
+          {works?.map((work, i) => {
+            const odd = i % 2 === 0;
+            const previousIsCurrent = workNavSplitIndex === i - 1;
+            const isMobile = size.width < 768;
+            let goesUp = false;
+            if(
+              i <= workNavSplitIndex || (!odd && previousIsCurrent && !isMobile)
+            ) {
+              goesUp = true;
+            }
+
+            return (
+              <WorkNavLinkHolder
+                key={work.uid}
                 index={i}
-              />
-            </WorkNavLinkHolder>
-          ))}
+                title={work.data.title.text}
+                position={ goesUp ? workNavUpPosition : workNavDownPosition }>
+                <WorkNavLink
+                  workNavRef={workNavRef}
+                  work={work}
+                  odd={odd}
+                  index={i}
+                />
+              </WorkNavLinkHolder>
+            )
+          })}
           {works.length % 2 === 1 &&
             <WorkNavLinkHolder
               position={

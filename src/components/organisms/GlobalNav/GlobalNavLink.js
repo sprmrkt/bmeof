@@ -1,19 +1,16 @@
 import React from "react";
-import {navigate} from "gatsby";
+import {Link} from "gatsby";
 import propTypes from "prop-types";
-
 import {manualKerning} from "../../../utils/helpers";
 import {useStore} from "../../../utils/store";
 
 function GlobalNavLink({
-  link,
-  index,
-  globalNavRef,
-}) {
+                         link,
+                         index,
+                         globalNavRef,
+                       }) {
   //store
-  const { setNavSplitIndex } = useStore();
-  const { setNavUpPosition } = useStore();
-  const { setNavDownPosition } = useStore();
+  const {setNavSplitIndex, setNavDownPosition, setNavUpPosition} = useStore();
 
   // methods
   const calculateTranslateDistance = () => {
@@ -32,8 +29,6 @@ function GlobalNavLink({
   };
 
   const handleNavigate = () => {
-    navigate(link.slug);
-
     setTimeout(() => {
       setNavSplitIndex(index);
       calculateTranslateDistance();
@@ -42,12 +37,13 @@ function GlobalNavLink({
 
   // render
   return (
-    <button
+    <Link
+      to={`${link.slug}`}
       id={link.id}
-      className="h1"
-      onClick={() => handleNavigate(link.slug)}>
+      className="h1 button"
+      onClick={() => handleNavigate()}>
       {manualKerning(link.label)}
-    </button>
+    </Link>
   );
 }
 

@@ -1,11 +1,11 @@
 import React, {forwardRef} from "react";
-
 import styled from "styled-components";
 import Header from "../../molecules/Header";
 import GlobalNavLink from "./GlobalNavLink";
 import {manualKerning} from "../../../utils/helpers";
 import {useStore} from "../../../utils/store";
 import GlobalNavLinkHolder from "./GlobalNavLinkHolder";
+import LoopingScroll from "../LoopingScroll";
 
 const Container = styled.nav`
   position: fixed;
@@ -14,19 +14,18 @@ const Container = styled.nav`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  pointer-events: ${({active}) => (active ? "auto" : "none")};
+  pointer-events: ${({$active}) => ($active ? "auto" : "none")};
   z-index: 100;
 
-  & > *:first-child {
+  .global-nav-wrapper {
     overflow-x: hidden;
-    overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
+    overflow-y: ${({$active}) => ($active ? "scroll" : "hidden")};
     height: 100%;
   }
 `;
 
 const Heading = styled.h1`
-  background: lightblue;
-  overflow: hidden;
+  background: ${({theme}) => theme.colors.white};
 `;
 
 const GlobalNav = forwardRef((props, globalNavRef) => {
@@ -52,16 +51,21 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       slug: "/store/",
       label: "Store",
     },
+    {
+      id: 'gravy',
+      slug: "/gravy/",
+      label: "Gravy",
+    },
   ];
 
   // store
-  const { navSplitIndex } = useStore();
-  const { navUpPosition } = useStore();
-  const { navDownPosition } = useStore();
-
+  const {navSplitIndex} = useStore();
+  const {navUpPosition} = useStore();
+  const {navDownPosition} = useStore();
   // render
   return (
-    <Container active={navSplitIndex === null}>
+    <Container
+      $active={navSplitIndex === null}>
       <div ref={globalNavRef} className="global-nav-wrapper">
         <GlobalNavLinkHolder position={navUpPosition}>
           <Header />
@@ -78,20 +82,24 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
               linkIndex <= navSplitIndex ? navUpPosition : navDownPosition
             }
             active={linkIndex === navSplitIndex}>
+
             <GlobalNavLink
               globalNavRef={globalNavRef}
               link={link}
               index={linkIndex}
             />
+
+
           </GlobalNavLinkHolder>
         ))}
 
         <GlobalNavLinkHolder position={navDownPosition}>
-          <Header />
+          <a className="button h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank"
+             rel="noreferrer">{manualKerning("Insta")}</a>
         </GlobalNavLinkHolder>
 
         <GlobalNavLinkHolder position={navDownPosition}>
-          <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+          <LoopingScroll fixedBody={globalNavRef} />
         </GlobalNavLinkHolder>
       </div>
     </Container>

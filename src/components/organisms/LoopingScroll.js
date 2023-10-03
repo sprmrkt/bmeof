@@ -4,9 +4,7 @@ import Header from "../molecules/Header";
 import useScrollTrigger from "../../hooks/useScrollTrigger";
 import {useWindowSize} from "react-use";
 import PropTypes from "prop-types";
-import useHorizontalHoverClassname from "../../hooks/useHorizontalHoverClassname";
 import {manualKerning} from "../../utils/helpers";
-import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
   display: none;
@@ -17,7 +15,6 @@ const Holder = styled.div`
     position: relative;
     width: 100%;
     height: 150vh;
-    overflow: hidden;
   }
 
   .trigger {
@@ -25,20 +22,18 @@ const Holder = styled.div`
     left: 0;
     top: calc(100vh - 2px);
     width: 100%;
-    height: 1px;
+    height: 0px;
   }
 
-  .large-text-outer {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      display: inline-block;
-    }
-  }
+`;
+
+const Heading = styled.h1`
+  background: ${({theme}) => theme.colors.white};
 `;
 
 function LoopingScroll({fixedBody}) {
   const {tl, holderRef, st, gsap} = useScrollTrigger();
   const size = useWindowSize();
-  const accordionIsOpen = useStore(state => state.accordionIsOpen);
 
   useEffect(() => {
 
@@ -49,7 +44,7 @@ function LoopingScroll({fixedBody}) {
       let mm = gsap.matchMedia();
       tl.current = mm.add("(min-width: 768px)", () => {
 
-        // this setup code only runs when viewport is at least 800px wide
+        // this setup code only runs when viewport is at least 768px wide
         st.create({
           id: 'looping-scroll',
           trigger: holderRef.current,
@@ -83,28 +78,14 @@ function LoopingScroll({fixedBody}) {
   }, [size, tl, holderRef, st, fixedBody, gsap])
 
 
-  useEffect(() => {
-    if (!accordionIsOpen) {
-      const myRefresh = setTimeout(() => {
-        if (st.getById('looping-scroll')) { st.getById('looping-scroll').refresh() }
-        console.log('refreshed after close')
-      }, 1500);
-      return () => clearTimeout(myRefresh);
-    }
-  }, [accordionIsOpen, st]);
+
 
   return (
     <Holder
       ref={holderRef}>
       <div className="inner">
         <Header />
-        <p className="h1">
-        <span className={`large-text-outer ${useHorizontalHoverClassname()}`}>
-        <span className="large-text-wrapper">
-          {manualKerning('Bear meets eagle on fire work studio hello')}
-        </span>
-        </span>
-        </p>
+        <Heading>{manualKerning("Bear meets eagle on fire work studio hello store")}</Heading>
       </div>
       <div className="end"/>
     </Holder>

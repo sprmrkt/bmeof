@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from "prop-types";
 import {motion} from "framer-motion";
-import {useStore} from "../../../utils/store";
 import WorkNavLinkTitleBar from "./WorkNavLinkTitleBar";
 
 const Holder = styled.div`
@@ -28,7 +27,7 @@ function GlobalNavLinkHolder(props) {
           y: props.position,
         }}
         transition={{
-          duration: 1,
+          duration: 0.75,
         }}
       >
         {props.children}

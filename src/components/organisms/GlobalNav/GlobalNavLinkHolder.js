@@ -12,9 +12,10 @@ const Holder = styled.div`
   z-index: 1;
   will-change: transform;
 
-  button {
-    background: indianred;
-    overflow: hidden;
+  a.button {
+    display: block;
+    text-decoration: none;
+    font-size: 35vw;
   }
 `;
 const Border = styled.div`
@@ -24,7 +25,7 @@ const Border = styled.div`
   width: 100%;
   height: 2px;
   background-color: black;
-  transform-origin: left;
+  transform-origin: right;
   will-change: transform;
 `;
 
@@ -35,13 +36,14 @@ const Close = styled.button`
   left: 0;
   width: 100%;
   height: 48px;
-  background: lightgreen !important;
+  background: transparent !important;
   pointer-events: auto;
   opacity: 0.2;
 `;
 
 function GlobalNavLinkHolder(props) {
-  const { closeNav } = useStore();
+  const {closeNav, hoverRight} = useStore();
+
   return (
     <Holder
       as={motion.div}
@@ -49,10 +51,15 @@ function GlobalNavLinkHolder(props) {
         y: props.position,
       }}
       transition={{
-        duration: 1,
+        duration: 0.75,
       }}
     >
-      {props.children}
+      <motion.div
+        className="global-nav-inner"
+        animate={{x: hoverRight ? '-22%' : 0}}
+        transition={{duration: 0.5}}>
+        {props.children}
+      </motion.div>
       <Border
         as={motion.div}
         initial={{
@@ -62,10 +69,10 @@ function GlobalNavLinkHolder(props) {
           scaleX: props.active ? 1 : 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.75,
         }}
       />
-      {props.active && <Close onClick={() => closeNav()}/>}
+      {props.active && <Close onClick={() => closeNav()} />}
     </Holder>
   )
 }
