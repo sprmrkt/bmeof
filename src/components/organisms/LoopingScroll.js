@@ -15,7 +15,6 @@ const Holder = styled.div`
     position: relative;
     width: 100%;
     height: 150vh;
-    overflow: hidden;
   }
 
   .trigger {
@@ -30,7 +29,6 @@ const Holder = styled.div`
 
 const Heading = styled.h1`
   background: ${({theme}) => theme.colors.white};
-  overflow: hidden;
 `;
 
 function LoopingScroll({fixedBody}) {

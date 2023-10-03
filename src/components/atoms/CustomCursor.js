@@ -23,7 +23,7 @@ const Cursor = styled.div.attrs(props => ({
   left: 0;
   opacity: 0;
   @media ( ${props => props.theme.breakpoints.md} ) {
-    opacity: ${props => props.customCursorIsVisible ? 1 : 0};
+    opacity: ${props => props.$customCursorIsVisible ? 1 : 0};
   }
 `;
 
@@ -43,7 +43,7 @@ function CustomCursor() {
 
   return (
     <Holder ref={ref}>
-      <Cursor x={elX} y={elY} customCursorIsVisible={customCursorIsVisible}>
+      <Cursor x={elX} y={elY} $customCursorIsVisible={customCursorIsVisible}>
         {customCursorContent && <Text>{customCursorContent}</Text>}
       </Cursor>
     </Holder>

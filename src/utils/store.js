@@ -1,6 +1,7 @@
 import {create} from "zustand";
 
 export const useStore = create(set => ({
+
   setProjectIsOpen: value => set({projectIsOpen: value}),
   setEmbedIsOpen: value => set({embedIsOpen: value}),
   embedContent: null,
@@ -21,6 +22,12 @@ export const useStore = create(set => ({
   }),
   globalNavSplitHappenedOnce: false,
   setGlobalNavSplitHappenedOnce: value => set({globalNavSplitHappenedOnce: value}),
+
+
+  // home hover
+
+  hoverRight: false,
+  setHoverRight: value => set({hoverRight: value}),
 
   // work
   workNavSplitIndex: null,

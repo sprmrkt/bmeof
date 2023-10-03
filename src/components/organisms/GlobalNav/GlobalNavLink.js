@@ -5,16 +5,12 @@ import {manualKerning} from "../../../utils/helpers";
 import {useStore} from "../../../utils/store";
 
 function GlobalNavLink({
-  link,
-  index,
-  globalNavRef,
-}) {
+                         link,
+                         index,
+                         globalNavRef,
+                       }) {
   //store
-  const { setNavSplitIndex } = useStore();
-  
-  const { setNavUpPosition } = useStore();
-  
-  const { setNavDownPosition } = useStore();
+  const {setNavSplitIndex, setNavDownPosition, setNavUpPosition} = useStore();
 
   // methods
   const calculateTranslateDistance = () => {

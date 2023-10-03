@@ -14,7 +14,6 @@ const Holder = styled.div`
 
   a.button {
     display: block;
-    overflow: hidden;
     text-decoration: none;
     font-size: 35vw;
   }
@@ -43,7 +42,8 @@ const Close = styled.button`
 `;
 
 function GlobalNavLinkHolder(props) {
-  const {closeNav} = useStore();
+  const {closeNav, hoverRight} = useStore();
+
   return (
     <Holder
       as={motion.div}
@@ -54,7 +54,12 @@ function GlobalNavLinkHolder(props) {
         duration: 0.75,
       }}
     >
-      {props.children}
+      <motion.div
+        className="global-nav-inner"
+        animate={{x: hoverRight ? '-22%' : 0}}
+        transition={{duration: 0.5}}>
+        {props.children}
+      </motion.div>
       <Border
         as={motion.div}
         initial={{

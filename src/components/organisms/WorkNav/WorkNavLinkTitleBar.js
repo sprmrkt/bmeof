@@ -14,8 +14,8 @@ const Holder = styled.div`
   height: 48px;
   padding: 0 24px;
   background: ${({theme}) => theme.colors.white}; !important;
-  pointer-events: ${({active}) => active ? 'auto' : 'none'};
-  opacity: ${({active}) => active ? 1 : 0};
+  pointer-events: ${({$active}) => $active ? 'auto' : 'none'};
+  opacity: ${({$active}) => $active ? 1 : 0};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,9 +55,8 @@ function WorkNavLinkTitleBar(props) {
 
   return (
     <Holder
-      even={(props.index + 1) % 2 === 0}
       as={motion.div}
-      active={props.index === workNavSplitIndex}
+      $active={props.index === workNavSplitIndex}
       animate={{
         y: props.position,
         x: props.index === workNavSplitIndex && (props.index + 1) % 2 === 0 && size.width >= 768 ? '-50%' : 0,

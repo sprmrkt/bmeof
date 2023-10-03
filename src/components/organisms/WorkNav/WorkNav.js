@@ -14,14 +14,14 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: visible;
-  opacity: ${(props) => (props.visible ? 1 : 0)};
-  pointer-events: ${(props) => (props.active && props.visible ? "auto" : "none")};
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
+  pointer-events: ${(props) => (props.$active && props.$visible ? "auto" : "none")};
   z-index: 1;
 
   .work-nav-container {
     position: relative;
     overflow-x: hidden;
-    overflow-y: ${({active}) => (active ? "scroll" : "hidden")};
+    overflow-y: ${({$active}) => ($active ? "scroll" : "hidden")};
     height: 100%;
   }
 `;
@@ -67,7 +67,7 @@ const WorkNav = forwardRef((props, workNavRef) => {
   );
 
   return (
-    <Container active={workNavSplitIndex === null} visible={props.visible}>
+    <Container $active={workNavSplitIndex === null} $visible={props.visible}>
       <div ref={workNavRef} className="work-nav-container">
         <Grid>
           {works?.map((work, i) => {
@@ -83,6 +83,7 @@ const WorkNav = forwardRef((props, workNavRef) => {
 
             return (
               <WorkNavLinkHolder
+                key={work.uid}
                 index={i}
                 title={work.data.title.text}
                 position={ goesUp ? workNavUpPosition : workNavDownPosition }>
