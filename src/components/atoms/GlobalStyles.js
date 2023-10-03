@@ -1,5 +1,5 @@
 import {createGlobalStyle} from "styled-components";
-
+import cursor from "../../assets/svg/cursor.svg"
 const GlobalStyle = createGlobalStyle`
 
   .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
@@ -45,7 +45,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.colors.black};
     background-color: ${props => props.theme.colors.white};
     overscroll-behavior-y: none;
-    overflow: hidden;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -71,10 +70,11 @@ const GlobalStyle = createGlobalStyle`
 
     a { text-decoration: none; }
 
-    a:hover { text-decoration: none; }
+    a:hover { text-decoration: none;
+    }
   }
 
-  h1, .h1 {
+  h1, .h1, .h1.button {
     font-size: 33.5vw;
     font-kerning: normal;
     text-transform: uppercase;
@@ -194,8 +194,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
     transition: color 0.5s linear;
-
-
+    cursor: url(${cursor}) 14 14, auto !important;
   }
 
   sup, sub {
@@ -323,14 +322,12 @@ const GlobalStyle = createGlobalStyle`
   input[type="button"],
   input[type="reset"] {
     display: inline-block;
-    cursor: pointer;
     padding: 0;
-
     font-family: inherit;
     text-decoration: none;
     white-space: nowrap;
     border: none;
-
+    cursor: url(${cursor}) 4 12, auto !important;
     color: inherit;
     background-color: transparent;
     margin: 0;

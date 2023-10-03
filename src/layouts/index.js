@@ -12,12 +12,11 @@ import WorkNav from "../components/organisms/WorkNav/WorkNav";
 import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
 import GlobalNavMoveRightButton from "../components/organisms/GlobalNav/GlobalNavMoveRightButton";
+import CustomCursor from "../components/atoms/CustomCursor";
 
 const Main = styled.main`
   position: relative;
   width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
 `;
 
 function Index({children, pageContext}) {
@@ -25,7 +24,7 @@ function Index({children, pageContext}) {
   const globalNavRef = useRef(null);
   const workNavRef = useRef(null);
   const size = useWindowSize();
-  const { closeNav, closeWorkNav, setWorkNavSplitHappenedOnce, navSplitIndex } = useStore();
+  const {closeNav, closeWorkNav, setWorkNavSplitHappenedOnce, navSplitIndex} = useStore();
 
   useEffect(() => {
     closeNav();
@@ -33,7 +32,7 @@ function Index({children, pageContext}) {
   }, [size, closeNav, closeWorkNav]);
 
   useEffect(() => {
-    if(pageContext.layout !== "work") {
+    if (pageContext.layout !== "work") {
       setWorkNavSplitHappenedOnce(true);
     }
   }, [pageContext.layout, setWorkNavSplitHappenedOnce])
@@ -52,13 +51,14 @@ function Index({children, pageContext}) {
       <>
         <GlobalStyles />
         <StickerHolder />
-        <GlobalNav ref={globalNavRef}/>
-        {navSplitIndex === null && 
-                <GlobalNavMoveRightButton />
+        <GlobalNav ref={globalNavRef} />
+        {navSplitIndex === null &&
+          <GlobalNavMoveRightButton />
         }
-        <WorkNav ref={workNavRef} visible={pageContext.layout === "work"}/>
+        <WorkNav ref={workNavRef} visible={pageContext.layout === "work"} />
         <Main>{renderChildren()}</Main>
         <EmbedOverlay />
+        <CustomCursor />
       </>
     </ThemeProvider>
   );

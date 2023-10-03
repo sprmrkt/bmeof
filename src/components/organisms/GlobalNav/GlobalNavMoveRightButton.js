@@ -21,7 +21,7 @@ const ButtonOverlay = styled.button`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255,0,0,0.1);
+  background: transparent;
   border: none;
   cursor: pointer;
   outline: none;
@@ -29,8 +29,6 @@ const ButtonOverlay = styled.button`
 `;
 
 const GlobalNavMoveRightButton = () => {
-
-  const hoverRight = useStore((state) => state.hoverRight);
   const setHoverRight = useStore((state) => state.setHoverRight);
 
   const handleMouseOver = () => {

@@ -3,7 +3,6 @@ import {create} from "zustand";
 export const useStore = create(set => ({
 
   setProjectIsOpen: value => set({projectIsOpen: value}),
-  customCursorIsVisible: false,
   setEmbedIsOpen: value => set({embedIsOpen: value}),
   embedContent: null,
   setEmbedContent: value => set({embedContent: value}),
@@ -23,17 +22,6 @@ export const useStore = create(set => ({
   }),
   globalNavSplitHappenedOnce: false,
   setGlobalNavSplitHappenedOnce: value => set({globalNavSplitHappenedOnce: value}),
-  globalLinkWidth: 0,
-  setGlobalLinkWidth: (value) => {
-    set((state) => {
-      // Check if the new value is bigger than the current value
-      if (value > state.globalLinkWidth) {
-        return { globalLinkWidth: value };
-      } else {
-        return state; // Don't update if the new value is not bigger
-      }
-    });
-  },
 
 
   // home hover
@@ -55,5 +43,13 @@ export const useStore = create(set => ({
   }),
   workNavSplitHappenedOnce: false,
   setWorkNavSplitHappenedOnce: value => set({workNavSplitHappenedOnce: value}),
+
+  //custom gallery hover 
+
+  customCursorIsVisible: false,
+  setCustomCursorIsVisible: value => set({ customCursorIsVisible: value }),
+  customCursorContent: false,
+  setCustomCursorContent: value => set({ customCursorContent: value }),
+  embedIsOpen: false,
 }));
 

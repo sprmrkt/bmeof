@@ -7,9 +7,8 @@ import bear from "../assets/img/bear.png";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 
 const Holder = styled.div`
-  height: calc(100% - 48px);
+  min-height: calc(100vh - 48px);
   margin-top: 48px;
-  -webkit-overflow-scrolling: touch;
 `;
 
 const Inner = styled.div`
