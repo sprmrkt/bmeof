@@ -13,6 +13,7 @@ function GlobalNavLink({
   const { setNavSplitIndex } = useStore();
   
   const { setNavUpPosition } = useStore();
+  
   const { setNavDownPosition } = useStore();
 
   // methods

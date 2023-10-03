@@ -51,7 +51,7 @@ function GlobalNavLinkHolder(props) {
         y: props.position,
       }}
       transition={{
-        duration: 1,
+        duration: 0.75,
       }}
     >
       {props.children}
@@ -64,7 +64,7 @@ function GlobalNavLinkHolder(props) {
           scaleX: props.active ? 1 : 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.75,
         }}
       />
       {props.active && <Close onClick={() => closeNav()} />}

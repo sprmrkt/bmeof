@@ -11,12 +11,11 @@ import GlobalNav from "../components/organisms/GlobalNav/GlobalNav";
 import WorkNav from "../components/organisms/WorkNav/WorkNav";
 import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
+import CustomCursor from "../components/atoms/CustomCursor";
 
 const Main = styled.main`
   position: relative;
   width: 100vw;
-  height: 100vh;
-  overflow-y: scroll;
 `;
 
 function Index({children, pageContext}) {
@@ -55,6 +54,7 @@ function Index({children, pageContext}) {
         <WorkNav ref={workNavRef} visible={pageContext.layout === "work"}/>
         <Main>{renderChildren()}</Main>
         <EmbedOverlay />
+        <CustomCursor />
       </>
     </ThemeProvider>
   );

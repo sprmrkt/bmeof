@@ -1,23 +1,22 @@
 import React from "react";
-import styled from "styled-components";
-
 import CloseButton from "../components/atoms/CloseButton";
-import Hello from "../components/organisms/Hello";
+import Gravy from "../components/organisms/Gravy";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
+import styled from "styled-components";
 
 const Container = styled.div`
   margin-top: 48px;
 `;
 
-const HelloPage = (props) => {
-  useInitialGlobalNavSplit(props.globalNav, 'hello', 2);
+const GravyPage = (props) => {
+  useInitialGlobalNavSplit(props.globalNav, 'gravy', 4);
   return (
     <Container>
-      <Hello />
+      <Gravy />
       <CloseButton />
     </Container>
   );
 };
 
-export default HelloPage;
+export default GravyPage;
 
