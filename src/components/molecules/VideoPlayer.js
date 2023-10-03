@@ -12,15 +12,21 @@ const Holder = styled.div`
   width: 100%;
   height: 100%;
 
-  & > .iframe-holder {
+  cursor: ${(props) => (props.controls ? "inherit" : "none !important")};
+
+  & .iframe-wrapper {
+    position: relative;
     width: 100%;
     height: 100%;
 
-    & iframe {
+    & .iframe-holder {
       width: 100%;
       height: 100%;
 
-      & * {
+      pointer-events: none;
+      user-select: none;
+
+      & iframe {
         width: 100%;
         height: 100%;
       }
@@ -38,6 +44,10 @@ const ProgressHolder = styled.div`
 
   display: flex;
   align-items: center;
+
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  pointer-events: ${(props) => (props.active ? "auto" : "none")};
+  transition: opacity 0.3s ease-in-out;
 
   progress {
     width: 100%;
@@ -131,14 +141,17 @@ const RangeHolder = styled.div`
 `;
 
 function VideoPlayer({ content }) {
+  const mouseTimer = useRef(null);
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const rangeRef = useRef(null);
 
   const size = useWindowSize();
 
-  const [duration, setDuration] = useState(0);
+  const [controlsVisible, setControlsVisible] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   //   const [toolTipTime, setToolTipTime] = useState(`00:00`);
 
@@ -150,11 +163,43 @@ function VideoPlayer({ content }) {
     playerRef.current.setCurrentTime(time);
   };
 
+  const hideControls = () => {
+    setControlsVisible(false);
+  };
+
+  const handleControlsVisible = (e) => {
+    setControlsVisible(true);
+    clearTimeout(mouseTimer.current);
+
+    mouseTimer.current = setTimeout(hideControls, 1000);
+  };
+
+  const pauseVideo = () => {
+    playerRef.current.pause();
+  };
+
+  const playVideo = () => {
+    playerRef.current.play();
+  };
+
+  const handlePlay = () => {
+    if (isPlaying) {
+      pauseVideo();
+    } else {
+      playVideo();
+    }
+  };
+
   useEffect(() => {
     if (!videoRef?.current) return;
 
     const iframe = videoRef.current.querySelector("iframe");
-    playerRef.current = new Player(iframe);
+    playerRef.current = new Player(iframe, {
+      controls: false,
+      autoplay: true,
+      muted: false,
+      loop: true,
+    });
   }, [content, videoRef.current]);
 
   useEffect(() => {
@@ -168,6 +213,22 @@ function VideoPlayer({ content }) {
       setCurrentTime(seconds);
       setProgress(percent);
     });
+
+    playerRef.current.on(`play`, () => {
+      setIsPlaying(true);
+    });
+
+    playerRef.current.on(`playing`, () => {
+      setIsPlaying(true);
+    });
+
+    playerRef.current.on(`pause`, () => {
+      setIsPlaying(false);
+    });
+
+    playerRef.current.on(`ended`, () => {
+      setIsPlaying(false);
+    });
   }, [playerRef, size]);
 
   useEffect(() => {
@@ -178,6 +239,12 @@ function VideoPlayer({ content }) {
     rangeIcon.style.transform = `translateX(${translateX}px)`;
   }, [progress, rangeRef.current]);
 
+  // useEffect(() => {
+  //   if (!controlsVisible) {
+  //   } else {
+  //   }
+  // }, [controlsVisible]);
+
   //   useEffect(() => {
   //     const { minutes, seconds } = formatTime(currentTime);
 
@@ -185,14 +252,16 @@ function VideoPlayer({ content }) {
   //   }, [currentTime]);
 
   return (
-    <Holder>
-      <div
-        ref={videoRef}
-        class="iframe-holder"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+    <Holder onMouseMove={handleControlsVisible} controls={controlsVisible}>
+      <div class="iframe-wrapper" onClick={handlePlay}>
+        <div
+          ref={videoRef}
+          class="iframe-holder"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      </div>
 
-      <ProgressHolder>
+      <ProgressHolder id="progress-holder" active={controlsVisible}>
         <RangeHolder ref={rangeRef}>
           <div id="range-icon-holder">
             <div class="range-icon" />

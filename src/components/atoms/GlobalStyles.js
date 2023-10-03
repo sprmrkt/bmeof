@@ -2,6 +2,10 @@ import {createGlobalStyle} from "styled-components";
 import cursor from "../../assets/svg/cursor.svg"
 const GlobalStyle = createGlobalStyle`
 
+  #embed-overlay {
+    cursor: url(${cursor}) 14 14, auto !important;
+  }
+
   .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
     background-image: none !important;
     background: black !important;
@@ -327,7 +331,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     white-space: nowrap;
     border: none;
-    cursor: url(${cursor}) 4 12, auto !important;
+    cursor: url(${cursor}) 14 14, auto !important;
     color: inherit;
     background-color: transparent;
     margin: 0;
