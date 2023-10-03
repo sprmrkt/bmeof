@@ -6,13 +6,13 @@ import GlobalStyles from "../components/atoms/GlobalStyles";
 import styled, {ThemeProvider} from "styled-components";
 import {theme} from "../utils/styling";
 import EmbedOverlay from "../components/atoms/EmbedOverlay";
-import StickerHolder from "../components/organisms/StickerHolder";
 import GlobalNav from "../components/organisms/GlobalNav/GlobalNav";
 import WorkNav from "../components/organisms/WorkNav/WorkNav";
 import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
 import GlobalNavMoveRightButton from "../components/organisms/GlobalNav/GlobalNavMoveRightButton";
 import CustomCursor from "../components/atoms/CustomCursor";
+import StickerHolder from "../components/organisms/StickerHolder";
 
 const Main = styled.main`
   position: relative;
