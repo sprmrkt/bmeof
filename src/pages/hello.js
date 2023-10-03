@@ -6,7 +6,6 @@ import Hello from "../components/organisms/Hello";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 
 const Container = styled.div`
-  height: calc(100% - 48px);
   margin-top: 48px;
 `;
 
