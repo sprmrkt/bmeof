@@ -46,7 +46,7 @@ function LoopingScroll({fixedBody}) {
       let mm = gsap.matchMedia();
       tl.current = mm.add("(min-width: 768px)", () => {
 
-        // this setup code only runs when viewport is at least 800px wide
+        // this setup code only runs when viewport is at least 768px wide
         st.create({
           id: 'looping-scroll',
           trigger: holderRef.current,
@@ -87,9 +87,7 @@ function LoopingScroll({fixedBody}) {
       ref={holderRef}>
       <div className="inner">
         <Header />
-        <p className="h1">
         <Heading>{manualKerning("Bear meets eagle on fire work studio hello store")}</Heading>
-        </p>
       </div>
       <div className="end"/>
     </Holder>
