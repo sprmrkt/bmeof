@@ -63,7 +63,7 @@ function WorkNavLinkTitleBar(props) {
         x: props.index === workNavSplitIndex && (props.index + 1) % 2 === 0 && size.width >= 768 ? '-50%' : 0,
       }}
       transition={{
-        duration: 1,
+        duration: 0.75,
       }}
     >
       <Border
@@ -75,7 +75,7 @@ function WorkNavLinkTitleBar(props) {
           scaleX: props.index === workNavSplitIndex ? 1 : 0,
         }}
         transition={{
-          duration: 1,
+          duration: 0.75,
         }}
       />
       <p>{props.title}</p>
