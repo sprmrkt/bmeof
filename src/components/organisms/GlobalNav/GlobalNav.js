@@ -6,6 +6,7 @@ import GlobalNavLink from "./GlobalNavLink";
 import {manualKerning} from "../../../utils/helpers";
 import {useStore} from "../../../utils/store";
 import GlobalNavLinkHolder from "./GlobalNavLinkHolder";
+import LoopingScroll from "../LoopingScroll";
 
 const Container = styled.nav`
   position: fixed;
@@ -90,18 +91,14 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
             />
           </GlobalNavLinkHolder>
         ))}
-
+        
         <GlobalNavLinkHolder position={navDownPosition}>
           <a className="button h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank"
              rel="noreferrer">{manualKerning("Insta")}</a>
         </GlobalNavLinkHolder>
 
         <GlobalNavLinkHolder position={navDownPosition}>
-          <Header />
-        </GlobalNavLinkHolder>
-
-        <GlobalNavLinkHolder position={navDownPosition}>
-          <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+          <LoopingScroll fixedBody={globalNavRef} />
         </GlobalNavLinkHolder>
       </div>
     </Container>
