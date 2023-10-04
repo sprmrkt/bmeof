@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/img/bear.png";
+import PropTypes from "prop-types";
 
 const Holder = styled.div`
   padding: 6px 12px 44px 12px;
@@ -13,6 +14,12 @@ const Holder = styled.div`
     padding: 24px 24px 0 24px;
     grid-template-columns: 1fr 1fr;
   }
+  &.bottom {
+    padding: 0 12px 12px 12px;
+    @media (${props => props.theme.breakpoints.md}) {
+      padding: 0 24px 24px 24px;
+    }
+  }
 
   img {
     width: 50px;
@@ -22,11 +29,14 @@ const Holder = styled.div`
       width: 75px;
     }
   }
+  p {
+    margin: 0;
+  }
 `;
 
-function Header() {
+function Header(props) {
   return (
-    <Holder>
+    <Holder className={props.bottom ? `bottom` : ''}>
       <img src={logo} alt="Bear meets eagle on fire" />
       <p>
         We help good people and brands
@@ -35,6 +45,14 @@ function Header() {
     </Holder>
   );
 }
+
+Header.propTypes = {
+  bottom: PropTypes.bool.isRequired,
+};
+
+Header.defaultProps = {
+  bottom: false,
+};
 
 export default Header;
 

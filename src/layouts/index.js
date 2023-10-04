@@ -50,7 +50,6 @@ function Index({children, pageContext}) {
     <ThemeProvider theme={theme}>
       <>
         <GlobalStyles />
-        <StickerHolder />
         <GlobalNav ref={globalNavRef} />
         {navSplitIndex === null &&
           <GlobalNavMoveRightButton />

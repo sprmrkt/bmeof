@@ -1,5 +1,6 @@
 import {createGlobalStyle} from "styled-components";
 import cursor from "../../assets/svg/cursor.svg"
+
 const GlobalStyle = createGlobalStyle`
 
   .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
@@ -85,14 +86,18 @@ const GlobalStyle = createGlobalStyle`
     white-space: normal;
     margin: 0;
 
-    .letter {
-      transform: translateY(-3%);
-    }
+    .manual-kerning {
 
-    @-moz-document url-prefix() {
       .letter {
-        transform: translateY(8%);
+        transform: translateY(-3%);
       }
+
+      @-moz-document url-prefix() {
+        .letter {
+          transform: translateY(8%);
+        }
+      }
+
     }
   }
 
@@ -358,6 +363,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .manual-kerning {
+    line-height: inherit;
     display: flex;
 
     .letter-w + .letter-o {

@@ -1,4 +1,5 @@
 import React from "react";
+
 export const convertToSlug = Text => {
   return (
     "/" +
@@ -25,13 +26,9 @@ export const manualKerning = text => {
     );
   });
 
-  return (
-    <div>
-      {words.map((word, i) => (
-        <React.Fragment key={i}>{word}</React.Fragment>
-      ))}
-    </div>
-  );
+  return words.map((word, i) => (
+    <React.Fragment key={i}>{word}</React.Fragment>
+  ));
 };
 
 export const randomIntFromInterval = (min, max) => {
