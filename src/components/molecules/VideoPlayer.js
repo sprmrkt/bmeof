@@ -44,6 +44,7 @@ const Controls = styled.div`
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 
   box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
 
@@ -252,7 +253,9 @@ function VideoPlayer({ content }) {
     playerRef.current.play();
   };
 
-  const handlePlay = () => {
+  const handlePlay = (e) => {
+    if(e.target !== e.currentTarget) return;
+
     if (isPlaying) {
       pauseVideo();
     } else {
@@ -317,7 +320,7 @@ function VideoPlayer({ content }) {
 
   return (
     <Holder onMouseMove={handleControlsVisible} controls={controlsVisible}>
-      <div class="iframe-wrapper" onClick={handlePlay}>
+      <div class="iframe-wrapper">
         <div
           ref={videoRef}
           class="iframe-holder"
@@ -325,7 +328,7 @@ function VideoPlayer({ content }) {
         />
       </div>
 
-      <Controls active={controlsVisible}>
+      <Controls active={controlsVisible} onClick={handlePlay}>
         <CloseButton
           onClick={() => {
             setEmbedContent(null);
