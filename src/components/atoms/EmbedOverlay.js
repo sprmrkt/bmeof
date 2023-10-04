@@ -25,82 +25,14 @@ const OverlayHolder = styled.div`
   transform-origin: bottom left;
   font-family: "Gotham", "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
-  .close {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-transform: uppercase;
-
-    .exit-text,
-    .cross {
-      margin: 0;
-      position: absolute;
-      top: ${(48 - 15) / 2}px;
-      left: 15px;
-      @media (${(props) => props.theme.breakpoints.md}) {
-        left: 24px;
-      }
-    }
-
-    .cross {
-      left: auto;
-      right: 15px;
-
-      width: 24px;
-      height: 24px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      & > div {
-        width: 100%;
-        height: 2px;
-        background-color: #fff;
-
-        &:nth-child(1) {
-          transform-origin: center center;
-          transform: translateY(1px) rotate(45deg);
-        }
-
-        &:nth-child(2) {
-          transform-origin: center center;
-          transform: translateY(-1px) rotate(-45deg);
-        }
-      }
-
-      @media (${(props) => props.theme.breakpoints.md}) {
-        left: auto;
-        right: 24px;
-      }
-    }
-  }
 `;
 
 function EmbedOverlay() {
   const embedIsOpen = useStore((state) => state.embedIsOpen);
-  const setEmbedIsOpen = useStore((state) => state.setEmbedIsOpen);
   const embedContent = useStore((state) => state.embedContent);
-  const setEmbedContent = useStore((state) => state.setEmbedContent);
 
   return (
     <OverlayHolder id="embed-overlay" active={embedIsOpen}>
-      <button
-        className="close"
-        onClick={() => {
-          setEmbedContent(null);
-          setEmbedIsOpen(false);
-        }}>
-        <div className="cross">
-          <div></div>
-          <div></div>
-        </div>
-      </button>
-
       {embedContent && <VideoPlayer content={embedContent} />}
     </OverlayHolder>
   );

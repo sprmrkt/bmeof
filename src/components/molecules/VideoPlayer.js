@@ -3,6 +3,7 @@ import Player from "@vimeo/player";
 import styled from "styled-components";
 import { useWindowSize } from "react-use";
 
+import { useStore } from "../../utils/store";
 // import { formatTime } from "../../utils/helpers";
 
 const Holder = styled.div`
@@ -34,6 +35,77 @@ const Holder = styled.div`
   }
 `;
 
+const Controls = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;
+
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  pointer-events: ${(props) => (props.active ? "auto" : "none")};
+  transition: opacity 0.3s ease-in-out;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-transform: uppercase;
+
+  .exit-text,
+  .cross {
+    margin: 0;
+    position: absolute;
+    top: ${(48 - 15) / 2}px;
+    left: 15px;
+    @media (${(props) => props.theme.breakpoints.md}) {
+      left: 24px;
+    }
+  }
+
+  .cross {
+    left: auto;
+    right: 15px;
+
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+      width: 100%;
+      height: 2px;
+      background-color: #fff;
+
+      &:nth-child(1) {
+        transform-origin: center center;
+        transform: translateY(1px) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        transform-origin: center center;
+        transform: translateY(-1px) rotate(-45deg);
+      }
+    }
+
+    @media (${(props) => props.theme.breakpoints.md}) {
+      left: auto;
+      right: 24px;
+    }
+  }
+`;
+
 const ProgressHolder = styled.div`
   position: absolute;
   bottom: 2rem;
@@ -44,10 +116,6 @@ const ProgressHolder = styled.div`
 
   display: flex;
   align-items: center;
-
-  opacity: ${(props) => (props.active ? 1 : 0)};
-  pointer-events: ${(props) => (props.active ? "auto" : "none")};
-  transition: opacity 0.3s ease-in-out;
 
   progress {
     width: 100%;
@@ -147,6 +215,8 @@ function VideoPlayer({ content }) {
   const rangeRef = useRef(null);
 
   const size = useWindowSize();
+  const setEmbedIsOpen = useStore((state) => state.setEmbedIsOpen);
+  const setEmbedContent = useStore((state) => state.setEmbedContent);
 
   const [controlsVisible, setControlsVisible] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -239,12 +309,6 @@ function VideoPlayer({ content }) {
     rangeIcon.style.transform = `translateX(${translateX}px)`;
   }, [progress, rangeRef.current]);
 
-  // useEffect(() => {
-  //   if (!controlsVisible) {
-  //   } else {
-  //   }
-  // }, [controlsVisible]);
-
   //   useEffect(() => {
   //     const { minutes, seconds } = formatTime(currentTime);
 
@@ -261,33 +325,46 @@ function VideoPlayer({ content }) {
         />
       </div>
 
-      <ProgressHolder id="progress-holder" active={controlsVisible}>
-        <RangeHolder ref={rangeRef}>
-          <div id="range-icon-holder">
-            <div class="range-icon" />
+      <Controls active={controlsVisible}>
+        <CloseButton
+          onClick={() => {
+            setEmbedContent(null);
+            setEmbedIsOpen(false);
+          }}>
+          <div className="cross">
+            <div></div>
+            <div></div>
           </div>
+        </CloseButton>
 
-          <input
-            class="seek"
-            value={progress}
+        <ProgressHolder id="progress-holder">
+          <RangeHolder ref={rangeRef}>
+            <div id="range-icon-holder">
+              <div class="range-icon" />
+            </div>
+
+            <input
+              class="seek"
+              value={progress}
+              min="0"
+              max="1"
+              type="range"
+              step="0.001"
+              onInput={handleInput}
+            />
+          </RangeHolder>
+
+          <progress
+            class="progress-bar"
+            value={currentTime}
             min="0"
-            max="1"
-            type="range"
-            step="0.001"
-            onInput={handleInput}
-          />
-        </RangeHolder>
+            max={duration}></progress>
 
-        <progress
-          class="progress-bar"
-          value={currentTime}
-          min="0"
-          max={duration}></progress>
-
-        {/* <div class="seek-tooltip" id="seek-tooltip">
-          {toolTipTime}
-        </div> */}
-      </ProgressHolder>
+          {/* <div class="seek-tooltip" id="seek-tooltip">
+            {toolTipTime}
+          </div> */}
+        </ProgressHolder>
+      </Controls>
     </Holder>
   );
 }
