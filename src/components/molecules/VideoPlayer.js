@@ -20,7 +20,7 @@ const Holder = styled.div`
     width: 100%;
     height: 100%;
 
-    & .iframe-holder {
+    & #vimeo-content {
       width: 100%;
       height: 100%;
 
@@ -266,12 +266,12 @@ function VideoPlayer({ content }) {
   useEffect(() => {
     if (!videoRef?.current) return;
 
-    const iframe = videoRef.current.querySelector("iframe");
-    playerRef.current = new Player(iframe, {
+    playerRef.current = new Player('vimeo-content', {
+      url: content,
       controls: false,
       autoplay: true,
       muted: false,
-      loop: true,
+      loop: false,
     });
   }, [content, videoRef.current]);
 
@@ -323,8 +323,7 @@ function VideoPlayer({ content }) {
       <div class="iframe-wrapper">
         <div
           ref={videoRef}
-          class="iframe-holder"
-          dangerouslySetInnerHTML={{ __html: content }}
+          id="vimeo-content"
         />
       </div>
 

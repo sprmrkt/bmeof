@@ -132,6 +132,7 @@ export const query = graphql`
                 url
               }
               embed {
+                embed_url
                 html
                 height
                 width
