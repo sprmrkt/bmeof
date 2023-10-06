@@ -1,14 +1,6 @@
 import React from "react";
 import Sticker from "../atoms/Sticker";
 import {graphql, useStaticQuery} from "gatsby";
-import styled from "styled-components";
-
-const Holder = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-`;
 
 function StickerHolder() {
   const data = useStaticQuery(graphql`
@@ -21,7 +13,7 @@ function StickerHolder() {
                           url
                       }
                       image {
-                          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                          gatsbyImageData(layout: FULL_WIDTH, placeholder: NONE)
                           alt
                       }
                   }
@@ -29,11 +21,7 @@ function StickerHolder() {
           }
       }
   `)
-  return (
-    <Holder>
-      {data.allPrismicSticker.nodes.map((sticker, i) => <Sticker key={i} sticker={sticker} />)}
-    </Holder>
-  )
+  return data.allPrismicSticker.nodes.map((sticker, i) => <Sticker key={i} sticker={sticker} />)
 }
 
 export default StickerHolder;

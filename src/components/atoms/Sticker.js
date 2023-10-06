@@ -1,8 +1,8 @@
-import React, {useMemo} from "react";
+import React, {useMemo, useRef} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import {GatsbyImage} from "gatsby-plugin-image";
-import Draggable from "react-draggable";
+import {motion} from "framer-motion"
 
 import {randomIntFromInterval} from "../../utils/helpers";
 import {useStore} from "../../utils/store";
@@ -13,38 +13,48 @@ const Holder = styled.div`
   position: absolute;
   top: ${({y}) => y}vh;
   left: ${({x}) => x}vw;
-
-  transition: opacity 150ms linear;
-
-  pointer-events: ${({active}) => (active ? "auto" : "none")};
-  opacity: ${({active}) => (active ? "1" : "0")};
-
-  .gatsby-image-wrapper {
-    width: 25vh;
-    height: auto;
-    @media (${({theme}) => theme.breakpoints.md}) {
-      width: 40vh;
-      height: auto;
-    }
+  width: 15vh;
+  aspect-ratio: 1/1;
+  @media (${({theme}) => theme.breakpoints.md}) {
+    width: 30vh;
   }
+`;
+const Area = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
 `;
 
 function Sticker(props) {
-  // store
-  const {navActive} = useStore();
-
   const x = useMemo(() => randomIntFromInterval(20, 80), []);
   const y = useMemo(() => randomIntFromInterval(20, 80), []);
+  const constraintsRef = useRef(null);
+  const {hoverRight} = useStore();
 
   return (
-    <Draggable>
-      <Holder x={x} y={y} active={navActive}>
-        <GatsbyImage
-          image={props.sticker.data.image.gatsbyImageData}
-          alt={props.sticker.data.image.alt || "sticker"}
-        />
+    <>
+      <Area as={motion.div} ref={constraintsRef} />
+      <Holder
+        as={motion.div}
+        drag
+        dragElastic={0.9}
+        dragConstraints={constraintsRef}
+        x={x} y={y}>
+        <motion.div
+          className="global-nav-inner"
+          animate={{x: hoverRight ? '-22vw' : 0}}
+          transition={{duration: 0.5}}>
+          <GatsbyImage
+            objectFit="contain"
+            image={props.sticker.data.image.gatsbyImageData}
+            alt={props.sticker.data.image.alt || "sticker"}
+          />
+        </motion.div>
       </Holder>
-    </Draggable>
+    </>
   );
 }
 
