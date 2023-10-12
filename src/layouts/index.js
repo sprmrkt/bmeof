@@ -32,7 +32,7 @@ function Index({children, pageContext}) {
   }, [size, closeNav, closeWorkNav]);
 
   useEffect(() => {
-    if (pageContext.layout !== "work") {
+    if (pageContext.layout !== "work" || pageContext.layout !== "store") {
       setWorkNavSplitHappenedOnce(true);
     }
   }, [pageContext.layout, setWorkNavSplitHappenedOnce])

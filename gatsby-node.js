@@ -36,6 +36,12 @@ exports.createPages = ({actions, graphql}) => {
           }
         }
       }
+      products: allPrismicProduct {
+        nodes {
+          id
+          uid
+        }
+      }
     }
   `).then(result => {
     if (result.errors) {
@@ -69,6 +75,20 @@ exports.createPages = ({actions, graphql}) => {
         });
       }
     });
+
+    // Create Product pages
+    const products = result.data.products.nodes;
+    products.forEach(product => {
+      createPage({
+        path: `/store/${product.uid}`,
+        component: path.resolve("./src/templates/ProductTemplate.js"),
+        context: {
+          id: product.id,
+          layout: "store",
+          index: i,
+        },
+      });
+    });
   });
 };
 
@@ -77,6 +97,11 @@ exports.onCreatePage = ({page, actions}) => {
 
   if (page.path.match(/work/)) {
     page.context.layout = "work";
+    createPage(page);
+  }
+
+  if (page.path.match(/store/)) {
+    page.context.layout = "store";
     createPage(page);
   }
 };
