@@ -1,65 +1,68 @@
 import React, { useState } from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
-import {PrismicRichText} from "@prismicio/react";
+import { PrismicRichText } from "@prismicio/react";
 
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 import useInitialStoreNavSplit from "../hooks/useInitialStoreNavSplit";
 
+import ProductGallery from "../components/molecules/ProductGallery";
+
 const Container = styled.div`
   position: relative;
-  min-height: calc(100vh - 48px);
+  width: 100%;
+  height: calc(100vh - 48px - 24px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  display: flex;
+  gap: 48px;
+
   margin-top: 48px;
+  padding: 15px;
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    padding: 24px;
+  }
+
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-const Content = styled.div`
-  padding: 0 15px;
-  @media (${(props) => props.theme.breakpoints.sm}) {
-    padding: 0 24px;
-  }
-
-  overflow: hidden;
-`;
 const TextHolder = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 24px;
-  padding-top: 15px;
-  @media (${(props) => props.theme.breakpoints.sm}) {
-    padding-top: 24px;
-    grid-template-columns: 2fr 1fr 1fr;
-  }
+  position: sticky;
+  top: 0;
 
   p,
   li {
     font-weight: 100;
   }
 
-  > div {
-    > :first-child {
-      margin-top: 0;
-    }
-    > :last-child {
-      margin-bottom: 0;
-    }
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  & > :last-child {
+    margin-bottom: 0;
   }
 `;
 
 function ProductTemplate(props) {
-  const { title, price, title_image, excerpt, description } = props.data.prismicProduct.data;
+  const { description, body } = props.data.prismicProduct.data;
+  const images = body.map((item) => item.primary.image);
+
   useInitialGlobalNavSplit(props.globalNav, "store", 3, true);
-  useInitialStoreNavSplit(props.storeNav, props.data.prismicProduct.id, props.pageContext.index);
+  useInitialStoreNavSplit(
+    props.storeNav,
+    props.data.prismicProduct.id,
+    props.pageContext.index
+  );
 
   return (
     <Container>
-      <Content>
-        <TextHolder>
-          <div className="text">
-            <PrismicRichText field={description.richText} />
-          </div>
-        </TextHolder>
-      </Content>
+      <TextHolder>
+        <PrismicRichText field={description.richText} />
+      </TextHolder>
+
+      <ProductGallery images={images} />
     </Container>
   );
 }
@@ -71,19 +74,20 @@ export const query = graphql`
     prismicProduct(id: { eq: $id }) {
       id
       data {
-        title {
-          text
-        }
-        price
-        title_image {
-          alt
-          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-        }
-        excerpt {
-          text
-        }
         description {
           richText
+        }
+        body {
+          ... on PrismicProductDataBodyStandardSlide {
+            id
+            primary {
+              image {
+                alt
+                gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                url(imgixParams: { width: 1000 })
+              }
+            }
+          }
         }
       }
     }
