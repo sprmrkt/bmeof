@@ -44,6 +44,21 @@ export const useStore = create(set => ({
   workNavSplitHappenedOnce: false,
   setWorkNavSplitHappenedOnce: value => set({workNavSplitHappenedOnce: value}),
 
+  // store
+  storeNavSplitIndex: null,
+  setStoreNavSplitIndex: value => set({storeNavSplitIndex: value}),
+  storeNavUpPosition: 0,
+  setStoreNavUpPosition: value => set({storeNavUpPosition: value}),
+  storeNavDownPosition: 0,
+  setStoreNavDownPosition: value => set({storeNavDownPosition: value}),
+  closeStoreNav: value => set({
+    storeNavDownPosition: 0,
+    storeNavUpPosition: 0,
+    storeNavSplitIndex: null,
+  }),
+  storeNavSplitHappenedOnce: false,
+  setStoreNavSplitHappenedOnce: value => set({storeNavSplitHappenedOnce: value}),
+
   //custom gallery hover 
 
   customCursorIsVisible: false,

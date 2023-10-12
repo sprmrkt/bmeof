@@ -34,7 +34,7 @@ function MediaItem({media, embedCanPlay}) {
 
   // This component tests if the media prop has image, video or embed and shows the correct content based on that
 
-  if (media.image.gatsbyImageData) return (
+  if (media?.image?.gatsbyImageData) return (
     <Holder>
       <GatsbyImage
         alt={media.image.alt || ""}
@@ -43,10 +43,10 @@ function MediaItem({media, embedCanPlay}) {
     </Holder>
   )
 
-  if (media.embed) return <Holder><EmbedItem embed={media.embed} poster={media.embed_poster}
+  if (media?.embed) return <Holder><EmbedItem embed={media.embed} poster={media.embed_poster}
                                              canPlay={embedCanPlay} caption={media.caption}/></Holder>
 
-  if (media.video.url) return (
+  if (media?.video?.url) return (
     <Holder>
       <video autoPlay muted playsInline loop poster={media.image ? media.image.url : ""}>
         <source src={media.video.url} type="video/mp4" />

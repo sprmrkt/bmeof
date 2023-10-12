@@ -78,7 +78,7 @@ exports.createPages = ({actions, graphql}) => {
 
     // Create Product pages
     const products = result.data.products.nodes;
-    products.forEach(product => {
+    products.forEach((product, i) => {
       createPage({
         path: `/store/${product.uid}`,
         component: path.resolve("./src/templates/ProductTemplate.js"),
