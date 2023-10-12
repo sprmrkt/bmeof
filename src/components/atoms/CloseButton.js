@@ -6,6 +6,10 @@ import classNames from "classnames";
 import {useStore} from "../../utils/store";
 import {manualKerning} from "../../utils/helpers";
 
+const Container = styled.div`
+  background-color: ${props => props.theme.colors.white};
+`;
+
 const Holder = styled.div`
   width: 100%;
   overflow: hidden;
@@ -64,7 +68,7 @@ function CloseButton({border}) {
   }
 
   return (
-    <>
+    <Container>
       <Holder className={holderClasses}>
         <button onClick={() => clickHandler()} className="h1">
           {manualKerning(`Close`)}
@@ -77,7 +81,7 @@ function CloseButton({border}) {
           <br /> think and make things differently.
         </p>
       </Copyright>
-    </>
+    </Container>
   );
 }
 
