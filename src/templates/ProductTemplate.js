@@ -72,7 +72,8 @@ const ButtonHolder = styled.div`
 `;
 
 function ProductTemplate(props) {
-  const { body, description, price, title, title_image } = props.data.prismicProduct.data;
+  const { body, description, price, title, title_image } =
+    props.data.prismicProduct.data;
   const images = body.map((item) => item.primary.image);
 
   useInitialGlobalNavSplit(props.globalNav, "store", 3, true);
@@ -90,12 +91,11 @@ function ProductTemplate(props) {
         <ButtonHolder>
           <button
             class="snipcart-add-item"
-            data-item-id={title.text.toLowerCase().replace(" ", "-")}
+            data-item-id={`/store/${props.data.prismicProduct.uid}`}
             data-item-price={price}
             data-item-url={`/store/${props.data.prismicProduct.uid}`}
             data-item-name={title.text}
-            data-item-image={title_image.url}
-            >
+            data-item-image={title_image.url}>
             Add to cart
           </button>
         </ButtonHolder>
