@@ -37,7 +37,6 @@ const Content = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 24px;
 
   p,
   li {
@@ -57,6 +56,7 @@ const ButtonHolder = styled.div`
   position: relative;
   width: 100%;
 
+  margin-top: 24px;
   padding: 1rem 0 0.5rem 0;
 
   color: ${({ theme }) => theme.colors.black};
