@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "gatsby";
+import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import classNames from "classnames";
@@ -7,15 +7,14 @@ import classNames from "classnames";
 import MediaItem from "../../molecules/MediaItem";
 import PrismicRichText from "../../atoms/PrismicRichText";
 
-import {useStore} from "../../../utils/store";
-
+import { useStore } from "../../../utils/store";
 
 const Holder = styled.div`
   width: 100%;
   padding: 15px 15px 0 15px;
   border-top: 1px solid;
-  background-color: ${({theme}) => theme.colors.white};
-  @media (${props => props.theme.breakpoints.md}) {
+  background-color: ${({ theme }) => theme.colors.white};
+  @media (${(props) => props.theme.breakpoints.md}) {
     padding: 24px 12px 0 24px;
     display: flex;
     flex-direction: column;
@@ -66,7 +65,7 @@ const ImageHolder = styled.div`
   padding-bottom: 100%;
   position: relative;
 
-  @media (${props => props.theme.breakpoints.md}) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     &:hover {
       ${Excerpt} {
         .inner {
@@ -102,7 +101,7 @@ const Title = styled.div`
 `;
 
 const StoreNavLink = (props) => {
-  const {title, title_image, excerpt} = props.product.data;
+  const { title, title_image, excerpt } = props.product.data;
 
   //store
   const {
@@ -114,6 +113,7 @@ const StoreNavLink = (props) => {
   } = useStore();
 
   // variables
+  const id = `store-${props.product.id}`;
   const link = props.product.uid && `/store/${props.product.uid}`;
   const tileClasses = classNames({
     storeTile: true,
@@ -122,10 +122,10 @@ const StoreNavLink = (props) => {
 
   // methods
   const calculateTranslateDistance = () => {
-    const el = props.productNavRef?.current.querySelector(`#store-${props.product.id}`);
+    const el = props?.storeNavRef?.current.querySelector(`#${id}`);
     if (!el) return;
 
-    const {top, bottom} = el?.getBoundingClientRect();
+    const { top, bottom } = el?.getBoundingClientRect();
 
     const windowHeight = window?.innerHeight;
 
@@ -145,7 +145,7 @@ const StoreNavLink = (props) => {
   return (
     <Link
       to={link}
-      id={`store-${props.product.id}`}
+      id={id}
       data-id={props.product.id}
       role="button"
       className="storeTileHolder"
@@ -175,7 +175,7 @@ const StoreNavLink = (props) => {
 
 StoreNavLink.propTypes = {
   odd: PropTypes.bool.isRequired,
-  store: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
 };
 
 export default StoreNavLink;

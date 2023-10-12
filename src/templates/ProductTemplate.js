@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {PrismicRichText} from "@prismicio/react";
 
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
-// import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
+import useInitialStoreNavSplit from "../hooks/useInitialStoreNavSplit";
 
 const Container = styled.div`
   position: relative;
@@ -49,7 +49,7 @@ const TextHolder = styled.div`
 function ProductTemplate(props) {
   const { title, price, title_image, excerpt, description } = props.data.prismicProduct.data;
   useInitialGlobalNavSplit(props.globalNav, "store", 3, true);
-  //   useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
+  useInitialStoreNavSplit(props.storeNav, props.data.prismicProduct.id, props.pageContext.index);
 
   return (
     <Container>
