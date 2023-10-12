@@ -27,9 +27,13 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-const TextHolder = styled.div`
+const Content = styled.div`
   position: sticky;
   top: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
   p,
   li {
@@ -45,8 +49,30 @@ const TextHolder = styled.div`
   }
 `;
 
+const ButtonHolder = styled.div`
+  position: relative;
+  width: 100%;
+
+  padding: 1rem 0 0.5rem 0;
+
+  color: ${({ theme }) => theme.colors.black};
+  border: 1px solid ${({ theme }) => theme.colors.black};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.white};
+  }
+
+  button {
+    width: 100%;
+    font-size: 48px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+`;
+
 function ProductTemplate(props) {
-  const { description, body } = props.data.prismicProduct.data;
+  const { body, description, price, title } = props.data.prismicProduct.data;
   const images = body.map((item) => item.primary.image);
 
   useInitialGlobalNavSplit(props.globalNav, "store", 3, true);
@@ -58,9 +84,20 @@ function ProductTemplate(props) {
 
   return (
     <Container>
-      <TextHolder>
+      <Content>
         <PrismicRichText field={description.richText} />
-      </TextHolder>
+
+        <ButtonHolder>
+          <button
+            class="snipcart-add-item"
+            data-item-id={title.text.toLowerCase().replace(" ", "-")}
+            data-item-price={price}
+            data-item-url={`/store/${props.data.prismicProduct.uid}`}
+            data-item-name={title.text}>
+            Add to cart
+          </button>
+        </ButtonHolder>
+      </Content>
 
       <ProductGallery images={images} />
     </Container>
@@ -73,10 +110,8 @@ export const query = graphql`
   query ($id: String) {
     prismicProduct(id: { eq: $id }) {
       id
+      uid
       data {
-        description {
-          richText
-        }
         body {
           ... on PrismicProductDataBodyStandardSlide {
             id
@@ -88,6 +123,13 @@ export const query = graphql`
               }
             }
           }
+        }
+        description {
+          richText
+        }
+        price
+        title {
+          text
         }
       }
     }
