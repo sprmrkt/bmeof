@@ -25,6 +25,10 @@ const Container = styled.div`
   }
 
   background-color: ${({ theme }) => theme.colors.white};
+
+  & > * {
+    flex-basis: 50%;
+  }
 `;
 
 const Content = styled.div`
