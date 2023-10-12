@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import {motion} from "framer-motion";
-import {useStore} from "../../../utils/store";
-import {useWindowSize} from "react-use";
+import { motion } from "framer-motion";
+import { useStore } from "../../../utils/store";
+import { useWindowSize } from "react-use";
 
 const Holder = styled.div`
   position: absolute;
@@ -13,14 +13,14 @@ const Holder = styled.div`
   width: 100%;
   height: 48px;
   padding: 0 24px;
-  background: ${({theme}) => theme.colors.white}; !important;
-  pointer-events: ${({$active}) => $active ? 'auto' : 'none'};
-  opacity: ${({$active}) => $active ? 1 : 0};
+  background: ${({ theme }) => theme.colors.white}; !important;
+  pointer-events: ${({ $active }) => ($active ? "auto" : "none")};
+  opacity: ${({ $active }) => ($active ? 1 : 0)};
   display: flex;
   justify-content: space-between;
   align-items: center;
   will-change: opacity, transform;
-  @media (${props => props.theme.breakpoints.md}) {
+  @media (${(props) => props.theme.breakpoints.md}) {
     width: 200%;
   }
   p {
@@ -39,19 +39,24 @@ const Border = styled.div`
   will-change: transform;
 `;
 
+const TitlHolder = styled.div`
+  width: 50%;
+
+  display: flex;
+  justify-content: space-between;
+
+  padding-right: 24px;
+`;
+
 function StoreNavLinkTitleBar(props) {
-  const {
-    storeNavSplitIndex,
-    navUpPosition,
-    setNavUpPosition,
-    closeStoreNav,
-  } = useStore();
+  const { storeNavSplitIndex, navUpPosition, setNavUpPosition, closeStoreNav } =
+    useStore();
   const size = useWindowSize();
 
   const closeHandler = () => {
     setNavUpPosition(navUpPosition + 50);
     closeStoreNav();
-  }
+  };
 
   return (
     <Holder
@@ -59,12 +64,16 @@ function StoreNavLinkTitleBar(props) {
       $active={props.index === storeNavSplitIndex}
       animate={{
         y: props.position,
-        x: props.index === storeNavSplitIndex && (props.index + 1) % 2 === 0 && size.width >= 768 ? '-50%' : 0,
+        x:
+          props.index === storeNavSplitIndex &&
+          (props.index + 1) % 2 === 0 &&
+          size.width >= 768
+            ? "-50%"
+            : 0,
       }}
       transition={{
         duration: 0.75,
-      }}
-    >
+      }}>
       <Border
         as={motion.div}
         initial={{
@@ -77,10 +86,13 @@ function StoreNavLinkTitleBar(props) {
           duration: 0.75,
         }}
       />
-      <p>{props.title}</p>
+      <TitlHolder>
+        <p>{props.title}</p>
+        <p>${props.price}</p>
+      </TitlHolder>
       <button onClick={() => closeHandler()}>Back</button>
     </Holder>
-  )
+  );
 }
 
 StoreNavLinkTitleBar.propTypes = {

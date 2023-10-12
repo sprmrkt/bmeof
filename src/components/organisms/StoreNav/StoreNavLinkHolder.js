@@ -35,6 +35,7 @@ function StoreNavLinkHolder(props) {
       {props.title && <StoreNavLinkTitleBar
         index={props.index}
         title={props.title}
+        price={props.price}
         position={props.position}
       />}
     </Holder>

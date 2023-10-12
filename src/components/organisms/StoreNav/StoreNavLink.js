@@ -90,10 +90,11 @@ const ImageHolder = styled.div`
   }
 `;
 
-const Title = styled.div`
+const TitleHolder = styled.div`
   height: 48px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   p {
     margin: 0;
@@ -101,7 +102,7 @@ const Title = styled.div`
 `;
 
 const StoreNavLink = (props) => {
-  const { title, title_image, excerpt } = props.product.data;
+  const { title, title_image, excerpt, price } = props.product.data;
 
   //store
   const {
@@ -165,9 +166,11 @@ const StoreNavLink = (props) => {
             </div>
           </Excerpt>
         </ImageHolder>
-        <Title>
+        <TitleHolder>
           <p>{title.text}</p>
-        </Title>
+
+          <p>${price}</p>
+        </TitleHolder>
       </Holder>
     </Link>
   );

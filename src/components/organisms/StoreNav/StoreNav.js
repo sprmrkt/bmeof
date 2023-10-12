@@ -83,6 +83,7 @@ const StoreNav = forwardRef((props, storeNavRef) => {
                 key={product.uid}
                 index={i}
                 title={product.data.title.text}
+                price={product.data.price}
                 position={goesUp ? storeNavUpPosition : storeNavDownPosition}>
                 <StoreNavLink
                   storeNavRef={storeNavRef}

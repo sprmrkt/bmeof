@@ -54,7 +54,6 @@ function ProductTemplate(props) {
   return (
     <Container>
       <Content>
-        <h1 className="h2">{title.text}</h1>
         <TextHolder>
           <div className="text">
             <PrismicRichText field={description.richText} />
