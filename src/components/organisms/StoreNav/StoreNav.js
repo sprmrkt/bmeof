@@ -83,8 +83,8 @@ const Cart = styled.button`
 
   .quantity {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 6px;
+    right: 4px;
 
     width: 16px;
     height: 16px;
