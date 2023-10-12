@@ -72,7 +72,7 @@ const ButtonHolder = styled.div`
 `;
 
 function ProductTemplate(props) {
-  const { body, description, price, title } = props.data.prismicProduct.data;
+  const { body, description, price, title, title_image } = props.data.prismicProduct.data;
   const images = body.map((item) => item.primary.image);
 
   useInitialGlobalNavSplit(props.globalNav, "store", 3, true);
@@ -93,7 +93,9 @@ function ProductTemplate(props) {
             data-item-id={title.text.toLowerCase().replace(" ", "-")}
             data-item-price={price}
             data-item-url={`/store/${props.data.prismicProduct.uid}`}
-            data-item-name={title.text}>
+            data-item-name={title.text}
+            data-item-image={title_image.url}
+            >
             Add to cart
           </button>
         </ButtonHolder>
@@ -112,6 +114,9 @@ export const query = graphql`
       id
       uid
       data {
+        title_image {
+          url(imgixParams: { width: 1000 })
+        }
         body {
           ... on PrismicProductDataBodyStandardSlide {
             id
