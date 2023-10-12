@@ -91,7 +91,7 @@ function ProductTemplate(props) {
         <ButtonHolder>
           <button
             class="snipcart-add-item"
-            data-item-id={`/store/${props.data.prismicProduct.uid}`}
+            data-item-id={`${process.env.GATSBY_SITE_URL}/store/${props.data.prismicProduct.uid}`}
             data-item-price={price}
             data-item-url={`/store/${props.data.prismicProduct.uid}`}
             data-item-name={title.text}
