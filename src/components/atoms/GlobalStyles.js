@@ -35,6 +35,13 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
+    .snipcart-cart__checkout-button {
+      font-family: ${adineueProBlack};
+      text-transform: uppercase;
+      font-size: 36px;
+      padding-top: 24px;
+    }
+
     .snipcart-modal__container {
       width: 100%;
       padding: 0;
@@ -475,6 +482,13 @@ const GlobalStyle = createGlobalStyle`
               margin: 0;
 
               .snipcart-cart-button {
+                &.snipcart__font--secondary.snipcart__font--subtitle {
+                  font-family: ${adineueProBlack} !important;
+                  text-transform: uppercase;
+                  font-size: 36px;
+                  padding-top: 24px;
+                }
+
                 background-image: unset;
                 background-color: ${props => props.theme.colors.black};
                 border: 1px solid ${props => props.theme.colors.black};
