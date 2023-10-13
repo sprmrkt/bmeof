@@ -2,32 +2,212 @@ import {createGlobalStyle} from "styled-components";
 import cursor from "../../assets/svg/cursor.svg"
 
 const GlobalStyle = createGlobalStyle`
+  #snipcart {
+    position: relative;
+    z-index: 10000;
+
+    .snipcart-modal__container {
+      width: 100%;
+      padding: 0;
+
+      .snipcart-layout {
+        background-color: ${props => props.theme.colors.white};
+
+        .snipcart-cart-header {
+          width: 100%;
+
+          justify-content: space-between;
+
+          margin: 0;
+          padding: 24px 24px 12px;
+
+          border-bottom: 1px solid black;
+          background-color: ${props => props.theme.colors.white};
+
+          &__close-button {
+            flex: unset;
+            order: 2;
+
+            svg {
+              display: none;
+            }
+          }
+
+          &__options {
+            display: none;
+          }
+        }
+
+        &__content {
+          width: 100%;
+          margin: 0;
+          max-width: unset;
+          padding: 24px 24px 0;
+
+          .snipcart-cart__content {
+            display: flex;
+            gap: 48px;
+            background-color: ${props => props.theme.colors.white};
+
+            & > * {
+              margin: 0;
+              width: 50%;
+            }
+
+            .snipcart-item-list {
+              display: flex;
+              flex-direction: column;
+              gap: 24px;
+
+              .snipcart-item-line {
+                background-color: transparent;
+                box-shadow: unset;
+
+                &__actions {
+                  button {
+                    padding: 0;
+                    border: none;
+
+                    &::before {
+                      content: "Remove";
+                    }
+                    svg {
+                      display: none;
+                    }
+                  }
+                }
+
+                &__product {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 16px;
+                }
+
+                &__container {
+                  margin: 0;
+                  padding: 0;
+                  gap: 12px;
+                }
+
+                &__media {
+                  margin: 0;
+                }
+
+                &__info {
+                  display: none;
+                }
+
+                &__variants {
+                  padding: 0;
+
+                  & > div:first-child {
+                    display: none;
+                  }
+                }
+
+                .snipcart-item-quantity {
+                  margin: 0;
+
+                  &__label {
+                    display: none;
+                  }
+
+                  &__quantity-price-container {
+                    justify-content: unset;
+                    gap: 24px;
+                  }
+
+                  &__quantity {
+                      width: auto;
+                      height: auto;
+                      gap: 16px;
+                      padding: 0;
+                      background-color: transparent;
+                      border: none;
+                  }
+
+                  &__button {
+                    max-height: unset;
+                    padding: 16px 0;
+                  }
+                }
+              }
+            }
+
+            .snipcart-cart__footer {
+              display: flex;
+              flex-direction: column;
+
+              .snipcart-cart__footer-col {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 48px;
+
+                .snipcart-cart-summary-fees {
+                  gap: 24px;
+
+                  &__notice {
+                    margin: 0;
+                  }
+                }
+
+                & > footer {
+                  .snipcart-cart-button {
+                    align-items: center;
+                    
+                    margin: 0;
+                    background-image: unset;
+                    background-color: ${props => props.theme.colors.black};
+                    border: 1px solid ${props => props.theme.colors.black};
+
+                    &:hover {
+                      background-color: ${props => props.theme.colors.white};
+                      color: ${props => props.theme.colors.black};
+                    }
+
+                    &__icon, & > svg {
+                      display: none;
+                    }
+                  }
+                }
+
+                .snipcart-cart__featured-payment-methods-container {
+                  margin: 0;
+
+                  .snipcart-featured-payment-methods {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 24px;
+
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+
+                    & > h3 {
+                      position: relative;
+                      top: 0;
+
+                      padding: 0;
+                      background: transparent;
+                    }
+                  }
+                }
+              }
+
+              .cart__footer-discount-box {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
   #embed-overlay {
     cursor: url(${cursor}) 14 14, auto !important;
   }
-
-  .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
-    background-image: none !important;
-    background: black !important;
-  }
-
-  .snipcart-cart-button {
-    background: black !important;
-  }
-
-  .snipcart__actions--link {
-    color: black !important;
-  }
-
-  .snipcart__icon--blue-dark path {
-    fill: black !important;
-  }
-
-  .snipcart__icon--blue-light path {
-    fill: black !important;
-  }
-
 
   :root {
     --windowHeight: 100vh;
