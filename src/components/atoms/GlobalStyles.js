@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     .snipcart-modal__container {
       width: 100%;
       padding: 0;
+      background-color: ${props => props.theme.colors.white};
 
       .snipcart-layout {
         background-color: ${props => props.theme.colors.white};
@@ -27,6 +28,8 @@ const GlobalStyle = createGlobalStyle`
           &__close-button {
             flex: unset;
             order: 2;
+
+            margin-left: auto;
 
             svg {
               display: none;
@@ -155,7 +158,7 @@ const GlobalStyle = createGlobalStyle`
                 & > footer {
                   .snipcart-cart-button {
                     align-items: center;
-                    
+
                     margin: 0;
                     background-image: unset;
                     background-color: ${props => props.theme.colors.black};
@@ -197,6 +200,211 @@ const GlobalStyle = createGlobalStyle`
 
               .cart__footer-discount-box {
                 display: none;
+              }
+            }
+          }
+        }
+
+        .snipcart-checkout__content {
+          .snipcart-layout__cols {
+            gap: 24px;
+          }
+          .snipcart-layout__col, .snipcart-layout__col--large {
+            width: 50%;
+            margin: 0;
+          }
+          .snipcart-layout__col > div {
+            position: relative !important;
+            width: 100% !important;
+
+            .snipcart-cart-summary {
+              background-color: transparent;
+              border: 1px solid ${props => props.theme.colors.black};
+
+              &__content {
+                background-color: transparent;
+
+                * {
+                  color: ${props => props.theme.colors.black};
+                }
+
+                hr {
+                  background-color: ${props => props.theme.colors.black};
+                }
+              }
+            }
+
+            .snipcart-modal__container.snipcart-cart-summary--edit {
+              .snipcart-layout.snipcart-modal {
+                background-color: ${props => props.theme.colors.white};
+                .snipcart-layout__content--side {
+                  background-color: transparent;
+
+                  .snipcart-cart__secondary-header {
+                    background-color: transparent;
+                    padding: 0;
+                  }
+
+                  .snipcart-cart__content {
+                    ul.snipcart-item-list {
+                      width: 100%;
+                      background-color: transparent;
+
+                      li {
+                        margin: 0;
+                        padding: 24px;
+                        border: 1px solid ${props => props.theme.colors.black};
+                      }
+                    }
+
+                    .snipcart-cart__footer {
+                      width: 100%;
+                      background-color: transparent;
+                      padding: 0;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          #snipcart-checkout-step-billing {
+            padding: 0;
+
+            #snipcart-billing-form {
+              background-color: transparent;
+              box-shadow: unset;
+
+              .snipcart__box {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+
+                margin: 0;
+                padding: 0;
+                background-color: transparent;
+
+                &--badge {
+                  display: none;
+                }
+
+                .snipcart-form {
+                  &__field {
+                    padding: 0;
+                  }
+
+                  &__set {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 24px;
+
+                    .snipcart-input, .snipcart-textbox {
+                      padding: 0;
+                      background-color: transparent;
+                      border: 1px solid ${props => props.theme.colors.black};
+
+                      &:hover {
+                        cursor: text;
+                      }
+
+                      &:focus-within {
+                          box-shadow: unset;
+                      }
+
+                      input {
+                        margin: 0;
+                        padding: 0 24px;
+                        border: none;
+                        border-radius: 0;
+
+                        &:focus {
+                          border: none;
+                        }
+                      }
+                    }
+                  }
+
+                  &__label {
+                    margin: 0;
+                  }
+                }
+
+                .snipcart-typeahead {
+                  background-color: transparent;
+
+                  &__suggestions {
+                    background-color: ${props => props.theme.colors.white};
+                    border: 1px solid ${props => props.theme.colors.black};
+                  }
+                }
+              }
+            }
+
+            .snipcart-billing-completed {
+              background-color: transparent;
+              border: 1px solid ${props => props.theme.colors.black};
+              margin: 0;
+
+              *, svg {
+                color: ${props => props.theme.colors.black} !important;
+              }
+
+              path {
+                fill: currentColor;
+              }
+
+              .snipcart__box--badge {
+                display: none;
+              }
+            }
+
+            .snipcart-form__footer {
+              margin: 0;
+
+              .snipcart-cart-button {
+                background-image: unset;
+                background-color: ${props => props.theme.colors.black};
+                border: 1px solid ${props => props.theme.colors.black};
+
+                &:hover {
+                  background-color: ${props => props.theme.colors.white};
+                  color: ${props => props.theme.colors.black};
+                }
+              }
+            }
+          }
+
+          #snipcart-checkout-step-payment {
+            margin-top: 24px;
+            padding: 0;
+
+            .snipcart__box--gray {
+              display: none;
+            }
+
+            .snipcart-form.snipcart-payment {
+              background-color: transparent;
+              box-shadow: unset;
+              margin: 0;
+              border: 1px solid ${props => props.theme.colors.black};
+
+              .snipcart__box--badge {
+                display: none;
+              }
+            }
+
+            .snipcart-form__footer {
+              margin: 0;
+
+              .snipcart-cart-button {
+                background-image: unset;
+                background-color: ${props => props.theme.colors.black};
+                border: 1px solid ${props => props.theme.colors.black};
+
+                &:hover {
+                  background-color: ${props => props.theme.colors.white};
+                  color: ${props => props.theme.colors.black};
+                }
               }
             }
           }
