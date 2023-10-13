@@ -203,6 +203,36 @@ const GlobalStyle = createGlobalStyle`
               }
             }
           }
+
+          .snipcart-empty-cart {
+            background-color: ${props => props.theme.colors.white};
+
+            color: ${props => props.theme.colors.black};
+
+            &__title {
+              height: auto;
+            }
+
+            .snipcart-cart-button {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+
+              color: ${props => props.theme.colors.white};
+              background-image: unset;
+              background-color: ${props => props.theme.colors.black};
+              border: 1px solid ${props => props.theme.colors.black};
+
+              &:hover {
+                background-color: ${props => props.theme.colors.white};
+                color: ${props => props.theme.colors.black};
+              }
+
+              svg, .snipcart-cart-button__icon {
+                display: none;
+              }
+            }
+          }
         }
 
         .snipcart-checkout__content {
