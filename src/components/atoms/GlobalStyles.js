@@ -1,10 +1,39 @@
 import {createGlobalStyle} from "styled-components";
 import cursor from "../../assets/svg/cursor.svg"
 
+const adineueProBlack = `"Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`;
+const gotham = `"Gotham", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"`;
+
 const GlobalStyle = createGlobalStyle`
   #snipcart {
     position: relative;
     z-index: 10000;
+
+    font-family: ${gotham};
+    font-size: 15px;
+    font-weight: 700;
+
+    .snipcart__font--secondary, .snipcart__font--subtitle {
+      font-family: ${gotham};
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .snipcart-billing-completed__information {
+      font-weight: 300;
+    }
+
+    .snipcart-input, .snipcart-textbox, .snipcart-typeahead {
+      & input, & textarea, & select {
+        font-weight: 300;
+      }
+
+      .snipcart-typeahead__suggestions {
+        .snipcart-typeahead__suggestion {
+          font-weight: 300 !important;
+        }
+      }
+    }
 
     .snipcart-modal__container {
       width: 100%;
@@ -25,6 +54,12 @@ const GlobalStyle = createGlobalStyle`
           border-bottom: 1px solid black;
           background-color: ${props => props.theme.colors.white};
 
+          &__title {
+            font-family: ${gotham};
+            font-size: 15px;
+            font-weight: 700;
+          }
+
           &__close-button {
             flex: unset;
             order: 2;
@@ -33,6 +68,13 @@ const GlobalStyle = createGlobalStyle`
 
             svg {
               display: none;
+            }
+
+            .snipcart-modal__close-title {
+              font-family: ${gotham};
+              font-size: 15px;
+              font-weight: 700;
+              text-transform: uppercase;
             }
           }
 
@@ -66,13 +108,22 @@ const GlobalStyle = createGlobalStyle`
                 background-color: transparent;
                 box-shadow: unset;
 
+                &__title {
+                  font-family: ${gotham};
+                  font-size: 15px;
+                  font-weight: 700;
+                }
+
                 &__actions {
                   button {
                     padding: 0;
                     border: none;
 
                     &::before {
-                      content: "Remove";
+                      content: "REMOVE";
+                      font-family: ${gotham};
+                      font-size: 12px;
+                      font-weight: 500;
                     }
                     svg {
                       display: none;
@@ -211,6 +262,9 @@ const GlobalStyle = createGlobalStyle`
 
             &__title {
               height: auto;
+              font-family: ${gotham};
+              font-size: 15px;
+              font-weight: 700;
             }
 
             .snipcart-cart-button {
@@ -222,6 +276,11 @@ const GlobalStyle = createGlobalStyle`
               background-image: unset;
               background-color: ${props => props.theme.colors.black};
               border: 1px solid ${props => props.theme.colors.black};
+
+              font-family: ${adineueProBlack};
+              font-size: 15px;
+              font-weight: 700;
+              text-transform: uppercase;
 
               &:hover {
                 background-color: ${props => props.theme.colors.white};
@@ -281,6 +340,10 @@ const GlobalStyle = createGlobalStyle`
                 hr {
                   background-color: ${props => props.theme.colors.black};
                 }
+
+                .snipcart-cart-summary-item {
+                  grid-template-columns: max-content 30px auto;
+                }
               }
             }
 
@@ -300,7 +363,7 @@ const GlobalStyle = createGlobalStyle`
                       width: 100%;
                       background-color: transparent;
 
-                      li {
+                      li.snipcart-item-line {
                         margin: 0;
                         padding: 24px;
                         border: 1px solid ${props => props.theme.colors.black};
@@ -484,7 +547,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     // Use system fonts: https://css-tricks.com/snippets/css/system-font-stack/
-    font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: ${adineueProBlack};
     color: ${props => props.theme.colors.black};
     background-color: ${props => props.theme.colors.white};
     overscroll-behavior-y: none;
@@ -492,7 +555,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6,
   .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: ${adineueProBlack};
     line-height: 0.75;
     text-transform: uppercase;
     letter-spacing: -0.025em;
@@ -502,7 +565,7 @@ const GlobalStyle = createGlobalStyle`
   p, .p,
   ol, ul, li,
   code, kbd, pre, samp {
-    font-family: 'Gotham', "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: ${gotham};
     margin-top: 15px;
     margin-bottom: 15px;
   }
