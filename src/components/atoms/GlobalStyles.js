@@ -233,6 +233,26 @@ const GlobalStyle = createGlobalStyle`
               }
             }
           }
+
+          snipcart-order {
+            &__details {
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+
+              .snipcart__box {
+                background-color: ${props => props.theme.colors.white};
+                border: 1px solid ${props => props.theme.colors.black};
+                margin: 0;
+              }
+
+              &__content {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+              }
+            }
+          }
         }
 
         .snipcart-checkout__content {
