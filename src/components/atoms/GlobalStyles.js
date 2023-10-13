@@ -293,7 +293,7 @@ const GlobalStyle = createGlobalStyle`
             }
           }
 
-          snipcart-order {
+          .snipcart-order {
             &__details {
               display: flex;
               flex-direction: column;
