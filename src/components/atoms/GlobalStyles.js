@@ -41,11 +41,32 @@ const GlobalStyle = createGlobalStyle`
       }
     }
 
-    .snipcart-cart__checkout-button {
+    path {
+      fill: ${(props) => props.theme.colors.black};
+    }
+
+    .snipcart-cart__checkout-button, .snipcart-cart-button {
       font-family: ${adineueProBlack};
       text-transform: uppercase;
-      font-size: 36px;
-      padding-top: 24px;
+
+      padding: 0.6rem 0.6rem 0.25rem;
+
+      color: ${(props) => props.theme.colors.white};
+      background-image: unset;
+      background-color: ${(props) => props.theme.colors.black};
+      border: 1px solid ${(props) => props.theme.colors.black};
+
+      font-size: 24px;
+
+      @media (${(props) => props.theme.breakpoints.sm}) {
+        padding: 24px 24px 16px;
+        font-size: 48px;
+      }
+
+      &:hover {
+        background-color: ${(props) => props.theme.colors.white};
+        color: ${(props) => props.theme.colors.black};
+      }
     }
 
     .snipcart-modal__container {
@@ -58,14 +79,18 @@ const GlobalStyle = createGlobalStyle`
 
         .snipcart-cart-header {
           width: 100%;
+          height: 48px;
 
           justify-content: space-between;
 
           margin: 0;
-          padding: 24px 24px 12px;
+          padding: 0 24px;
 
           border-bottom: 1px solid black;
           background-color: ${(props) => props.theme.colors.white};
+
+          @media (${(props) => props.theme.breakpoints.sm}) {
+          }
 
           &__title {
             font-family: ${gotham};
@@ -80,7 +105,13 @@ const GlobalStyle = createGlobalStyle`
             margin-left: auto;
 
             svg {
-              display: none;
+              @media (${(props) => props.theme.breakpoints.sm}) {
+                display: none;
+              }
+
+              path {
+                fill: ${(props) => props.theme.colors.black};
+              }
             }
 
             .snipcart-modal__close-title {
@@ -93,29 +124,91 @@ const GlobalStyle = createGlobalStyle`
 
           &__options {
             display: none;
+
+            & + .snipcart-modal__header-summary {
+              .snipcart-modal__header-summary-title {
+                svg:first-child {
+                  display: none;
+                }
+              }
+
+              .snipcart-cart-summary--small {
+                margin-top: 10px;
+
+                .snipcart-cart-summary {
+                  background-color: ${(props) => props.theme.colors.white};
+
+                  &__content {
+                    padding: 24px;
+                    background-color: transparent;
+
+                    hr {
+                      width: calc(100% + 48px);
+
+                      margin: 24px 0;
+                      margin-left: -24px;
+
+                      background-color: ${(props) => props.theme.colors.black};
+                    }
+
+                    .snipcart-loading-overlay {
+                      &__content {
+                        .snipcart-cart-summary__totals {
+                          .snipcart-cart-summary-fees {
+                            &__total {
+                              margin-top: 24px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  &__actions {
+                    button {
+                      color: ${(props) => props.theme.colors.black};
+                    }
+                  }
+
+                  &__overlay {
+
+                  }
+                }
+              }
+            }
           }
         }
 
         &__content {
           width: 100%;
-          margin: 0;
           max-width: unset;
-          padding: 24px 24px 0;
+
+          margin: 0;
+          padding: 0;
 
           .snipcart-cart__content {
+            width: 100%;
+            height: 100%;
+
             display: flex;
-            gap: 48px;
+            flex-direction: column;
             background-color: ${(props) => props.theme.colors.white};
 
-            & > * {
-              margin: 0;
-              width: 50%;
+            @media (${(props) => props.theme.breakpoints.sm}) {
+              & > * {
+                margin: 0;
+                width: 50%;
+              }
             }
 
             .snipcart-item-list {
               display: flex;
               flex-direction: column;
               gap: 24px;
+
+              margin: 0;
+              padding: 24px;
+              border-bottom: 1px solid ${(props) => props.theme.colors.black};
 
               .snipcart-item-line {
                 background-color: transparent;
@@ -147,7 +240,6 @@ const GlobalStyle = createGlobalStyle`
                 &__product {
                   display: flex;
                   flex-direction: column;
-                  gap: 16px;
                 }
 
                 &__container {
@@ -157,7 +249,17 @@ const GlobalStyle = createGlobalStyle`
                 }
 
                 &__header {
+                  display: grid;
+                  grid-template-columns: max-content 1fr auto;
                   align-items: start;
+                  gap: 12px;
+
+                  margin: 0;
+
+                  @media (${(props) => props.theme.breakpoints.sm}) {
+                    display: flex;
+                    justify-content: space-between;
+                  }
                 }
 
                 &__media {
@@ -166,6 +268,10 @@ const GlobalStyle = createGlobalStyle`
 
                   img {
                     max-width: 64px;
+
+                    @media (${(props) => props.theme.breakpoints.sm}) {
+                      max-width: 120px;
+                    }
                   }
                 }
 
@@ -213,6 +319,10 @@ const GlobalStyle = createGlobalStyle`
             .snipcart-cart__footer {
               display: flex;
               flex-direction: column;
+              
+              padding: 24px;
+
+              background-color: blue;
 
               .snipcart-cart__footer-col {
                 width: 100%;
@@ -231,16 +341,6 @@ const GlobalStyle = createGlobalStyle`
                 & > footer {
                   .snipcart-cart-button {
                     align-items: center;
-
-                    margin: 0;
-                    background-image: unset;
-                    background-color: ${(props) => props.theme.colors.black};
-                    border: 1px solid ${(props) => props.theme.colors.black};
-
-                    &:hover {
-                      background-color: ${(props) => props.theme.colors.white};
-                      color: ${(props) => props.theme.colors.black};
-                    }
 
                     &__icon, & > svg {
                       display: none;
@@ -277,7 +377,16 @@ const GlobalStyle = createGlobalStyle`
             }
           }
 
+          &.snipcart-layout__content--side {
+            .snipcart-cart__content {
+              .snipcart-cart__footer {
+                padding: 0 24px !important;
+              }
+            }
+          }
+
           .snipcart-empty-cart {
+            padding: 24px;
             background-color: ${(props) => props.theme.colors.white};
 
             color: ${(props) => props.theme.colors.black};
@@ -293,20 +402,10 @@ const GlobalStyle = createGlobalStyle`
               position: absolute;
               top: 50%;
               transform: translateY(-50%);
+              width: calc(100% - 48px);
 
-              color: ${(props) => props.theme.colors.white};
-              background-image: unset;
-              background-color: ${(props) => props.theme.colors.black};
-              border: 1px solid ${(props) => props.theme.colors.black};
-
-              font-family: ${adineueProBlack};
-              font-size: 15px;
-              font-weight: 700;
-              text-transform: uppercase;
-
-              &:hover {
-                background-color: ${(props) => props.theme.colors.white};
-                color: ${(props) => props.theme.colors.black};
+              @media (${(props) => props.theme.breakpoints.sm}) {
+                width: auto;
               }
 
               svg, .snipcart-cart-button__icon {
@@ -337,13 +436,21 @@ const GlobalStyle = createGlobalStyle`
         }
 
         .snipcart-checkout__content {
+          padding: 24px;
+
           .snipcart-layout__cols {
             gap: 24px;
           }
+
           .snipcart-layout__col, .snipcart-layout__col--large {
-            width: 50%;
+            width: 100%;
             margin: 0;
+
+            @media (${(props) => props.theme.breakpoints.sm}) {
+              width: 50%;
+            }
           }
+
           .snipcart-layout__col > div {
             position: relative !important;
             width: 100% !important;
@@ -379,6 +486,10 @@ const GlobalStyle = createGlobalStyle`
                           margin: 0;
                           margin-bottom: 15px;
                         }
+
+                        &__total {
+                          margin-top: 24px;
+                        }
                       }
                     }
                   }
@@ -395,6 +506,10 @@ const GlobalStyle = createGlobalStyle`
                   .snipcart-cart__secondary-header {
                     background-color: transparent;
                     padding: 0;
+
+                    @media (${(props) => props.theme.breakpoints.sm}) {
+                      padding: 24px;
+                    }
                   }
 
                   .snipcart-cart__content {
@@ -485,6 +600,11 @@ const GlobalStyle = createGlobalStyle`
                     margin: 0;
                     font-size: 12px;
                   }
+
+                  &__select {
+                    background-color: transparent;
+                    border-color: ${(props) => props.theme.colors.black};
+                  }
                 }
 
                 .snipcart-typeahead {
@@ -528,19 +648,7 @@ const GlobalStyle = createGlobalStyle`
               margin: 0;
 
               .snipcart-cart-button {
-                font-family: ${adineueProBlack} !important;
-                text-transform: uppercase;
-                font-size: 36px;
-                padding-top: 24px;
-
-                background-image: unset;
-                background-color: ${(props) => props.theme.colors.black};
-                border: 1px solid ${(props) => props.theme.colors.black};
-
-                &:hover {
-                  background-color: ${(props) => props.theme.colors.white};
-                  color: ${(props) => props.theme.colors.black};
-                }
+                margin-top: 24px;
               }
             }
           }
@@ -568,20 +676,34 @@ const GlobalStyle = createGlobalStyle`
               margin: 0;
 
               .snipcart-cart-button {
-                background-image: unset;
-                background-color: ${(props) => props.theme.colors.black};
-                border: 1px solid ${(props) => props.theme.colors.black};
-                
-                font-family: ${adineueProBlack} !important;
-                text-transform: uppercase;
-                font-size: 36px;
-                padding-top: 24px;
-
-                &:hover {
-                  background-color: ${(props) => props.theme.colors.white};
-                  color: ${(props) => props.theme.colors.black};
-                }
+                margin-top: 24px;
               }
+            }
+          }
+        }
+
+        &__content {
+          .snipcart-cart__secondary-header {
+            height: 48px;
+            min-height: 48px;
+            max-height: 48px;
+            background-color: ${(props) => props.theme.colors.white};
+            border-bottom: 1px solid ${(props) => props.theme.colors.black};
+          }
+
+          .snipcart-cart__content {
+            .snipcart-item-list {
+              background: ${(props) => props.theme.colors.white};
+
+              .snipcart-item-line {
+                margin: 0;
+                padding: 0;
+                border: none;
+              }
+            }
+
+            .snipcart-cart__footer {
+              background: ${(props) => props.theme.colors.white};
             }
           }
         }
