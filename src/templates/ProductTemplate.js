@@ -16,15 +16,20 @@ const Container = styled.div`
   overflow-y: scroll;
 
   display: flex;
-  gap: 48px;
+  flex-direction: column;
+  gap: 24px;
 
   margin-top: 48px;
   padding: 15px;
-  @media (${(props) => props.theme.breakpoints.sm}) {
-    padding: 24px;
-  }
 
   background-color: ${({ theme }) => theme.colors.white};
+
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    flex-direction: row;
+    gap: 48px;
+
+    padding: 24px;
+  }
 
   & > * {
     flex-basis: 50%;
@@ -32,11 +37,22 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  position: sticky;
-  top: 0;
-
   display: flex;
   flex-direction: column;
+
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    position: sticky;
+    top: 0;
+  }
+`;
+
+const TextHolder = styled.div`
+  position: relative;
+  width: 80%;
+
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    width: 100%;
+  }
 
   p,
   li {
@@ -56,8 +72,8 @@ const ButtonHolder = styled.div`
   position: relative;
   width: 100%;
 
-  margin-top: 24px;
-  padding: 1rem 0 0.5rem 0;
+  margin-top: 12px;
+  padding: 0.6rem 0 0.25rem 0;
 
   color: ${({ theme }) => theme.colors.black};
   border: 1px solid ${({ theme }) => theme.colors.black};
@@ -67,11 +83,20 @@ const ButtonHolder = styled.div`
     color: ${({ theme }) => theme.colors.white};
   }
 
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    margin-top: 24px;
+    padding: 1rem 0 0.5rem 0;
+  }
+
   button {
     width: 100%;
-    font-size: 48px;
+    font-size: 24px;
     text-transform: uppercase;
     text-align: center;
+
+    @media (${(props) => props.theme.breakpoints.sm}) {
+      font-size: 48px;
+    }
   }
 `;
 
@@ -90,7 +115,9 @@ function ProductTemplate(props) {
   return (
     <Container>
       <Content>
-        <PrismicRichText field={description.richText} />
+        <TextHolder>
+          <PrismicRichText field={description.richText} />
+        </TextHolder>
 
         <ButtonHolder>
           <button

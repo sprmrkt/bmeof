@@ -9,10 +9,14 @@ const Gallery = styled.ul`
 
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
 
   margin: 0;
   padding: 0;
+
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    gap: 24px;
+  }
 `;
 
 const MediaHolder = styled.div`
@@ -21,7 +25,10 @@ const MediaHolder = styled.div`
   height: 0;
 
   padding-bottom: 100%;
-  margin-bottom: 15px;
+
+  @media (${(props) => props.theme.breakpoints.sm}) {
+    margin-bottom: 15px;
+  }
 `;
 
 const ProductGallery = ({ images }) => {
