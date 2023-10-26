@@ -25,7 +25,8 @@ module.exports = {
       options: {
         version: "3.0.29",
         publicApiKey: process.env.GATSBY_SNIPCART_API_KEY,
-        useSideCart: true,
+        useSideCart: false,
+        openCartOnAdd: false,
       },
     },
     {
