@@ -15,6 +15,8 @@ function StickerHolder() {
                           gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
                           alt
                       }
+                      columns
+                      rows
                   }
               }
           }
