@@ -7,28 +7,6 @@ const GlobalStyle = createGlobalStyle`
     cursor: url(${cursor}) 14 14, auto !important;
   }
 
-  .snipcart-cart-button--highlight, .snipcart__box--badge-highlight {
-    background-image: none !important;
-    background: black !important;
-  }
-
-  .snipcart-cart-button {
-    background: black !important;
-  }
-
-  .snipcart__actions--link {
-    color: black !important;
-  }
-
-  .snipcart__icon--blue-dark path {
-    fill: black !important;
-  }
-
-  .snipcart__icon--blue-light path {
-    fill: black !important;
-  }
-
-
   :root {
     --windowHeight: 100vh;
     --horizontalHoverDistance: 0px;
