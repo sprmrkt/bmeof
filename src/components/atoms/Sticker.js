@@ -35,6 +35,10 @@ function Sticker({sticker, src, className}) {
   // store
   const {navActive} = useStore();
 
+  const cols = sticker?.data?.columns;
+  const rows = sticker?.data?.rows;
+
+
   const x = useMemo(() => randomIntFromInterval(20, 80), []);
   const y = useMemo(() => randomIntFromInterval(20, 80), []);
 
