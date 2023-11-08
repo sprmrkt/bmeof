@@ -12,7 +12,7 @@ import {useWindowSize} from "react-use";
 import {useStore} from "../utils/store";
 import GlobalNavMoveRightButton from "../components/organisms/GlobalNav/GlobalNavMoveRightButton";
 import CustomCursor from "../components/atoms/CustomCursor";
-import StickerHolder from "../components/organisms/StickerHolder";
+// import StickerHolder from "../components/organisms/StickerHolder";
 
 const Main = styled.main`
   position: relative;
