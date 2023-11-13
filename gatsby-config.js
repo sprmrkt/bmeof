@@ -21,14 +21,6 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sitemap`,
     {
-      resolve: "gatsby-plugin-snipcart-advanced",
-      options: {
-        version: "3.0.29",
-        publicApiKey: process.env.GATSBY_SNIPCART_API_KEY,
-        useSideCart: true,
-      },
-    },
-    {
       resolve: "gatsby-plugin-svgr",
       options: {
         prettier: true,

@@ -85,7 +85,7 @@ function LoopingScroll({fixedBody}) {
       ref={holderRef}>
       <div className="inner">
         <Header />
-        <Heading>{manualKerning("Bear meets eagle on fire work studio hello store")}</Heading>
+        <Heading>{manualKerning("Bear meets eagle on fire work studio hello")}</Heading>
       </div>
       <div className="end"/>
     </Holder>
