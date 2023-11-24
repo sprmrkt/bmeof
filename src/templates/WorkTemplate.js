@@ -24,7 +24,7 @@ max-height: var(--windowHeight);
     padding: 0 24px;
   }
 
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 const TextHolder = styled.div`
   display: grid;
