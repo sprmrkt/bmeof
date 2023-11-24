@@ -95,6 +95,9 @@ const CloseButton = styled.div`
   }
 `;
 
+// // TO DO: 
+// Address button styles to match WorkNavLinkTitleBar
+
 const SlidesInner = styled.div`
   width: 100%;
   height: 100%;
@@ -222,7 +225,7 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
       </Slides>
       <StackedImages slides={slides} />
       {absolute && <CloseButton>
-        <button className="temp-close-button" onClick={() => closeHandler()}>Back</button>
+        <button className="temp-close-button p" onClick={() => closeHandler()}>Back</button>
       </CloseButton>}
     </Holder>
   );

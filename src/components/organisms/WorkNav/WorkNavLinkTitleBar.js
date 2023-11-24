@@ -33,7 +33,7 @@ const Border = styled.div`
   top: calc(100% - 2px);
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: black;
   transform-origin: right;
   will-change: transform;
@@ -78,7 +78,7 @@ function WorkNavLinkTitleBar(props) {
         }}
       />
       <p>{props.title}</p>
-      <button onClick={() => closeHandler()}>Back</button>
+      <button className="p" onClick={() => closeHandler()}>Back</button>
     </Holder>
   )
 }
