@@ -77,7 +77,7 @@ function WorkNavLinkTitleBar(props) {
           duration: 0.75,
         }}
       />
-      <p>{props.title}</p>
+      <h1 className="p">{props.title}</h1>
       <button className="p" onClick={() => closeHandler()}>Back</button>
     </Holder>
   )

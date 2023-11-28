@@ -80,23 +80,18 @@ const Slides = styled.div`
 
 const CloseButton = styled.div`
   position: fixed;
-  top: 0;
+  top: 1px; // navbar border-top width
   right: 0;
   z-index: 199;
-  height: 46px;
   padding: 0 24px;
-  background-color: ${props => props.theme.colors.white};
   display: flex;
   align-items: center;
   justify-content: center;
 
-  button {
-    margin-top: 2px;
+  button.p {
+    background-color: ${props => props.theme.colors.white};
   }
 `;
-
-// // TO DO: 
-// Address button styles to match WorkNavLinkTitleBar
 
 const SlidesInner = styled.div`
   width: 100%;
@@ -225,7 +220,7 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
       </Slides>
       <StackedImages slides={slides} />
       {absolute && <CloseButton>
-        <button className="temp-close-button p" onClick={() => closeHandler()}>Back</button>
+        <button className="p" onClick={() => closeHandler()}>Back</button>
       </CloseButton>}
     </Holder>
   );
