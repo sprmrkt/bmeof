@@ -43,6 +43,10 @@ export const useStore = create(set => ({
   }),
   workNavSplitHappenedOnce: false,
   setWorkNavSplitHappenedOnce: value => set({workNavSplitHappenedOnce: value}),
+  
+  // work gallery
+  openGallery: false,
+  setOpenGallery: value => set({openGallery: value}),
 
   //custom gallery hover 
 

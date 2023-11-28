@@ -9,6 +9,8 @@ import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
 import StackedImages from "../components/molecules/StackedImages";
 
+import {useStore} from "../utils/store";
+
 const Container = styled.div`
   position: relative;
   min-height: calc(100vh - 48px);
@@ -54,7 +56,9 @@ function WorkTemplate(props) {
   useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
   useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
 
-  const [openGallery, setOpenGallery] = useState(false);
+  const openGallery = useStore((state) => state.openGallery);
+  const setOpenGallery = useStore((state) => state.setOpenGallery);
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (

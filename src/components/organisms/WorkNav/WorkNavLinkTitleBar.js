@@ -48,9 +48,16 @@ function WorkNavLinkTitleBar(props) {
   } = useStore();
   const size = useWindowSize();
 
+  const openGallery = useStore((state) => state.openGallery);
+  const setOpenGallery = useStore((state) => state.setOpenGallery);
+
   const closeHandler = () => {
-    setNavUpPosition(navUpPosition + 50);
-    closeWorkNav();
+    if (openGallery) {
+      setOpenGallery(false);
+    } else {
+      setNavUpPosition(navUpPosition + 50);
+      closeWorkNav();
+    }
   }
 
   return (

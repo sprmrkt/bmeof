@@ -6,7 +6,6 @@ import {useSwipeable} from "react-swipeable";
 import StackedImages from "./StackedImages";
 import { useStore } from "../../utils/store";
 
-
 const Holder = styled.div`
   position: relative;
   width: 100%;
@@ -75,21 +74,6 @@ const Slides = styled.div`
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 24px;
-  }
-`;
-
-const CloseButton = styled.div`
-  position: fixed;
-  top: 1px; // navbar border-top width
-  right: 0;
-  z-index: 199;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  button.p {
-    background-color: ${props => props.theme.colors.white};
   }
 `;
 
@@ -219,9 +203,6 @@ function Gallery({slides, currentSlide, setCurrentSlide, absolute, closeHandler}
         </SlidesInner>
       </Slides>
       <StackedImages slides={slides} />
-      {absolute && <CloseButton>
-        <button className="p" onClick={() => closeHandler()}>Back</button>
-      </CloseButton>}
     </Holder>
   );
 }
