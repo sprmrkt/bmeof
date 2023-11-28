@@ -33,7 +33,7 @@ const Border = styled.div`
   top: calc(100% - 2px);
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: black;
   transform-origin: right;
   will-change: transform;
@@ -48,9 +48,16 @@ function WorkNavLinkTitleBar(props) {
   } = useStore();
   const size = useWindowSize();
 
+  const openGallery = useStore((state) => state.openGallery);
+  const setOpenGallery = useStore((state) => state.setOpenGallery);
+
   const closeHandler = () => {
-    setNavUpPosition(navUpPosition + 50);
-    closeWorkNav();
+    if (openGallery) {
+      setOpenGallery(false);
+    } else {
+      setNavUpPosition(navUpPosition + 50);
+      closeWorkNav();
+    }
   }
 
   return (
@@ -77,8 +84,8 @@ function WorkNavLinkTitleBar(props) {
           duration: 0.75,
         }}
       />
-      <p>{props.title}</p>
-      <button onClick={() => closeHandler()}>Back</button>
+      <h1 className="p">{props.title}</h1>
+      <button className="p" onClick={() => closeHandler()}>Back</button>
     </Holder>
   )
 }
