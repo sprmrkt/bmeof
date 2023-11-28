@@ -14,7 +14,7 @@ import {useStore} from "../utils/store";
 const Container = styled.div`
   position: relative;
   min-height: var(--windowHeight);
-  margin-top: 100px;
+  padding: 56px 0 48px;
   background-color: ${({theme}) => theme.colors.white};
 `;
 

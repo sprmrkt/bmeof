@@ -23,8 +23,8 @@ export default function useInitialWorkNavSplit(workNavRef, id, index) {
       const split = setTimeout(() => {
         // 3. Calculate translate distance for nav up and down
         const windowHeight = window?.innerHeight;
-        let up = -(height - 48);
-        const down = windowHeight - 48;
+        let up = -(height - 56);
+        const down = windowHeight - 56;
         // 4. Set nav split index to work link
         // 5. Set nav up and down position
         setWorkNavSplitIndex(index);

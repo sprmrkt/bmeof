@@ -125,15 +125,20 @@ const WorkNavLink = (props) => {
     const el = props.workNavRef?.current.querySelector(`#work-${props.work.id}`);
     if (!el) return;
 
-    const {top, bottom} = el?.getBoundingClientRect();
 
+    const {top, bottom} = el?.getBoundingClientRect();
+  
     const windowHeight = window?.innerHeight;
 
-    const up = -bottom + 48;
+    const up = -bottom + 56;
     const down = windowHeight - top;
 
     setWorkNavUpPosition(up);
     setWorkNavDownPosition(down);
+
+    setTimeout(() => {
+      console.log('timeout bottom', el?.getBoundingClientRect()?.bottom);
+    }, 1500)
   };
 
   const handleNavigate = () => {
