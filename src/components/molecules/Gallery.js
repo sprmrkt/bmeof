@@ -9,8 +9,9 @@ import { useStore } from "../../utils/store";
 const Holder = styled.div`
   position: relative;
   width: 100%;
-  -webkit-overflow-scrolling: touch;
-  padding-top: 54px;
+  padding-top: 56px;
+  height: 100vh;
+  overflow: auto;
   background-color: ${props => props.theme.colors.white};
 
   &.absPositioned {
