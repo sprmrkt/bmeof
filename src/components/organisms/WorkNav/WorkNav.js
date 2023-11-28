@@ -21,7 +21,7 @@ const Container = styled.div`
   .work-nav-container {
     position: relative;
     overflow-x: hidden;
-    overflow-y: ${({$active}) => ($active ? "scroll" : "hidden")};
+    overflow-y: scroll;
     height: 100%;
   }
 `;

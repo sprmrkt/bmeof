@@ -13,18 +13,20 @@ import {useStore} from "../utils/store";
 
 const Container = styled.div`
   position: relative;
-  min-height: calc(100vh - 48px);
-  margin-top: 48px;
+  min-height: var(--windowHeight);
+  padding: 56px 0 48px;
   background-color: ${({theme}) => theme.colors.white};
 `;
 
 const Content = styled.div`
+max-height: var(--windowHeight);
+
   padding: 0 15px;
   @media (${props => props.theme.breakpoints.sm}) {
     padding: 0 24px;
   }
 
-  overflow: hidden;
+  overflow-y: scroll;
 `;
 const TextHolder = styled.div`
   display: grid;
