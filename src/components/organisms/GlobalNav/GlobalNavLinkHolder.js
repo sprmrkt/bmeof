@@ -20,10 +20,10 @@ const Holder = styled.div`
 `;
 const Border = styled.div`
   position: absolute;
-  top: calc(100% - 2px);
+  top: calc(100% - 1px);
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: black;
   transform-origin: right;
   will-change: transform;
