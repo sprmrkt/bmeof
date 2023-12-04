@@ -1,9 +1,9 @@
-import React, {forwardRef} from "react";
+import React, { forwardRef } from "react";
 import styled from "styled-components";
 import Header from "../../molecules/Header";
 import GlobalNavLink from "./GlobalNavLink";
-import {manualKerning} from "../../../utils/helpers";
-import {useStore} from "../../../utils/store";
+import { manualKerning } from "../../../utils/helpers";
+import { useStore } from "../../../utils/store";
 import GlobalNavLinkHolder from "./GlobalNavLinkHolder";
 import StickerHolder from "../StickerHolder";
 
@@ -14,12 +14,12 @@ const Container = styled.nav`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  pointer-events: ${({$active}) => ($active ? "auto" : "none")};
+  pointer-events: ${({ $active }) => ($active ? "auto" : "none")};
   z-index: 100;
 
   .global-nav-wrapper {
     overflow-x: hidden;
-    overflow-y: ${({$active}) => ($active ? "scroll" : "hidden")};
+    overflow-y: ${({ $active }) => ($active ? "scroll" : "hidden")};
     height: 100%;
     overscroll-behavior: none;
 
@@ -30,42 +30,50 @@ const Container = styled.nav`
 `;
 
 const Heading = styled.h1`
-  background: ${({theme}) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.white};
 `;
 
 const GlobalNav = forwardRef((props, globalNavRef) => {
   // variables
   const links = [
     {
-      id: 'work',
+      id: "work",
       slug: "/work/",
       label: "Work",
     },
     {
-      id: 'studio',
+      id: "studio",
       slug: "/studio/",
       label: "Studio",
     },
     {
-      id: 'hello',
+      id: "hello",
       slug: "/hello/",
       label: "Hello",
     },
     {
-      id: 'gravy',
+      id: "gravy",
       slug: "/gravy/",
       label: "Gravy",
     },
   ];
 
   // store
-  const {navSplitIndex} = useStore();
-  const {navUpPosition} = useStore();
-  const {navDownPosition} = useStore();
+  const { navSplitIndex } = useStore();
+  const { navUpPosition } = useStore();
+  const { navDownPosition } = useStore();
+
+  const onHeaderClick = (ev) => {
+    ev.preventDefault();
+
+    document
+      .querySelector("#work")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   // render
   return (
-    <Container
-      $active={navSplitIndex === null}>
+    <Container $active={navSplitIndex === null}>
       <div ref={globalNavRef} className="global-nav-wrapper">
         <div className="global-nav-inner">
           <StickerHolder />
@@ -74,38 +82,46 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
           </GlobalNavLinkHolder>
 
           <GlobalNavLinkHolder position={navUpPosition}>
-            <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+            <a href="#work" onClick={(ev) => onHeaderClick(ev)}>
+              <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
+            </a>
           </GlobalNavLinkHolder>
 
           {links.map((link, linkIndex) => (
             <GlobalNavLinkHolder
               key={linkIndex}
+              id={link.id}
               position={
                 linkIndex <= navSplitIndex ? navUpPosition : navDownPosition
               }
-              active={linkIndex === navSplitIndex}>
-
+              active={linkIndex === navSplitIndex}
+            >
               <GlobalNavLink
                 globalNavRef={globalNavRef}
                 link={link}
                 index={linkIndex}
               />
-
             </GlobalNavLinkHolder>
           ))}
 
           <GlobalNavLinkHolder position={navDownPosition}>
-            <a className="button h1" href="https://www.instagram.com/bearmeetseagleonfire/" target="_blank"
-               rel="noreferrer">{manualKerning("Insta")}</a>
+            <a
+              className="button h1"
+              href="https://www.instagram.com/bearmeetseagleonfire/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {manualKerning("Insta")}
+            </a>
           </GlobalNavLinkHolder>
           <GlobalNavLinkHolder position={navDownPosition}>
-            <Header bottom/>
+            <Header bottom />
           </GlobalNavLinkHolder>
         </div>
       </div>
     </Container>
   );
-})
+});
 
 export default GlobalNav;
 

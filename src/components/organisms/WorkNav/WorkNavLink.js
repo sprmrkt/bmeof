@@ -15,6 +15,7 @@ const Holder = styled.div`
   padding: 15px 15px 0 15px;
   border-top: 1px solid;
   background-color: ${({theme}) => theme.colors.white};
+
   @media (${props => props.theme.breakpoints.md}) {
     padding: 24px 12px 0 24px;
     display: flex;
