@@ -67,6 +67,7 @@ const GlobalStyle = createGlobalStyle`
     text-align: left;
     white-space: normal;
     margin: 0;
+    overflow: hidden;
 
     .manual-kerning {
 
