@@ -63,6 +63,8 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   const { navSplitIndex, setNavSplitIndex } = useStore();
   const { navUpPosition, setNavUpPosition } = useStore();
   const { navDownPosition, setNavDownPosition } = useStore();
+  const { setWorkNavSplitIndex, setWorkNavUpPosition, setWorkNavDownPosition } =
+    useStore();
 
   const onHeaderClick = (ev) => {
     ev.preventDefault();
@@ -76,6 +78,10 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
     setNavSplitIndex(null);
     setNavUpPosition(0);
     setNavDownPosition(0);
+
+    setWorkNavSplitIndex(null);
+    setWorkNavUpPosition(0);
+    setWorkNavDownPosition(0);
   };
 
   useEffect(() => {
