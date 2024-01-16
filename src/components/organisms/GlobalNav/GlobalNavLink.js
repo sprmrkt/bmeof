@@ -1,23 +1,20 @@
 import React from "react";
-import {Link} from "gatsby";
+import { Link } from "gatsby";
 import propTypes from "prop-types";
-import {manualKerning} from "../../../utils/helpers";
-import {useStore} from "../../../utils/store";
+import { manualKerning } from "../../../utils/helpers";
+import { useStore } from "../../../utils/store";
 
-function GlobalNavLink({
-                         link,
-                         index,
-                         globalNavRef,
-                       }) {
+
+function GlobalNavLink({ link, index, globalNavRef }) {
   //store
-  const {setNavSplitIndex, setNavDownPosition, setNavUpPosition} = useStore();
+  const { setNavSplitIndex, setNavDownPosition, setNavUpPosition } = useStore();
 
   // methods
   const calculateTranslateDistance = () => {
-    const el = globalNavRef.current.querySelector(`#${link.id}`);
+    const el = globalNavRef?.current?.querySelector(`#${link.id}`);
     if (!el) return;
 
-    const {top, bottom, height} = el?.getBoundingClientRect();
+    const { top, bottom, height } = el?.getBoundingClientRect();
 
     const windowHeight = window?.innerHeight;
     const elHeight = height / 4;
@@ -41,7 +38,8 @@ function GlobalNavLink({
       to={`${link.slug}`}
       id={link.id}
       className="h1 button"
-      onClick={() => handleNavigate()}>
+      onClick={() => handleNavigate()}
+    >
       {manualKerning(link.label)}
     </Link>
   );
@@ -51,7 +49,7 @@ export default GlobalNavLink;
 
 GlobalNavLink.propTypes = {
   link: propTypes.shape({
-    ref: propTypes.shape({current: propTypes.string}),
+    ref: propTypes.shape({ current: propTypes.string }),
     id: propTypes.string,
     slug: propTypes.string,
     label: propTypes.string,
