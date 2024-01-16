@@ -60,9 +60,9 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
   ];
 
   // store
-  const { navSplitIndex } = useStore();
-  const { navUpPosition } = useStore();
-  const { navDownPosition } = useStore();
+  const { navSplitIndex, setNavSplitIndex } = useStore();
+  const { navUpPosition, setNavUpPosition } = useStore();
+  const { navDownPosition, setNavDownPosition } = useStore();
 
   const onHeaderClick = (ev) => {
     ev.preventDefault();
@@ -72,12 +72,17 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       .scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const resetNavigation = () => {
+    setNavSplitIndex(null);
+    setNavUpPosition(0);
+    setNavDownPosition(0);
+  };
+
   useEffect(() => {
     const historyListener = globalHistory.listen(() => {
       // detect navigation with browser arrows
       if (!globalHistory.location.action) {
-        // reload the page to get it in proper position
-        window.location.reload();
+        resetNavigation();
       }
     });
 
