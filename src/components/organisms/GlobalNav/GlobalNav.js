@@ -1,5 +1,6 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import styled from "styled-components";
+import { globalHistory } from "@reach/router";
 import Header from "../../molecules/Header";
 import GlobalNavLink from "./GlobalNavLink";
 import { manualKerning } from "../../../utils/helpers";
@@ -70,6 +71,19 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       .querySelector("#work")
       .scrollIntoView({ behavior: "smooth", block: "start" });
   };
+
+  useEffect(() => {
+    const historyListener = globalHistory.listen(() => {
+      // detect navigation with browser arrows
+      if (!globalHistory.location.action) {
+        // reload the page to get it in proper position
+        window.location.reload();
+      }
+    });
+
+    // unsubscribing
+    return historyListener;
+  }, []);
 
   // render
   return (

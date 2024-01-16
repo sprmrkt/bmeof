@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "gatsby";
 import propTypes from "prop-types";
-import { globalHistory } from "@reach/router";
 import { manualKerning } from "../../../utils/helpers";
 import { useStore } from "../../../utils/store";
 
@@ -12,7 +11,7 @@ function GlobalNavLink({ link, index, globalNavRef }) {
 
   // methods
   const calculateTranslateDistance = () => {
-    const el = globalNavRef.current.querySelector(`#${link.id}`);
+    const el = globalNavRef?.current?.querySelector(`#${link.id}`);
     if (!el) return;
 
     const { top, bottom, height } = el?.getBoundingClientRect();
@@ -32,13 +31,6 @@ function GlobalNavLink({ link, index, globalNavRef }) {
       calculateTranslateDistance();
     }, [100]);
   };
-
-  useEffect(() => {
-    globalHistory.listen(() => {
-      console.log("change");
-    })
-
-  }, []);
 
   // render
   return (
