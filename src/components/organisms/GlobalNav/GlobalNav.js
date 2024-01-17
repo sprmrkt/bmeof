@@ -95,7 +95,7 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
             <Header />
           </GlobalNavLinkHolder>
 
-          <GlobalNavLinkHolder position={navUpPosition}>
+          <GlobalNavLinkHolder position={navUpPosition} header={true}>
             <a href="#work" onClick={(ev) => onHeaderClick(ev)}>
               <Heading>{manualKerning("Bear meets eagle on fire")}</Heading>
             </a>
@@ -120,13 +120,12 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
 
           <GlobalNavLinkHolder position={navDownPosition}>
             <a
-              className="button h1"
+              className="button"
               href="https://www.instagram.com/bearmeetseagleonfire/"
               target="_blank"
               rel="noreferrer"
-            >
-              {manualKerning("Insta")}
-            </a>
+            >Insta</a>
+            <p className="h1">{manualKerning("Insta")}</p>
           </GlobalNavLinkHolder>
           <GlobalNavLinkHolder position={navDownPosition}>
             <Header bottom />
