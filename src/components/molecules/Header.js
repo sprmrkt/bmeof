@@ -11,13 +11,13 @@ const Holder = styled.div`
   align-items: center;
   background-color: ${({theme}) => theme.colors.white};
   @media (${props => props.theme.breakpoints.md}) {
-    padding: 24px 24px 0 24px;
+    padding: 24px 24px 24px 24px;
     grid-template-columns: 1fr 1fr;
   }
   &.bottom {
     padding: 0 12px 12px 12px;
     @media (${props => props.theme.breakpoints.md}) {
-      padding: 0 24px 24px 24px;
+      padding: 12px 24px 24px 24px;
     }
   }
 

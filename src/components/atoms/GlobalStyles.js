@@ -58,7 +58,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1, .h1, .h1.button {
-    font-size: 35vw;
+    font-size: 33.5vw;
     font-kerning: normal;
     text-transform: uppercase;
     letter-spacing: -0.025em;
