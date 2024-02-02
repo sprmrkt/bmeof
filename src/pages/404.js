@@ -9,7 +9,8 @@ const Outer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--windowHeight);
+  height: 100vh;
+  height: 100svh;
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 `;

@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from "gatsby";
 import PrismicRichText from "../atoms/PrismicRichText";
 
 const Holder = styled.div`
+  min-height: calc(100vh - 48px);
   min-height: calc(100svh - 48px);
 
   .close-copyright {

@@ -7,6 +7,7 @@ const Holder = styled.div`
   top: 0;
   right: 0;
   width: 5%;
+  height: 100vh;
   height: 100svh;
   display: flex;
   justify-content: flex-end;

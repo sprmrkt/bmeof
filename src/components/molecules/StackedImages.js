@@ -6,7 +6,8 @@ import classNames from "classnames";
 
 const Holder = styled.div`
   padding: 15px 0;
-  min-height: calc(var(--windowHeight) - 48px);
+  min-height: calc(100vh - 48px);
+  min-height: calc(100svh - 48px);
   @media ( ${props => props.theme.breakpoints.md} ) {
     display: none;
   }
