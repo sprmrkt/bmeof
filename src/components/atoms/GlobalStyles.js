@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --windowHeight: 100vh;
+    --windowHeight: 100svh;
     --horizontalHoverDistance: 0px;
   }
 

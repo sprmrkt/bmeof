@@ -10,7 +10,7 @@ const Holder = styled.div`
   position: relative;
   width: 100%;
   padding-top: 56px;
-  height: 100vh;
+  height: 100svh;
   overflow: auto;
   background-color: ${props => props.theme.colors.white};
 
@@ -70,7 +70,7 @@ const Slides = styled.div`
     width: 100%;
     overflow: hidden;
     position: relative;
-    height: calc(100vh - 48px);
+    height: calc(100svh - 48px);
     min-height: calc(((100vw - 48px) * 0.75 * 0.6667) + 48px + 48px);
     padding: 24px;
     display: grid;
