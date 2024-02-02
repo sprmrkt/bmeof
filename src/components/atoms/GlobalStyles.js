@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     ${props => props.theme.fluidType(0)};
-    overscroll-behavior-y: none;
+    overscroll-behavior: none;
 
     * { box-sizing: border-box; }
   }
@@ -27,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: ${props => props.theme.colors.black};
     background-color: ${props => props.theme.colors.white};
-    overscroll-behavior-y: none;
+    overscroll-behavior: none;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -58,7 +58,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h1, .h1, .h1.button {
-    font-size: 35vw;
+    font-size: 33.5vw;
     font-kerning: normal;
     text-transform: uppercase;
     letter-spacing: -0.025em;

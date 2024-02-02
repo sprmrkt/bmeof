@@ -5,34 +5,36 @@ import {motion} from "framer-motion";
 import {useStore} from "../../../utils/store";
 
 const Holder = styled.div`
-  position: relative;
-  width: 100%;
-  display: block;
-  background-color: ${({theme}) => theme.colors.white};
-  z-index: 1;
-  will-change: transform;
+    position: relative;
+    width: 100%;
+    display: block;
+    background-color: ${({theme}) => theme.colors.white};
+    //background-color: rgba(255, 0, 0, 0.5);
+    z-index: 1;
+    margin-top: -1px;
+    will-change: transform;
 `;
 const Border = styled.div`
-  position: absolute;
-  top: calc(100% - 1px);
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: black;
-  transform-origin: right;
-  will-change: transform;
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    transform-origin: right;
+    will-change: transform;
 `;
 
 const Close = styled.button`
-  position: absolute;
-  top: calc(100% - 48px);
-  z-index: 10;
-  left: 0;
-  width: 100%;
-  height: 48px;
-  background: transparent !important;
-  pointer-events: auto;
-  opacity: 0.2;
+    position: absolute;
+    top: calc(100% - 48px);
+    z-index: 10;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    background: transparent !important;
+    pointer-events: auto;
+    opacity: 0.2;
 `;
 
 const Inner = styled.div`
