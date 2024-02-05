@@ -1,20 +1,14 @@
 import React from "react";
-import CloseButton from "../components/atoms/CloseButton";
 import Gravy from "../components/organisms/Gravy";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
-import styled from "styled-components";
-
-const Container = styled.div`
-  margin-top: 48px;
-`;
+import PageHolder from "../components/organisms/PageHolder";
 
 const GravyPage = (props) => {
   useInitialGlobalNavSplit(props.globalNav, 'gravy', 4);
   return (
-    <Container>
+    <PageHolder>
       <Gravy />
-      <CloseButton />
-    </Container>
+    </PageHolder>
   );
 };
 

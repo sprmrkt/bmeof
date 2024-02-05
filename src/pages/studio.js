@@ -1,21 +1,14 @@
 import React from "react";
-import styled from "styled-components";
-
-import CloseButton from "../components/atoms/CloseButton";
 import Studio from "../components/organisms/Studio";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
-
-const Container = styled.div`
-  margin-top: 48px;
-`;
+import PageHolder from "../components/organisms/PageHolder";
 
 const StudioPage = (props) => {
   useInitialGlobalNavSplit(props.globalNav, 'studio', 1);
   return (
-    <Container>
+    <PageHolder>
       <Studio />
-      <CloseButton />
-    </Container>
+    </PageHolder>
   );
 };
 
