@@ -15,6 +15,7 @@ const Holder = styled.div`
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
     z-index: 400;
+    background-color: ${({theme}) => theme.colors.white};
 `;
 
 const Inner = styled.div`
