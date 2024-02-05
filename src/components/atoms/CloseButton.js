@@ -13,9 +13,9 @@ const Container = styled.div`
 const Holder = styled.div`
   width: 100%;
   overflow: hidden;
-  padding-top: 48px;
+  padding-top: 12px;
   @media (${props => props.theme.breakpoints.md}) {
-    padding: 0 0 0 12px;
+    padding: 48px 0 0 12px;
   }
 
   &.has-border {
@@ -44,7 +44,7 @@ const Copyright = styled.div`
   grid-gap: 24px;
   grid-template-columns: 1fr 3fr;
   align-items: end;
-  padding: 0 15px calc(15px + 48px);
+  padding: 0 15px;
   @media (${props => props.theme.breakpoints.md}) {
     grid-template-columns: 1fr 1fr;
     padding: 0 24px;
