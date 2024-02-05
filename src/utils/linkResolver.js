@@ -1,11 +1,13 @@
 const linkResolver = (doc) => {
   // Pretty URLs for known types
-
-  // if (doc.type === 'news') return "/news/" + doc.uid;
-  // if (doc.type === 'page') return doc.uid;
+  if (doc.type === "homepage") return `/`;
+  if (doc.type === "work") return `/work/${doc.uid}/`;
+  if (doc.type === "studio") return `/studio/`;
+  if (doc.type === "hello") return `/hello/`;
+  if (doc.type === "gravy") return `/gravy/`;
 
   // Backup for all other types
-  return '/'
+  return `/`;
 }
 
 module.exports = linkResolver
