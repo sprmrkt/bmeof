@@ -20,7 +20,6 @@ const Holder = styled.div`
 
 const Inner = styled.div`
     height: 100%;
-    overflow: auto;
     padding: 0 16px;
 
     @media (${props => props.theme.breakpoints.sm}) {
