@@ -15,10 +15,10 @@ const repositoryConfigs = [
     linkResolver,
     componentResolver: {
       homepage: lazy(() => import('./src/pages/index')),
-      work: lazy(() => import('./src/templates/WorkTemplate')), // Assuming you have a WorkPage component
-      studio: lazy(() => import('./src/pages/studio')), // Assuming you have a StudioPage component
-      hello: lazy(() => import('./src/pages/hello')), // Assuming you have a HelloPage component
-      gravy: lazy(() => import('./src/pages/gravy')), // Assuming you have a GravyPage component
+      work: lazy(() => import('./src/templates/WorkTemplate')), 
+      studio: lazy(() => import('./src/pages/studio')), 
+      hello: lazy(() => import('./src/pages/hello')), 
+      gravy: lazy(() => import('./src/pages/gravy')),
     },
   },
 ];
