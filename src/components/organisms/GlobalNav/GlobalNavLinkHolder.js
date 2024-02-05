@@ -12,7 +12,7 @@ const Holder = styled.div`
     //background-color: rgba(255, 0, 0, 0.5);
     z-index: 1;
     margin-top: -1px;
-    will-change: transform;
+    //will-change: transform;
 `;
 const Border = styled.div`
     position: absolute;
