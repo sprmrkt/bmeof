@@ -19,7 +19,6 @@ const Holder = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  will-change: opacity, transform;
   @media (${props => props.theme.breakpoints.md}) {
     width: 200%;
   }
@@ -36,7 +35,7 @@ const Border = styled.div`
   height: 1px;
   background-color: black;
   transform-origin: right;
-  will-change: transform;
+  
 `;
 
 function WorkNavLinkTitleBar(props) {

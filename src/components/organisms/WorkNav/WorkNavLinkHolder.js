@@ -15,7 +15,7 @@ const Inner = styled.div`
   width: 100%;
   height: 100%;
   display: block;
-  will-change: transform;
+  
 `;
 
 function GlobalNavLinkHolder(props) {
