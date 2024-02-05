@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {graphql, useStaticQuery} from "gatsby";
+import { useMergePrismicPreviewData } from "gatsby-plugin-prismic-previews";
 import Gallery from "../molecules/Gallery";
 import StackedImages from "../molecules/StackedImages";
 
@@ -16,9 +17,10 @@ const StackedImagesHolder = styled.div`
 
 function Gravy(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const data = useStaticQuery(graphql`
+  const staticData = useStaticQuery(graphql`
       query GravyQuery {
           prismicGravy {
+              _previewable
               data {
                   gallery {
                       caption {
@@ -38,6 +40,7 @@ function Gravy(props) {
           }
       }
   `);
+  const data = useMergePrismicPreviewData(staticData); 
   return (
     <Holder>
       <StackedImagesHolder>
