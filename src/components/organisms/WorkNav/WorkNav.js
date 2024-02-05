@@ -13,6 +13,7 @@ const Container = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100svh;
   overflow: visible;
   opacity: ${(props) => (props.$visible ? 1 : 0)};
   pointer-events: ${(props) => (props.$active && props.$visible ? "auto" : "none")};

@@ -13,7 +13,8 @@ import {useStore} from "../utils/store";
 
 const Container = styled.div`
   position: relative;
-  height: var(--windowHeight);
+  height: 100vh;
+  height: 100svh;
   overflow: hidden;
   padding: 56px 0 0;
   background-color: ${({theme}) => theme.colors.white};

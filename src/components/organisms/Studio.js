@@ -3,33 +3,38 @@ import styled from "styled-components";
 import {graphql, useStaticQuery} from "gatsby";
 import PrismicRichText from "../atoms/PrismicRichText";
 import Gallery from "../molecules/Gallery";
+import StackedImages from "../molecules/StackedImages";
 
 const Holder = styled.div`
 `;
 
 const Inner = styled.div`
-  padding: 15px;
-  display: grid;
-  grid-template-columns: 1fr;
-  align-content: start;
-  grid-gap: 24px;
-  @media (${(props) => props.theme.breakpoints.md}) {
-    padding: 24px;
-  }
-
-  > div {
-    > :first-child {
-      margin-top: 0;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: start;
+    grid-gap: 24px;
+    @media (${(props) => props.theme.breakpoints.md}) {
+        padding: 24px;
     }
 
-    > :last-child {
-      margin-bottom: 0;
+    > div {
+        > :first-child {
+            margin-top: 0;
+        }
+
+        > :last-child {
+            margin-bottom: 0;
+        }
     }
-  }
 `;
 
 const GalleryHolder = styled.div`
-  border-top: 1px solid;
+    display: none;
+    @media (${(props) => props.theme.breakpoints.md}) {
+        border-top: 1px solid;
+        display: block;
+    }
 `;
 
 function Studio(props) {
@@ -84,6 +89,7 @@ function Studio(props) {
         <div>
           <PrismicRichText render={data.prismicStudio.data.text_2.richText} />
         </div>
+        <StackedImages slides={data.prismicStudio.data.gallery} />
       </Inner>
       <GalleryHolder>
         <Gallery

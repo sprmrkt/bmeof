@@ -21,6 +21,7 @@ const Holder = styled.div`
     position: absolute;
     left: 0;
     top: calc(100vh - 2px);
+    top: calc(100svh - 2px);
     width: 100%;
     height: 0px;
   }

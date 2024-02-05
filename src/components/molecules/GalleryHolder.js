@@ -5,6 +5,7 @@ import Gallery from "./Gallery";
 
 const Holder = styled.div`
   height: calc(100vh - 48px);
+  height: calc(100svh - 48px);
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
 `;
