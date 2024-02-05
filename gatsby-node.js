@@ -12,6 +12,7 @@ exports.createPages = ({actions, graphql}) => {
   return graphql(`
     {
       work: prismicHomepage {
+          _previewable
           data {
               work {
                   work_item {
