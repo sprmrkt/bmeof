@@ -6,6 +6,10 @@ const Holder = styled.div`
     height: 100vh;
     height: 100svh;
     overflow: hidden;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+        height: unset;
+        overflow: unset;
+    }
 `;
 
 const Inner = styled.div`
@@ -14,6 +18,9 @@ const Inner = styled.div`
     overflow: scroll;
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
+    @media ( ${props => props.theme.breakpoints.md} ) {
+        height: unset;
+    }
 `;
 
 function PageHolder({children}) {
