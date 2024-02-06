@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {graphql, useStaticQuery} from "gatsby";
+import { useMergePrismicPreviewData } from "gatsby-plugin-prismic-previews";
 import PrismicRichText from "../atoms/PrismicRichText";
 import Gallery from "../molecules/Gallery";
 import StackedImages from "../molecules/StackedImages";
@@ -39,47 +40,49 @@ const GalleryHolder = styled.div`
 
 function Studio(props) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const data = useStaticQuery(graphql`
+  const staticData = useStaticQuery(graphql`
       query BeliefQuery {
           prismicStudio {
-              data {
-                  text {
-                      richText
-                  }
-                  text_2 {
-                      richText
-                  }
-                  gallery {
-                      image {
-                          dimensions {
-                              width
-                              height
-                          }
-                          alt
-                          gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
-                          url(imgixParams: { width: 1000 })
-                      }
-                      embed_poster {
-                          url
-                      }
-                      video {
-                          url
-                      }
-                      embed {
-                          html
-                          height
-                          width
-                          thumbnail_url
-                          title
-                      }
-                      caption {
-                          text
-                      }
-                  }
-              }
+            _previewable
+            data {
+                text {
+                    richText
+                }
+                text_2 {
+                    richText
+                }
+                gallery {
+                    image {
+                        dimensions {
+                            width
+                            height
+                        }
+                        alt
+                        gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
+                        url(imgixParams: { width: 1000 })
+                    }
+                    embed_poster {
+                        url
+                    }
+                    video {
+                        url
+                    }
+                    embed {
+                        html
+                        height
+                        width
+                        thumbnail_url
+                        title
+                    }
+                    caption {
+                        text
+                    }
+                }
+            }
           }
       }
   `);
+  const data = useMergePrismicPreviewData(staticData);
   return (
     <Holder>
       <Inner className="p-large">

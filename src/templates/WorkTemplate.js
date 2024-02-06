@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {graphql} from "gatsby";
 import styled from "styled-components";
 import {PrismicRichText} from "@prismicio/react";
+import { withPrismicPreview } from "gatsby-plugin-prismic-previews";
 
 import Gallery from "../components/molecules/Gallery";
 import WorkThumbnailsHolder from "../components/molecules/WorkThumbnailsHolder";
@@ -95,11 +96,12 @@ function WorkTemplate(props) {
   );
 }
 
-export default WorkTemplate;
+export default withPrismicPreview(WorkTemplate);
 
 export const query = graphql`
   query ($id: String) {
     prismicWork(id: {eq: $id}) {
+      _previewable
       id
       data {
         info {

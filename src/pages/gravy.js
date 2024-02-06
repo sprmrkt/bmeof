@@ -2,6 +2,7 @@ import React from "react";
 import Gravy from "../components/organisms/Gravy";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 import PageHolder from "../components/organisms/PageHolder";
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews';
 
 const GravyPage = (props) => {
   useInitialGlobalNavSplit(props.globalNav, 'gravy', 4);
@@ -12,5 +13,5 @@ const GravyPage = (props) => {
   );
 };
 
-export default GravyPage;
+export default withPrismicPreviewResolver(GravyPage);
 

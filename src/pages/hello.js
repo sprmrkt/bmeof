@@ -2,6 +2,7 @@ import React from "react";
 import Hello from "../components/organisms/Hello";
 import useInitialGlobalNavSplit from "../hooks/useInitialGlobalNavSplit";
 import PageHolder from "../components/organisms/PageHolder";
+import { withPrismicPreviewResolver } from 'gatsby-plugin-prismic-previews';
 
 const HelloPage = (props) => {
   useInitialGlobalNavSplit(props.globalNav, 'hello', 2);
@@ -12,5 +13,5 @@ const HelloPage = (props) => {
   );
 };
 
-export default HelloPage;
+export default withPrismicPreviewResolver(HelloPage);
 

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { graphql, useStaticQuery } from "gatsby";
+import { useMergePrismicPreviewData } from "gatsby-plugin-prismic-previews";
 import PrismicRichText from "../atoms/PrismicRichText";
 
 const Holder = styled.div`
@@ -35,9 +36,10 @@ const TextHolder = styled.div`
   }
 `;
 function Hello(props) {
-  const data = useStaticQuery(graphql`
+  const staticData = useStaticQuery(graphql`
     query StudioQuery {
       prismicHello {
+        _previewable
         data {
           text {
             richText
@@ -46,6 +48,7 @@ function Hello(props) {
       }
     }
   `);
+  const data = useMergePrismicPreviewData(staticData);
   const { text } = data.prismicHello.data;
   return (
     <Holder>

@@ -3,6 +3,7 @@ import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Header from "../components/molecules/Header";
 import {Link} from "gatsby";
+import { withPrismicUnpublishedPreview } from "gatsby-plugin-prismic-previews";
 // import {useStore} from "../utils/store";
 
 const Holder = styled.div`
@@ -49,5 +50,4 @@ const NotFoundPage = () => {
   );
 };
 
-export default NotFoundPage;
-
+export default withPrismicUnpublishedPreview(NotFoundPage);

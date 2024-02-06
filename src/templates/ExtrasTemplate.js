@@ -16,6 +16,7 @@ export default ExtrasTemplate;
 export const query = graphql`
   query ($id: String) {
     prismicPost(id: { eq: $id }) {
+      _previewable
       id
       uid
       data {
