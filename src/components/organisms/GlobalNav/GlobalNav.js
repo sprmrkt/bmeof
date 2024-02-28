@@ -53,11 +53,6 @@ const GlobalNav = forwardRef((props, globalNavRef) => {
       slug: "/hello/",
       label: "Hello",
     },
-    {
-      id: "gravy",
-      slug: "/gravy/",
-      label: "Gravy",
-    },
   ];
 
   // store
