@@ -57,7 +57,6 @@ const TextHolder = styled.div`
 
 function WorkTemplate(props) {
   const {info, body} = props.data.prismicWork.data;
-  console.log("props", props.data.prismicWork.data.title.text);
 
   const metaTitle = props.data.prismicWork.data.meta_title || props.data.prismicWork.data.title.text;
   const metaDescription = props.data.prismicWork.data.meta_description;
