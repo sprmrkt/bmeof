@@ -89,7 +89,7 @@ function Studio(props) {
 
   const metaTitle = data.prismicStudio.data.meta_title || "Studio";
   const metaDescription = data.prismicStudio.data.meta_description || null;
-  const metaImage = data.prismicStudio.data.meta_image.url || null;
+  const metaImage = data.prismicStudio.data?.meta_image?.url || null;
   return (
     <Holder>
               <Seo title={metaTitle} description={metaDescription} image={metaImage}  />

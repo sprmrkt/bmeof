@@ -6,7 +6,7 @@ import Seo from "../components/molecules/Seo";
 const ExtrasTemplate = ({ data }) => {
   const metaTitle = data.prismicPost.data.meta_title;
   const metaDescription = data.prismicPost.data.meta_description;
-  const metaImage = data.prismicPost.data.meta_image.url;
+  const metaImage = data.prismicPost.data.meta_image?.url;
   return (
     <div>
         <Seo title={metaTitle} description={metaDescription} image={metaImage}  />

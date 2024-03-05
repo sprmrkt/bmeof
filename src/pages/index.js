@@ -24,7 +24,7 @@ function IndexPage() {
 
 const metaTitle = data.prismicHomepage.data.meta_title || "Home";
 const metaDescription = data.prismicHomepage.data.meta_description || null; 
-const metaImage = data.prismicHomepage.data.meta_image.url || null;
+const metaImage = data.prismicHomepage.data?.meta_image?.url || null;
 
   useEffect(() => {
     setGlobalNavSplitHappenedOnce(true);
