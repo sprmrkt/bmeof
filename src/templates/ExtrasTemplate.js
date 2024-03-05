@@ -1,11 +1,15 @@
 import React from "react";
 import { graphql } from "gatsby";
 import GalleryHolder from "../components/molecules/GalleryHolder";
+import Seo from "../components/molecules/Seo";
 
 const ExtrasTemplate = ({ data }) => {
-  console.log("extras", data);
+  const metaTitle = data.prismicPost.data.meta_title;
+  const metaDescription = data.prismicPost.data.meta_description;
+  const metaImage = data.prismicPost.data.meta_image.url;
   return (
     <div>
+        <Seo title={metaTitle} description={metaDescription} image={metaImage}  />
       <GalleryHolder slides={data.prismicPost.data.gallery} extra={true} />
     </div>
   );
@@ -19,6 +23,11 @@ export const query = graphql`
       id
       uid
       data {
+        meta_title
+        meta_description
+        meta_image {
+          url
+        }
         title {
           text
         }
