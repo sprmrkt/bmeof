@@ -4,7 +4,7 @@ import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import ogImage from '../../../static/images/sharing-image.png';
 
-function Seo( { description, lang, meta, keywords, title }) {
+function Seo( { description, lang, meta, keywords, title, image }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -59,7 +59,7 @@ function Seo( { description, lang, meta, keywords, title }) {
         },
         {
           property: `og:image`,
-          content: ogImage,
+          content: image || ogImage,
         },
         {
           name: `twitter:description`,
@@ -92,6 +92,7 @@ Seo.propTypes = {
   meta: PropTypes.arrayOf(PropTypes.object),
   keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
+  image: PropTypes.string,
 }
 
 export default Seo
