@@ -55,8 +55,8 @@ function Hello(props) {
   const { text } = data.prismicHello.data;
 
   const metaTitle = data.prismicHello.data.meta_title || "Hello";
-  const metaDescription = data.prismicHello.data.meta_description;
-  const metaImage = data.prismicHello.data.meta_image.url;
+  const metaDescription = data.prismicHello.data.meta_description || null;
+  const metaImage = data.prismicHello.data?.meta_image?.url || null;
 
   return (
     <Holder>

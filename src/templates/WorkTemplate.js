@@ -59,8 +59,8 @@ function WorkTemplate(props) {
   const {info, body} = props.data.prismicWork.data;
 
   const metaTitle = props.data.prismicWork.data.meta_title || props.data.prismicWork.data.title.text;
-  const metaDescription = props.data.prismicWork.data.meta_description;
-  const metaImage = props.data.prismicWork.data.meta_image.url;
+  const metaDescription = props.data.prismicWork.data.meta_description || null;
+  const metaImage = props.data.prismicWork.data.meta_image.url || null;
 
   useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
   useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
