@@ -46,7 +46,7 @@ function MediaItem({media, embedCanPlay}) {
   if (media.embed) return <Holder><EmbedItem embed={media.embed} poster={media.embed_poster}
                                              canPlay={embedCanPlay} caption={media.caption}/></Holder>
 
-  if (media.video.url) return (
+  if (media?.video?.url) return (
     <Holder>
       <video autoPlay muted playsInline loop poster={media.image ? media.image.url : ""}>
         <source src={media.video.url} type="video/mp4" />
