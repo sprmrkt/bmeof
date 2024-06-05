@@ -1,47 +1,53 @@
-import React, {useRef} from "react"
-import Seo from "../components/molecules/Seo"
+import React, {useRef} from "react";
+import Seo from "../components/molecules/Seo";
 import styled from "styled-components";
 import Header from "../components/molecules/Header";
-import useHorizontalHoverClassname from "../hooks/useHorizontalHoverClassname";
-import {manualKerning} from "../utils/helpers";
-import {useStore} from "../utils/store";
-import HorizontalHoverButton from "../components/atoms/HorizontalHoverButton";
+import {Link} from "gatsby";
+// import {useStore} from "../utils/store";
 
-const Outer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--windowHeight);
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;
+const Holder = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    z-index: 400;
+    background-color: ${({theme}) => theme.colors.white};
 `;
 
-const Holder = styled.h1`
-  overflow: hidden;
-  .large-text-outer {
-    @media ( ${props => props.theme.breakpoints.md} ) {
-      display: inline-block;
+const Inner = styled.div`
+    height: 100%;
+    padding: 0 16px;
+
+    @media (${props => props.theme.breakpoints.sm}) {
+        padding: 0 24px;
     }
-  }
+    h1 {
+        font-size: 12vw;
+        margin-bottom: 24px;
+    }
+    a {
+        text-decoration: underline;
+    }
 `;
 
 const NotFoundPage = () => {
-  const fixedBodyRef = useRef(null);
   return (
     <>
-      <HorizontalHoverButton />
-      <Outer id="fixed-body" ref={fixedBodyRef}>
+      <Holder>
         <Seo title="404: Not found" />
         <Header />
-        <Holder>
-        <span className={`large-text-outer`}>
-          <span className="large-text-wrapper">{manualKerning('Page not found')}</span>
-        </span>
-        </Holder>
-      </Outer>
+        <Inner>
+          <h1>Sorry <br/>That page <br/>is missing</h1>
+          <p>You may find what you are looking for on our <Link to="/">homepage</Link></p>
+        </Inner>
+      </Holder>
     </>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;
+

@@ -20,7 +20,7 @@ function MediaItem({media, height, embedCanPlay}) {
 
   if (media.embed) return <EmbedItem embed={media.embed} poster={media.embed_poster} canPlay={embedCanPlay}/>
 
-  if (media.video.url) return (
+  if (media?.video?.url) return (
     <video autoPlay muted playsInline loop>
       <source src={media.video.url} type="video/mp4" />
       Your browser does not support the video tag.

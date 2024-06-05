@@ -5,8 +5,8 @@ import MediaItem from "./MediaItem";
 import classNames from "classnames";
 
 const Holder = styled.div`
-  padding: 15px;
-  min-height: calc(var(--windowHeight) - 48px);
+  padding: 15px 0;
+    margin-bottom: 48px;
   @media ( ${props => props.theme.breakpoints.md} ) {
     display: none;
   }
@@ -38,8 +38,8 @@ function StackedImages({slides}) {
       {slides.map((slide, i) => {
           const holderClasses = classNames({
             'has-caption': (slide.primary && slide.primary.caption && slide.primary.caption.text !== "") || (slide.caption && slide.caption.text !== ""),
-            'has-long-caption': (slide.primary && slide.primary.caption && slide.primary.caption.text.length > 45) || (slide.caption && slide.caption.text.length > 45),
-            'has-very-long-caption': (slide.primary && slide.primary.caption && slide.primary.caption.text.length > 95) || (slide.caption && slide.caption.text.length > 95),
+            'has-long-caption': (slide.primary && slide.primary.caption && slide.primary.caption.text?.length > 45) || (slide.caption && slide.caption.text?.length > 45),
+            'has-very-long-caption': (slide.primary && slide.primary.caption && slide.primary.caption.text?.length > 95) || (slide.caption && slide.caption.text?.length > 95),
           })
           return (
             <MediaHolder key={i} className={holderClasses}>

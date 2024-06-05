@@ -1,17 +1,22 @@
-import {createGlobalStyle} from "styled-components"
+import {createGlobalStyle} from "styled-components";
+import cursor from "../../assets/svg/cursor.svg"
 
 const GlobalStyle = createGlobalStyle`
 
+  #embed-overlay {
+    cursor: url(${cursor}) 14 14, auto !important;
+  }
+
   :root {
-    --windowHeight: 100vh;
+    --windowHeight: 100svh;
     --horizontalHoverDistance: 0px;
   }
 
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    ${(props) => props.theme.fluidType(0)};
-    overscroll-behavior-y: none;
+    ${props => props.theme.fluidType(0)};
+    overscroll-behavior: none;
 
     * { box-sizing: border-box; }
   }
@@ -20,9 +25,9 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     // Use system fonts: https://css-tricks.com/snippets/css/system-font-stack/
     font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color: ${(props) => props.theme.colors.black};
-    background-color: ${(props) => props.theme.colors.white};
-    overscroll-behavior-y: none;
+    color: ${props => props.theme.colors.black};
+    background-color: ${props => props.theme.colors.white};
+    overscroll-behavior: none;
   }
 
   h1, h2, h3, h4, h5, h6,
@@ -48,17 +53,33 @@ const GlobalStyle = createGlobalStyle`
 
     a { text-decoration: none; }
 
-    a:hover { text-decoration: none; }
+    a:hover { text-decoration: none;
+    }
   }
 
-  h1, .h1 {
+  h1, .h1, .h1.button {
     font-size: 33.5vw;
     font-kerning: normal;
-    @supports (-moz-appearance:none) {
-      .large-text-wrapper {
-        display: block;
-        transform: translateY(0.1em);
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 0.75;
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    margin: 0;
+
+    .manual-kerning {
+
+      .letter {
+        transform: translateY(-3%);
       }
+
+      @-moz-document url-prefix() {
+        .letter {
+          transform: translateY(8%);
+        }
+      }
+
     }
   }
 
@@ -160,12 +181,7 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     text-decoration: none;
     transition: color 0.5s linear;
-
-    &:hover {
-      @media ( ${props => props.theme.breakpoints.md} ) {
-        color: rgb(70, 70, 70);
-      }
-    }
+    cursor: url(${cursor}) 14 14, auto !important;
   }
 
   sup, sub {
@@ -177,7 +193,7 @@ const GlobalStyle = createGlobalStyle`
   sub { top: 0.4em; }
 
   label {
-    ${(props) => props.theme.fluidType(-1)};
+    ${props => props.theme.fluidType(-1)};
     line-height: 1.2;
     font-weight: normal;
   }
@@ -203,7 +219,7 @@ const GlobalStyle = createGlobalStyle`
   textarea {
     display: block;
     font-family: inherit;
-    ${(props) => props.theme.fluidType(0)};
+    ${props => props.theme.fluidType(0)};
     padding: 0.2rem 0.5rem;
     margin-top: 24px;
     margin-bottom: 24px;
@@ -214,7 +230,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-appearance: none;
 
     &:focus {
-      border: 1px ${(props) => props.theme.colors.focus} solid;
+      border: 1px ${props => props.theme.colors.focus} solid;
     }
   }
 
@@ -293,16 +309,15 @@ const GlobalStyle = createGlobalStyle`
   input[type="button"],
   input[type="reset"] {
     display: inline-block;
-    cursor: pointer;
     padding: 0;
-
     font-family: inherit;
     text-decoration: none;
     white-space: nowrap;
     border: none;
-
+    cursor: url(${cursor}) 14 14, auto !important;
     color: inherit;
     background-color: transparent;
+    margin: 0;
 
     font-size: 13px;
     @media ( ${props => props.theme.breakpoints.md} ) {
@@ -315,7 +330,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .errorMsg {
-    color: ${(props) => props.theme.colors.error};
+    color: ${props => props.theme.colors.error};
   }
 
   .is-affected-by-horizontal-hover {
@@ -330,6 +345,9 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .manual-kerning {
+    line-height: inherit;
+    display: flex;
+
     .letter-w + .letter-o {
       margin-left: -1.5vw;
     }
@@ -374,6 +392,7 @@ const GlobalStyle = createGlobalStyle`
       margin-left: 1.2vw;
     }
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
+

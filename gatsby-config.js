@@ -1,7 +1,7 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
-const linkResolver = require('./src/utils/linkResolver');
+});
+const linkResolver = require("./src/utils/linkResolver");
 
 module.exports = {
   siteMetadata: {
@@ -16,19 +16,19 @@ module.exports = {
   plugins: [
     `gatsby-plugin-image`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-layout`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-styled-components`,
-    "gatsby-plugin-layout",
     `gatsby-plugin-sitemap`,
     {
-      resolve: 'gatsby-plugin-svgr',
+      resolve: "gatsby-plugin-svgr",
       options: {
         prettier: true,
         svgo: true,
         svgoConfig: {
           plugins: [
             {
-              name: 'prefixIds',
+              name: "prefixIds",
               active: true,
             },
           ],
@@ -51,12 +51,12 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-source-prismic',
+      resolve: "gatsby-source-prismic",
       options: {
         repositoryName: process.env.GATSBY_PRISMIC_REPO_NAME,
         accessToken: process.env.PRISMIC_ACCESS_TOKEN,
         customTypesApiToken: process.env.PRISMIC_CUSTOM_TYPES_API_TOKEN,
-        linkResolver: (doc) => linkResolver(doc),
+        linkResolver: doc => linkResolver(doc),
       },
     },
     {
@@ -75,4 +75,5 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};
+
