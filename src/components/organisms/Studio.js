@@ -4,6 +4,7 @@ import {graphql, useStaticQuery} from "gatsby";
 import PrismicRichText from "../atoms/PrismicRichText";
 import Gallery from "../molecules/Gallery";
 import StackedImages from "../molecules/StackedImages";
+import Seo from "../molecules/Seo";
 
 const Holder = styled.div`
 `;
@@ -43,6 +44,11 @@ function Studio(props) {
       query BeliefQuery {
           prismicStudio {
               data {
+                meta_title
+                meta_description
+                meta_image {
+                url
+                }
                   text {
                       richText
                   }
@@ -80,8 +86,14 @@ function Studio(props) {
           }
       }
   `);
+
+  const metaTitle = data.prismicStudio.data.meta_title || "Studio";
+  const metaDescription = data.prismicStudio.data.meta_description || null;
+  const metaImage = data.prismicStudio.data?.meta_image?.url || null;
   return (
     <Holder>
+              <Seo title={metaTitle} description={metaDescription} image={metaImage}  />
+
       <Inner className="p-large">
         <div>
           <PrismicRichText render={data.prismicStudio.data.text.richText} />

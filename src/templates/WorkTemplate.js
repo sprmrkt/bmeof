@@ -10,6 +10,7 @@ import useInitialWorkNavSplit from "../hooks/useInitialWorkNavSplit";
 import StackedImages from "../components/molecules/StackedImages";
 
 import {useStore} from "../utils/store";
+import Seo from "../components/molecules/Seo";
 
 const Container = styled.div`
   position: relative;
@@ -56,6 +57,11 @@ const TextHolder = styled.div`
 
 function WorkTemplate(props) {
   const {info, body} = props.data.prismicWork.data;
+
+  const metaTitle = props.data.prismicWork.data.meta_title || props.data.prismicWork.data.title.text;
+  const metaDescription = props.data.prismicWork.data.meta_description || null;
+  const metaImage = props.data.prismicWork.data.meta_image?.url || null;
+
   useInitialGlobalNavSplit(props.globalNav, 'work', 0, true);
   useInitialWorkNavSplit(props.workNav, props.data.prismicWork.id, props.pageContext.index);
 
@@ -66,6 +72,7 @@ function WorkTemplate(props) {
 
   return (
     <Container>
+      <Seo title={metaTitle} description={metaDescription} image={metaImage}  />
 
       <Content>
         <TextHolder>
@@ -102,6 +109,11 @@ export const query = graphql`
     prismicWork(id: {eq: $id}) {
       id
       data {
+        meta_title
+        meta_description
+        meta_image {
+          url
+        }
         info {
           richText
         }
