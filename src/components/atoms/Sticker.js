@@ -29,8 +29,8 @@ const Area = styled.div`
 `;
 
 function Sticker(props) {
-  const x = useMemo(() => randomIntFromInterval(20, 80), []);
-  const y = useMemo(() => randomIntFromInterval(20, 80), []);
+  const x = randomIntFromInterval(20, 80);
+  const y = randomIntFromInterval(20, 80);
   const constraintsRef = useRef(null);
   const {hoverRight} = useStore();
 
