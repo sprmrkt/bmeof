@@ -59,6 +59,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "gatsby-plugin-netlify": "^5.1.1",
     "prettier": "3.0.3"
   },
   "keywords": [
