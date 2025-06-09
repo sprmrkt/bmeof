@@ -46,6 +46,17 @@ function Index({children, pageContext}) {
     });
   };
 
+  if (pageContext.layout === "page") {
+ return (
+    <ThemeProvider theme={theme}>
+      <>
+        <GlobalStyles />
+        <div>{children}</div>
+        <CustomCursor />
+      </>
+    </ThemeProvider>
+  );  }
+
   return (
     <ThemeProvider theme={theme}>
       <>
@@ -55,6 +66,7 @@ function Index({children, pageContext}) {
           <GlobalNavMoveRightButton />
         }
         <WorkNav ref={workNavRef} visible={pageContext.layout === "work"} />
+       
         <Main>{renderChildren()}</Main>
         <EmbedOverlay />
         <CustomCursor />
