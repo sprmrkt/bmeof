@@ -35,6 +35,16 @@ exports.createPages = ({actions, graphql}) => {
             }
           }
         }
+      pages: allPrismicPage {
+        nodes {
+          id
+          uid
+          data {
+            text {
+              richText
+            }
+          }
+        }
       }
     }
   `).then(result => {
@@ -55,6 +65,22 @@ exports.createPages = ({actions, graphql}) => {
           index: i,
         },
       });
+    });
+
+
+    // Create default pages
+ 
+    const defaultPages = result.data.pages.nodes;
+    defaultPages.forEach(page => {
+      if (page.data.text.richText !== null) {
+        createPage({
+          path: `/${page.uid}`,
+          component: path.resolve("./src/templates/PageTemplate.js"),
+          context: {
+            id: post.id,
+          },
+        });
+      }
     });
 
     const extraPosts = result.data.posts.nodes;
