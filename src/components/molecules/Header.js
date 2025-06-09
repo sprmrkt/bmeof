@@ -7,8 +7,8 @@ const Holder = styled.div`
   padding: 6px 12px 44px 12px;
   display: grid;
   grid-gap: 24px;
-  grid-template-columns: 1fr 3fr;
   align-items: center;
+  grid-template-columns: 1fr 3fr;
   background-color: ${({theme}) => theme.colors.white};
   @media (${props => props.theme.breakpoints.md}) {
     padding: 24px 24px 24px 24px;
@@ -18,6 +18,8 @@ const Holder = styled.div`
     padding: 0 12px 12px 12px;
     @media (${props => props.theme.breakpoints.md}) {
       padding: 12px 24px 24px 24px;
+      display: flex;
+      justify-content: space-between;
     }
   }
 
@@ -32,6 +34,17 @@ const Holder = styled.div`
   p {
     margin: 0;
   }
+
+  a {
+    position: unset !important;
+    opacity: unset!important;
+    overflow: unset!important;
+    font-size: 14px !important;
+    line-height: unset!important;
+    font-weight: normal;
+    font-family: "Gotham", sans-serif;
+
+  }
 `;
 
 function Header(props) {
@@ -42,6 +55,10 @@ function Header(props) {
         We help good people and brands
         <br /> think and make things differently.
       </p>
+      {
+        props.bottom &&  <a href="/page/privacy">Privacy policy</a>
+      }
+    
     </Holder>
   );
 }

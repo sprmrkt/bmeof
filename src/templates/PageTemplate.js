@@ -80,7 +80,7 @@ const PageTemplate = ({ data }) => {
           </Content>
         <GlobalNavLinkHolder header={true}>
             <a href="/">
-              <Heading>{manualKerning("Back")}</Heading>
+              <Heading>{manualKerning("Close")}</Heading>
             </a>
         </GlobalNavLinkHolder>
          <Copyright className="close-copyright">
