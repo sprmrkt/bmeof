@@ -1,95 +1,69 @@
 import React from "react";
-import { graphql } from "gatsby";
+import {graphql} from "gatsby";
 import Seo from "../components/molecules/Seo";
-import { PrismicRichText } from "@prismicio/react";
+import {PrismicRichText} from "@prismicio/react";
 import styled from "styled-components";
-import GlobalNavLinkHolder from "../components/organisms/GlobalNav/GlobalNavLinkHolder";
-import { manualKerning } from "../utils/helpers";
+import {manualKerning} from "../utils/helpers";
 import * as prismic from "@prismicio/client";
+import CloseButton from "../components/atoms/CloseButton";
+import LongTitleHolder from "../components/organisms/LongTitleHolder";
+import Header from "../components/molecules/Header";
 
 const Container = styled.div`
-  position: relative;
-  min-height: 100vh;
-  overflow: hidden;
-  padding: 56px 0 0;
-  background-color: ${({theme}) => theme.colors.white};
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: ${({theme}) => theme.colors.white};
 `;
 
 const Content = styled.div`
-  height: 100%;
-  overflow: auto;
-  padding: 32px 16px;
-  z-index: 101;
+    height: 100%;
+    overflow: auto;
+    padding: 24px 16px;
 
-  
+    @media (${props => props.theme.breakpoints.sm}) {
+        padding: 24px 24px 48px;
+    }
 
-  @media (${props => props.theme.breakpoints.sm}) {
-    padding: 32px 24px 80px;
-  }
+    @media (${props => props.theme.breakpoints.md}) {
+        width: 60%;
+    }
 
-   @media (${props => props.theme.breakpoints.md}) {
-    width: 60%;
-  }
+
+    h1, h2, h3, h4, h5, h6 {
+        text-transform: none;
+        letter-spacing: 0;
+    }
 `;
 
 const Heading = styled.h1`
-  background: ${({ theme }) => theme.colors.white};
+    background: ${({theme}) => theme.colors.white};
 `;
 
 
-const Copyright = styled.div`
-  display: grid;
-  grid-gap: 24px;
-  grid-template-columns: 1fr 3fr;
-  align-items: end;
-  padding: 0 15px;
-  @media (${props => props.theme.breakpoints.md}) {
-    grid-template-columns: 1fr 1fr;
-    padding: 0 24px;
-  }
-  p {
-    margin-bottom: 12px;
-    margin-top: 0;
-    @media (${props => props.theme.breakpoints.md}) {
-      margin-bottom: 24px;
-      margin-top: 0;
-    }
-  }
-`;
-
-const PageTemplate = ({ data }) => {
+const PageTemplate = ({data}) => {
   const metaTitle = data.prismicPage.data.meta_title;
   const metaDescription = data.prismicPage.data.meta_description;
   const metaImage = data.prismicPage.data.meta_image?.url;
   const title = prismic.asText(data.prismicPage.data?.title.richText);
+  const textStyle = data.prismicPage.data?.base_text_style.toLowerCase() || "medium";
+
+  console.log("Page data:", data);
 
   return (
     <Container>
+      <Header hideText={true} />
       {
-        title &&   
-        <GlobalNavLinkHolder active header={true}>
-          <a href="/">
-            <Heading>{manualKerning(title)}</Heading>
-          </a>
-        </GlobalNavLinkHolder>
+        title &&
+        <LongTitleHolder>
+          <Heading>{manualKerning(title)}</Heading>
+        </LongTitleHolder>
       }
-      
-        <Seo title={metaTitle} description={metaDescription} image={metaImage}  />
-         <Content className="text">
-            <PrismicRichText field={data.prismicPage.data.text.richText} />
-          </Content>
-        <GlobalNavLinkHolder header={true}>
-            <a href="/">
-              <Heading>{manualKerning("Close")}</Heading>
-            </a>
-        </GlobalNavLinkHolder>
-         <Copyright className="close-copyright">
-        <p>&copy;</p>
-        <p>
-          We help good people and brands
-          <br /> think and make things differently.
-        </p>
-      </Copyright>     
+      <Seo title={metaTitle} description={metaDescription} image={metaImage} />
+      <Content className={`page-text` + ` text-style-${textStyle}`}>
+        <PrismicRichText field={data.prismicPage.data.text.richText} />
+      </Content>
+      <CloseButton asHomeButton={true} />
     </Container>
   );
 };
@@ -97,24 +71,25 @@ const PageTemplate = ({ data }) => {
 export default PageTemplate;
 
 export const query = graphql`
-  query ($id: String) {
-    prismicPage(id: { eq: $id }) {
-      id
-      uid
-      data {
-      title {
-        richText
-      }
-      meta_title
-      meta_description
-        meta_image {
-          url
+    query ($id: String) {
+        prismicPage(id: { eq: $id }) {
+            id
+            uid
+            data {
+                title {
+                    richText
+                }
+                meta_title
+                meta_description
+                meta_image {
+                    url
+                }
+                text {
+                    richText
+                }
+                base_text_style
+            }
         }
-        text {
-          richText
-        }
-      }
     }
-  }
 `;
 
