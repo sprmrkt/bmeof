@@ -50,8 +50,8 @@ function LongTitleHolder(props) {
   return (
     <Holder>
       <motion.div
-        animate={{x: hoverRight ? '-22%' : 0}}
-        transition={{duration: 0.5}}>
+        animate={{x: hoverRight ? `-${props.movementPosition}%` : 0}}
+        transition={{duration: props.movementDuration}}>
         <Inner>{props.children}</Inner>
       </motion.div>
       <Border />

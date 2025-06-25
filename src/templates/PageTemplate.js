@@ -40,6 +40,17 @@ const Heading = styled.h1`
     background: ${({theme}) => theme.colors.white};
 `;
 
+const calculateTransformPercentage = (text) => {
+  const characterCount = text.length;
+  const excessCharacters = Math.max(0, characterCount - 5);
+  return excessCharacters * 20;
+}
+
+const calculateDuration = (text) => {
+  const characterCount = text.length;
+  const excessCharacters = Math.max(0, characterCount - 6);
+  return 0.5 + excessCharacters * 0.05;
+}
 
 const PageTemplate = ({data}) => {
   const metaTitle = data.prismicPage.data.meta_title;
@@ -48,14 +59,15 @@ const PageTemplate = ({data}) => {
   const title = prismic.asText(data.prismicPage.data?.title.richText);
   const textStyle = data.prismicPage.data?.base_text_style.toLowerCase() || "medium";
 
-  console.log("Page data:", data);
-
   return (
     <Container>
       <Header hideText={true} />
       {
         title &&
-        <LongTitleHolder>
+        <LongTitleHolder
+          movementPosition={calculateTransformPercentage(title)}
+          duration={calculateDuration(title)}
+        >
           <Heading>{manualKerning(title)}</Heading>
         </LongTitleHolder>
       }
