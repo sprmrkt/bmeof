@@ -62,6 +62,7 @@ const Copyright = styled.div`
         grid-column: 2/3;
         @media (${props => props.theme.breakpoints.md}) {
             grid-column: span 1;
+            text-align: right;
         }
     }
 `;

@@ -26,7 +26,7 @@ const Content = styled.div`
     }
 
     @media (${props => props.theme.breakpoints.md}) {
-        width: 60%;
+        width: 50%;
     }
 
 

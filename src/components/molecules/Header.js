@@ -36,6 +36,7 @@ const Holder = styled.div`
         @media (${props => props.theme.breakpoints.md}) {
             margin-top: 16px;
             grid-column: span 1;
+            text-align: right;
         }
     }
     p {
