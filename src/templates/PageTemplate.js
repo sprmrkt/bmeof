@@ -33,6 +33,46 @@ const Content = styled.div`
     h1, h2, h3, h4, h5, h6 {
         text-transform: none;
         letter-spacing: 0;
+        font-size: 13px;
+        line-height: 14px;
+    }
+    &.heading-style-large {
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0.75em 0;
+            @media ( ${props => props.theme.breakpoints.md} ) {
+                font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                font-size: 40px;
+                line-height: 36px;
+            }
+        }
+    }
+    &.heading-style-small {
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: bold;
+            font-family: 'Gotham', "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            @media ( ${props => props.theme.breakpoints.md} ) {
+                font-size: 15px;
+                line-height: 21px;
+            }
+        }
+    }
+    &.heading-style-mixed {
+        h1, h2, h3 {
+            margin: 0.75em 0;
+            @media ( ${props => props.theme.breakpoints.md} ) {
+                font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+                font-size: 40px;
+                line-height: 36px;
+            }
+        }
+        h4, h5, h6 {
+            font-family: 'Gotham', "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-weight: bold;
+            @media ( ${props => props.theme.breakpoints.md} ) {
+                font-size: 15px;
+                line-height: 21px;
+            }
+        }
     }
 `;
 
@@ -57,8 +97,10 @@ const PageTemplate = ({data}) => {
   const metaDescription = data.prismicPage.data.meta_description;
   const metaImage = data.prismicPage.data.meta_image?.url;
   const title = prismic.asText(data.prismicPage.data?.title.richText);
-  const textStyle = data.prismicPage.data?.base_text_style.toLowerCase() || "medium";
+  const textStyle = data.prismicPage.data?.base_text_style?.toLowerCase() || "medium";
+  const headingStyle = data.prismicPage.data?.heading_style?.toLowerCase() || "large";
 
+  console.log(data.prismicPage.data)
   return (
     <Container>
       <Header hideText={true} />
@@ -72,7 +114,7 @@ const PageTemplate = ({data}) => {
         </LongTitleHolder>
       }
       <Seo title={metaTitle} description={metaDescription} image={metaImage} />
-      <Content className={`page-text` + ` text-style-${textStyle}`}>
+      <Content className={`page-text` + ` text-style-${textStyle}` + ` heading-style-${headingStyle}`}>
         <PrismicRichText field={data.prismicPage.data.text.richText} />
       </Content>
       <CloseButton asHomeButton={true} />
@@ -100,6 +142,7 @@ export const query = graphql`
                     richText
                 }
                 base_text_style
+                heading_style
             }
         }
     }
