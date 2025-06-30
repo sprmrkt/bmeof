@@ -35,10 +35,14 @@ const Content = styled.div`
         letter-spacing: 0;
         font-size: 13px;
         line-height: 14px;
+        margin: 2.5em 0 0.75em 0;
+    }
+    a:hover {
+        text-decoration: underline;
+        cursor: pointer;
     }
     &.heading-style-large {
         h1, h2, h3, h4, h5, h6 {
-            margin: 0.75em 0;
             @media ( ${props => props.theme.breakpoints.md} ) {
                 font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 font-size: 40px;
@@ -58,7 +62,6 @@ const Content = styled.div`
     }
     &.heading-style-mixed {
         h1, h2, h3 {
-            margin: 0.75em 0;
             @media ( ${props => props.theme.breakpoints.md} ) {
                 font-family: "Adineue PRO Black", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
                 font-size: 40px;

@@ -413,7 +413,22 @@ const GlobalStyle = createGlobalStyle`
         .letter-v + .letter-y {
             margin-left: 1.2vw;
         }
-    }
+
+        .letter-v + .letter-a {
+            margin-left: -5vw;
+        }
+        .letter-a + .letter-c {
+            margin-left: -2.2vw;
+        }
+        .letter-c + .letter-y {
+            margin-left: -1.6vw;
+        }
+        .letter-t + .letter-a {
+            margin-left: -3.2vw;
+        }
+        .letter-l + .letter-o {
+            margin-left: -1vw;
+        }
     }
 `;
 
