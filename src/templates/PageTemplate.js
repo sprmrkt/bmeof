@@ -37,9 +37,8 @@ const Content = styled.div`
         line-height: 14px;
         margin: 2.5em 0 0.75em 0;
     }
-    a:hover {
+    a {
         text-decoration: underline;
-        cursor: pointer;
     }
     &.heading-style-large {
         h1, h2, h3, h4, h5, h6 {
@@ -102,8 +101,6 @@ const PageTemplate = ({data}) => {
   const title = prismic.asText(data.prismicPage.data?.title.richText);
   const textStyle = data.prismicPage.data?.base_text_style?.toLowerCase() || "medium";
   const headingStyle = data.prismicPage.data?.heading_style?.toLowerCase() || "large";
-
-  console.log(data.prismicPage.data)
   return (
     <Container>
       <Header hideText={true} />

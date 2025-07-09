@@ -2,15 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../../assets/img/bear.png";
 import PropTypes from "prop-types";
-import {Link} from "gatsby";
+import {Link, navigate} from "gatsby";
+import {useStore} from "../../utils/store";
 
 const Holder = styled.div`
     padding: 6px 12px 44px 12px;
     display: grid;
     grid-gap: 12px 24px;
+    justify-items: start;
     align-items: center;
     grid-template-columns: 1fr 3fr;
     background-color: ${({theme}) => theme.colors.white};
+    position: relative;
+    z-index: 20;
     @media (${props => props.theme.breakpoints.md}) {
         padding: 24px 24px 24px 24px;
         grid-template-columns: 4fr 3fr 1fr;
@@ -51,14 +55,21 @@ const Holder = styled.div`
         line-height: inherit !important;
         font-weight: normal;
         font-family: "Gotham", sans-serif;
-
     }
 `;
 
 function Header(props) {
+  const {closeNav} = useStore();
+  const clickHandler = () => {
+    closeNav();
+    navigate("/");
+  }
   return (
     <Holder className={props.bottom ? `bottom` : ''}>
-      <img src={logo} alt="Bear meets eagle on fire" />
+      <button onClick={() => clickHandler()} >
+        <img src={logo} alt="Bear meets eagle on fire" />
+      </button>
+
       {!props.hideText && <p>
         We help good people and brands
         <br /> think and make things differently.
