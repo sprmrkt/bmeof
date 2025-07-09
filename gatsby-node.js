@@ -35,6 +35,20 @@ exports.createPages = ({actions, graphql}) => {
             }
           }
         }
+  }
+      pages: allPrismicPage {
+        nodes {
+          id
+          uid
+          data {
+          title {
+            richText
+            }
+            text {
+              richText
+            }
+          }
+        }
       }
     }
   `).then(result => {
@@ -57,6 +71,23 @@ exports.createPages = ({actions, graphql}) => {
       });
     });
 
+
+    // Create default pages
+ 
+    const defaultPages = result.data.pages.nodes;
+    defaultPages.forEach(page => {
+      if (page.data.text.richText !== null) {
+        createPage({
+          path: `/page/${page.uid}`,
+          component: path.resolve("./src/templates/PageTemplate.js"),
+          context: {
+            id: page.id,
+            layout: "page",
+          },
+        });
+      }
+    });
+
     const extraPosts = result.data.posts.nodes;
     extraPosts.forEach(post => {
       if (post.data.external_link && post.data.external_link.url === null) {
@@ -72,12 +103,27 @@ exports.createPages = ({actions, graphql}) => {
   });
 };
 
-exports.onCreatePage = ({page, actions}) => {
-  const {createPage} = actions;
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions;
 
   if (page.path.match(/work/)) {
-    page.context.layout = "work";
-    createPage(page);
+    deletePage(page);
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        layout: "work",
+      },
+    });
+  } else if (page.path.match(/page/)) {
+    deletePage(page);
+    createPage({
+      ...page,
+      context: {
+        ...page.context,
+        layout: "page",
+      },
+    });
   }
 };
 
